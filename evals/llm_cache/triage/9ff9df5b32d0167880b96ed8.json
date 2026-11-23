@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137357155974:cdf1e190830364ff",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API Types Check fails deterministically: the regenerated api-types.d.ts drops PayloadCustomizationUpdateOutput.update_other_changes, so the committed front-end types are stale against the changed Java DTO. Regenerate with 'yarn generate-types-from-api' and commit the result; a rerun will fail the same way.",
+  "evidence": [
+   {
+    "line": 1170,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1180,
+    "quote": "-  update_other_changes: string[];"
+   },
+   {
+    "line": 1184,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2789,
+  "output_tokens": 676,
+  "ms": 4444,
+  "cost_usd": 0.000617,
+  "cached": false
+ }
+}

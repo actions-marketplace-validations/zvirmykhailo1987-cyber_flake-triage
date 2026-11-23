@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136404802542:de2a584aed9e9766",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The i18n checker step failed deterministically: the key \"What's new in Filigran v{version}\" is missing from every locale (de, en, es, fr, it, ja, ko, ru, zh). The PR touches the lang files but does not add this key, so a rerun will fail the same way. Fix by adding the key to the translation files.",
+  "evidence": [
+   {
+    "line": 520,
+    "quote": "Missing keys : {"
+   },
+   {
+    "line": 521,
+    "quote": "  de: [ \"What's new in Filigran v{version}\" ],"
+   },
+   {
+    "line": 522,
+    "quote": "  en: [ \"What's new in Filigran v{version}\" ],"
+   },
+   {
+    "line": 531,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2518,
+  "output_tokens": 494,
+  "ms": 3011,
+  "cost_usd": 0.000499,
+  "cached": false
+ }
+}

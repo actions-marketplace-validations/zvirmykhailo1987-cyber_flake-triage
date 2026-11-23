@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136054841190:842b0c58ca7d6bf6",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "Two ArchUnit architecture tests fail deterministically because the change adds new access paths the rules do not allow. PayloadCustomizationService calls InjectorContract.getAttackPatterns() (customize and update), and PayloadCustomizationMerge.newerVersion and PayloadLocalVersioning.addVersion call PayloadIdentity methods. Both files are in the change, and the tests have no flake history, so a re-run will fail the same way. Fix the access or update the allowed-class lists in the rules.",
+  "evidence": [
+   {
+    "line": 3033,
+    "quote": "Architecture Violation [Priority: MEDIUM] - Rule 'no classes that do not belong to any of [io.openaev.rest.attack_pattern.AttackPatternInitializer, io.openaev.rest.kill_chain_phase.KillChainPhaseInitializer, io.openaev.database.model.Inject, io.openaev.database.model.InjectorContract, io.openaev.service.attackpath.AttackPathGraphService, io.openaev.service.autonomous.CapabilityResolverService, io."
+   },
+   {
+    "line": 3034,
+    "quote": "Method <io.openaev.service.payload.PayloadCustomizationService.customize(java.lang.String, java.lang.String)> calls method <io.openaev.database.model.InjectorContract.getAttackPatterns()> in (PayloadCustomizationService.java:80)"
+   },
+   {
+    "line": 3046,
+    "quote": "Architecture Violation [Priority: MEDIUM] - Rule 'no classes that do not belong to any of [io.openaev.database.model.Payload, io.openaev.database.model.payload.HasPayloadIdentity, io.openaev.database.model.InjectorContract, io.openaev.database.repository.PayloadIdentityRepository, io.openaev.service.catalog.payload.CatalogPayloadService, io.openaev.service.catalog.payload.CatalogPayloadOfferServic"
+   },
+   {
+    "line": 3047,
+    "quote": "Method <io.openaev.service.payload.PayloadCustomizationMerge.newerVersion(io.openaev.database.model.Payload)> calls method <io.openaev.database.model.payload.PayloadIdentity.getLatestVersion()> in (PayloadCustomizationMerge.java:90)"
+   },
+   {
+    "line": 3080,
+    "quote": "Method <io.openaev.service.payload.PayloadCustomizationService.update(java.lang.String, java.lang.String, java.lang.String, java.util.Map)> calls method <io.openaev.database.model.InjectorContract.getAttackPatterns()> in (PayloadCustomizationService.java:105)"
+   },
+   {
+    "line": 3083,
+    "quote": "Method <io.openaev.service.payload.PayloadLocalVersioning.addVersion(io.openaev.database.model.Payload, io.openaev.database.model.Payload, io.openaev.database.model.hash.Hashed$Change)> calls method <io.openaev.database.model.payload.PayloadIdentity.getId()> in (PayloadLocalVersioning.java:81)"
+   },
+   {
+    "line": 3086,
+    "quote": "[ERROR] Tests run: 1436, Failures: 2, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6908,
+  "output_tokens": 1557,
+  "ms": 6173,
+  "cost_usd": 0.001469,
+  "cached": false
+ }
+}

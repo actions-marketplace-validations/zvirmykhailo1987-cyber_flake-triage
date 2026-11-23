@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136966190750:379f9555bd03f110",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "The MUI regression gate failed deterministically: this change adds 2 new MUI imports in ScenarioGeneralFields.tsx (MenuItem and Typography) where the design system components should be used. Re-running will fail the same way; fix the imports or add a justified fds:keep-mui exemption.",
+  "evidence": [
+   {
+    "line": 831,
+    "quote": "MUI regression gate: FAIL — 2 new import(s) (6ac390658...HEAD)"
+   },
+   {
+    "line": 833,
+    "quote": "openaev-front/src/admin/components/scenarios/ScenarioGeneralFields.tsx:1"
+   },
+   {
+    "line": 834,
+    "quote": "imports MUI `MenuItem`; this product already renders the design system's `Menu`."
+   },
+   {
+    "line": 835,
+    "quote": "openaev-front/src/admin/components/scenarios/ScenarioGeneralFields.tsx:1"
+   },
+   {
+    "line": 836,
+    "quote": "imports MUI `Typography`; this product already renders the design system's `Typography`."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3708,
+  "output_tokens": 615,
+  "ms": 3356,
+  "cost_usd": 0.000678,
+  "cached": false
+ }
+}

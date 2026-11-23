@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136886936332:61b4c3b39000b4f5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "API Types Check failed because the API now generates types that differ from the committed ones: the diff adds a new Summary interface (and other changes) that were never regenerated. The check itself warns to run generate-types-from-api before committing. This is deterministic and will repeat on re-run; regenerate the types, commit them, and push.",
+  "evidence": [
+   {
+    "line": 1242,
+    "quote": "export interface Summary {"
+   },
+   {
+    "line": 1262,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1263,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1452,
+  "output_tokens": 599,
+  "ms": 4176,
+  "cost_usd": 0.000445,
+  "cached": false
+ }
+}

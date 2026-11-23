@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136305439584:35e27e2bb15544e2",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.3,
+  "summary": "The API types check failed because the application never came up on port 8080 within 180s (HTTP 000, no response). The excerpt has no application startup output, so it cannot tell whether a crash from this change (the new V6 migration or Spring wiring) or an infrastructure slowdown caused it. Check the full log for the Spring Boot startup error before trusting a rerun.",
+  "evidence": [
+   {
+    "line": 1133,
+    "quote": "❌ Application failed to become ready within 180s"
+   },
+   {
+    "line": 1135,
+    "quote": "HTTP 000"
+   },
+   {
+    "line": 1136,
+    "quote": "(no response)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3140,
+  "output_tokens": 828,
+  "ms": 18587,
+  "cost_usd": 0.000728,
+  "cached": false
+ }
+}

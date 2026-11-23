@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136403926048:dc898fb6798c34bb",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "The 'Check i18n translations' step (yarn i18n-checker) fails with exit code 1. It reports the key \"What's new in Filigran v{version}\" as missing in all nine locales (de, en, es, fr, it, ja, ko, ru, zh). The key is missing from the translation files, which is deterministic and tied to this change, so a re-run will fail the same way. The fix is to add the key to the lang JSON files or correct its name in the code.",
+  "evidence": [
+   {
+    "line": 519,
+    "quote": "Missing keys : {"
+   },
+   {
+    "line": 521,
+    "quote": "  en: [ \"What's new in Filigran v{version}\" ],"
+   },
+   {
+    "line": 530,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2518,
+  "output_tokens": 608,
+  "ms": 3585,
+  "cost_usd": 0.000556,
+  "cached": false
+ }
+}

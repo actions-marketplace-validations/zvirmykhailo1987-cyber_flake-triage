@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136188278261:2a0b317033b38047",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "API types check failed because the committed src/utils/api-types.d.ts is out of date with the backend API. The generator produced a diff for CatalogHistoryOutput.catalog_history_action (a union type reformatted across lines), and the script then asked for regeneration before committing. This is deterministic and will repeat on re-run; fix by running yarn generate-types-from-api and committing the updated api-types.d.ts.",
+  "evidence": [
+   {
+    "line": 1183,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1192,
+    "quote": "  catalog_history_action: \"INSTALL\" | \"UNINSTALL\" | \"REVOKE\" | \"LIFT_REVOCATION\";"
+   },
+   {
+    "line": 1201,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1202,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1597,
+  "output_tokens": 661,
+  "ms": 3638,
+  "cost_usd": 0.00049,
+  "cached": false
+ }
+}

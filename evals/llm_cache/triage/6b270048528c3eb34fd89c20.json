@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136889417070:d5949992ad0c72df",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.35,
+  "summary": "Only failure is UserApiTest.consumeTokenOnSuccessfulReset: the expected sendEmail call never happened (zero interactions), and the log does not show why. No flake history and no direct link to the touched files, so retry is the default. Caution: an NPE in PlatformSettingsService.findSettings() (line 3564) is in a file this change touched, so check that before trusting the retry. The other errors (ES mapping, engine down, SMTP down) look like noise.",
+  "evidence": [
+   {
+    "line": 3385,
+    "quote": "io.openaev.rest.UserApiTest.consumeTokenOnSuccessfulReset -- Time elapsed: 0.206 s <<< FAILURE!"
+   },
+   {
+    "line": 4354,
+    "quote": "Actually, there were zero interactions with this mock."
+   },
+   {
+    "line": 3564,
+    "quote": "the return value of"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3710,
+  "output_tokens": 1394,
+  "ms": 6718,
+  "cost_usd": 0.001068,
+  "cached": false
+ }
+}

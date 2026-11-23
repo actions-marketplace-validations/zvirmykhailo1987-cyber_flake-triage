@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136899401321:6e2ed8da2a5bfc25",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "E2E job failed because the app container exits at startup: Flyway rejects a duplicate migration version V6_20261121140000000. The changed file V6_20261121140000000__Add_finding_lifecycle.java shares that version with another migration (Coverage_scenario_safe_mode_and_approval), so re-running on the same commit will fail the same way. Fix the migration version collision.",
+  "evidence": [
+   {
+    "line": 1470,
+    "quote": "Caused by: java.lang.IllegalStateException: Duplicate Flyway migration version found: V6_20261121140000000__Coverage_scenario_safe_mode_and_approval.class"
+   },
+   {
+    "line": 1462,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   },
+   {
+    "line": 1489,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3245,
+  "output_tokens": 650,
+  "ms": 3522,
+  "cost_usd": 0.00065,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136568800254:efd9d4ad1f17760e",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "E2E job failed because the OpenAEV API never started: Spring threw an UnsatisfiedDependencyException and /api/me never returned 200 in 300s. The only file changed is the Dockerfile (Temurin 25 base image bump), so the runtime change is the likely cause. The log is truncated and does not show the bean name, so confidence is moderate.",
+  "evidence": [
+   {
+    "line": 1506,
+    "quote": "\"cause\":{\"className\":\"org.springframework.beans.factory.UnsatisfiedDependency"
+   },
+   {
+    "line": 1511,
+    "quote": "❌ API /api/me not returning 200 after 300s (last HTTP 000)"
+   },
+   {
+    "line": 1534,
+    "quote": "\"level\":\"ERROR\",\"threadName\":\"main\",\"loggerName\":\"org.springframework.boot.SpringApplication\""
+   },
+   {
+    "line": 1535,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3747,
+  "output_tokens": 695,
+  "ms": 4010,
+  "cost_usd": 0.000722,
+  "cached": false
+ }
+}

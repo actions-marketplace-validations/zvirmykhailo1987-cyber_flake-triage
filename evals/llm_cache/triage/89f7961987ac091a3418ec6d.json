@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136899411648:a1fb1b96031b0426",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.45,
+  "summary": "The API types check failed only because the app never became ready on port 8080 within 180s (HTTP 000, no response). The excerpt has no application startup logs, so the cause is unknown. The touched files (a .d.ts file, a doc, and an architecture test) are unlikely to stop the app booting, so a re-run is reasonable, but check the app's own startup logs before trusting it.",
+  "evidence": [
+   {
+    "line": 1158,
+    "quote": "❌ Application failed to become ready within 180s"
+   },
+   {
+    "line": 1160,
+    "quote": "HTTP 000"
+   },
+   {
+    "line": 1162,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1136,
+  "output_tokens": 611,
+  "ms": 3902,
+  "cost_usd": 0.000419,
+  "cached": false
+ }
+}

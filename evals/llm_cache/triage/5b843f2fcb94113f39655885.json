@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134702145793:c8bb39ca12b03fe8",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "The FDS MUI regression gate failed deterministically: this PR adds 5 new MUI imports (Button, Typography, Badge, Tooltip) in openaev-front graph components where the design system already provides them. The check is a policy gate, not a flaky or infrastructure failure, so a rerun will fail the same way. Fix by importing from @filigran/design-system, or add a justified fds:keep-mui comment.",
+  "evidence": [
+   {
+    "line": 811,
+    "quote": "MUI regression gate: FAIL — 5 new import(s) (01d6f1f89...HEAD)"
+   },
+   {
+    "line": 814,
+    "quote": "imports MUI `Button`; this product already renders the design system's `Button`."
+   },
+   {
+    "line": 825,
+    "quote": "  - import Button from '@filigran/design-system' instead (preferred);"
+   },
+   {
+    "line": 832,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1601,
+  "output_tokens": 599,
+  "ms": 3692,
+  "cost_usd": 0.00046,
+  "cached": false
+ }
+}

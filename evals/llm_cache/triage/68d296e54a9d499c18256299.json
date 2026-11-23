@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136876152350:558ae7cdbc960dc4",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "ScenarioApprovalServiceTest.aNewInjectAfterApprovalMakesTheScenarioWaitAgain failed with a plain assertion ('Expecting value to be true but was false') and no stack trace, so the log does not show a cause. The test has no flake history, and the change touches NotificationEngineService, which may sit on the approval path, so I can't rule out a real regression. Treat as no_retry until an engineer checks whether the notification change affects scenario approval; the rest of the 1392-test run passed.",
+  "evidence": [
+   {
+    "line": 2786,
+    "quote": "[ERROR] Tests run: 5, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.005 s <<< FAILURE! -- in Safe mode"
+   },
+   {
+    "line": 2787,
+    "quote": "[ERROR] io.openaev.service.scenario.ScenarioApprovalServiceTest.aNewInjectAfterApprovalMakesTheScenarioWaitAgain -- Time elapsed: 0.003 s <<< FAILURE!"
+   },
+   {
+    "line": 2790,
+    "quote": "Expecting value to be true but was false"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2244,
+  "output_tokens": 852,
+  "ms": 4327,
+  "cost_usd": 0.00065,
+  "cached": false
+ }
+}

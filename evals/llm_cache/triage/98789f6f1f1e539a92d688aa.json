@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136305439935:b1af160dd37ca809",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "Every failing test died at Spring ApplicationContext startup, not in its own assertions. The root cause is an invalid query in PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse, a file this change touches: JSqlParser rejects the SQL at line 15, column 68 (\"ANDi\"). That is deterministic and will repeat on re-run, so the flake history (0 flakes) fits a real regression.",
+  "evidence": [
+   {
+    "line": 3415,
+    "quote": "Caused by: org.springframework.data.repository.query.QueryCreationException: Cannot create query for method [PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse(java.lang.String,java.util.Collection)]; The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3444,
+    "quote": "Caused by: net.sf.jsqlparser.parser.ParseException: Encountered: <S_IDENTIFIER> / \"ANDi\", at line 15, column 68, in lexical state DEFAULT."
+   },
+   {
+    "line": 3401,
+    "quote": "Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'payloadIdentityRepository' defined in io.openaev.database.repository.PayloadIdentityRepository defined in @EnableJpaRepositories declared on DataJpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3484,
+    "quote": "java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@365f1b7c testClass = io.openaev.api.credentials.CredentialApiTest, locations = [], classes = [io.openaev.App], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [PropertySourceDescriptor[locations=[], ignoreResourceNotFound=false, name=null, propertySourceFactory=nul"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 14567,
+  "output_tokens": 1262,
+  "ms": 5873,
+  "cost_usd": 0.002088,
+  "cached": false
+ }
+}

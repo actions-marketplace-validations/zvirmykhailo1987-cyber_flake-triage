@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136881429056:109c85747c190331",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.35,
+  "summary": "The Spring Boot app failed at startup, so /api/me never returned 200 in 300s (last HTTP 000). The excerpt cuts off before the actual failure analysis, so the root cause is not visible. Migrations ran and the DB was reachable, so this is probably not a simple infra blip, but the only changed file is a test, so the cause is unknown. Check the full failure analysis before retrying.",
+  "evidence": [
+   {
+    "line": 1592,
+    "quote": "\"level\":\"ERROR\",\"threadName\":\"main\",\"loggerName\":\"org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter\""
+   },
+   {
+    "line": 1593,
+    "quote": "❌ API /api/me not returning 200 after 300s (last HTTP 000)"
+   },
+   {
+    "line": 1612,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5016,
+  "output_tokens": 1049,
+  "ms": 6702,
+  "cost_usd": 0.001026,
+  "cached": false
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133435017065:2a8bc1465b52e716",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The only failing test is ByIdRequestScopeGuardCoverageTest, a deterministic guard that fails because the new endpoint POST /injects/{injectId}/targets/{assetId}/ai-token is not listed in either endpoint list. The change adds that endpoint (InjectApi.java is touched), so the assertion should fail again on re-run. The other ERROR/exception lines in the log come from tests that passed and are not the cause. Fix: add the endpoint to the correct list in the test, or adjust the guard if it should be excluded.",
+  "evidence": [
+   {
+    "line": 1860,
+    "quote": "Expecting empty but was: [\"POST /injects/{injectId}/targets/{assetId}/ai-token\"]"
+   },
+   {
+    "line": 4942,
+    "quote": "ByIdRequestScopeGuardCoverageTest.given_controllersByIdInjectEndpoints_should_matchTheEndpointLists:199 [endpoints missing from the lists of this class and of ParentedInjectEndpoints]"
+   },
+   {
+    "line": 4945,
+    "quote": "[ERROR] Tests run: 1599, Failures: 1, Errors: 0, Skipped: 0"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4465,
+  "output_tokens": 575,
+  "ms": 3335,
+  "cost_usd": 0.000734,
+  "cached": false
+ }
+}

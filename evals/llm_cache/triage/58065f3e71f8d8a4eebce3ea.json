@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134701082802:b024b094511464e4",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API types check failed because the generated TypeScript types are out of date. The diff adds new graph types (GraphOutput, GraphNodeOutput, GraphEdgeOutput) that the committed types don't include, so the branch needs `yarn generate-types-from-api` run and committed. This comes from the change itself and will repeat on re-run.",
+  "evidence": [
+   {
+    "line": 1148,
+    "quote": "Run API_URL=http://localhost:8080 yarn generate-types-from-api"
+   },
+   {
+    "line": 1224,
+    "quote": "+export interface GraphOutput {"
+   },
+   {
+    "line": 1235,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1236,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1975,
+  "output_tokens": 535,
+  "ms": 3199,
+  "cost_usd": 0.000465,
+  "cached": false
+ }
+}

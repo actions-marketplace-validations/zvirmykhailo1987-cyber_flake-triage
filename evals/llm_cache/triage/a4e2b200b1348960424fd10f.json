@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136965960618:98b0cc479315ccd9",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Job failed at the git-diff guard, not at a test. The step found uncommitted changes after generation: PayloadCustomizationService.java differs from the committed version (a method chain was reflowed onto one line). The committed code does not match the formatter or generator output, so re-running on the same commit will fail the same way. Fix by committing the regenerated or formatted output. Files touched by this PR are not in the diff, so the cause is inferred, not confirmed.",
+  "evidence": [
+   {
+    "line": 774,
+    "quote": "##[group]Run git diff --exit-code"
+   },
+   {
+    "line": 782,
+    "quote": "diff --git a/openaev-api/src/main/java/io/openaev/service/payload/PayloadCustomizationService.java b/openaev-api/src/main/java/io/openaev/service/payload/PayloadCustomizationService.java"
+   },
+   {
+    "line": 793,
+    "quote": "+    return catalogListService.offeredVersions(CatalogPayload.class, base.getExternalId()).stream()"
+   },
+   {
+    "line": 797,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3802,
+  "output_tokens": 700,
+  "ms": 4061,
+  "cost_usd": 0.00073,
+  "cached": false
+ }
+}

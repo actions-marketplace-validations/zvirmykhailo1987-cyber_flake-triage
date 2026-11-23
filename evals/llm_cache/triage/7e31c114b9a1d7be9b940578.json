@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134777284098:d231d3dc54b7c314",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Both AtomicTestingApiTest findings-deletion tests fail because findings survive deleting their inject, which is the behaviour this change targets. An Elasticsearch mapping conflict (finding_masking_version keyword to long) is a deterministic error that will repeat on rerun. The 'engine down' and 'Integration failed to stop' lines are in other tests, so they don't explain these two failures. Confidence is 0.8, not higher, because the log doesn't show the mapping conflict directly causing the assertion failures.",
+  "evidence": [
+   {
+    "line": 1886,
+    "quote": "mapper [finding_masking_version] cannot be changed from type [keyword] to [long]"
+   },
+   {
+    "line": 2533,
+    "quote": "Expecting an empty Optional but was containing value: Finding(id=2d94d6b9-8e0a-4e31-8153-e1953670d5c2"
+   },
+   {
+    "line": 2582,
+    "quote": "Expecting an empty Optional but was containing value: Finding(id=ed0bd956-c924-4b46-86ea-88b1c905ffe1"
+   },
+   {
+    "line": 1993,
+    "quote": "Immediate engine delete flush failed for 1 id(s); journaled for replay: engine down"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5267,
+  "output_tokens": 916,
+  "ms": 4847,
+  "cost_usd": 0.000985,
+  "cached": false
+ }
+}

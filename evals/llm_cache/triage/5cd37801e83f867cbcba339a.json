@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133309112983:62ce340be267d25b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The i18n checker step failed deterministically: the keys 'Launched by' and 'Scheduled by' are reported missing in every language file (de, en, es, fr, it, ja, ko, ru, zh), and the step exits with code 1. The change touches ExerciseDatePopover.tsx and ExerciseHeader.tsx, which likely use these new strings without adding them to the translation files. Fix the translations and re-run; a retry will fail the same way.",
+  "evidence": [
+   {
+    "line": 520,
+    "quote": "Missing keys : {"
+   },
+   {
+    "line": 522,
+    "quote": "en: [ 'Launched by', 'Scheduled by', 'Scheduled by', 'Launched by' ],"
+   },
+   {
+    "line": 531,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1579,
+  "output_tokens": 646,
+  "ms": 3714,
+  "cost_usd": 0.000481,
+  "cached": false
+ }
+}

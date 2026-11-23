@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136269898939:000e4d4bf826dda2",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "API Types Check failed because the generated TypeScript types are stale: regenerating from the API adds new Page*Output interfaces (e.g. PageCatalogScenarioOutput) that are not committed. The branch changed the catalog API, so the committed types must be regenerated and pushed. A re-run on the same commit will fail the same way.",
+  "evidence": [
+   {
+    "line": 1201,
+    "quote": "+export interface PageCatalogScenarioOutput {"
+   },
+   {
+    "line": 1223,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1224,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3667,
+  "output_tokens": 566,
+  "ms": 3817,
+  "cost_usd": 0.00065,
+  "cached": false
+ }
+}

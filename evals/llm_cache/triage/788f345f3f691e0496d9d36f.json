@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135945507977:4f528cc66b6bfad5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.7,
+  "summary": "The frontend-quality job fails at the 'Check i18n translations' step (yarn i18n-checker), which reports 38 plural placeholder mismatches across de, es, fr, it, ja, ru and zh locale files. The checker is deterministic, so a re-run on the same commit will likely fail the same way. None of the touched files are locale files, so the log does not show whether this branch caused it or it was already on the base branch. Fix the locale plural placeholders or the checker's expectations, then re-run.",
+  "evidence": [
+   {
+    "line": 544,
+    "quote": "(loanword, language name), add it to scripts/i18n-loanwords.json under the locale, e.g. \"de\": [\"Dashboard\"]."
+   },
+   {
+    "line": 545,
+    "quote": "de.json — placeholders differ, expected [{# atomic tests} {# atomic test}] got [{# atomare Tests} {# atomarer Test}]"
+   },
+   {
+    "line": 659,
+    "quote": "Total: 38 placeholder violation(s)."
+   },
+   {
+    "line": 660,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4673,
+  "output_tokens": 1055,
+  "ms": 5574,
+  "cost_usd": 0.000995,
+  "cached": false
+ }
+}

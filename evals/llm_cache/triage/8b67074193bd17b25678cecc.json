@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137456038192:afd207f3028f8c15",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API Types Check failed deterministically: the committed openaev-front/src/utils/api-types.d.ts does not match the types generated from the running backend. The generator moves user_pastel_colours (added in User.java by this PR) to a different position and the check exits 1. Re-running will produce the same diff. Fix: run yarn generate-types-from-api and commit the regenerated api-types.d.ts.",
+  "evidence": [
+   {
+    "line": 1179,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1189,
+    "quote": "+  user_pastel_colours?: boolean;"
+   },
+   {
+    "line": 1202,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1203,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2265,
+  "output_tokens": 673,
+  "ms": 4235,
+  "cost_usd": 0.000563,
+  "cached": false
+ }
+}

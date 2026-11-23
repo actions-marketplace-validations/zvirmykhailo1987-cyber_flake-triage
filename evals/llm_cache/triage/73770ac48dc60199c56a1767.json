@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136864383802:90ab3282e12e62ee",
+ "answer": {
+  "decision": "retry",
+  "category": "infrastructure",
+  "confidence": 0.88,
+  "summary": "The failing step is the upload of the merged multi-arch artifact via actions/upload-artifact@v7. The upload was about 1.9 GB in, then the storage service returned 'The server is busy.' and the action ended with outcome=failure. This is a transient storage-service error, not something the file changes caused, so a re-run on the same commit should likely pass.",
+  "evidence": [
+   {
+    "line": 900,
+    "quote": "##[error]The server is busy."
+   },
+   {
+    "line": 901,
+    "quote": "RequestId:f1fdd183-001e-001e-66bf-797732000000"
+   },
+   {
+    "line": 905,
+    "quote": "##[end-action id=__self.__actions_upload-artifact;outcome=failure;conclusion=failure;duration_ms=29843]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1944,
+  "output_tokens": 385,
+  "ms": 3558,
+  "cost_usd": 0.000387,
+  "cached": false
+ }
+}

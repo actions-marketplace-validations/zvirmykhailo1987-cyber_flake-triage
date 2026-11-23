@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136372077549:54c0f8e5fdcd99f5",
+ "answer": {
+  "decision": "retry",
+  "category": "infrastructure",
+  "confidence": 0.9,
+  "summary": "The E2E job failed during the Install dependencies step at yarn install --immutable, before any tests ran. The log shows a network-level failure: a TLS/SSL connection was destroyed mid-write while resolving packages (write ECANCELED). The change does not touch dependencies or the install path, so this looks like a transient network problem and a re-run should pass.",
+  "evidence": [
+   {
+    "line": 552,
+    "quote": "➤ YN0001: │ Error: write ECANCELED Canceled because of SSL destruction"
+   },
+   {
+    "line": 556,
+    "quote": "➤ YN0001: Error: write ECANCELED Canceled because of SSL destruction"
+   },
+   {
+    "line": 561,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2481,
+  "output_tokens": 410,
+  "ms": 2858,
+  "cost_usd": 0.000453,
+  "cached": false
+ }
+}

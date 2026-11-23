@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135426142672:8158442235005b75",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The frontend-quality job failed on the i18n checker, not on a test. The French locale has the key \"minutes\" with the same value as English, so the check fails deterministically and a re-run will fail the same way. The likely cause is a new untranslated string from this change. Fix: translate it with \"yarn auto-translation:all\", or add it to scripts/i18n-loanwords.json if it is a legitimate loanword.",
+  "evidence": [
+   {
+    "line": 523,
+    "quote": "fr.json — identical to the English value"
+   },
+   {
+    "line": 524,
+    "quote": "  key   : minutes"
+   },
+   {
+    "line": 525,
+    "quote": "Total: 1 missing or untranslated value(s)."
+   },
+   {
+    "line": 526,
+    "quote": "Run \"yarn auto-translation:all\" to translate them. If a value is legitimately identical"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1329,
+  "output_tokens": 506,
+  "ms": 3106,
+  "cost_usd": 0.000386,
+  "cached": false
+ }
+}

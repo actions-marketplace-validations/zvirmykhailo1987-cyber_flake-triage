@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136305439718:b12d96206628f2d1",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "Spring ApplicationContext fails to start, so every test that loads it errors out, including the listed AutonomousAttackPathStepOwnershipTest and AutonomousDefaultAgentsNoSelectorCallersTest cases. The cause is an invalid query in PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse, which this change touches; JSqlParser rejects it at line 15, column 68 with an unexpected identifier near 'ANDi'. This is deterministic, so a re-run will fail the same way.",
+  "evidence": [
+   {
+    "line": 3416,
+    "quote": "Caused by: org.springframework.data.repository.query.QueryCreationException: Cannot create query for method [PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse(java.lang.String,java.util.Collection)]; The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3445,
+    "quote": "Caused by: net.sf.jsqlparser.parser.ParseException: Encountered: <S_IDENTIFIER> / \"ANDi\", at line 15, column 68, in lexical state DEFAULT."
+   },
+   {
+    "line": 3402,
+    "quote": "Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'payloadIdentityRepository' defined in io.openaev.database.repository.PayloadIdentityRepository defined in @EnableJpaRepositories declared on DataJpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3257,
+    "quote": "2026-11-20T13:10:10.028Z ERROR 3991 --- [           main] [                                                 ] o.s.boot.SpringApplication               : Application run failed"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 14883,
+  "output_tokens": 1358,
+  "ms": 5895,
+  "cost_usd": 0.002167,
+  "cached": false
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134770503390:dbeb2d8e926759e8",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "The FDS MUI regression gate failed deterministically because this PR adds a new MUI Typography import in FindingImpactSections.tsx, where the design system's Typography should be used. Re-running will fail the same way. Fix: import Typography from @filigran/design-system, or add an fds:keep-mui exemption with a recorded reason.",
+  "evidence": [
+   {
+    "line": 818,
+    "quote": "MUI regression gate: FAIL — 1 new import(s) (0c5d5c6b3...HEAD)"
+   },
+   {
+    "line": 820,
+    "quote": "openaev-front/src/admin/components/findings/FindingImpactSections.tsx:3"
+   },
+   {
+    "line": 821,
+    "quote": "imports MUI `Typography`; this product already renders the design system's `Typography`."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1408,
+  "output_tokens": 555,
+  "ms": 3179,
+  "cost_usd": 0.000418,
+  "cached": false
+ }
+}

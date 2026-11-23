@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136881428918:2af98c5b422c122c",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.75,
+  "summary": "Spring context fails to start in AmbientTenantBridgeTest and CanAccessTenantFunctionTest with a bean dependency cycle (workflowService -> ... -> exerciseService -> workflowService). Later contexts fail as 'threshold exceeded' follow-ons, so about 419 tests error. The cycle is deterministic startup code, so a retry will likely fail the same way. The touched-files list shows only WorkflowServiceTest.java, so the link to this change is not confirmed; check whether the change added a constructor dependency in the workflow/exercise services.",
+  "evidence": [
+   {
+    "line": 3270,
+    "quote": "APPLICATION FAILED TO START"
+   },
+   {
+    "line": 3295,
+    "quote": "Relying upon circular references is discouraged and they are prohibited by default."
+   },
+   {
+    "line": 3475,
+    "quote": "Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?"
+   },
+   {
+    "line": 3488,
+    "quote": "ApplicationContext failure threshold (1) exceeded: skipping repeated attempt to load context"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 13503,
+  "output_tokens": 1355,
+  "ms": 7503,
+  "cost_usd": 0.002028,
+  "cached": false
+ }
+}

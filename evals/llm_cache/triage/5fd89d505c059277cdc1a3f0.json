@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137000579902:e3585b40ce5646b2",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "E2E job failed because the OpenAEV API never became ready: /api/me returned HTTP 000 after 300s. The container log shows Spring Boot's LoggingFailureAnalysisReporter emitting an ERROR right after the database migrations ran, so the application failed at startup. The excerpt is truncated before the actual failure cause, so I can't tell whether the PR's changes (ExposureResult, NotificationEventService) caused it. A startup failure is usually deterministic, so a retry is unlikely to help, but confidence is low until the full startup exception is checked.",
+  "evidence": [
+   {
+    "line": 1595,
+    "quote": "{\"sequenceNumber\":0,\"timestamp\":1795299097955,\"nanoseconds\":955726893,\"level\":\"ERROR\",\"threadName\":\"main\",\"loggerName\":\"org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter\""
+   },
+   {
+    "line": 1596,
+    "quote": "❌ API /api/me not returning 200 after 300s (last HTTP 000)"
+   },
+   {
+    "line": 1615,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5833,
+  "output_tokens": 1267,
+  "ms": 6301,
+  "cost_usd": 0.001217,
+  "cached": false
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135364700917:6e30b7f2f328ec61",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API types check failed because the generated TypeScript types are out of date. The change adds inject_execution_threshold_minutes settings to the API but the generated types were not regenerated and committed. This is deterministic and will repeat on re-run. Fix: run yarn generate-types-from-api and commit the result.",
+  "evidence": [
+   {
+    "line": 1208,
+    "quote": "+export interface SettingsInjectExecutionUpdateInput {"
+   },
+   {
+    "line": 1221,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1222,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3167,
+  "output_tokens": 650,
+  "ms": 3667,
+  "cost_usd": 0.000642,
+  "cached": false
+ }
+}

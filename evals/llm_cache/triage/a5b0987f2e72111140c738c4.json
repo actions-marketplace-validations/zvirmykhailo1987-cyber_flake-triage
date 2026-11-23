@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075459656:6622e6dac1cb9707",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "All 8 failures are in the webkit graph-interactions suite, and only the first one shows its cause: a browser console CSP error captured by the test (line 2783). The other 7 failure reasons are cut from the excerpt. The change touches only Java OpenCRQ/XtmOne backend files, not the graph UI, so nothing links it to these failures. The CSP error and the unseen reasons may be environmental, but the log does not confirm that, so retry with low confidence.",
+  "evidence": [
+   {
+    "line": 2717,
+    "quote": "✘  19 [webkit] › tests_e2e/tests/graph/graph-interactions.spec.ts:112:3 › Exploration graph interactions › each layout button moves the nodes on the first click"
+   },
+   {
+    "line": 2783,
+    "quote": "error: The Content Security Policy 'default-src 'self'; script-src 'self' 'nonce-cc1aeae93d1fa042b5cf81a9d3538f46'"
+   },
+   {
+    "line": 2788,
+    "quote": "expect(problems).toEqual([]);"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6953,
+  "output_tokens": 1254,
+  "ms": 6956,
+  "cost_usd": 0.001322,
+  "cached": false
+ }
+}

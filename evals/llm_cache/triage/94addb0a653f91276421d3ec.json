@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136881429285:634406899ad6f94f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.6,
+  "summary": "Spring ApplicationContext fails to start in every API test class (CredentialApiTest, MarkingDefinitionApiTest, NotificationHttpIsolationTest and others), so the 'flaky' history is misleading. The root cause is a deterministic bean circular reference (workflowService -> workflowEndService -> notificationEventService -> scenarioNotificationEventHandler -> exerciseService -> workflowService). Re-running the same commit will hit the same cycle. The PR only lists a test file as changed, so the cycle may predate it, but it is still a blocker for this PR.",
+  "evidence": [
+   {
+    "line": 3257,
+    "quote": "APPLICATION FAILED TO START"
+   },
+   {
+    "line": 3282,
+    "quote": "Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true."
+   },
+   {
+    "line": 3440,
+    "quote": "Caused by: org.springframework.beans.factory.BeanCurrentlyInCreationException: Error creating bean with name 'workflowService': Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?"
+   },
+   {
+    "line": 5506,
+    "quote": "[ERROR] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 7.954 s <<< FAILURE! -- in Find by ids"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 12706,
+  "output_tokens": 1396,
+  "ms": 7066,
+  "cost_usd": 0.001969,
+  "cached": false
+ }
+}

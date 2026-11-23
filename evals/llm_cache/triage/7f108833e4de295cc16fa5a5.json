@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135364137245:2a8536526ddfc509",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The i18n checker step failed with exit code 1 on a deterministic, change-related problem. The log shows the same 'Stop execution' string repeated in every locale array (e.g. ja, ko, ru, zh), which looks like a duplicate-entry or translation-consistency failure from the new atomic-testing strings. The excerpt does not print the checker's own error message, so the exact rule is inferred. Fix the duplicate entries and re-run; a retry will likely fail the same way.",
+  "evidence": [
+   {
+    "line": 548,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 554,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 575,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3086,
+  "output_tokens": 595,
+  "ms": 3525,
+  "cost_usd": 0.000606,
+  "cached": false
+ }
+}

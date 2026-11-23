@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136184025211:6ca469706058cd19",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Five CSV export tests in InjectorContractApiCopyRankingTenantScopeTest and InjectorContractRightsPerCopyTest fail with HTTP 400 where 200 is expected. The 400 is a BadRequestException on the export endpoint, and the change touches the export code (ThreatArsenalApiExporter, MapperApi, import/export mappers). The failures are deterministic with no flake history, so a retry will likely fail the same way. The Jackson parse error at line 1246 is a caught, logged error from DetectionRemediationAIService and does not explain the failures.",
+  "evidence": [
+   {
+    "line": 2528,
+    "quote": "Type = io.openaev.rest.exception.BadRequestException"
+   },
+   {
+    "line": 2584,
+    "quote": "Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 12.00 s <<< FAILURE! -- in Threat arsenal CSV export with no selector"
+   },
+   {
+    "line": 2588,
+    "quote": "expected: 200"
+   },
+   {
+    "line": 2589,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 3010,
+    "quote": "Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 2.102 s <<< FAILURE! -- in Threat arsenal CSV export on a scope of the default tenant and tenant A"
+   },
+   {
+    "line": 3264,
+    "quote": "but was: 400"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6988,
+  "output_tokens": 1196,
+  "ms": 5782,
+  "cost_usd": 0.001297,
+  "cached": false
+ }
+}

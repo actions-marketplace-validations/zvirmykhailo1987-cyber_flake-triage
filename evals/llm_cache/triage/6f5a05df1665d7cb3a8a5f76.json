@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134701082710:44515189a27d91b2",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The frontend-quality step fails in the i18n check, not in a flaky test. The checker reports 3 locale values identical to English (de 'Radial', es 'Radial', fr 'Relations'), and the change touched the lang files. Re-running will reproduce the same result. Fix by translating these values or adding legitimate loanwords to scripts/i18n-loanwords.json.",
+  "evidence": [
+   {
+    "line": 524,
+    "quote": "de.json — identical to the English value"
+   },
+   {
+    "line": 525,
+    "quote": "  key   : Radial"
+   },
+   {
+    "line": 528,
+    "quote": "fr.json — identical to the English value"
+   },
+   {
+    "line": 529,
+    "quote": "  key   : Relations"
+   },
+   {
+    "line": 530,
+    "quote": "Total: 3 missing or untranslated value(s)."
+   },
+   {
+    "line": 533,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1713,
+  "output_tokens": 478,
+  "ms": 2796,
+  "cost_usd": 0.00041,
+  "cached": false
+ }
+}

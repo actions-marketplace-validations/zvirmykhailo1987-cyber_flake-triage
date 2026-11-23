@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136881428938:3c2275ba679694b2",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The API test shard fails because the Spring ApplicationContext cannot start: a bean dependency cycle (workflowService -> workflowEndService -> notificationEventService -> scenarioNotificationEventHandler -> exerciseService -> workflowService) is prohibited by default. Every test that loads the context fails, so the failure is deterministic and a rerun will repeat it. Caveat: the touched-files list contains only WorkflowServiceTest.java, so the cycle's source is not confirmed in this diff. Check bean wiring in WorkflowService, WorkflowEndService, NotificationEventService and ExerciseService.",
+  "evidence": [
+   {
+    "line": 3288,
+    "quote": "Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans."
+   },
+   {
+    "line": 3447,
+    "quote": "Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?"
+   },
+   {
+    "line": 3263,
+    "quote": "APPLICATION FAILED TO START"
+   },
+   {
+    "line": 3290,
+    "quote": "[ERROR] Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 43.75 s <<< FAILURE! -- in attack path: read endpoints enforce SIMULATION READ (seed-tolerant)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 13163,
+  "output_tokens": 1380,
+  "ms": 6658,
+  "cost_usd": 0.002006,
+  "cached": false
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137313851032:cf966fbcfdf6c6ed",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Every API test shard fails at Spring context startup with a classpath mismatch: MetricsAutoConfiguration calls DefaultMeterObservationHandler.builder(MeterRegistry), which is missing from the Micrometer version on the classpath (NoSuchMethodError). The PR bumps spring-boot-starter-parent to 4.x in pom.xml, so the Boot and Micrometer versions are likely out of sync. This is deterministic and will repeat on retry; the flaky-test history is irrelevant. Fix the Micrometer/Boot version alignment in pom.xml.",
+  "evidence": [
+   {
+    "line": 3301,
+    "quote": "Correct the classpath of your application so that it contains compatible versions of the classes org.springframework.boot.micrometer.metrics.autoconfigure.MetricsAutoConfiguration and io.micrometer.core.instrument.observation.DefaultMeterObservationHandler"
+   },
+   {
+    "line": 3438,
+    "quote": "Caused by: java.lang.NoSuchMethodError: 'io.micrometer.core.instrument.observation.DefaultMeterObservationHandler$Builder io.micrometer.core.instrument.observation.DefaultMeterObservationHandler.builder(io.micrometer.core.instrument.MeterRegistry)'"
+   },
+   {
+    "line": 3439,
+    "quote": "at org.springframework.boot.micrometer.metrics.autoconfigure.MetricsAutoConfiguration.defaultMeterObservationHandler(MetricsAutoConfiguration.java:78)"
+   },
+   {
+    "line": 3273,
+    "quote": "APPLICATION FAILED TO START"
+   },
+   {
+    "line": 5516,
+    "quote": "[ERROR] Tests run: 13, Failures: 0, Errors: 13, Skipped: 0, Time elapsed: 9.342 s <<< FAILURE! -- in autonomous default agents, the callers that name no tenant"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 12715,
+  "output_tokens": 1141,
+  "ms": 4875,
+  "cost_usd": 0.001842,
+  "cached": false
+ }
+}

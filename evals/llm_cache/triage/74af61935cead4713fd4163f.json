@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137348923381:20ba386da44c3f0d",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "FDS conformity check fails deterministically on one file: AskAfterSavingChoice.tsx is declared as an <Alert> adoption site but renders no <Alert>. The declaration likely comes from fds-migration/migration-state.json, which this PR touches, so a rerun will fail the same way. Fix the declaration or add the Alert. The log does not show the rule source, so that link is inferred.",
+  "evidence": [
+   {
+    "line": 902,
+    "quote": "❌ [lib-component-usage] openaev-front/src/admin/components/threat_arsenal/versions/AskAfterSavingChoice.tsx: DRIFT — declared as a <Alert> adoption site but renders no <Alert> at all"
+   },
+   {
+    "line": 914,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5084,
+  "output_tokens": 720,
+  "ms": 4844,
+  "cost_usd": 0.000868,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133461215146:79a3e996cccffcc1",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "API Types Check failed because the committed openaev-front/src/utils/api-types.d.ts is stale. The PR adds XtmHubJwksOutput and XtmHubPublicJwk, the regenerated types contain them, and the script exits 1. Rerunning will fail the same way. Fix: run yarn generate-types-from-api and commit the updated api-types.d.ts.",
+  "evidence": [
+   {
+    "line": 1182,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1191,
+    "quote": "+export interface XtmHubJwksOutput {"
+   },
+   {
+    "line": 1207,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1208,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1912,
+  "output_tokens": 526,
+  "ms": 3346,
+  "cost_usd": 0.000454,
+  "cached": false
+ }
+}

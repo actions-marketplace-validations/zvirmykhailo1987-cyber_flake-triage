@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "132684472637:e644f6e0cdbf1f71",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The Docker build fails in Maven dependency resolution for openaev-es8-client: co.elastic.clients:elasticsearch-java:8.19.25 cannot be found in Central, shibboleth-releases, or jboss-public. The PR bumps elasticsearch.version, so the new version is the likely cause. A retry would probably fail the same way unless the artifact was simply not yet mirrored, so check that 8.19.25 is published and the version is correct.",
+  "evidence": [
+   {
+    "line": 8412,
+    "quote": "#30 16.13 [ERROR] Failed to execute goal on project openaev-es8-client: Could not resolve dependencies for project io.openaev:openaev-es8-client:jar:3.261110.0"
+   },
+   {
+    "line": 8413,
+    "quote": "#30 16.13 [ERROR] dependency: co.elastic.clients:elasticsearch-java:jar:8.19.25 (runtime)"
+   },
+   {
+    "line": 8414,
+    "quote": "#30 16.13 [ERROR] Could not find artifact co.elastic.clients:elasticsearch-java:jar:8.19.25 in central (https://repo.maven.apache.org/maven2)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2910,
+  "output_tokens": 1097,
+  "ms": 5698,
+  "cost_usd": 0.000839,
+  "cached": false
+ }
+}

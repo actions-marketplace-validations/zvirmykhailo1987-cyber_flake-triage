@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136052280988:6025d48e95f092b6",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "Two deterministic architecture-rule failures in openaev-api, both in files this change touches. TenantBackgroundTransactionArchTest flags intra-class self-invocation of @Transactional methods in CatalogListService (offered calls released) and CatalogScenarioUpdateService (newerVersions calls installed). JsonTypeDirtyOnLoadCoverageTest says JSON-mapped tenant-active fields lack probe cases in JsonTypeDirtyOnLoadProbeTest. The JSON parse error near line 1244 is logged noise and not the cause. Rerunning will repeat these failures until the code is fixed.",
+  "evidence": [
+   {
+    "line": 1832,
+    "quote": "every JSON-mapped field stored in a tenant-active table needs a case in JsonTypeDirtyOnLoadProbeTest, and nothing else belongs in PROBED_FIELDS"
+   },
+   {
+    "line": 3036,
+    "quote": "Architecture Violation [Priority: MEDIUM] - Rule 'classes should not call a @Transactional method of the same class, because an intra-class call to a @Transactional method bypasses the Spring proxy: no transaction, no tenant scope, silently' was violated (2 times):"
+   },
+   {
+    "line": 3037,
+    "quote": "Method <io.openaev.service.catalog.CatalogListService.offered(java.lang.Class, java.lang.String, java.lang.String)> calls method <io.openaev.service.catalog.CatalogListService.released(java.lang.Class, java.lang.String, java.lang.String)> in (CatalogListService.java:41)"
+   },
+   {
+    "line": 3062,
+    "quote": "Method <io.openaev.service.catalog.scenario.update.CatalogScenarioUpdateService.newerVersions(io.openaev.context.TxCtx, java.lang.String)> calls method"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5977,
+  "output_tokens": 1622,
+  "ms": 6781,
+  "cost_usd": 0.001409,
+  "cached": false
+ }
+}

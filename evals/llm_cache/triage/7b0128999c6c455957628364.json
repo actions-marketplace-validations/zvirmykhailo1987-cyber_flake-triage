@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136673156444:c30e28a3d2869375",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "Frontend build fails deterministically with a JSX syntax error in Graph.tsx: a <Box> opened at line 239 is closed by </Stack> at line 290, then a stray token at line 292. The PR touches Graph.tsx, so the change most likely introduced this. Re-running will fail the same way; fix the unbalanced JSX tags.",
+  "evidence": [
+   {
+    "line": 271,
+    "quote": "[builtin:vite-transform] Expected corresponding JSX closing tag for 'Box'."
+   },
+   {
+    "line": 272,
+    "quote": "     ╭─[ src/admin/components/graph/Graph.tsx:290:7 ]"
+   },
+   {
+    "line": 278,
+    "quote": "  290 │     </Stack>"
+   },
+   {
+    "line": 280,
+    "quote": "     │         ╰──── Expected `</Box>`"
+   },
+   {
+    "line": 283,
+    "quote": "[builtin:vite-transform] Unexpected token. Did you mean `{'}'}` or `&rbrace;`?"
+   },
+   {
+    "line": 300,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2138,
+  "output_tokens": 375,
+  "ms": 2219,
+  "cost_usd": 0.000401,
+  "cached": false
+ }
+}

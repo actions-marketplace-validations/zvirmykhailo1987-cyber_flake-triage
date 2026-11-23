@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136188417963:6e01683c8885ad36",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API Types Check failed because the committed src/utils/api-types.d.ts is stale. Regenerating from the API produces a diff in CatalogHistoryOutput.catalog_history_action (a union type reformatted across multiple lines), and the job exits 1 on that mismatch. The diff is deterministic for this commit, so a re-run will fail the same way. Fix: run yarn generate-types-from-api in openaev-front and commit the updated api-types.d.ts.",
+  "evidence": [
+   {
+    "line": 1187,
+    "quote": "-  catalog_history_action: \"INSTALL\" | \"UNINSTALL\" | \"REVOKE\" | \"LIFT_REVOCATION\";"
+   },
+   {
+    "line": 1196,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1197,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1597,
+  "output_tokens": 870,
+  "ms": 4493,
+  "cost_usd": 0.000595,
+  "cached": false
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075460350:aba93ef9ab44bfd3",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The API test job failed in the post-run multi-tenancy summary step, not in a test. It reports 19 unscoped production reads that are not in this mode's stored list, so the check fails deterministically on this commit. The change touches OpenCRQCounterpartProvider.java and XtmOneClient.java, which are likely sources of new unscoped reads. The excerpt does not show which reads they are, so confidence is moderate and a re-run should fail the same way.",
+  "evidence": [
+   {
+    "line": 184479,
+    "quote": "##[start-action display=Summarise the multi-tenancy shadow run;id=__self.__run_6]"
+   },
+   {
+    "line": 184743,
+    "quote": "##[error]19 unscoped production read(s) new to this mode's stored list. See the job summary."
+   },
+   {
+    "line": 184744,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1156,
+  "output_tokens": 576,
+  "ms": 3345,
+  "cost_usd": 0.000404,
+  "cached": false
+ }
+}

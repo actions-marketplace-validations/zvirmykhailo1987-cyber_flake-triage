@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135449871606:ce2433b0fc186e14",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.6,
+  "summary": "The one failing test asserts that every className in the library resolves to a stylesheet class. Three classes used in RuntimeSettingsForm.tsx (outline-2, outline-offset-2, outline-current) resolve to nothing. This is a deterministic assertion, not a timing or infrastructure problem, so a rerun should fail the same way. The change touched only i18n-loanwords.json, so the log does not show how it caused this. The MissingTranslationError lines are console noise from passing tests and are not the failure.",
+  "evidence": [
+   {
+    "line": 6631,
+    "quote": " FAIL  src/__tests__/components/libUtilityClasses.test.ts > utility classes the library ships > every class written in a className exists in that stylesheet"
+   },
+   {
+    "line": 6632,
+    "quote": "AssertionError: these classes resolve to nothing at runtime: expected [ …(3) ] to deeply equal []"
+   },
+   {
+    "line": 6672,
+    "quote": "+   \"outline-2 (src/admin/components/settings/RuntimeSettingsForm.tsx)\","
+   },
+   {
+    "line": 6673,
+    "quote": "+   \"outline-offset-2 (src/admin/components/settings/RuntimeSettingsForm.tsx)\","
+   },
+   {
+    "line": 6674,
+    "quote": "+   \"outline-current (src/admin/components/settings/RuntimeSettingsForm.tsx)\","
+   },
+   {
+    "line": 6665,
+    "quote": "##[error]AssertionError: these classes resolve to nothing at runtime: expected [ …(3) ] to deeply equal []"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3601,
+  "output_tokens": 950,
+  "ms": 5263,
+  "cost_usd": 0.000835,
+  "cached": false
+ }
+}

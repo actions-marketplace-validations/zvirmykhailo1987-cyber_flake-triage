@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133134238971:637312a0783ad8e5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "PinnedActiveTablesArchTest fails deterministically on elk8-6. The pinned-active-tables baseline records CrossTenantJobSweepTest as importing only import_mappers, but the test now runs with import_mappers,scenarios. This PR modifies that same test file, so the change most likely caused the stale pin. Zero flake history and a repeatable assertion point to a real fix (update or remove the baseline line), not a rerun. The Jackson parse error near line 1249 is logged noise from another test and is not the cause.",
+  "evidence": [
+   {
+    "line": 1882,
+    "quote": "io.openaev.architecture.PinnedActiveTablesArchTest.given_testTree_should_passEveryCheckOfTheGuard()[6] -- Time elapsed: 0.019 s <<< FAILURE!"
+   },
+   {
+    "line": 1884,
+    "quote": "[should find each pinned list recorded exactly. Lines of pinned-active-tables-baseline.txt that no longer describe their class. Re-read the reason when a pin changes, then fix the line, or remove it and lower its count]"
+   },
+   {
+    "line": 1885,
+    "quote": "Expecting empty but was: [\"io.openaev.scheduler.jobs.CrossTenantJobSweepTest: recorded import_mappers, runs with import_mappers,scenarios\"]"
+   },
+   {
+    "line": 3050,
+    "quote": "PinnedActiveTablesArchTest.lambda$given_testTree_should_passEveryCheckOfTheGuard$0:74 [should find each pinned list recorded exactly. Lines of pinned-active-tables-baseline.txt that no longer describe their class. Re-read the reason when a pin changes, then fix the line, or remove it and lower its count]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3312,
+  "output_tokens": 1134,
+  "ms": 5198,
+  "cost_usd": 0.000898,
+  "cached": false
+ }
+}

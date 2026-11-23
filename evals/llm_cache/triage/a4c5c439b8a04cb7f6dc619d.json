@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136165542347:bc940d49349dfb86",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "Five deterministic CSV-export tests in InjectorContractApiCopyRankingTenantScopeTest and InjectorContractRightsPerCopyTest fail with HTTP 400 where 200 is expected. They have no flake history, and the change touches the export path (ThreatArsenalApiExporter, CsvInjectionUtils, CsvType, TenantGroupService). The log does not state the 400 reason, so the link to the change is inferred, not shown.",
+  "evidence": [
+   {
+    "line": 2585,
+    "quote": "io.openaev.rest.injector_contract.InjectorContractApiCopyRankingTenantScopeTest.given_copiesLabelledDifferently_should_exportTheDefaultTenantsCopy -- Time elapsed: 6.193 s <<< FAILURE!"
+   },
+   {
+    "line": 2589,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 2590,
+    "quote": "at io.openaev.rest.injector_contract.InjectorContractApiCopyRankingTenantScopeTest$ExportWithNoSelector.exportCsv(InjectorContractApiCopyRankingTenantScopeTest.java:390)"
+   },
+   {
+    "line": 3011,
+    "quote": "io.openaev.rest.injector_contract.InjectorContractRightsPerCopyTest.given_grantOnlyInTenantAGroup_should_exportTenantACopyOnceAsTheSearchLists -- Time elapsed: 0.711 s <<< FAILURE!"
+   },
+   {
+    "line": 3270,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 3278,
+    "quote": "Tests run: 1426, Failures: 5, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6966,
+  "output_tokens": 1061,
+  "ms": 5103,
+  "cost_usd": 0.001227,
+  "cached": false
+ }
+}

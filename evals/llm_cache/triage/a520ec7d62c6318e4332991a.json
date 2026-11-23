@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135142759827:567fab55582dd898",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "API Types Check failed because the PR adds new enum values (IDENTITY_OF, WORKS_FOR, PERSON, ORGANIZATION, TEAM, etc.) to the graph DTOs, but the committed openaev-front api-types.d.ts was not regenerated. The job's own message says to run generate-types-from-api before committing. This is deterministic and will fail again on re-run until the types are regenerated and committed.",
+  "evidence": [
+   {
+    "line": 1189,
+    "quote": "@@ -6464,7 +6464,13 @@ export interface GraphEdgeOutput {"
+   },
+   {
+    "line": 1200,
+    "quote": "    | \"ATTACK_STEP\";"
+   },
+   {
+    "line": 1210,
+    "quote": "    | \"PERSON\""
+   },
+   {
+    "line": 1216,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1217,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1648,
+  "output_tokens": 672,
+  "ms": 3526,
+  "cost_usd": 0.000501,
+  "cached": false
+ }
+}

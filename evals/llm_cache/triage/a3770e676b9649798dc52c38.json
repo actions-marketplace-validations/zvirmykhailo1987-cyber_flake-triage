@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136419677334:f937b5c5d45835d3",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "The FDS conformity script (check-fds-conformity.mjs) exited with code 1 after a 287 ms run. The visible log lines are all OK, and the failing rule is in the elided section, so the log does not name the violation. The script is a deterministic static check on the same design-system files this PR touched, so a rerun will probably fail the same way. Check the report at fds-migration/reports/conformity-latest.json to find the offending file.",
+  "evidence": [
+   {
+    "line": 172,
+    "quote": "##[group]Run node fds-migration/scripts/check-fds-conformity.mjs"
+   },
+   {
+    "line": 896,
+    "quote": "Report: fds-migration/reports/conformity-latest.json"
+   },
+   {
+    "line": 897,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3344,
+  "output_tokens": 623,
+  "ms": 4388,
+  "cost_usd": 0.000646,
+  "cached": false
+ }
+}

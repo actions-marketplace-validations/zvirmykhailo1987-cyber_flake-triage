@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135746801943:13e64c61a6db6886",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The 'Check i18n translations' step (yarn i18n-checker) failed with 38 placeholder violations. The PR touched the locale files (de, es, fr, it, ja, ru, zh and others), and their plural strings use different placeholder text than en.json, for example 'atomic tests', 'chained steps', 'injects' and 'scenarios'. This is deterministic and will repeat on rerun. Fix the translation placeholders or the loanword allowlist in scripts/i18n-loanwords.json.",
+  "evidence": [
+   {
+    "line": 544,
+    "quote": "de.json — placeholders differ, expected [{# atomic tests} {# atomic test}] got [{# atomare Tests} {# atomarer Test}]"
+   },
+   {
+    "line": 658,
+    "quote": "Total: 38 placeholder violation(s)."
+   },
+   {
+    "line": 659,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5198,
+  "output_tokens": 766,
+  "ms": 5162,
+  "cost_usd": 0.000903,
+  "cached": false
+ }
+}

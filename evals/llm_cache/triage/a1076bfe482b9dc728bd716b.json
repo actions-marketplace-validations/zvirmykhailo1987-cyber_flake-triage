@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075460269:1710faef9fce8a30",
+ "answer": {
+  "decision": "retry",
+  "category": "flaky_test",
+  "confidence": 0.6,
+  "summary": "14 failures in lessons and objective API tests: 404s on ownership-scoped calls and row-count mismatches (0 vs 1). None of the touched files (OpenCRQ counterpart provider, XtmOne client, and their test) are in the failing code path. Shared tenant data (seedSimulation/cleanup) and an ElementNotFoundException suggest test-data pollution or order dependence, not this change. The log doesn't prove that, so confidence is moderate.",
+  "evidence": [
+   {
+    "line": 9847,
+    "quote": "Type = io.openaev.rest.exception.ElementNotFoundException"
+   },
+   {
+    "line": 9869,
+    "quote": "[WRITEATTR] table=exercises relation=DEFAULT tenant=2cffad3a-0001-4078-b0e2-ef74274022c3 scope= entry=null innermost=io.openaev.rest.lessons.PlayerLessonsAnonymousScopeTest.seedSimulation:112"
+   },
+   {
+    "line": 9871,
+    "quote": "[WRITEATTR] table=exercises relation=DEFAULT tenant=2cffad3a-0001-4078-b0e2-ef74274022c3 scope= entry=null innermost=io.openaev.rest.lessons.PlayerLessonsAnonymousScopeTest.cleanup:81"
+   },
+   {
+    "line": 9874,
+    "quote": "java.lang.AssertionError: Status expected:<200> but was:<404>"
+   },
+   {
+    "line": 14519,
+    "quote": "[ERROR] Tests run: 1418, Failures: 14, Errors: 0, Skipped: 2"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 10360,
+  "output_tokens": 1312,
+  "ms": 6640,
+  "cost_usd": 0.001692,
+  "cached": false
+ }
+}

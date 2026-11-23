@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "132684472616:574241ddfc2a6f2c",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Docker build fails at mvn install in the api-builder stage because the Renovate bump to elasticsearch.version cannot resolve co.elastic.clients:elasticsearch-java:jar:8.19.25 from central, shibboleth, or jboss. The version is likely unpublished or wrong, so a rerun should fail the same way. Confidence is moderate because the log shows only 'Could not find' and not whether the version exists, so a transient mirror gap is possible.",
+  "evidence": [
+   {
+    "line": 8392,
+    "quote": "[ERROR] Failed to execute goal on project openaev-es8-client: Could not resolve dependencies for project io.openaev:openaev-es8-client:jar:3.261110.0"
+   },
+   {
+    "line": 8393,
+    "quote": "[ERROR] dependency: co.elastic.clients:elasticsearch-java:jar:8.19.25 (runtime)"
+   },
+   {
+    "line": 8394,
+    "quote": "[ERROR] \tCould not find artifact co.elastic.clients:elasticsearch-java:jar:8.19.25 in central (https://repo.maven.apache.org/maven2)"
+   },
+   {
+    "line": 8408,
+    "quote": "#30 ERROR: process \"/bin/sh -c mvn install -DskipTests -Pdev\" did not complete successfully: exit code: 1"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2925,
+  "output_tokens": 759,
+  "ms": 4360,
+  "cost_usd": 0.000672,
+  "cached": false
+ }
+}

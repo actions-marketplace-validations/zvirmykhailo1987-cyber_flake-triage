@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136873753296:11c5e2eee7cc564c",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "API Types Check failed because the generated TypeScript types are stale. The PR adds FindingRetestInput and FindingRetestOutput to the API but the types were not regenerated, so the diff shows new interfaces missing from the committed file. The failure is deterministic and will repeat on re-run until yarn generate-types-from-api is run and committed.",
+  "evidence": [
+   {
+    "line": 1209,
+    "quote": "@@ -6492,6 +6503,27 @@ export interface FindingOutput {"
+   },
+   {
+    "line": 1213,
+    "quote": "+export interface FindingRetestInput {"
+   },
+   {
+    "line": 1237,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1238,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1995,
+  "output_tokens": 622,
+  "ms": 3205,
+  "cost_usd": 0.00051,
+  "cached": false
+ }
+}

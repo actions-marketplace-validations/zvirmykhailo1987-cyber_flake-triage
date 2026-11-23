@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136899401313:c5f4e9b144d2fc55",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "E2E job failed because the openaev-app container exits on startup with a deterministic Flyway error: two migrations share version V6_20261121140000000. The change adds V6_20261121140000000__Add_finding_lifecycle.java, and the log shows a clashing V6_20261121140000000__Coverage_scenario_safe_mode_and_approval.class. Re-running will hit the same duplicate version, so the migration version needs renaming. Confidence is not higher because the clashing class name is not among the touched files, so it may be a stale build artifact.",
+  "evidence": [
+   {
+    "line": 1460,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   },
+   {
+    "line": 1468,
+    "quote": "Caused by: java.lang.IllegalStateException: Duplicate Flyway migration version found: V6_20261121140000000__Coverage_scenario_safe_mode_and_approval.class"
+   },
+   {
+    "line": 1484,
+    "quote": "at io.openaev.tools.FlywayMigrationValidator.validateFlywayMigrationNames(FlywayMigrationValidator.java:44)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3240,
+  "output_tokens": 720,
+  "ms": 4783,
+  "cost_usd": 0.000684,
+  "cached": false
+ }
+}

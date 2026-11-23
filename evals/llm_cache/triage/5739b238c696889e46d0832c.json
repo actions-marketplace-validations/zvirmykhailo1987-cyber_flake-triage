@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136587630201:e26416a705383aac",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.6,
+  "summary": "The i18n checker step (yarn i18n-checker) exited with code 1, but the excerpt omits the checker's own error message, so the exact cause isn't visible. The failure is a deterministic content check, so a re-run is unlikely to pass. None of the touched files are locale files, so the cause may be pre-existing or come from the new strings; check the full checker output before deciding.",
+  "evidence": [
+   {
+    "line": 511,
+    "quote": "##[group]Run yarn i18n-checker"
+   },
+   {
+    "line": 593,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1691,
+  "output_tokens": 830,
+  "ms": 4894,
+  "cost_usd": 0.000584,
+  "cached": false
+ }
+}

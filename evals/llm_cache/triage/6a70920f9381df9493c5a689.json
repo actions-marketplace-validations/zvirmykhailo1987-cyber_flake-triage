@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134704242756:0e273e20fce28fc8",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API Types Check failed because the generated TypeScript types are out of date. The log shows added Graph types (GraphOutput, GraphNodeOutput, GraphEdgeOutput) that the committed types lack, and the script ends by telling the author to regenerate and commit them. The failure is deterministic and will repeat on re-run until the types are regenerated and committed.",
+  "evidence": [
+   {
+    "line": 1224,
+    "quote": "+export interface GraphOutput {"
+   },
+   {
+    "line": 1235,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1236,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1527,
+  "output_tokens": 622,
+  "ms": 3908,
+  "cost_usd": 0.000464,
+  "cached": false
+ }
+}

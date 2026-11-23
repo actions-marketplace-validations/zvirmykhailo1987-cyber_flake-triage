@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133478298418:bc063834011cb9eb",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The FDS conformity check failed deterministically. PaginationComponentV2.tsx, which this PR modifies, is declared as a Button adoption site but renders no Button, so the check reports DRIFT. The check is not flaky, so a rerun will fail the same way. Fix the component so it renders the design-system Button, or correct its declaration.",
+  "evidence": [
+   {
+    "line": 861,
+    "quote": "❌ [lib-component-usage] openaev-front/src/components/common/queryable/pagination/PaginationComponentV2.tsx: DRIFT — declared as a <Button> adoption site but renders no <Button> at all"
+   },
+   {
+    "line": 885,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2973,
+  "output_tokens": 666,
+  "ms": 4067,
+  "cost_usd": 0.00063,
+  "cached": false
+ }
+}

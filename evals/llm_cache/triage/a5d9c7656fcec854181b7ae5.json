@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136338606091:5704b227cc28d413",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The frontend-quality step failed in the i18n checker, not in a test. It reports 5 missing or untranslated values in de, es and fr (e.g. 'Radial', 'Version v{version}', 'Relations') that match the English text. This is deterministic and tied to the change's new strings in the locale files, so a rerun will fail the same way. Fix by translating the values, or by adding legitimate loanwords to scripts/i18n-loanwords.json.",
+  "evidence": [
+   {
+    "line": 519,
+    "quote": "de.json — identical to the English value"
+   },
+   {
+    "line": 529,
+    "quote": "Total: 5 missing or untranslated value(s)."
+   },
+   {
+    "line": 530,
+    "quote": "Run \"yarn auto-translation:all\" to translate them. If a value is legitimately identical"
+   },
+   {
+    "line": 532,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2342,
+  "output_tokens": 514,
+  "ms": 2929,
+  "cost_usd": 0.000491,
+  "cached": false
+ }
+}

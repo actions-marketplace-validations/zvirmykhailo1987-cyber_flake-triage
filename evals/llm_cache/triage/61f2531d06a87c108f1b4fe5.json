@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135488968083:431ab1b3ab510214",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.75,
+  "summary": "The i18n translation checker step exited with code 1. The excerpt does not state the checker's own error message, but each language array in the printed output repeats the same 'Stop execution' entry, and the PR adds new atomic-testing strings. The failure looks deterministic and tied to this change, so a rerun will likely fail again.",
+  "evidence": [
+   {
+    "line": 555,
+    "quote": "    'Stop execution',"
+   },
+   {
+    "line": 558,
+    "quote": "    'Stop execution'"
+   },
+   {
+    "line": 579,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2940,
+  "output_tokens": 659,
+  "ms": 4315,
+  "cost_usd": 0.000624,
+  "cached": false
+ }
+}

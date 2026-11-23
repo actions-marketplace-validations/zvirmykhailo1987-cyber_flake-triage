@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136272628143:43dd37d8b63f5efd",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "API Types Check failed because the committed front-end types in openaev-front/src/utils/api-types.d.ts are stale. The change adds ScenarioChangelogOutput, a new INSTALL value on scenario_revision_reason, and a new scenario_update_changelogs field on ScenarioUpdatePreviewOutput, but the generated file was not regenerated. The check prints 'Forgot to generate types!' and exits 1. Rerunning will fail the same way; the fix is to run yarn generate-types-from-api and commit the result.",
+  "evidence": [
+   {
+    "line": 1191,
+    "quote": "+export interface ScenarioChangelogOutput {"
+   },
+   {
+    "line": 1205,
+    "quote": "-  scenario_revision_reason: \"UPDATE\" | \"ROLLBACK\";"
+   },
+   {
+    "line": 1206,
+    "quote": "+  scenario_revision_reason: \"INSTALL\" | \"UPDATE\" | \"ROLLBACK\";"
+   },
+   {
+    "line": 1214,
+    "quote": "+  scenario_update_changelogs: ScenarioChangelogOutput[];"
+   },
+   {
+    "line": 1218,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1219,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3927,
+  "output_tokens": 767,
+  "ms": 4022,
+  "cost_usd": 0.000776,
+  "cached": false
+ }
+}

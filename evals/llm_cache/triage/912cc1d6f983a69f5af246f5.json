@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137313851023:d1a4825cb1fac643",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.55,
+  "summary": "The API types check failed because the app never came up on port 8080 within 180s and returned no HTTP response. The excerpt has no application startup logs, so the cause isn't shown. The PR is a Renovate bump of the Spring Boot parent to 4.x (pom.xml), so a startup failure from the upgrade is plausible and would likely repeat on retry. Check the app's startup logs before retrying.",
+  "evidence": [
+   {
+    "line": 1141,
+    "quote": "❌ Application failed to become ready within 180s"
+   },
+   {
+    "line": 1143,
+    "quote": "HTTP 000"
+   },
+   {
+    "line": 1145,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1074,
+  "output_tokens": 822,
+  "ms": 4797,
+  "cost_usd": 0.000518,
+  "cached": false
+ }
+}

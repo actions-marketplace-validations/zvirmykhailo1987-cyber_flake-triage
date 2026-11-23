@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134850944608:227cd1f3c0ed52f3",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API Types Check fails because the committed openaev-front/src/utils/api-types.d.ts is stale. The change adds the LocalObjectOutput DTO, but the developer did not regenerate the types before committing. Re-running gives the same diff, so fix it by running yarn generate-types-from-api and committing the result.",
+  "evidence": [
+   {
+    "line": 1183,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1192,
+    "quote": "+export interface LocalObjectOutput {"
+   },
+   {
+    "line": 1203,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1734,
+  "output_tokens": 576,
+  "ms": 3113,
+  "cost_usd": 0.000461,
+  "cached": false
+ }
+}

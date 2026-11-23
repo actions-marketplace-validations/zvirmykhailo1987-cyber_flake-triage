@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137082657636:487af8ef5b32a5e9",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The API test step failed because a multi-tenancy shadow check found 13 unscoped production reads that are not in the stored baseline list. That is a deterministic code-analysis result, so a rerun will fail the same way. The touched files, including OpenCRQCounterpartProvider.java and XtmOneClient.java, likely contain the new reads, but the excerpt does not list them, so check the job summary to confirm.",
+  "evidence": [
+   {
+    "line": 7214,
+    "quote": "##[error]13 unscoped production read(s) new to this mode's stored list. See the job summary."
+   },
+   {
+    "line": 7215,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1152,
+  "output_tokens": 498,
+  "ms": 3121,
+  "cost_usd": 0.000364,
+  "cached": false
+ }
+}

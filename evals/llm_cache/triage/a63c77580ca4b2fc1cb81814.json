@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136392772818:8e33bc642d8c098d",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The Check i18n translations step (yarn i18n-checker) exits with code 1. The excerpt shows the same translation strings listed twice (e.g. 'Explore in graph', 'Hide this suggestion'), which looks like duplicate keys added by this change to the lang JSON files (en.json and others are touched). The excerpt does not print the checker's own error message, so this is inferred. Duplicates are deterministic, so a rerun will fail the same way; fix the duplicate keys.",
+  "evidence": [
+   {
+    "line": 511,
+    "quote": "Run yarn i18n-checker"
+   },
+   {
+    "line": 1411,
+    "quote": "'Explore in graph',"
+   },
+   {
+    "line": 1425,
+    "quote": "'Hide this suggestion',"
+   },
+   {
+    "line": 1439,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3368,
+  "output_tokens": 729,
+  "ms": 4189,
+  "cost_usd": 0.000701,
+  "cached": false
+ }
+}

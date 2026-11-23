@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134739236675:50dd0e7e8d13044d",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.35,
+  "summary": "FDS conformity check exited with code 1 and wrote a report, but the excerpt shows only OK lines (834-870) and no violation message; the failing rule is in the elided part of the log. Nothing points to infrastructure or flakiness, and a deterministic check failure would likely repeat on retry. The PR touches no front-end source files, so the cause is unclear. Open the full log or conformity-latest.json to see the violation.",
+  "evidence": [
+   {
+    "line": 872,
+    "quote": "Report: fds-migration/reports/conformity-latest.json"
+   },
+   {
+    "line": 873,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3543,
+  "output_tokens": 727,
+  "ms": 4247,
+  "cost_usd": 0.000718,
+  "cached": false
+ }
+}

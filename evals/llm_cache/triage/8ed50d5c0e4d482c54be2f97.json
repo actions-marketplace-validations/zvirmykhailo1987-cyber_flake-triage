@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135447107803:b14b08b924d1648b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "E2E app container crashed at startup: Flyway found two migrations with the same version V6_20261118120000000 (one from this PR's Catalog_connector_injector_contracts migration, the other Request_finding_refeed_for_asset_groups_side). The duplicate version is deterministic and will fail again on re-run, so fix the version collision.",
+  "evidence": [
+   {
+    "line": 1463,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   },
+   {
+    "line": 1471,
+    "quote": "Caused by: java.lang.IllegalStateException: Duplicate Flyway migration version found: V6_20261118120000000__Request_finding_refeed_for_asset_groups_side.class"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3656,
+  "output_tokens": 536,
+  "ms": 4185,
+  "cost_usd": 0.000634,
+  "cached": false
+ }
+}

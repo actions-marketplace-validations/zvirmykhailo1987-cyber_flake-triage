@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137000580212:6957c1ba23940ec9",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Every failing test is a Spring context load failure, not a test assertion. The app fails to start because of a bean dependency cycle: workflowService -> workflowEndService -> notificationEventService -> scenarioNotificationEventHandler -> exerciseService -> workflowService. WorkflowEndService and NotificationEventService are both in this change, so the change most likely introduced the cycle. It is deterministic and a re-run should fail the same way. The flake history (0 flakes, 2 prior failures) fits a consistent break, not a race.",
+  "evidence": [
+   {
+    "line": 3256,
+    "quote": "APPLICATION FAILED TO START"
+   },
+   {
+    "line": 3281,
+    "quote": "Relying upon circular references is discouraged and they are prohibited by default."
+   },
+   {
+    "line": 3371,
+    "quote": "Error creating bean with name 'workflowEndService' defined in file"
+   },
+   {
+    "line": 3388,
+    "quote": "Error creating bean with name 'notificationEventService' defined in file"
+   },
+   {
+    "line": 3405,
+    "quote": "Error creating bean with name 'scenarioNotificationEventHandler' defined in file"
+   },
+   {
+    "line": 3422,
+    "quote": "Error creating bean with name 'exerciseService' defined in file"
+   },
+   {
+    "line": 3439,
+    "quote": "Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 13526,
+  "output_tokens": 1278,
+  "ms": 5891,
+  "cost_usd": 0.001992,
+  "cached": false
+ }
+}

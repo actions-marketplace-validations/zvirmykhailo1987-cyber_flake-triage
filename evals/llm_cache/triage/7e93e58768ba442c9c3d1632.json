@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136288828806:a6092f9042c7e4de",
+ "answer": {
+  "decision": "retry",
+  "category": "infrastructure",
+  "confidence": 0.85,
+  "summary": "The one failing test (StixApiNonAdminIsolationTest) errored in its setup, seedTenantWithPayloadSupportingInjector, not on an assertion. RabbitMQ refused to declare a quorum queue with reply-text cluster_not_formed, so tenant creation failed. The change only touches PayloadUpsertDocumentLinkTenantTest, and the test has no flake history. This looks like a broker cluster problem, so a re-run should be worth trying.",
+  "evidence": [
+   {
+    "line": 1368,
+    "quote": "io.openaev.multitenancy.DependenciesManagerException: Failed to create RabbitMQ queues for tenant ecb3dd5c-319d-4e9c-ae36-341f6d804a1b"
+   },
+   {
+    "line": 1412,
+    "quote": "at io.openaev.api.stix_process.StixApiNonAdminIsolationTest.seedTenantWithPayloadSupportingInjector(StixApiNonAdminIsolationTest.java:74)"
+   },
+   {
+    "line": 1422,
+    "quote": "reply-text=INTERNAL_ERROR - Cannot declare quorum queue 'openbas-ecb3dd5c-319d-4e9c-ae36-341f6d804a1b_execution_workflows-update' in vhost '/' on node 'rabbit@9c9f10f1eba8' with leader on node 'rabbit@9c9f10f1eba8': cluster_not_fo"
+   },
+   {
+    "line": 1442,
+    "quote": "Caused by: com.rabbitmq.client.ShutdownSignalException: connection error; protocol method: #method<connection.close>(reply-code=541, reply-text=INTERNAL_ERROR - Cannot declare quorum queue"
+   },
+   {
+    "line": 49482,
+    "quote": "StixApiNonAdminIsolationTest.seedTenantWithPayloadSupportingInjector:74 » DependenciesManager Failed to create RabbitMQ queues for tenant ecb3dd5c-319d-4e9c-ae36-341f6d804a1b"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5142,
+  "output_tokens": 1024,
+  "ms": 5054,
+  "cost_usd": 0.001026,
+  "cached": false
+ }
+}

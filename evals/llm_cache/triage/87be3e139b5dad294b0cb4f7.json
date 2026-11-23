@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134784467154:ba1cd77205e8e9df",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "The i18n checker failed deterministically: the key \"In OpenCTI\" is identical to the English value in de.json and it.json, and the check counts it as untranslated. The change added this string, so re-running will fail the same way. Fix: translate it in de.json and it.json, or list it in scripts/i18n-loanwords.json if it is a legitimate loanword.",
+  "evidence": [
+   {
+    "line": 523,
+    "quote": "de.json — identical to the English value"
+   },
+   {
+    "line": 524,
+    "quote": "  key   : In OpenCTI"
+   },
+   {
+    "line": 525,
+    "quote": "it.json — identical to the English value"
+   },
+   {
+    "line": 527,
+    "quote": "Total: 2 missing or untranslated value(s)."
+   },
+   {
+    "line": 530,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1459,
+  "output_tokens": 284,
+  "ms": 2138,
+  "cost_usd": 0.000288,
+  "cached": false
+ }
+}

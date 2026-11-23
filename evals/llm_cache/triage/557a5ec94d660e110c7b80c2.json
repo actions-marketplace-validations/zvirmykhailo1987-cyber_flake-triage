@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137344100374:04b837396932de7a",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The FDS conformity check failed deterministically at lib-component-usage: AskAfterSavingChoice.tsx is declared as an <Alert> adoption site but renders no <Alert>. The check exits 1 on this drift, so a re-run should fail the same way. AskAfterSavingChoice.tsx is not in the touched-file list, so the declaration likely comes from the changed fds-migration/migration-state.json; check that file or the component's Alert usage.",
+  "evidence": [
+   {
+    "line": 901,
+    "quote": "❌ [lib-component-usage] openaev-front/src/admin/components/threat_arsenal/versions/AskAfterSavingChoice.tsx: DRIFT — declared as a <Alert> adoption site but renders no <Alert> at all — A message about the payload a drawer shows: its revocation, and what a revoked version breaks."
+   },
+   {
+    "line": 913,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5090,
+  "output_tokens": 638,
+  "ms": 3422,
+  "cost_usd": 0.000828,
+  "cached": false
+ }
+}

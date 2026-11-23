@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135412345013:f2e54291a7f26663",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "Not infra or flakiness: the committed openaev-front/src/utils/api-types.d.ts is stale. The API now generates SettingsRuntimeUpdateInput.settings as Record<string, any> instead of Record<string, object>, so the types check fails deterministically. Fix: run yarn generate-types-from-api and commit the regenerated file.",
+  "evidence": [
+   {
+    "line": 1192,
+    "quote": "-  settings: Record<string, object>;"
+   },
+   {
+    "line": 1193,
+    "quote": "+  settings: Record<string, any>;"
+   },
+   {
+    "line": 1197,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1198,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2508,
+  "output_tokens": 566,
+  "ms": 3186,
+  "cost_usd": 0.000534,
+  "cached": false
+ }
+}

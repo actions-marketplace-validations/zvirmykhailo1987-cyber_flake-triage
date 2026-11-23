@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136566227534:1b3f1e2717f33e93",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API Types Check failed because the committed src/utils/api-types.d.ts is stale. Regenerating from the API adds node_relation_counts to GraphNodeOutput, which this PR's GraphExplorationApi.java change appears to introduce. The generator is deterministic, so a re-run will produce the same diff. Fix: run yarn generate-types-from-api and commit the updated api-types.d.ts.",
+  "evidence": [
+   {
+    "line": 1178,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1187,
+    "quote": "+  node_relation_counts?: Record<string, number>;"
+   },
+   {
+    "line": 1191,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1192,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1506,
+  "output_tokens": 700,
+  "ms": 3905,
+  "cost_usd": 0.000501,
+  "cached": false
+ }
+}

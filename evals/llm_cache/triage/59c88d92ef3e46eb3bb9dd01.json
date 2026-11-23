@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136203655948:91dea07c317dac3e",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Five export tests in the injector-contract tenant-scope and rights suites fail with HTTP 400 where 200 is expected. The server resolves the request to a BadRequestException, which is deterministic, not timing or infrastructure. The change touches the threat arsenal exporter and the import/export code these tests exercise, so re-running will likely fail the same way. The log does not show the exact validation message, so the root cause is inferred rather than confirmed.",
+  "evidence": [
+   {
+    "line": 2528,
+    "quote": "Type = io.openaev.rest.exception.BadRequestException"
+   },
+   {
+    "line": 2584,
+    "quote": "[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 14.74 s <<< FAILURE! -- in Threat arsenal CSV export with no selector"
+   },
+   {
+    "line": 2585,
+    "quote": "[ERROR] io.openaev.rest.injector_contract.InjectorContractApiCopyRankingTenantScopeTest.given_copiesLabelledDifferently_should_exportTheDefaultTenantsCopy -- Time elapsed: 1.026 s <<< FAILURE!"
+   },
+   {
+    "line": 2588,
+    "quote": "expected: 200"
+   },
+   {
+    "line": 2589,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 3265,
+    "quote": "[ERROR]   InjectorContractApiCopyRankingTenantScopeTest.given_copiesLabelledDifferently_should_exportTheDefaultTenantsCopy"
+   },
+   {
+    "line": 3276,
+    "quote": "but was: 400"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6970,
+  "output_tokens": 1024,
+  "ms": 5080,
+  "cost_usd": 0.001209,
+  "cached": false
+ }
+}

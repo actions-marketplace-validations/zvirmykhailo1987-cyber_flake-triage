@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133941740796:3af9eba0efbd75eb",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Both XtmHubEmailRecipientsTest failures (Platform email and Tenant email) hit the roles_guard_platform_row trigger, which refuses inserts of platform roles (tenant_id NULL) in a non-platform transaction. That trigger comes from the migration V6 Guard_roles_and_role_links this change adds, so the failure is deterministic and should repeat on re-run. The other logged errors (engine down, smtp down, database down) are expected noise from other tests and don't explain the failing build.",
+  "evidence": [
+   {
+    "line": 3875,
+    "quote": "could not execute batch [Batch entry 0 insert into roles (role_created_at,role_description,role_name,tenant_id,role_updated_at,role_id) values (('2026-11-17 09:40:00.230003+00'),('Default platform admin role'),('xtmhub-role-b9729daa-958e-4e16-b1b6-9a9fc5def34b'),(NULL),('2026-11-17 09:40:00.230004+00'),('f4beb5a8-1113-49c7-8c8b-cfbebc470485')) was aborted: ERROR: write of a platform row refused: t"
+   },
+   {
+    "line": 3929,
+    "quote": "PL/pgSQL function roles_guard_platform_row() line 5 at PERFORM  Call getNextException to see other errors in the batch."
+   },
+   {
+    "line": 3941,
+    "quote": "Caused by: org.postgresql.util.PSQLException: ERROR: write of a platform row refused: the transaction is not platform-write"
+   },
+   {
+    "line": 4379,
+    "quote": "[ERROR] Tests run: 1538, Failures: 0, Errors: 2, Skipped: 1"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6501,
+  "output_tokens": 1064,
+  "ms": 4780,
+  "cost_usd": 0.001182,
+  "cached": false
+ }
+}

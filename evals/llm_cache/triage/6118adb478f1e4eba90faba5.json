@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136184184729:b70823e3268406cd",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Five deterministic Threat arsenal CSV export tests fail with HTTP 400 where 200 is expected, and the resolved exception is BadRequestException. The change touches ThreatArsenalApiExporter and the import/export mapper and CSV code, so it likely broke the export endpoint. Same commit re-run should repeat the failure. The Crowdstrike JSON parse error at line 1247 is unrelated noise.",
+  "evidence": [
+   {
+    "line": 2529,
+    "quote": "Type = io.openaev.rest.exception.BadRequestException"
+   },
+   {
+    "line": 2586,
+    "quote": "io.openaev.rest.injector_contract.InjectorContractApiCopyRankingTenantScopeTest.given_copiesLabelledDifferently_should_exportTheDefaultTenantsCopy -- Time elapsed: 4.241 s <<< FAILURE!"
+   },
+   {
+    "line": 2589,
+    "quote": "expected: 200"
+   },
+   {
+    "line": 2590,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 3263,
+    "quote": "InjectorContractApiCopyRankingTenantScopeTest.given_builtinContractInTwoTenants_should_exportOneRowCountedLikeTheSearch"
+   },
+   {
+    "line": 3279,
+    "quote": "Tests run: 1426, Failures: 5, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6982,
+  "output_tokens": 812,
+  "ms": 4564,
+  "cost_usd": 0.001104,
+  "cached": false
+ }
+}

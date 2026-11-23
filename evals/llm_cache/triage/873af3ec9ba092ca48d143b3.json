@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134686640303:619455dce08b9817",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "API Types Check fails deterministically because the API change in CounterpartApi.java added new output types (CounterpartOutput, XtmConnectionOutput) that were never regenerated into the committed TypeScript types. The diff in the log shows the generated-but-missing types, and the check tells the author to regenerate and commit. Re-running on the same commit will fail the same way; regenerate the types and push.",
+  "evidence": [
+   {
+    "line": 1200,
+    "quote": "+export interface CounterpartOutput {"
+   },
+   {
+    "line": 1217,
+    "quote": "+export interface XtmConnectionOutput {"
+   },
+   {
+    "line": 1226,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1227,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1482,
+  "output_tokens": 613,
+  "ms": 3690,
+  "cost_usd": 0.000455,
+  "cached": false
+ }
+}

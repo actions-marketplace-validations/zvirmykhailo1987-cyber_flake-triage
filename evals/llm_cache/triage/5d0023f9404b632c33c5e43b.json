@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137327730206:54f14fc13774f977",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "The API types check failed deterministically: the generated api-types.d.ts adds a @minLength 1 constraint to ThreatArsenalActionIdOutput.action_id, but the committed file lacks it. The change to ThreatArsenalActionIdOutput.java introduced the constraint without regenerating types. Re-running will fail the same way; run yarn generate-types-from-api and commit the result.",
+  "evidence": [
+   {
+    "line": 1183,
+    "quote": "@@ -13971,6 +13971,7 @@ export interface ThreatArsenalActionFullOutput {"
+   },
+   {
+    "line": 1186,
+    "quote": " export interface ThreatArsenalActionIdOutput {"
+   },
+   {
+    "line": 1187,
+    "quote": "+  /** @minLength 1 */"
+   },
+   {
+    "line": 1191,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1192,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3417,
+  "output_tokens": 716,
+  "ms": 4772,
+  "cost_usd": 0.0007,
+  "cached": false
+ }
+}

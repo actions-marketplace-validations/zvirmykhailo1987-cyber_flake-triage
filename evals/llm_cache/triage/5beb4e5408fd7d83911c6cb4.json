@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134742298433:44abb056e3579a8e",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "The i18n checker fails with deterministic missing-key errors: 'Launched by' and 'Scheduled by' are reported missing in all nine locales, and the step exits 1. The keys are most likely new strings from this change's header/hero components that were never added to the translation files, so a re-run will fail the same way until the keys are added.",
+  "evidence": [
+   {
+    "line": 524,
+    "quote": "Missing keys : {"
+   },
+   {
+    "line": 525,
+    "quote": "  de: [ 'Launched by', 'Scheduled by', 'Scheduled by', 'Launched by' ],"
+   },
+   {
+    "line": 535,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1744,
+  "output_tokens": 572,
+  "ms": 3383,
+  "cost_usd": 0.00046,
+  "cached": false
+ }
+}

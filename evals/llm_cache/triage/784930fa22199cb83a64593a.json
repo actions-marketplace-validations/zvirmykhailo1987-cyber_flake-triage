@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136051523891:f902c2b3f2dedd3b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "API Types Check failed because the committed TypeScript API types are out of date. The regenerated output adds ScenarioRevisionOutput and ScenarioUpdateInput, which the PR's new API classes produce but the committed types lack. The fix is to run yarn generate-types-from-api and commit the result. This is deterministic, so a re-run will fail the same way.",
+  "evidence": [
+   {
+    "line": 1216,
+    "quote": "+export interface ScenarioRevisionOutput {"
+   },
+   {
+    "line": 1234,
+    "quote": "+export interface ScenarioUpdateInput {"
+   },
+   {
+    "line": 1241,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1242,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2947,
+  "output_tokens": 545,
+  "ms": 2911,
+  "cost_usd": 0.000567,
+  "cached": false
+ }
+}

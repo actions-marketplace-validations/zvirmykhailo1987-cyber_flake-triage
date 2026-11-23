@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135365140817:e6ddeee5badb69bf",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API Types Check failed because the committed TypeScript API types are stale. The generated types add new fields (scenarios_count, simulations_count) and a new StarterPackDashboardsRestoreOutput interface that the PR did not commit. The job itself says to regenerate types before committing. This is deterministic, so a rerun on the same commit will fail the same way. Fix: run yarn generate-types-from-api and commit the result.",
+  "evidence": [
+   {
+    "line": 1204,
+    "quote": "+  scenarios_count: number;"
+   },
+   {
+    "line": 1209,
+    "quote": "+  simulations_count: number;"
+   },
+   {
+    "line": 1220,
+    "quote": "+ export interface StarterPackDashboardsRestoreOutput {"
+   },
+   {
+    "line": 1232,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1233,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3057,
+  "output_tokens": 654,
+  "ms": 3462,
+  "cost_usd": 0.000633,
+  "cached": false
+ }
+}

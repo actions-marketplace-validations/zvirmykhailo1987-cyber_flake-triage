@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136054618694:aea0c025802910d1",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Two ArchUnit tests in TenantActiveTableAccessArchTest fail deterministically because the change adds calls from new code to restricted repository and entity methods. PayloadCustomizationService calls InjectorContract.getAttackPatterns(), and PayloadCustomizationMerge and PayloadLocalVersioning call PayloadIdentity methods, and those classes are not in the allowed list. The rest of the 1436 tests pass. The DetectionRemediationAIService JSON parse error in the log is unrelated noise from an external service. Re-running will fail the same way until the access is moved behind an allowed class or the architecture rule is updated.",
+  "evidence": [
+   {
+    "line": 3027,
+    "quote": "[ERROR] Tests run: 106, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 17.52 s <<< FAILURE! -- in io.openaev.architecture.TenantActiveTableAccessArchTest"
+   },
+   {
+    "line": 3031,
+    "quote": "Method <io.openaev.service.payload.PayloadCustomizationService.customize(java.lang.String, java.lang.String)> calls method <io.openaev.database.model.InjectorContract.getAttackPatterns()> in (PayloadCustomizationService.java:80)"
+   },
+   {
+    "line": 3044,
+    "quote": "Method <io.openaev.service.payload.PayloadCustomizationMerge.newerVersion(io.openaev.database.model.Payload)> calls method <io.openaev.database.model.payload.PayloadIdentity.getLatestVersion()> in (PayloadCustomizationMerge.java:90)"
+   },
+   {
+    "line": 3080,
+    "quote": "Method <io.openaev.service.payload.PayloadLocalVersioning.addVersion(io.openaev.database.model.Payload, io.openaev.database.model.Payload, io.openaev.database.model.hash.Hashed$Change)> calls method <io.openaev.database.model.payload.PayloadIdentity.getId()> in (PayloadLocalVersioning.java:81)"
+   },
+   {
+    "line": 3083,
+    "quote": "[ERROR] Tests run: 1436, Failures: 2, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6890,
+  "output_tokens": 1476,
+  "ms": 6285,
+  "cost_usd": 0.001427,
+  "cached": false
+ }
+}

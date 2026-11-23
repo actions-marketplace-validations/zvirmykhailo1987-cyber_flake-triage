@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136055328499:8f5d174251d05473",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Two deterministic ArchUnit tests failed, so a re-run will likely fail the same way. TenantBackgroundTransactionArchTest flags intra-class @Transactional self-invocations in CatalogListService.offered (calls released) and CatalogScenarioUpdateService.newerVersions (calls installed), both in files this change touches. JsonTypeDirtyOnLoadCoverageTest says the PROBED_FIELDS list no longer matches the JSON-mapped fields in tenant-active tables. Static architecture checks don't flake, and the 2 prior failures for the transaction rule suggest it is a known recurring problem. The rest of the run (1433 tests, 2 failures) looks unrelated.",
+  "evidence": [
+   {
+    "line": 1835,
+    "quote": "org.opentest4j.AssertionFailedError: every JSON-mapped field stored in a tenant-active table needs a case in JsonTypeDirtyOnLoadProbeTest, and nothing else belongs in PROBED_FIELDS."
+   },
+   {
+    "line": 3037,
+    "quote": "io.openaev.architecture.TenantBackgroundTransactionArchTest.no_transactional_self_invocation -- Time elapsed: 0.128 s <<< FAILURE!"
+   },
+   {
+    "line": 3039,
+    "quote": "Rule 'classes should not call a @Transactional method of the same class, because an intra-class call to a @Transactional method bypasses the Spring proxy: no transaction, no tenant scope, silently' was violated (2 times):"
+   },
+   {
+    "line": 3040,
+    "quote": "Method <io.openaev.service.catalog.CatalogListService.offered(java.lang.Class, java.lang.String, java.lang.String)> calls method <io.openaev.service.catalog.CatalogListService.released(java.lang.Class, java.lang.String, java.lang.String)> in (CatalogListService.java:41) self-invokes @Transactional"
+   },
+   {
+    "line": 3065,
+    "quote": "Method <io.openaev.service.catalog.scenario.update.CatalogScenarioUpdateService.newerVersions(io.openaev.context.TxCtx, java.lang.String)> calls method <io.openaev.service.catalog.scenario.update.CatalogScenarioUpdateService.installed(io.openaev.context.TxCtx, java.lang.String)> in (CatalogScenarioUpdateService.java:66) self-invokes @Transactional"
+   },
+   {
+    "line": 3067,
+    "quote": "[ERROR] Tests run: 1433, Failures: 2, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6515,
+  "output_tokens": 1234,
+  "ms": 5339,
+  "cost_usd": 0.001269,
+  "cached": false
+ }
+}

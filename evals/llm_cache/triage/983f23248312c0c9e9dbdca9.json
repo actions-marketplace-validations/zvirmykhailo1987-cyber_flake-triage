@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136167590325:7d35aa007f2c32f6",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "Five injector-contract export tests fail deterministically: the export endpoint returns HTTP 400 where the tests expect 200. Every failure shows the same 400, with a BadRequestException resolved, and none has flake history, so the change is the likely cause. The log does not include the 400 response body, so the exact validation rule is unconfirmed. The export path (ThreatArsenalApiExporter, import/export mappers) was touched by this change.",
+  "evidence": [
+   {
+    "line": 2527,
+    "quote": "Type = io.openaev.rest.exception.BadRequestException"
+   },
+   {
+    "line": 2583,
+    "quote": "Threat arsenal CSV export with no selector"
+   },
+   {
+    "line": 2587,
+    "quote": "expected: 200"
+   },
+   {
+    "line": 2588,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 2589,
+    "quote": "at io.openaev.rest.injector_contract.InjectorContractApiCopyRankingTenantScopeTest$ExportWithNoSelector.exportCsv(InjectorContractApiCopyRankingTenantScopeTest.java:390)"
+   },
+   {
+    "line": 3263,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 3277,
+    "quote": "Tests run: 1426, Failures: 5, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6967,
+  "output_tokens": 1107,
+  "ms": 5626,
+  "cost_usd": 0.00125,
+  "cached": false
+ }
+}

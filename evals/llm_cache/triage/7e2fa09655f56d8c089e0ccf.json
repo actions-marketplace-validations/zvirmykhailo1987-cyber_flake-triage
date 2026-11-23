@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135490931578:5e71eb1c055ae76d",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "The API types check failed because the generated TypeScript types differ from the committed ones. The diff adds GraphStartingPointOutput and GraphStartingPointsOutput, which come from the graph-completeness change, but the types were not regenerated before commit. Re-running will fail the same way until `yarn generate-types-from-api` is run and the result committed.",
+  "evidence": [
+   {
+    "line": 1341,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1342,
+    "quote": "##[error]Process completed with exit code 1."
+   },
+   {
+    "line": 1334,
+    "quote": "export interface GraphStartingPointsOutput {"
+   },
+   {
+    "line": 1335,
+    "quote": "  starting_points: GraphStartingPointOutput[];"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3804,
+  "output_tokens": 423,
+  "ms": 2668,
+  "cost_usd": 0.000592,
+  "cached": false
+ }
+}

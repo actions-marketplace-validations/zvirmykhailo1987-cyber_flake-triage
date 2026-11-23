@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075459670:32a9582bc3a4887f",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "All 8 failures are in one new webkit spec, graph-interactions.spec.ts, and share one assertion: the page's console errors must be empty (line 2811). The captured error is a Content Security Policy violation (line 2806), but the log truncates it and doesn't show which resource was blocked. The touched files are backend Java and none is in the graph UI, so the log doesn't link the change to these failures. The spec is new and failing on one browser, so a shared cause is likely, but the log doesn't settle whether it is the change or a flake. Low confidence; check the CSP violation details before trusting a retry.",
+  "evidence": [
+   {
+    "line": 2737,
+    "quote": "✘  19 [webkit] › tests_e2e/tests/graph/graph-interactions.spec.ts:112:3 › Exploration graph interactions › each layout button moves the nodes on the first click, and Re-run plays the layout again (7.6s)"
+   },
+   {
+    "line": 2806,
+    "quote": "+     \"error: The Content Security Policy 'default-src 'self'; script-src 'self' 'nonce-dab5a90a7ae1ba5075052bb19c2ee083'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://hub.filigran.io"
+   },
+   {
+    "line": 2811,
+    "quote": "    > 127 |     expect(problems).toEqual([]);"
+   },
+   {
+    "line": 3510,
+    "quote": "│ ├ Failed    │ 8  (10.5%)             │"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6918,
+  "output_tokens": 1384,
+  "ms": 7880,
+  "cost_usd": 0.001384,
+  "cached": false
+ }
+}

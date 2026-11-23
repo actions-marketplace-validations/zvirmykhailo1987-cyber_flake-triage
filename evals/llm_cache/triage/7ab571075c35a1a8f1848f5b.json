@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133638371433:3899a286e5d1ef09",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "Deterministic ArchUnit failure in TenantActiveTableAccessArchTest.injector_contract_callers_are_the_claimed_ones. The allowlist says NotificationDigestService.processDigest calls NotificationDispatchService.dispatch, but the compiled bytecode has no such call. NotificationDigestService.java was changed in this PR, so the change likely removed or altered that call. The allowlist is stale and the rerun will fail the same way. Fix the call or update the allowlist.",
+  "evidence": [
+   {
+    "line": 3049,
+    "quote": "[ERROR] Tests run: 104, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 12.85 s <<< FAILURE! -- in io.openaev.architecture.TenantActiveTableAccessArchTest"
+   },
+   {
+    "line": 3052,
+    "quote": "was violated (2 times):"
+   },
+   {
+    "line": 3084,
+    "quote": "Method <io.openaev.notification.engine.NotificationDigestService.processDigest(io.openaev.notification.engine.ResolvedNotificationTrigger, java.time.Instant)> calls method <io.openaev.notification.engine.NotificationDispatchService.dispatch"
+   },
+   {
+    "line": 3085,
+    "quote": "NotificationDigestService#processDigest is claimed to call NotificationDispatchService#dispatch but no such call was found"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3890,
+  "output_tokens": 819,
+  "ms": 3900,
+  "cost_usd": 0.000798,
+  "cached": false
+ }
+}

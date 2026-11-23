@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136077173140:fcd3d6c72fbe04f3",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Two ArchUnit tenant-access rules fail deterministically, and both violations come from code this change adds. PayloadCustomizationService calls InjectorContract.getAttackPatterns() and PayloadCustomizationMerge/PayloadLocalVersioning call PayloadIdentity methods, none of which are on the rule's allowed list. Rerunning will hit the same assertions; the fix is to route these accesses through an allowed class or update the rule deliberately.",
+  "evidence": [
+   {
+    "line": 3028,
+    "quote": "[ERROR] Tests run: 106, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 51.61 s <<< FAILURE! -- in io.openaev.architecture.TenantActiveTableAccessArchTest"
+   },
+   {
+    "line": 3032,
+    "quote": "Method <io.openaev.service.payload.PayloadCustomizationService.customize(java.lang.String, java.lang.String)> calls method <io.openaev.database.model.InjectorContract.getAttackPatterns()> in (PayloadCustomizationService.java:80)"
+   },
+   {
+    "line": 3045,
+    "quote": "Method <io.openaev.service.payload.PayloadCustomizationMerge.newerVersion(io.openaev.database.model.Payload)> calls method <io.openaev.database.model.payload.PayloadIdentity.getLatestVersion()> in (PayloadCustomizationMerge.java:90)"
+   },
+   {
+    "line": 3081,
+    "quote": "Method <io.openaev.service.payload.PayloadLocalVersioning.addVersion(io.openaev.database.model.Payload, io.openaev.database.model.Payload, io.openaev.database.model.hash.Hashed$Change)> calls method <io.openaev.database.model.payload.PayloadIdentity.getId()> in (PayloadLocalVersioning.java:81)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6900,
+  "output_tokens": 1011,
+  "ms": 4902,
+  "cost_usd": 0.001195,
+  "cached": false
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135751123020:38e0c718846ec774",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "StreamVisibilityServiceTest.given_findingOnAGroupWithAHiddenAsset_should_keepTheVisibleOnesInTheGroup fails deterministically: the finding's group comes back empty where the test expects the group \"g\". The test has no flake history, and the change touches AssetGroupRepository, which plausibly feeds this group lookup. The log does not show the repository code path, so treat the link to the change as likely rather than proven.",
+  "evidence": [
+   {
+    "line": 2657,
+    "quote": "[ERROR] Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.289 s <<< FAILURE! -- in The rows the payload lists or embeds"
+   },
+   {
+    "line": 2658,
+    "quote": "[ERROR] io.openaev.service.stream.StreamVisibilityServiceTest.given_findingOnAGroupWithAHiddenAsset_should_keepTheVisibleOnesInTheGroup -- Time elapsed: 0.012 s <<< FAILURE!"
+   },
+   {
+    "line": 2679,
+    "quote": "  []"
+   },
+   {
+    "line": 2680,
+    "quote": "to contain exactly (and in same order):"
+   },
+   {
+    "line": 2681,
+    "quote": "  [\"g\"]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2163,
+  "output_tokens": 766,
+  "ms": 4157,
+  "cost_usd": 0.000599,
+  "cached": false
+ }
+}

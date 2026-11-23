@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075460366:24bd828662e7ec0f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.6,
+  "summary": "14 deterministic failures in 3 test classes: lessons and objective API tests return 404 where 200 is expected, and a lessons count is 0 where 1 is expected. All reruns are consistent with no flake history, so a retry will likely repeat them. The log does not show the cause, and none of the failing tests touch the three changed files, so the link to this change is unproven. The Maven network retries at lines 1356-1364 are dependency-resolution noise, and the build reached the tests.",
+  "evidence": [
+   {
+    "line": 9917,
+    "quote": "java.lang.AssertionError: Status expected:<200> but was:<404>"
+   },
+   {
+    "line": 9890,
+    "quote": "Type = io.openaev.rest.exception.ElementNotFoundException"
+   },
+   {
+    "line": 10341,
+    "quote": " but was: \"lessons_category-32efeca6-360e-49e5-9d16-d3312930e5ef|0|1|lessons_question-17b4d897-891a-4965-8195-e3ce872ec28a\""
+   },
+   {
+    "line": 14565,
+    "quote": "[ERROR] Tests run: 1418, Failures: 14, Errors: 0, Skipped: 2"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 10920,
+  "output_tokens": 1573,
+  "ms": 8068,
+  "cost_usd": 0.001878,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136338606527:5082fe53f8577264",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "ArchRuleRegistrationTest fails deterministically: TenantActiveTableAccessArchTest#scenario_revisions_repository_access_is_reviewed is neither annotated @ArchTest nor listed in HELPERS, so the arch-rule registration check rejects it. This is a static check and will fail again on retry. The NoHttpResponseException and Jackson parse errors in the log are unrelated noise. The touched-files list has no openaev-api file, so confirm where this new rule came from before fixing.",
+  "evidence": [
+   {
+    "line": 1791,
+    "quote": "io.openaev.architecture.ArchRuleRegistrationTest.given_aRuleMember_should_beAnArchTestOrAListedHelper -- Time elapsed: 0.082 s <<< FAILURE!"
+   },
+   {
+    "line": 1793,
+    "quote": "[these rules are not annotated @ArchTest, so the ArchUnit engine never runs them: annotate them, or list them in HELPERS with the class that runs them]"
+   },
+   {
+    "line": 1794,
+    "quote": "Expecting empty but was: [\"io.openaev.architecture.TenantActiveTableAccessArchTest#scenario_revisions_repository_access_is_reviewed\"]"
+   },
+   {
+    "line": 3042,
+    "quote": "[ERROR]   ArchRuleRegistrationTest.given_aRuleMember_should_beAnArchTestOrAListedHelper [these rules are not annotated @ArchTest, so the ArchUnit engine never runs them: annotate them, or list them in HELPERS with the class that runs them]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4467,
+  "output_tokens": 1256,
+  "ms": 6243,
+  "cost_usd": 0.001075,
+  "cached": false
+ }
+}

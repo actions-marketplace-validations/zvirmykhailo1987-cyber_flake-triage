@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135964276324:156da8134b193952",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "All 3 UpdateInject.test.tsx tests fail with a deterministic TypeError: helper.getPlatformSettings is not a function, raised from isFeatureEnabled in utils.ts when UpdateInject.tsx (touched by this change) renders. The test's helper mock likely lacks getPlatformSettings. Re-running will repeat this. The many MissingTranslationError lines are log noise from other passing suites and are not the cause.",
+  "evidence": [
+   {
+    "line": 6822,
+    "quote": "TypeError: helper.getPlatformSettings is not a function"
+   },
+   {
+    "line": 6854,
+    "quote": "❯ src/__tests__/admin/components/common/injects/UpdateInject.test.tsx:19:124"
+   },
+   {
+    "line": 6869,
+    "quote": "❯ UpdateInject src/admin/components/common/injects/UpdateInject.tsx:133:28"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4838,
+  "output_tokens": 707,
+  "ms": 4349,
+  "cost_usd": 0.000837,
+  "cached": false
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136395707207:4da929c9228bacc0",
+ "answer": {
+  "decision": "retry",
+  "category": "flaky_test",
+  "confidence": 0.7,
+  "summary": "Only one of 1786 tests failed: AzureCredentialConnectivityCheckTest.given_managedIdentityWithScope_should_readSubscriptionOnIt, which timed out (expected ACTIVE, got TIMEOUT). None of the changed files touch the Azure credential code, so this looks like an external-service or network timing problem, not the change. The other ERROR stack traces in the log come from passing tests that log expected exceptions. Re-running should pass; the test has no flake history, so confidence is moderate.",
+  "evidence": [
+   {
+    "line": 4760,
+    "quote": "[ERROR] Tests run: 22, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 3.019 s <<< FAILURE! -- in Sovereign cloud overrides"
+   },
+   {
+    "line": 4761,
+    "quote": "AzureCredentialConnectivityCheckTest.given_managedIdentityWithScope_should_readSubscriptionOnIt -- Time elapsed: 2.890 s <<< FAILURE!"
+   },
+   {
+    "line": 4764,
+    "quote": "expected: ACTIVE"
+   },
+   {
+    "line": 4765,
+    "quote": "but was: TIMEOUT"
+   },
+   {
+    "line": 7187,
+    "quote": "[ERROR] Tests run: 1786, Failures: 1, Errors: 0, Skipped: 0"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4393,
+  "output_tokens": 908,
+  "ms": 4544,
+  "cost_usd": 0.000893,
+  "cached": false
+ }
+}

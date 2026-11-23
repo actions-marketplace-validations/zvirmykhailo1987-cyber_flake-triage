@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135943981391:aea587294735ee28",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The Check i18n translations step failed with 38 placeholder violations across all nine locale files (de, es, fr, it, ja, ko, ru, zh and others). Translated plural forms do not match the expected English placeholders, and this PR edited those lang files. The check is deterministic, so a rerun will fail the same way. Fix the translation plural placeholders in the lang JSON files, or the checker config if the mismatch is intended.",
+  "evidence": [
+   {
+    "line": 539,
+    "quote": "de.json — placeholders differ, expected [{# atomic tests} {# atomic test}] got [{# atomare Tests} {# atomarer Test}]"
+   },
+   {
+    "line": 653,
+    "quote": "Total: 38 placeholder violation(s)."
+   },
+   {
+    "line": 654,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5056,
+  "output_tokens": 728,
+  "ms": 4056,
+  "cost_usd": 0.00087,
+  "cached": false
+ }
+}
