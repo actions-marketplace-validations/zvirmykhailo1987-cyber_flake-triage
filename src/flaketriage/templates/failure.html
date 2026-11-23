@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}{{ r.f.job }}{% endblock %}
+{% block content %}
+<div class="head">
+  <div>
+    <div class="eyebrow">{% if live_row %}Triaged live, not in the collected data{% else %}Job {{ r.f.job_id }} · {{ r.f.created_at | when }} UTC{% if r.period == 'holdout' %} · holdout{% endif %}{% endif %}</div>
+    <h1>{{ r.f.job }}</h1>
+    <p class="lead">{{ r.f.workflow }} · {{ r.f.event }} on <code>{{ r.f.branch }}</code> · commit <code>{{ r.f.sha[:7] }}</code>
+      {% if r.f.url.startswith('https://github.com/') %} · <a href="{{ r.f.url }}" rel="noopener noreferrer">open on GitHub {{ m.icon('arrow') }}</a>{% endif %}</p>
+  </div>
+  <a class="btn" href="/failures">← All failures</a>
+</div>
+
+<div class="split">
+  <div class="stack">
+    <div class="card raised">
+      <div class="decision-row">
+        {{ m.decision(r.final.decision, big=true) }}
+        <span class="muted small">{{ KIND_LABEL.get(r.final.kind, r.final.kind) }} · {{ RULES.get(r.final.rule, r.final.rule) }} · {{ m.source(r.final) }}</span>
+      </div>
+      <p class="reason">{{ r.final.reason }}</p>
+      {% if r.final.evidence %}
+      <h3 class="cites-h">Log lines this rests on</h3>
+      {% for s in r.final.evidence[:8] %}
+      <div class="cite"><a href="#L{{ s.line }}">line {{ s.line }}</a><code>{{ s.text }}</code></div>
+      {% endfor %}
+      {% else %}
+      <p class="note">No log line carries a reason here, so the team's current policy applies: retry.</p>
+      {% endif %}
+      {% if r.model == 'answered' and r.rules.decision != r.final.decision %}
+      <p class="note small">The rules alone said <strong>{{ DECISION_LABEL[r.rules.decision] | lower }}</strong>: {{ r.rules.reason }} The model decided because they were unsure, and its quotes were checked against the log.</p>
+      {% elif r.model == 'not_asked' and r.rules.decision == 'unsure' and r.f.label == 'unlabelled' and not r.dependent %}
+      <p class="note small">The model was asked only about failures someone re-ran (the measured set). In use it would be asked here too; until then the team's current policy applies: retry.</p>
+      {% elif r.model == 'dropped' %}
+      <p class="note small">The model answered, but none of its quotes matched the log, so its answer was dropped.</p>
+      {% endif %}
+    </div>
+
+    <div class="log">
+      <div class="log-head"><span>{{ m.icon('doc') }} Excerpt of the failed step · {{ lines | selectattr('n') | list | length }} of the job's log lines, original numbers</span>
+        <span>{% if r.f.failed_steps %}Failed step: <strong>{{ r.f.failed_steps | join(', ') }}</strong>{% endif %}</span></div>
+      <div class="log-body" tabindex="0" aria-label="Log excerpt">
+        {% for l in lines %}
+        {% if l.gap %}<div class="ln gap"><span class="no">⋯</span><span class="tx">{{ l.gap | num }} lines not kept</span></div>
+        {% else %}<div class="ln{{ ' cited' if l.cited }}" id="L{{ l.n }}"><span class="no">{{ l.n }}</span><span class="tx">{{ l.text }}</span></div>{% endif %}
+        {% else %}<div class="empty">No log: GitHub no longer keeps it.</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <aside class="stack">
+    <div class="card">
+      <h3>What happened</h3>
+      <p class="outcome-big">{{ m.outcome(r.f.label) }}</p>
+      <p class="small muted">{% if r.f.label == 'flake' %}A later attempt of the same job, on the same commit, passed.
+        {% elif r.f.label == 'persists' %}Every later attempt of the same job failed too.
+        {% else %}Nobody re-ran it, or the re-run was cancelled: the outcome is unknown.{% endif %}</p>
+      {% if r.f.label != 'unlabelled' %}
+      <dl class="facts verdict-facts">
+        <dt>Decision</dt><dd>{{ m.verdict(r) }}</dd>
+        <dt>Retries took</dt><dd class="num">{{ r.f.retry_seconds | minutes }}</dd>
+        {% if r.f.known_at %}<dt>Known at</dt><dd class="num">{{ r.f.known_at | when }}</dd>{% endif %}
+      </dl>
+      {% endif %}
+      {% if r.dependent %}<p class="note small">This job only failed because another job did; it is left out of every score.</p>{% endif %}
+    </div>
+
+    {% if history %}
+    <div class="card">
+      <h3>Failing tests and their history</h3>
+      <p class="small muted">Across all collected failures. The decision itself only used what was known at the time.</p>
+      <ul class="list">
+        {% for h in history %}
+        <li><span class="t">{% if h.known %}<a href="/test?name={{ h.test | urlencode }}">{{ h.test | short_test }}</a>{% else %}{{ h.test | short_test }}{% endif %}</span>
+          <span class="small num nowrap">{{ h.flaked }} flaked · {{ h.persisted }} failed again</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <div class="card">
+      <h3>Run</h3>
+      <dl class="facts">
+        <dt>Attempt</dt><dd class="num">{{ r.f.attempt }}</dd>
+        <dt>Job ran</dt><dd class="num">{{ r.f.seconds | minutes }}</dd>
+        <dt>Changed files</dt><dd class="num">{{ r.f.changed_files | length }}</dd>
+      </dl>
+      {% if r.f.changed_files %}
+      <details><summary>Show changed files</summary>
+        <ul class="list">{% for c in r.f.changed_files[:40] %}<li><span class="t">{{ c }}</span></li>{% endfor %}</ul>
+        {% if r.f.changed_files | length > 40 %}<p class="small muted">and {{ r.f.changed_files | length - 40 }} more</p>{% endif %}
+      </details>
+      {% endif %}
+    </div>
+
+    <div class="card">
+      <h3>As a job summary</h3>
+      <p class="small muted">What <code>flake-triage job … --summary</code> writes to <code>$GITHUB_STEP_SUMMARY</code>.</p>
+      <pre class="md">{{ markdown }}</pre>
+      <p class="small more"><a href="/api/failures/{{ r.f.job_id }}">The same as JSON →</a></p>
+    </div>
+  </aside>
+</div>
+{% endblock %}

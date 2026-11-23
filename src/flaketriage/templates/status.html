@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Status{% endblock %}
+{% block content %}
+<div class="head">
+  <div>
+    <div class="eyebrow">This server</div>
+    <h1>Data, model and limits</h1>
+    <p class="lead">Where the numbers come from and what this instance can do.</p>
+  </div>
+</div>
+<div class="grid g2">
+  <div class="card">
+    <h3>Collected data</h3>
+    <dl class="facts">
+      <dt>Repository</dt><dd>{{ st.meta.repo or 'OpenAEV-Platform/openaev' }}</dd>
+      <dt>Collected</dt><dd class="num">{{ st.meta.collected_at | when if st.meta.collected_at else '—' }}</dd>
+      <dt>Window</dt><dd class="num">{{ st.meta.days or 45 }} days</dd>
+      <dt>Job failures</dt><dd class="num">{{ st.total_failures | num }}</dd>
+      <dt>With a log excerpt</dt><dd class="num">{{ st.rows | length | num }} <span class="muted">({{ st.without_log | num }} logs expired)</span></dd>
+      <dt>Outcome</dt><dd class="num">{% for k in ('flake', 'persists', 'unlabelled') %}{{ OUTCOME_LABEL[k] | lower }} {{ labels[k] | num }}{% if not loop.last %} · {% endif %}{% endfor %}</dd>
+      <dt>Kind</dt><dd class="num">{% for k, n in kinds.most_common() %}{{ KIND_LABEL.get(k, k) | lower }} {{ n | num }}{% if not loop.last %} · {% endif %}{% endfor %}</dd>
+      <dt>Loaded in</dt><dd class="num">{{ st.built_in_s }} s</dd>
+    </dl>
+  </div>
+  <div class="card">
+    <h3>Model and live triage</h3>
+    <dl class="facts">
+      <dt>Model answers</dt><dd class="num">{{ st.cassette.answers }} in the cassette ({{ st.cassette.model or '—' }})</dd>
+      <dt>Their cost</dt><dd class="num">${{ '%.2f' % st.cassette.cost_usd }}</dd>
+      <dt>On this page</dt><dd>Model answers are replayed from the cassette; no API call happens while browsing.</dd>
+      <dt>Live triage</dt><dd>{% if live %}On for {{ live_repos | join(', ') }}, rate-limited per address{% if live_model %}, with the model{% else %}, rules only{% endif %}.{% else %}Off: only jobs in the collected data.{% endif %}</dd>
+      <dt>Version</dt><dd class="num">{{ version }}</dd>
+    </dl>
+  </div>
+</div>
+<section>
+  <h2>For scripts</h2>
+  <p class="sub">The same data as JSON: <a href="/api/summary">/api/summary</a> · <code>/api/failures/&lt;job id&gt;</code> · <a href="/api/tests">/api/tests</a> · <a href="/health">/health</a>.
+    The MCP server (<code>python -m flaketriage.mcp_server</code>) offers them as tools to another agent.</p>
+</section>
+{% endblock %}

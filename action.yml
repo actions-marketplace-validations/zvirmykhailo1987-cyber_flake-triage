@@ -1,0 +1,65 @@
+name: Flake triage
+description: >-
+  For every failed job of a workflow run: retry, do not retry, or unsure, with the log lines behind
+  the decision, written to the run's summary. Read-only: it never re-runs, comments or opens issues.
+branding:
+  icon: repeat
+  color: purple
+inputs:
+  run-id:
+    description: The workflow run to triage (default, in a workflow_run trigger, the run that just finished).
+    required: false
+    default: ${{ github.event.workflow_run.id || github.run_id }}
+  repository:
+    description: OWNER/REPO of the run.
+    required: false
+    default: ${{ github.repository }}
+  github-token:
+    description: A token that can read Actions (the default GITHUB_TOKEN with actions:read is enough).
+    required: false
+    default: ${{ github.token }}
+  anthropic-api-key:
+    description: Optional. Without it, rules only; with it, the model is asked where the rules are unsure.
+    required: false
+    default: ""
+  history:
+    description: >-
+      Optional path to collected CI history (see flake-collect). Without it the two rules that learn from
+      past retries ("flaked before", "failed again every time before") cannot fire; the README numbers are
+      measured with history. For OpenAEV, "bundled" uses the history shipped with this action.
+    required: false
+    default: ""
+  max-usd:
+    description: Model spend cap for one run; after it, rules only.
+    required: false
+    default: "0.5"
+outputs:
+  decisions:
+    description: Path of a JSON file with one decision per failed job.
+    value: ${{ steps.triage.outputs.decisions }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5
+      with:
+        python-version: "3.12"
+    - shell: bash
+      run: python -m pip install --quiet -c "$GITHUB_ACTION_PATH/requirements.lock" "$GITHUB_ACTION_PATH"
+    - id: triage
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        ANTHROPIC_API_KEY: ${{ inputs.anthropic-api-key }}
+        FLAKE_REPO: ${{ inputs.repository }}
+        FLAKE_RUN_ID: ${{ inputs.run-id }}
+        FLAKE_HISTORY: ${{ inputs.history }}
+        FLAKE_MAX_USD: ${{ inputs.max-usd }}
+      run: |
+        out="$RUNNER_TEMP/flake-triage.json"
+        args=(run --repo "$FLAKE_REPO" --run-id "$FLAKE_RUN_ID" --json-out "$out"
+              --summary-file "$GITHUB_STEP_SUMMARY" --max-usd "$FLAKE_MAX_USD")
+        if [ "$FLAKE_HISTORY" = "bundled" ]; then args+=(--history "$GITHUB_ACTION_PATH/data/openaev")
+        elif [ -n "$FLAKE_HISTORY" ]; then args+=(--history "$FLAKE_HISTORY"); fi
+        [ -n "$ANTHROPIC_API_KEY" ] || args+=(--no-model)
+        echo "decisions=$out" >> "$GITHUB_OUTPUT"
+        python -m flaketriage.cli "${args[@]}"

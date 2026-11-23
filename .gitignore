@@ -1,0 +1,11 @@
+data/*/raw/
+data/*/cache/
+.venv/
+__pycache__/
+*.egg-info/
+.env.local
+.coverage
+data/*/runs.jsonl
+data/*/excerpts-e6/
+.claude/
+build/

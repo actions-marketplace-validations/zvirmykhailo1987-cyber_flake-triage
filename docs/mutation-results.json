@@ -1,0 +1,397 @@
+{
+  "measured": "2026-11-23",
+  "bugs_injected": 65,
+  "caught": 65,
+  "results": [
+    {
+      "bug": "A build error is retried",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_decisions"
+    },
+    {
+      "bug": "An infrastructure error is not retried",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_decisions"
+    },
+    {
+      "bug": "A test that flaked before is not retried",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_flake_history_means_retry_even_if_touched"
+    },
+    {
+      "bug": "A failing test the change touched is retried",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_change_touching_the_test_means_no_retry"
+    },
+    {
+      "bug": "Replay learns an outcome before it was known",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_replay_never_learns_before_the_outcome_is_known"
+    },
+    {
+      "bug": "History counts a persisting test as a flake",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_a_test_that_persisted_before_is_not_called_a_flake"
+    },
+    {
+      "bug": "A job that failed because another did is judged on its own log",
+      "file": "src/flaketriage/signals.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_a_job_failing_because_of_another_is_dependent"
+    },
+    {
+      "bug": "A network error outranks a build error",
+      "file": "src/flaketriage/signals.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_build_error_outranks_a_network_error_in_the_same_log"
+    },
+    {
+      "bug": "A passing retry is not labelled a flake",
+      "file": "src/flaketriage/dataset.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_labels_from_attempts"
+    },
+    {
+      "bug": "A cancelled retry is labelled persists",
+      "file": "src/flaketriage/dataset.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_cancelled_retry_is_unlabelled"
+    },
+    {
+      "bug": "Gate jobs become samples",
+      "file": "src/flaketriage/dataset.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_labels_from_attempts"
+    },
+    {
+      "bug": "A job that failed twice counts twice",
+      "file": "src/flaketriage/dataset.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_labels_from_attempts"
+    },
+    {
+      "bug": "The step's own script is read as events",
+      "file": "src/flaketriage/excerpt.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_the_step_script_is_not_read_as_events"
+    },
+    {
+      "bug": "The failed step is ignored: post-job noise is read",
+      "file": "src/flaketriage/excerpt.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_excerpt_reads_the_failed_step_not_the_cleanup"
+    },
+    {
+      "bug": "Dependent jobs are scored",
+      "file": "src/flaketriage/evals.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_console_numbers_are_the_evals_numbers"
+    },
+    {
+      "bug": "Unsure counted as not retried in scoring",
+      "file": "src/flaketriage/evals.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_console_numbers_are_the_evals_numbers"
+    },
+    {
+      "bug": "A model quote is accepted without checking the log",
+      "file": "src/flaketriage/diagnose.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_model_decides_unsure_only_with_a_verified_quote"
+    },
+    {
+      "bug": "The model overrides a decision the rules already made",
+      "file": "src/flaketriage/diagnose.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_model_not_asked_when_rules_know"
+    },
+    {
+      "bug": "Cassette never replayed (every eval pays again)",
+      "file": "src/flaketriage/llm.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_the_model_only_decides_what_the_rules_left_unsure"
+    },
+    {
+      "bug": "A model refusal is treated as an answer",
+      "file": "src/flaketriage/llm.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_llm_failures_become_unavailable[reply0]"
+    },
+    {
+      "bug": "Schema not closed for structured output",
+      "file": "src/flaketriage/llm.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_llm_answers_and_keeps_the_answer"
+    },
+    {
+      "bug": "Replay-only mode still calls the API",
+      "file": "src/flaketriage/llm.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_llm_off_without_key_or_in_replay"
+    },
+    {
+      "bug": "Expired logs are fetched one by one to the end",
+      "file": "src/flaketriage/collect.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_expired_logs_stop_the_run_early"
+    },
+    {
+      "bug": "One unreachable run aborts the whole collection",
+      "file": "src/flaketriage/collect.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_collect_skips_a_run_github_keeps_failing"
+    },
+    {
+      "bug": "The disk cache is never read",
+      "file": "src/flaketriage/collect.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_collect_uses_cache_on_second_pass"
+    },
+    {
+      "bug": "A failure that always failed again is still retried",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_a_failure_that_always_failed_again_is_not_retried"
+    },
+    {
+      "bug": "One persisting retry is already a pattern",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_a_test_that_persisted_before_is_not_called_a_flake"
+    },
+    {
+      "bug": "A failure that once passed on retry still counts as stuck",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_a_failure_that_always_failed_again_is_not_retried"
+    },
+    {
+      "bug": "Shards of one matrix are different jobs",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_a_failure_that_always_failed_again_is_not_retried"
+    },
+    {
+      "bug": "Tests that always failed again are still retried",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_tests_that_always_failed_again_are_not_retried"
+    },
+    {
+      "bug": "Replay never learns signatures",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_replay_learns_signatures_too"
+    },
+    {
+      "bug": "The last failed step is read, not the first",
+      "file": "src/flaketriage/excerpt.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_the_first_failed_step_is_the_cause"
+    },
+    {
+      "bug": "Blind is scored on more failures than the rules",
+      "file": "src/flaketriage/evals.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_console_numbers_are_the_evals_numbers"
+    },
+    {
+      "bug": "A label without a recorded end is learned at once",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_a_label_without_a_recorded_end_is_never_learned"
+    },
+    {
+      "bug": "A copied job counts as a retry",
+      "file": "src/flaketriage/dataset.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_a_copied_failure_is_not_a_persisting_retry"
+    },
+    {
+      "bug": "A flake's minutes include attempts after it passed",
+      "file": "src/flaketriage/dataset.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_a_flake_costs_the_retries_until_it_passed"
+    },
+    {
+      "bug": "Source-code lines are read as events",
+      "file": "src/flaketriage/signals.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_review_false_alarms_are_gone"
+    },
+    {
+      "bug": "A test line is also read as infra/timeout/build",
+      "file": "src/flaketriage/signals.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_a_test_named_after_an_infra_error_is_a_test"
+    },
+    {
+      "bug": "Touching a source file counts as touching its test",
+      "file": "src/flaketriage/triage.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_touching_a_source_file_is_not_touching_its_test"
+    },
+    {
+      "bug": "A boilerplate line counts as a quote",
+      "file": "src/flaketriage/diagnose.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_model_answers_that_say_nothing_are_dropped"
+    },
+    {
+      "bug": "A model answer with an invalid decision is used",
+      "file": "src/flaketriage/diagnose.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_model_answers_that_say_nothing_are_dropped"
+    },
+    {
+      "bug": "The model is asked about dependent jobs",
+      "file": "src/flaketriage/diagnose.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_the_model_only_decides_what_the_rules_left_unsure"
+    },
+    {
+      "bug": "The spend cap is checked only at the end",
+      "file": "src/flaketriage/diagnose.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_eval_budget_stop"
+    },
+    {
+      "bug": "The cassette ignores the prompt",
+      "file": "src/flaketriage/diagnose.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_model_not_asked_about_dependent_jobs_and_prompt_is_in_the_key"
+    },
+    {
+      "bug": "A planted instruction in the log counts as evidence",
+      "file": "src/flaketriage/diagnose.py",
+      "caught": true,
+      "caught_by": "tests/test_core.py::test_a_log_line_that_talks_to_the_model_is_never_evidence"
+    },
+    {
+      "bug": "'Unsure' is no longer retried",
+      "file": "src/flaketriage/console.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_console_numbers_are_the_evals_numbers"
+    },
+    {
+      "bug": "Dependent jobs are scored",
+      "file": "src/flaketriage/console.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_console_numbers_are_the_evals_numbers"
+    },
+    {
+      "bug": "A dropped model answer is shown as a decision",
+      "file": "src/flaketriage/console.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_the_model_only_decides_what_the_rules_left_unsure"
+    },
+    {
+      "bug": "The triage form skips the CSRF check",
+      "file": "src/flaketriage/web.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_triage_form_known_unknown_and_live"
+    },
+    {
+      "bug": "Any address whose path looks like a job is fetched, whatever the host",
+      "file": "src/flaketriage/cli.py",
+      "caught": true,
+      "caught_by": "tests/test_web.py::test_triage_rejects_lookalike_addresses"
+    },
+    {
+      "bug": "Live triage fetches any repository",
+      "file": "src/flaketriage/web.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_triage_form_known_unknown_and_live"
+    },
+    {
+      "bug": "A job from another run is accepted",
+      "file": "src/flaketriage/cli.py",
+      "caught": true,
+      "caught_by": "tests/test_web.py::test_a_job_from_another_run_is_refused"
+    },
+    {
+      "bug": "A GitHub HTTP error crashes the live triage page",
+      "file": "src/flaketriage/web.py",
+      "caught": true,
+      "caught_by": "tests/test_web.py::test_a_github_http_error_is_a_502_page_not_a_crash"
+    },
+    {
+      "bug": "Live triage learns from its own run",
+      "file": "src/flaketriage/console.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_live_triage_never_learns_from_its_own_run"
+    },
+    {
+      "bug": "The rate limit lets one more through",
+      "file": "src/flaketriage/web.py",
+      "caught": true,
+      "caught_by": "tests/test_web.py::test_live_triage_limits_and_github_failures"
+    },
+    {
+      "bug": "Pages may run scripts",
+      "file": "src/flaketriage/web.py",
+      "caught": true,
+      "caught_by": "tests/test_web.py::test_security_headers_everywhere"
+    },
+    {
+      "bug": "The MCP tool fetches when live triage is off",
+      "file": "src/flaketriage/mcp_server.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_cli_and_mcp_agree_with_the_console"
+    },
+    {
+      "bug": "The simulation leaves its threshold changed",
+      "file": "scripts/simulate.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_simulation_matches_the_evals"
+    },
+    {
+      "bug": "The fresh check also scores old failures",
+      "file": "scripts/fresh_check.py",
+      "caught": true,
+      "caught_by": "tests/test_full_cycle.py::test_fresh_check_scores_only_what_came_after_the_collection"
+    },
+    {
+      "bug": "A run's gate jobs are triaged",
+      "file": "src/flaketriage/cli.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_cli_run_triages_every_failed_job_of_a_run"
+    },
+    {
+      "bug": "The job summary is overwritten",
+      "file": "src/flaketriage/cli.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_cli_run_triages_every_failed_job_of_a_run"
+    },
+    {
+      "bug": "Model text is written into the summary as Markdown",
+      "file": "src/flaketriage/cli.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_log_and_model_text_cannot_plant_markdown"
+    },
+    {
+      "bug": "A backtick in a test name breaks the code span",
+      "file": "src/flaketriage/cli.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_log_and_model_text_cannot_plant_markdown"
+    },
+    {
+      "bug": "Only the first page of a run's jobs is read",
+      "file": "src/flaketriage/cli.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_failed_jobs_follows_pages"
+    },
+    {
+      "bug": "A run nobody could triage looks green",
+      "file": "src/flaketriage/cli.py",
+      "caught": true,
+      "caught_by": "tests/test_io.py::test_cli_run_reports_a_job_github_does_not_return"
+    }
+  ]
+}

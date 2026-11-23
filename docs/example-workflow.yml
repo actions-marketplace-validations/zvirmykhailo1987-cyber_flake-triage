@@ -1,0 +1,24 @@
+# Example: after the CI workflow finishes with a failure, write a verdict for every failed job to the
+# run's summary. Read-only: it needs no write permission and never re-runs, comments or opens issues.
+# A team that wants it to gate an auto-retry (like OpenAEV's ci-retry.yml) reads the JSON decisions in
+# its own reviewed step: retry when "retry" or "unsure", skip when "no_retry".
+name: Flake triage
+on:
+  workflow_run:
+    workflows: ['\[Core\] CI']
+    types: [completed]
+permissions:
+  actions: read
+  contents: read
+jobs:
+  triage:
+    if: github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - id: triage
+        uses: OWNER/flake-triage@v0          # pin a tag or a commit SHA you have reviewed
+        with:
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}   # optional: without it, rules only
+          history: bundled                                       # OpenAEV: the history shipped with the action
+      # - run: jq '.[] | select(.decision == "no_retry") | .job' "${{ steps.triage.outputs.decisions }}"

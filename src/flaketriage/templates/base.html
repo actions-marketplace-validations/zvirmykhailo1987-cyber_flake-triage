@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+<title>{% block title %}Flake triage{% endblock %} · flake-triage</title>
+<meta name="description" content="Which failed CI jobs were worth a retry, with the log lines behind every decision.">
+<link rel="preload" href="/static/fonts/ibm-plex-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/app.css?v={{ version }}">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+{% import "_macros.html" as m %}
+<a class="sr" href="#content">Skip to content</a>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/"><img src="/static/favicon.svg" alt="" width="24" height="24"> flake-triage <small>· OpenAEV CI</small></a>
+    <nav class="main" aria-label="Main">
+      {% set p = path %}
+      <a href="/" {% if p == '/' %}aria-current="page"{% endif %}>Overview</a>
+      <a href="/failures" {% if p.startswith('/failures') %}aria-current="page"{% endif %}>Failures</a>
+      <a href="/tests" {% if p.startswith('/test') and not p.startswith('/triage') %}aria-current="page"{% endif %}>Flaky tests</a>
+      <a href="/triage" {% if p == '/triage' %}aria-current="page"{% endif %}>Triage a job</a>
+      <a href="/quality" {% if p == '/quality' %}aria-current="page"{% endif %}>Quality</a>
+      <a href="/status" {% if p == '/status' %}aria-current="page"{% endif %}>Status</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="content" data-state="{{ state | default('ready') }}">
+{% block content %}{% endblock %}
+</main>
+<footer class="wrap foot">
+  <p>Public GitHub Actions history of OpenAEV-Platform/openaev, collected through the GitHub API{% if data_until %}, up to {{ data_until | when }} UTC{% endif %}. Not affiliated with the OpenAEV project.</p>
+  <p>Read-only: the triage suggests; re-running a job, commenting and opening issues stay with people.</p>
+  <p>© 2026 Mykhailo Zvir · MIT · v{{ version }}</p>
+</footer>
+</body>
+</html>

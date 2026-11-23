@@ -1,0 +1,58 @@
+{# Shared pieces of the design system (docs/DESIGN.md). #}
+{% macro icon(name, cls='') -%}
+<svg class="i {{ cls }}" aria-hidden="true" focusable="false"><use href="/static/icons.svg#{{ name }}"></use></svg>
+{%- endmacro %}
+
+{% macro decision(d, big=false) -%}
+{%- set ic = {'retry': 'cycle', 'no_retry': 'x', 'unsure': 'ask'}[d] -%}
+<span class="chip {{ d }}{{ ' big' if big }}">{{ icon(ic) }}{{ DECISION_LABEL[d] }}</span>
+{%- endmacro %}
+
+{% macro outcome(label) -%}
+<span class="outcome {{ label }}">{{ OUTCOME_LABEL[label] }}</span>
+{%- endmacro %}
+
+{# was the decision right, given what happened? (unsure is retried, as today) #}
+{% macro verdict(r) -%}
+{%- if r.f.label == 'unlabelled' or r.dependent -%}<span class="faint small">not scored</span>
+{%- elif (r.final.decision == 'no_retry') == (r.f.label == 'persists') -%}<span class="verdict right">{{ icon('check') }}right</span>
+{%- elif r.final.decision == 'no_retry' -%}<span class="verdict wrong">{{ icon('alert') }}flake not retried</span>
+{%- else -%}<span class="verdict wrong faint">retry failed again</span>{%- endif -%}
+{%- endmacro %}
+
+{# a horizontal meter as SVG (the CSP allows no inline style) #}
+{% macro meter(value, total, cls='') -%}
+{%- set w = (100 * value / total) if total else 0 -%}
+<span class="meter"><svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><rect class="bg" x="0" y="0" width="100" height="8" rx="4"/><rect class="fg {{ cls }}" x="0" y="0" width="{{ '%.2f' % w }}" height="8" rx="4"/></svg></span>
+{%- endmacro %}
+
+{% macro rate(x, cls='') -%}
+{%- if x is none -%}<span class="faint">—</span>
+{%- else -%}<span class="rate"><span>{{ x | pct }}</span>{{ meter(x, 1, cls) }}</span>{%- endif -%}
+{%- endmacro %}
+
+{% macro source(d) -%}
+{%- if d.rule == 'model' -%}<span class="tag model">model</span>{%- else -%}<span class="tag">rules</span>{%- endif -%}
+{%- endmacro %}
+
+{# the empty state is always in the page, hidden while there are rows: designed, declared, never a dead end #}
+{% macro empty(text, ic='search', href='/', action='Back to the overview', shown=true) -%}
+<div class="empty" data-state="empty"{% if not shown %} hidden{% endif %}>{{ icon(ic) }}<p>{{ text }}</p><p class="more"><a class="btn" href="{{ href }}">{{ action }}</a></p></div>
+{%- endmacro %}
+
+{# horizontal bars with a scale: rows = [(label, value, cls)], vmax = right end of the axis #}
+{% macro hchart(rows, vmax, unit='', label_w=128, width=520, title='') -%}
+{%- set bw = width - label_w - 64 -%}{%- set rh = 34 -%}{%- set h = 30 + rows | length * rh -%}
+<svg class="chart hchart" viewBox="0 0 {{ width }} {{ h }}" role="img" aria-label="{{ title }}">
+  {%- for t in range(5) %}{% set x = label_w + bw * t / 4 %}
+  <line class="grid" x1="{{ '%.1f' % x }}" y1="4" x2="{{ '%.1f' % x }}" y2="{{ h - 20 }}"/>
+  <text x="{{ '%.1f' % x }}" y="{{ h - 5 }}" text-anchor="middle">{{ num(vmax * t / 4) }}</text>
+  {%- endfor %}
+  <line class="axis" x1="{{ label_w }}" y1="4" x2="{{ label_w }}" y2="{{ h - 20 }}"/>
+  {%- for label, value, cls in rows %}{% set y = 8 + loop.index0 * rh %}{% set w = (bw * (value or 0) / vmax) if vmax else 0 %}
+  <text class="lbl" x="0" y="{{ y + 15 }}">{{ label }}</text>
+  <rect class="{{ cls }}" x="{{ label_w }}" y="{{ y }}" width="{{ '%.1f' % w }}" height="20" rx="3"/>
+  <text class="val" x="{{ '%.1f' % (label_w + w + 6) }}" y="{{ y + 15 }}">{{ num(value) }}{{ unit }}</text>
+  {%- endfor %}
+</svg>
+{%- endmacro %}

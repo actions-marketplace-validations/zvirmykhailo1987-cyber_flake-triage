@@ -1,0 +1,3 @@
+IBM Plex Sans, IBM Plex Mono: SIL Open Font License 1.1.
+Sources: github.com/google/fonts/ofl/ibmplexsans, /ibmplexmono
+Icons (icons.svg): Lucide, ISC licence, lucide.dev

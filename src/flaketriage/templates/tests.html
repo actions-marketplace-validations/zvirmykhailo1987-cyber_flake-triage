@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Flaky tests{% endblock %}
+{% block content %}
+<div class="head">
+  <div>
+    <div class="eyebrow">{{ tests | length }} tests flaked {{ min_flakes }} times or more</div>
+    <h1>Tests that keep flaking</h1>
+    <p class="lead">A test counts as flaky when its job failed and then passed on a re-run of the same commit. These are
+      the tests to fix, not to retry forever. Each one has an issue draft; nothing is posted.</p>
+  </div>
+  <form method="get" action="/tests" class="inline-form">
+    <label class="field">Flaked at least
+      <input type="number" name="min_flakes" min="1" max="50" value="{{ min_flakes }}"></label>
+    <button class="btn" type="submit">Show</button>
+  </form>
+</div>
+{% if tests %}
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Test</th><th class="n">Flaked</th><th class="n">Failed again</th><th class="n">Not re-run</th><th>Seen</th><th>Jobs</th></tr></thead>
+  <tbody>
+  {% for t in tests %}
+  <tr>
+    <td><a class="t" href="/test?name={{ t.name | urlencode }}">{{ t.name }}</a></td>
+    <td class="n"><strong>{{ t.flaked }}</strong></td>
+    <td class="n">{{ t.persisted }}</td>
+    <td class="n">{{ t.not_rerun }}</td>
+    <td class="small num nowrap">{{ t.first[:10] }} → {{ t.last[:10] }}</td>
+    <td class="small">{% for j, n in t.jobs.most_common(2) %}{{ j }} <span class="muted">({{ n }})</span>{% if not loop.last %}<br>{% endif %}{% endfor %}{% if t.jobs | length > 2 %}<br><span class="muted">+{{ t.jobs | length - 2 }} more</span>{% endif %}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<p class="small muted more">Collected logs reach back only as far as GitHub keeps them, so "seen" is when the collected data first shows the test failing, not when it started.</p>
+{% endif %}
+<div class="card{{ ' sr-hidden' if tests }}">{{ m.empty('No test flaked that often. Lower the threshold.', 'check', '/tests?min_flakes=1', 'Show every flaky test', shown=not tests) }}</div>
+{% endblock %}

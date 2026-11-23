@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ t.name | short_test }}{% endblock %}
+{% block content %}
+<div class="head">
+  <div>
+    <div class="eyebrow">Failing test</div>
+    <h1 class="mono-h">{{ t.name }}</h1>
+    <p class="lead">Failed in {{ t.failures }} jobs between {{ t.first | when }} and {{ t.last | when }} UTC.</p>
+  </div>
+  <a class="btn" href="/tests">← Flaky tests</a>
+</div>
+
+<div class="grid g4">
+  <div class="card kpi"><div class="v accent num">{{ t.flaked }}</div><div class="l">times it failed, then passed on a re-run</div></div>
+  <div class="card kpi"><div class="v num">{{ t.persisted }}</div><div class="l">times every re-run failed too</div></div>
+  <div class="card kpi"><div class="v num">{{ t.not_rerun }}</div><div class="l">failures nobody re-ran</div></div>
+  <div class="card kpi"><div class="v num">{{ t.jobs | length }}</div><div class="l">job{{ 's' if t.jobs | length != 1 }} it failed in{% if t.jobs | length == 1 %}: always the same shard{% endif %}</div></div>
+</div>
+
+<div class="split section-gap">
+  <section class="flush">
+    <h2>Every failure of this test</h2>
+    <p class="sub">Newest first.</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>When (UTC)</th><th>Job</th><th>Decision</th><th>What happened</th></tr></thead>
+      <tbody>
+      {% for r in rows[:200] %}
+      <tr>
+        <td class="num small"><a href="/failures/{{ r.f.job_id }}">{{ r.f.created_at | when_short }}</a></td>
+        <td class="small">{{ r.f.job }}<br><span class="muted mono">{{ r.f.sha[:7] }}</span></td>
+        <td>{{ m.decision(r.final.decision) }}</td>
+        <td>{{ m.outcome(r.f.label) }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    {{ m.empty('No failure of this test is left in the data.', 'search', '/tests', 'Back to flaky tests', shown=not rows) }}
+    {% if rows | length > 200 %}<p class="small muted more">Showing the newest 200 of {{ rows | length }}.</p>{% endif %}
+  </section>
+  <aside class="stack">
+    <div class="card">
+      <h3>Issue draft</h3>
+      {% if draft %}
+      <p class="small muted">Generated from the failures above. Not posted: a maintainer decides.</p>
+      <p class="draft-title"><strong>{{ draft.title }}</strong></p>
+      <pre class="md">{{ draft.body }}</pre>
+      {% else %}
+      <p class="small muted">This test never passed on a re-run, so it is not a flake: an issue would be about a real failure.</p>
+      {% endif %}
+    </div>
+  </aside>
+</div>
+{% endblock %}

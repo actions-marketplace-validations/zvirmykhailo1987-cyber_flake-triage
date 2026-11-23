@@ -1,0 +1,72 @@
+{
+ "at": "2026-11-23T09:58:07+00:00",
+ "period": "holdout",
+ "from": "2026-11-18",
+ "to": "2026-11-22",
+ "failures": 618,
+ "variants": [
+  {
+   "label": "Retry everything (today)",
+   "post_hoc": false,
+   "wasted_min": 7106,
+   "missed": 0,
+   "missed_min": 0,
+   "notes_per_day": 0,
+   "busiest_day_notes": 0,
+   "saved_min": 0
+  },
+  {
+   "label": "Rules",
+   "post_hoc": false,
+   "wasted_min": 4518,
+   "missed": 4,
+   "missed_min": 39,
+   "notes_per_day": 44,
+   "busiest_day_notes": 118,
+   "saved_min": 2588
+  },
+  {
+   "label": "Rules + model",
+   "post_hoc": false,
+   "wasted_min": 1964,
+   "missed": 8,
+   "missed_min": 88,
+   "notes_per_day": 67.4,
+   "busiest_day_notes": 151,
+   "saved_min": 5142
+  },
+  {
+   "label": "Rules + model, model's 'do not retry' only at confidence ≥ 0.7",
+   "post_hoc": true,
+   "wasted_min": 2518,
+   "missed": 5,
+   "missed_min": 40,
+   "notes_per_day": 65,
+   "busiest_day_notes": 149,
+   "saved_min": 4588
+  },
+  {
+   "label": "Rules, 'stuck' after 1 failed retry",
+   "post_hoc": true,
+   "wasted_min": 4144,
+   "missed": 4,
+   "missed_min": 39,
+   "notes_per_day": 46.6,
+   "busiest_day_notes": 120,
+   "saved_min": 2962
+  },
+  {
+   "label": "Rules, 'stuck' after 3 failed retries",
+   "post_hoc": true,
+   "wasted_min": 4829,
+   "missed": 2,
+   "missed_min": 13,
+   "notes_per_day": 40,
+   "busiest_day_notes": 108,
+   "saved_min": 2277
+  }
+ ],
+ "summary": "Replayed day by day from 2026-11-18 to 2026-11-22 as if the triage had been posting its decision on every failed job (1075 with a log). With rules and model, engineers would have seen a 'do not retry' note on about 67.4 runs a day (at most 151). On the 618 failures with a known outcome, 8 flakes would have needed a manual re-run (88 min) while 5,142 CI minutes were not spent.",
+ "caveat": "Post-hoc rows change a setting after the holdout was seen: they show how sensitive the result is, and the defaults were not changed because of them. Minutes are runner minutes of the retries GitHub recorded. Notes count every failed job with a log, re-run or not; the model answered every 'unsure' one of them (answers for failures nobody re-ran are in the cassette too, but no score is computed on them).",
+ "holdout_from": "2026-11-18T00:00:00+00:00"
+}

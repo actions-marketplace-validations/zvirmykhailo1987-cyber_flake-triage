@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block title %}Quality{% endblock %}
+{% block content %}
+{% set P = rep.policies or {} %}
+<div class="head">
+  <div>
+    <div class="eyebrow">evals/results/latest.json · {{ rep.at[:10] if rep else 'not run' }}</div>
+    <h1>How good the decisions are</h1>
+    <p class="lead">The same failures for every policy, replayed in time order: a label is learned only once its retries
+      had finished.{% if rep %} The holdout cut ({{ rep.holdout_from[:10] }}) was set when the data was collected, and the rules and the prompt were
+      written on earlier failures. An independent review of a first version saw aggregate holdout numbers before its defects were fixed.{% endif %}</p>
+  </div>
+  <a class="btn" href="/report">{{ m.icon('doc') }}Full report</a>
+</div>
+{% if not rep %}<div class="card">{{ m.empty('The evals have not been run on this data yet: python -m flaketriage.evals', 'flask', '/failures', 'Browse the failures') }}</div>{% endif %}
+
+{% if rep %}
+{% if 'rules+model' in P %}
+<div class="grid g2 charts-row">
+  <div class="card">
+    <h3>Minutes still spent on retries that failed again</h3>
+    <p class="small muted">Holdout, {{ P.blind.holdout.failures }} failures, the same for each policy.</p>
+    {{ m.hchart([('Retry everything', P.blind.holdout.retry_minutes_wasted, 'blind'), ('Rules', P.rules.holdout.retry_minutes_wasted, 'tool soft'), ('Rules + model', P['rules+model'].holdout.retry_minutes_wasted, 'tool')], 8000, ' min', title='Minutes still spent on retries that failed again, holdout') }}
+  </div>
+  <div class="card">
+    <h3>Flakes left for a manual re-run</h3>
+    <p class="small muted">Holdout, out of {{ P.blind.holdout.flakes }} flakes. Fewer is better.</p>
+    {{ m.hchart([('Retry everything', P.blind.holdout.missed_flakes, 'blind'), ('Rules', P.rules.holdout.missed_flakes, 'tool soft'), ('Rules + model', P['rules+model'].holdout.missed_flakes, 'stop')], 12, '', title='Flakes not retried automatically, holdout') }}
+  </div>
+</div>
+{% endif %}
+
+<section class="flush">
+  <h2>Three policies, two periods</h2>
+  <p class="sub">"Retry everything" is what the project does today. Intervals are Wilson 95% per failure, optimistic because shards of one run fail together.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Policy</th><th>Period</th><th class="n">Failures (runs)</th><th>Flakes still retried</th><th>Failed-again retries skipped</th><th class="n">Minutes still wasted</th><th class="n">"Do not retry" right</th></tr></thead>
+    <tbody>
+    {% for name, label in [('blind', 'Retry everything'), ('rules', 'Rules'), ('rules+model', 'Rules + model')] if name in P %}
+    {% for per in ('holdout', 'dev') %}{% set x = P[name][per] %}
+    <tr>
+      <td>{% if loop.first %}<strong>{{ label }}</strong>{% endif %}</td>
+      <td class="small">{{ per }}</td>
+      <td class="n">{{ x.failures }} ({{ x.runs }})</td>
+      <td>{{ m.rate(x.flake_recall, 'ok') }}<span class="small muted">{{ x.flakes_retried }} of {{ x.flakes }}{% if x.flake_recall_ci95 and name != 'blind' %} · {{ x.flake_recall_ci95[0] | pct }}–{{ x.flake_recall_ci95[1] | pct }}{% endif %}</span></td>
+      <td>{{ m.rate(x.persist_skip_rate) }}<span class="small muted">{{ x.persist_skipped }} of {{ x.persists }}{% if x.persist_skip_ci95 and name != 'blind' %} · {{ x.persist_skip_ci95[0] | pct }}–{{ x.persist_skip_ci95[1] | pct }}{% endif %}</span></td>
+      <td class="n">{{ x.retry_minutes_wasted | num }} min</td>
+      <td class="n">{{ x.no_retry_precision | pct }}</td>
+    </tr>
+    {% endfor %}
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+{% endif %}
+
+<section>
+  <h2>Each rule on the holdout</h2>
+  <p class="sub">How often a rule decided and how often what it decided matched what happened. A "retry" rule is right
+    when the retry passed; a "do not retry" rule when it would have failed again. Weak rules stay visible here.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Rule</th><th>Decides</th><th class="n">Times</th><th class="n">Failed again</th><th class="n">Passed on retry</th><th>Right</th></tr></thead>
+    <tbody>
+    {% for x in rules_hold %}
+    <tr>
+      <td><a href="/failures?period=holdout&amp;rule={{ x.rule }}">{{ x.label }}</a></td>
+      <td>{% if x.decision == 'mixed' %}<span class="tag model">retry or not</span>{% else %}{{ m.decision(x.decision) }}{% endif %}</td>
+      <td class="n">{{ x.n }}</td><td class="n">{{ x.persists }}</td><td class="n">{{ x.flakes }}</td>
+      <td>{{ m.rate(x.right_rate, 'ok' if (x.right_rate or 0) >= 0.85 else 'stop') }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {{ m.empty('No rule decided a scored failure in this period.', 'search', '/failures', 'All failures', shown=not rules_hold) }}
+  <p class="small muted more">"Retry" rules look weaker by construction: a retry policy keeps every flake and pays for the failed-again ones, so the honest column for them is "Passed on retry". On the dev period the same table: {% for x in rules_dev %}{{ x.label | lower }} {{ x.right_rate | pct(0) }}{% if not loop.last %}, {% endif %}{% endfor %}.</p>
+</section>
+
+{% if 'rules+model' in P %}
+<section>
+  <h2>The model layer</h2>
+  <p class="sub">Only where the rules were unsure. The model ({{ cassette.model }}) gets the excerpt, the failed step, the changed
+    files and the test history, answers in a fixed JSON schema and must quote log lines; code checks every quote. All answers
+    are kept in <code>evals/llm_cache/triage/</code>, so CI replays them without a key.</p>
+  <div class="grid g4">
+    <div class="card kpi"><div class="v num">{{ cassette.answers }}</div><div class="l">answers, dev and holdout</div></div>
+    <div class="card kpi"><div class="v num">${{ '%.2f' % cassette.cost_usd }}</div><div class="l">for all of them, at list prices</div></div>
+    <div class="card kpi"><div class="v num">{{ '%.1f' % (cassette.median_ms / 1000) if cassette.median_ms else '—' }}<small>s</small></div><div class="l">median per answer</div></div>
+    <div class="card kpi"><div class="v num">{{ P['rules+model'].holdout.missed_flakes - P.rules.holdout.missed_flakes }}</div><div class="l">more flakes not retried than with rules alone (holdout)</div></div>
+  </div>
+  <p class="note more">The trade is explicit: on the holdout the model skips {{ P['rules+model'].holdout.persist_skipped - P.rules.holdout.persist_skipped }} more
+    failed-again retries at the cost of {{ P['rules+model'].holdout.missed_flakes - P.rules.holdout.missed_flakes }} more missed flakes. On the small dev period
+    it did worse ({{ P['rules+model'].dev.flakes_retried }} of {{ P['rules+model'].dev.flakes }} flakes retried). A team that cannot afford a missed flake runs the rules alone.</p>
+</section>
+{% endif %}
+
+{% if fresh and fresh.policies %}
+{% set F = fresh.policies %}
+<section>
+  <h2>Fresh check: failures that did not exist when it was built</h2>
+  <p class="sub">The same rules, prompt and cassette on {{ fresh.fresh_failures }} failures created after the data was collected
+    ({{ fresh.fresh_after[:16] | replace('T', ' ') }} UTC) and collected on {{ fresh.fresh_collected_at[:10] }}, with all earlier history.
+    No rule, threshold or prompt changed after they were collected; code did change between the two collections without
+    changing any evaluated decision, and one live check had triaged a job of one of these runs. A small, late sanity check.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Policy</th><th class="n">Scored (runs)</th><th class="n">Flakes still retried</th><th class="n">Failed-again retries skipped</th><th class="n">Minutes still wasted</th></tr></thead>
+    <tbody>
+    {% for name, label in [('blind', 'Retry everything'), ('rules', 'Rules'), ('rules+model', 'Rules + model')] if name in F %}{% set x = F[name] %}
+    <tr><td>{{ label }}</td><td class="n">{{ x.failures }} ({{ x.runs }})</td><td class="n">{{ x.flakes_retried }} of {{ x.flakes }}</td><td class="n">{{ x.persist_skipped }} of {{ x.persists }}</td><td class="n">{{ x.retry_minutes_wasted | num }} min</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {{ m.empty('No fresh failure has an outcome yet.', 'clock', '/failures', 'All failures', shown=not F.blind.failures) }}
+</section>
+{% endif %}
+
+{% if sim %}
+<section>
+  <h2>Shadow-mode simulation</h2>
+  <p class="sub">{{ sim.summary }}</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Variant</th><th class="n">Minutes still wasted</th><th class="n">Flakes not retried</th><th class="n">Manual re-run minutes</th><th class="n">Runs a day with a "do not retry" note</th></tr></thead>
+    <tbody>
+    {% for v in sim.variants %}
+    <tr><td>{{ v.label }}{% if v.post_hoc %} <span class="tag">post hoc</span>{% endif %}</td><td class="n">{{ v.wasted_min | num }}</td><td class="n">{{ v.missed }}</td><td class="n">{{ v.missed_min | num }}</td><td class="n">{{ v.notes_per_day }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p class="small muted more">{{ sim.caveat }}</p>
+</section>
+{% endif %}
+{% endblock %}

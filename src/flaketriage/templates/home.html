@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Overview{% endblock %}
+{% block content %}
+<div class="head">
+  <div>
+    <div class="eyebrow">Holdout · failures from {{ report.holdout_from[:10] if report else '' }} on, held out</div>
+    <h1>Which failed jobs were worth a retry</h1>
+    <p class="lead">Failed jobs of OpenAEV's two main CI workflows, read by rules and, where they are unsure, by a model
+      that must quote the log. Scored against what happened when people re-ran the job.</p>
+  </div>
+  <a class="btn primary" href="/triage">{{ m.icon('search') }}Triage a job</a>
+</div>
+
+<div class="grid g4">
+  <div class="card kpi raised">
+    <div class="v accent num">{{ (s.blind_wasted_min - s.wasted_min) | num }}<small>min</small></div>
+    <div class="l">CI time not spent on retries that would fail again</div>
+    <div class="vs">of {{ s.blind_wasted_min | num }} min a "retry everything" policy spent ({{ (1 - s.wasted_min / s.blind_wasted_min) | pct(0) }} less)</div>
+  </div>
+  <div class="card kpi">
+    <div class="v num">{{ s.skipped }}<small>of {{ s.persists }}</small></div>
+    <div class="l">retries that would fail again are skipped</div>
+    <div class="vs">{{ (s.skipped / s.persists) | pct }} of failures that persisted</div>
+  </div>
+  <div class="card kpi">
+    <div class="v num">{{ s.flakes_retried }}<small>of {{ s.flakes }}</small></div>
+    <div class="l">flakes are still retried automatically</div>
+    <div class="vs">{{ s.missed }} flakes would need a manual re-run</div>
+  </div>
+  <div class="card kpi">
+    <div class="v num">{{ s.failures }}</div>
+    <div class="l">failures with a known outcome, in {{ s.runs }} runs</div>
+    <div class="vs">{{ s.model_answered }} decided by the model, the rest by rules</div>
+  </div>
+</div>
+
+<section>
+  <h2>Minutes spent on retries that failed again, per day</h2>
+  <p class="sub">Grey: what retrying every failed job spent. Indigo: what is still spent when the triage decides.
+    Failures with a known outcome only; days before the dashed line are where the rules were written.</p>
+  <div class="card">
+    <svg class="chart" viewBox="0 0 {{ chart.w }} {{ chart.h }}" role="img" aria-label="Daily minutes spent on retries that failed again, blind retry against the triage">
+      {% for t in chart.ticks %}
+      <line class="grid" x1="{{ chart.x0 }}" x2="{{ chart.x1 }}" y1="{{ t.y }}" y2="{{ t.y }}"/>
+      <text x="{{ chart.x0 - 8 }}" y="{{ t.y + 4 }}" text-anchor="end">{{ t.v | num }}</text>
+      {% endfor %}
+      {% for b in chart.bars %}
+      <g><title>{{ b.title }}</title>
+        <rect class="blind" x="{{ b.x }}" y="{{ b.yb }}" width="{{ b.w }}" height="{{ b.hb }}" rx="1.5"/>
+        <rect class="tool" x="{{ b.x }}" y="{{ b.yw }}" width="{{ b.w }}" height="{{ b.hw }}" rx="1.5"/>
+      </g>
+      {% if b.label %}<text x="{{ b.x + b.w / 2 }}" y="{{ chart.base + 18 }}" text-anchor="middle">{{ b.label }}</text>{% endif %}
+      {% endfor %}
+      <line class="axis" x1="{{ chart.x0 }}" x2="{{ chart.x1 }}" y1="{{ chart.base }}" y2="{{ chart.base }}"/>
+      {% if chart.cut %}
+      <line class="cut" x1="{{ chart.cut }}" x2="{{ chart.cut }}" y1="4" y2="{{ chart.base }}"/>
+      <text class="cut-l" x="{{ chart.cut + 6 }}" y="14">holdout</text>
+      {% endif %}
+    </svg>
+    <div class="legend"><span><i class="blind"></i>Retry everything</span><span><i class="tool"></i>With the triage</span><span class="faint">minutes per day</span></div>
+  </div>
+</section>
+
+<div class="grid g2">
+  <section>
+    <h2>Tests that keep flaking</h2>
+    <p class="sub">Failed, then passed on a re-run of the same commit. Each is a ready issue draft (never posted).</p>
+    <div class="card">
+      {% if flaky %}
+      <ul class="list">
+        {% for t in flaky %}
+        <li><a class="t" href="/test?name={{ t.name | urlencode }}">{{ t.name | short_test }}</a><span class="big-n">{{ t.flaked }}<span class="small muted"> ×</span></span></li>
+        {% endfor %}
+      </ul>
+      <p class="small more"><a href="/tests">All flaky tests →</a></p>
+      {% else %}{{ m.empty('No test flaked three times or more.', 'check', '/tests?min_flakes=1', 'Show every flaky test') }}{% endif %}
+    </div>
+  </section>
+  <section>
+    <h2>Latest "do not retry" with a named test</h2>
+    <p class="sub">What an engineer would see first: the test, and the line that says why.</p>
+    <div class="card">
+      {% if attention %}
+      <ul class="list">
+        {% for r in attention %}
+        <li>
+          <span><a href="/failures/{{ r.f.job_id }}">{{ r.f.job }}</a><br><span class="t muted">{{ r.final.tests[0] | short_test }}</span></span>
+          <span>{{ m.outcome(r.f.label) }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}{{ m.empty('Nothing to look at.', 'check', '/failures', 'All failures') }}{% endif %}
+    </div>
+  </section>
+</div>
+
+<section>
+  <h2>Before the holdout</h2>
+  <p class="sub">The dev period is small: GitHub keeps job logs for a limited time. {{ dev.failures }} failures, {{ dev.flakes_retried }} of {{ dev.flakes }} flakes retried, {{ dev.skipped }} of {{ dev.persists }} failed-again retries skipped. <a href="/quality">How each rule and the model did →</a></p>
+</section>
+{% endblock %}

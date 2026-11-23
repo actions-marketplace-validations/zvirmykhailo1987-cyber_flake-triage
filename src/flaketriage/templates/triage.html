@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Triage a job{% endblock %}
+{% block content %}
+<div class="head">
+  <div>
+    <div class="eyebrow">One failed job</div>
+    <h1>Should this job be re-run?</h1>
+    <p class="lead">Paste the address of a failed GitHub Actions job. If it is in the collected data you get its decision,
+      the log lines and what happened. {% if live %}Otherwise it is fetched from GitHub and triaged now, with the history of every collected failure.{% else %}Live triage of new jobs is off on this server; the command line does it: <code>flake-triage job URL</code>.{% endif %}</p>
+  </div>
+</div>
+
+<div class="split">
+  <div class="card raised">
+    <form method="post" action="/triage" class="stack">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <label class="field" for="url">Job address</label>
+      <input type="url" id="url" name="url" value="{{ url }}" required maxlength="300" placeholder="https://github.com/OWNER/REPO/actions/runs/RUN/job/JOB" autocomplete="off" spellcheck="false">
+      {% if error %}<p class="note warn" role="alert">{{ m.icon('alert') }} {{ error }}</p>{% endif %}
+      <div><button class="btn primary" type="submit">{{ m.icon('search') }}Triage</button></div>
+      <p class="small muted">Read-only. Nothing is re-run, commented or stored beyond this server's memory.</p>
+    </form>
+  </div>
+  <aside class="card">
+    <h3>Try one from the data</h3>
+    <p class="small muted">Holdout failures, one per kind of decision. Copy an address or open it.</p>
+    <ul class="list">
+      {% for r in examples %}
+      <li><span><a href="/failures/{{ r.f.job_id }}">{{ r.f.job }}</a><br><span class="small muted">{{ RULES.get(r.final.rule, r.final.rule) }}</span></span>
+        <span>{{ m.decision(r.final.decision) }}</span></li>
+      {% endfor %}
+    </ul>
+  </aside>
+</div>
+{% endblock %}

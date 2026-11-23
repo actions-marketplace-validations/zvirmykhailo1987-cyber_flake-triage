@@ -1,0 +1,37 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      FLAKE_REPLAY_ONLY: "1"  # CI never calls the model; evals replay the cassette
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -c requirements.lock -e ".[dev]"
+      - name: Lint
+        run: ruff check . && ruff format --check .
+      - name: Types
+        run: mypy
+      - name: Tests
+        run: pytest --cov --cov-report=term-missing
+      - name: Evals from the committed dataset must match the committed report (no API calls)
+        run: python -m flaketriage.evals --model --replay-only --verify
+      - name: Shadow-mode simulation must match docs/simulation.json
+        run: PYTHONPATH=src python scripts/simulate.py --check
+      - name: Fresh check (failures after the data was collected) must match evals/results/fresh.json
+        run: PYTHONPATH=src python scripts/fresh_check.py --replay-only --check
+      - name: Hostile logs and prompt injection (model answers replayed)
+        run: PYTHONPATH=src python scripts/stress.py --replay-only --check
+      - name: Security
+        run: bandit -q -r src && pip-audit -r requirements.lock --strict --progress-spinner off
+      - name: Mutation check (every injected bug must break a test)
+        run: python scripts/mutation_check.py
