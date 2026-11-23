@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136055112041:ff32e1d82f240d93",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "Two deterministic ArchUnit architecture rules fail, and both violations sit in files this change touched. TenantBackgroundTransactionArchTest flags intra-class self-invocation of @Transactional methods in CatalogListService and CatalogScenarioUpdateService, which bypasses the Spring proxy and the tenant scope. JsonTypeDirtyOnLoadCoverageTest fails because the JSON-mapped field probe list no longer matches the tenant-active tables. A re-run will fail the same way. The Jackson '<' parse error at line 1246 is unrelated noise from a mocked external service.",
+  "evidence": [
+   {
+    "line": 3035,
+    "quote": "[ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.213 s <<< FAILURE! -- in io.openaev.architecture.TenantBackgroundTransactionArchTest"
+   },
+   {
+    "line": 3039,
+    "quote": "Method <io.openaev.service.catalog.CatalogListService.offered(java.lang.Class, java.lang.String, java.lang.String)> calls method <io.openaev.service.catalog.CatalogListService.released(java.lang.Class, java.lang.String, java.lang.String)> in (CatalogListService.java:41) self-invokes @Transactional"
+   },
+   {
+    "line": 3064,
+    "quote": "Method <io.openaev.service.catalog.scenario.update.CatalogScenarioUpdateService.newerVersions(io.openaev.context.TxCtx, java.lang.String)> calls method <io.openaev.service.catalog.scenario.update.CatalogScenarioUpdateService.installed(io.openaev.context.TxCtx, java.lang.String)> in (CatalogScenarioUpdateService.java:66) self-invokes @Transactional"
+   },
+   {
+    "line": 1834,
+    "quote": "every JSON-mapped field stored in a tenant-active table needs a case in JsonTypeDirtyOnLoadProbeTest, and nothing else belongs in PROBED_FIELDS."
+   },
+   {
+    "line": 3066,
+    "quote": "[ERROR] Tests run: 1433, Failures: 2, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5998,
+  "output_tokens": 1385,
+  "ms": 6104,
+  "cost_usd": 0.001292,
+  "cached": false
+ }
+}

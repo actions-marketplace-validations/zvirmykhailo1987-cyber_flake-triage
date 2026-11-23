@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136850287623:b393cb9eb8113b94",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "API Types Check failed because the committed TypeScript types are stale. The generator output adds XtmPeerToken* interfaces that the PR did not commit, so the check exits 1. This is deterministic and will repeat on re-run until the types are regenerated and committed.",
+  "evidence": [
+   {
+    "line": 1207,
+    "quote": "+export interface XtmPeerTokenOutput {"
+   },
+   {
+    "line": 1233,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1234,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1767,
+  "output_tokens": 418,
+  "ms": 2934,
+  "cost_usd": 0.000386,
+  "cached": false
+ }
+}

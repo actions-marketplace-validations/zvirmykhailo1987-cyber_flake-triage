@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075460305:d29e46b2cfe9b25c",
+ "answer": {
+  "decision": "retry",
+  "category": "infrastructure",
+  "confidence": 0.6,
+  "summary": "ChannelArticleParentTest.given_articleOfTheSimulation_should_updateIt failed with 404 instead of 200, in a test the change did not touch. The same run shows environment noise: connection refused to localhost:4577 from Azure identity and managed identity lookup failures, and a catalog startup cleanup that failed for 1 of 3 tenants. The log does not directly link the 404 to these, so this is a low-to-moderate confidence retry.",
+  "evidence": [
+   {
+    "line": 1474,
+    "quote": "Connection refused: localhost/[0:0:0:0:0:0:0:1]:4577"
+   },
+   {
+    "line": 1571,
+    "quote": "Azure Identity => ERROR in getToken() call for scopes [https://management.azure.com/.default]: Managed Identity authentication failed"
+   },
+   {
+    "line": 5636,
+    "quote": "Type = io.openaev.rest.exception.ElementNotFoundException"
+   },
+   {
+    "line": 5660,
+    "quote": "java.lang.AssertionError: Status expected:<200> but was:<404>"
+   },
+   {
+    "line": 6404,
+    "quote": "Catalog startup cleanup failed for one or more tenants; continuing platform startup."
+   },
+   {
+    "line": 6406,
+    "quote": "java.lang.IllegalStateException: forEachTenant: 1 of 3 tenant(s) failed"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4948,
+  "output_tokens": 1230,
+  "ms": 6703,
+  "cost_usd": 0.00111,
+  "cached": false
+ }
+}

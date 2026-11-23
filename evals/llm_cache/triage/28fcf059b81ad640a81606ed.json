@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137456038584:33754d42645b9f0a",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API shard elk8-remaining failed on UserResponseViewTest.given_aUserWithEveryFieldSet_should_copyEveryField. The test's value-filling helper has no case for the new pastelColours field, which is a java.lang.Boolean, so it throws IllegalStateException. The field comes from this PR's migration and User/UpdateProfileInput changes, so a rerun will fail the same way until the test helper handles Boolean or the field is covered. Not a flake.",
+  "evidence": [
+   {
+    "line": 1637,
+    "quote": "java.lang.IllegalStateException: UserResponseViewTest does not know how to fill pastelColours: class java.lang.Boolean"
+   },
+   {
+    "line": 1638,
+    "quote": "at io.openaev.api.users.dto.UserResponseViewTest.distinctValueOf(UserResponseViewTest.java:52)"
+   },
+   {
+    "line": 2866,
+    "quote": "UserResponseViewTest.distinctValueOf:52 IllegalState UserResponseViewTest does not know how to fill pastelColours: class java.lang.Boolean"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2941,
+  "output_tokens": 686,
+  "ms": 3565,
+  "cost_usd": 0.000637,
+  "cached": false
+ }
+}

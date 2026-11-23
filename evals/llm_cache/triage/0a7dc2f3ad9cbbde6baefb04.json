@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135933573842:05838c0374f70cf3",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The i18n-checker step failed with exit code 1 (line 579). The excerpt does not show the checker's own error message, so the cause is inferred from the translation arrays it printed. Each locale (ja, ko, ru, zh) lists 'Stop execution' twice, and the same atomic-testing strings appear in the change. This looks like a deterministic translation-file problem the PR introduced, so a re-run should fail again. Check the stop-execution i18n keys for duplicate or misplaced entries.",
+  "evidence": [
+   {
+    "line": 552,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 558,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 579,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3758,
+  "output_tokens": 604,
+  "ms": 3665,
+  "cost_usd": 0.000678,
+  "cached": false
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137085371645:3f90dd19946a17d2",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The API Types Check failed because the committed front-end types in openaev-front/src/utils/api-types.d.ts do not match the types generated from the running API. The step prints a diff adding fields such as XtmComposerRegisterInput image and version, then reports 'Forgot to generate types'. This is deterministic for this commit, so a re-run will fail the same way. Regenerate with 'yarn generate-types-from-api' and commit the result. The log does not show which change caused the drift, since some diffed types are outside the touched files.",
+  "evidence": [
+   {
+    "line": 1334,
+    "quote": "+  /** The container image XTM Composer runs from, optional */"
+   },
+   {
+    "line": 1357,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1358,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1887,
+  "output_tokens": 903,
+  "ms": 5107,
+  "cost_usd": 0.00064,
+  "cached": false
+ }
+}

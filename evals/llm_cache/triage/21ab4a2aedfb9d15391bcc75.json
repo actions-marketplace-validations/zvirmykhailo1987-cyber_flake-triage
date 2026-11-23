@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133449047802:a98b66952d84ac8c",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "One test failed: ImportBundleAttributionTest expected a successful (2xx) response but got a 400 CLIENT_ERROR from the bundle import. The log does not show the response body or the cause of the 400. The failure is a deterministic response-status assertion with no flake history, and none of the touched files is the importer, so I cannot link it to the change. Other logged exceptions (certificate, Caldera, CrowdStrike) come from tests that did not fail the build. Low confidence; check the 400 response body before retrying.",
+  "evidence": [
+   {
+    "line": 2396,
+    "quote": "java.lang.AssertionError: Range for response status value 400 expected:<SUCCESSFUL> but was:<CLIENT_ERROR>"
+   },
+   {
+    "line": 118182,
+    "quote": "[ERROR]   ImportBundleAttributionTest.given_contractBundleDeclaresAnotherTenantOnEveryResource_should_attributeAllToHeaderTenant Range for response status value 400 expected:<SUCCESSFUL> but was:<CLIENT_ERROR>"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5147,
+  "output_tokens": 1226,
+  "ms": 6709,
+  "cost_usd": 0.001128,
+  "cached": false
+ }
+}

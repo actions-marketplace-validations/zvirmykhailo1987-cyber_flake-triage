@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136165542578:b5f00cb6e8afcf1f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API Types Check fails because the committed openaev-front/src/utils/api-types.d.ts is stale. Regenerating from the API adds fields the PR did not commit (e.g. has_more, last_verified_at, tenant_name). The same diff will reproduce on re-run. Fix: run yarn generate-types-from-api and commit the result.",
+  "evidence": [
+   {
+    "line": 1135,
+    "quote": "Run API_URL=http://localhost:8080 yarn generate-types-from-api"
+   },
+   {
+    "line": 1292,
+    "quote": "+  consistency_mode?: string;"
+   },
+   {
+    "line": 1293,
+    "quote": "+  /** Whether another page is expected to follow */"
+   },
+   {
+    "line": 1294,
+    "quote": "+  has_more?: boolean;"
+   },
+   {
+    "line": 1382,
+    "quote": "+  last_verified_at?: string;"
+   },
+   {
+    "line": 1397,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1398,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3544,
+  "output_tokens": 792,
+  "ms": 4155,
+  "cost_usd": 0.00075,
+  "cached": false
+ }
+}

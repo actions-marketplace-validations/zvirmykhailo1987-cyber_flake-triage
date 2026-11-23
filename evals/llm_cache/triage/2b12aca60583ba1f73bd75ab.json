@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137161498958:4e7cee91ce957738",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "The frontend-quality step failed because the yarn i18n-checker exited with code 1. The excerpt does not include the checker's specific error message. The ru and zh pivot strings are still English copies of the en text (e.g. 'Annual loss', the OpenCRQ/OpenCTI sentences), which suggests untranslated keys added by this change. That is deterministic and will repeat on re-run, so fix the translations rather than retrying.",
+  "evidence": [
+   {
+    "line": 511,
+    "quote": "##[group]Run yarn i18n-checker"
+   },
+   {
+    "line": 601,
+    "quote": "    'Annual loss',"
+   },
+   {
+    "line": 612,
+    "quote": "    'Annual loss',"
+   },
+   {
+    "line": 620,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4019,
+  "output_tokens": 753,
+  "ms": 4322,
+  "cost_usd": 0.000778,
+  "cached": false
+ }
+}

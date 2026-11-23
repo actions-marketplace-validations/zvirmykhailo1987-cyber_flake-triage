@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134298051357:a6f53f1abed4014c",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.35,
+  "summary": "FDS conformity check exited 1 on a PR touching many new marketplace/catalog components. The excerpt is truncated and the visible lines (845-882) all report OK, so the violating file is not shown. The check is deterministic and the change adds many components, so a re-run will likely fail the same way. Open the full report at fds-migration/reports/conformity-latest.json to find the violation.",
+  "evidence": [
+   {
+    "line": 885,
+    "quote": "##[error]Process completed with exit code 1."
+   },
+   {
+    "line": 884,
+    "quote": "Report: fds-migration/reports/conformity-latest.json"
+   },
+   {
+    "line": 882,
+    "quote": "✅ [lib-component-usage] openaev-front/src/admin/components/nav/NewsFeedToastItem.tsx: OK"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3583,
+  "output_tokens": 579,
+  "ms": 3597,
+  "cost_usd": 0.000648,
+  "cached": false
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075460394:c9643ad24a69725a",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The multi-tenancy shadow check failed the API Tests job on a scheduled run of main. It reports 16 unscoped production reads that are not in the stored baseline for this mode. That is a deterministic code-level check, so a retry should fail the same way. The change touches OpenCRQCounterpartProvider and XtmOneClient, which are the likely source of the new reads. The excerpt does not name the reads, so the link to these files is inferred.",
+  "evidence": [
+   {
+    "line": 81863,
+    "quote": "##[error]16 unscoped production read(s) new to this mode's stored list. See the job summary."
+   },
+   {
+    "line": 81864,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1152,
+  "output_tokens": 537,
+  "ms": 3121,
+  "cost_usd": 0.000384,
+  "cached": false
+ }
+}

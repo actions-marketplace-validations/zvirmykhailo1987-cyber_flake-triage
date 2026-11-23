@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134701082445:51794761dc0fe867",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The ensure-no-git-diff step failed because the formatter rewrote Java files the PR committed unformatted, so git diff is non-empty. The diff reformats GraphExplorationService.java and GraphExplorationSliceTest.java. This is deterministic and will repeat on re-run. Fix: run the project formatter and commit the result.",
+  "evidence": [
+   {
+    "line": 777,
+    "quote": "##[start-action display=Check git diff and error if non zero;id=ensure-no-git-diff.no-git-diff]"
+   },
+   {
+    "line": 778,
+    "quote": "##[group]Run git diff --exit-code"
+   },
+   {
+    "line": 825,
+    "quote": "+                String a ="
+   },
+   {
+    "line": 826,
+    "quote": "+                    slice.node(GraphNodeType.ASSET, (String) r[0], (String) r[1], (String) r[2]);"
+   },
+   {
+    "line": 854,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2204,
+  "output_tokens": 593,
+  "ms": 3356,
+  "cost_usd": 0.000517,
+  "cached": false
+ }
+}

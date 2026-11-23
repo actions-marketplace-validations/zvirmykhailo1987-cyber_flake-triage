@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136373470036:531652fcc071e872",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.75,
+  "summary": "The 'Run yarn i18n-checker' step exited with code 1. The excerpt does not print the checker's specific error, so the exact cause is inferred. The atomic-testing 'Stop execution' strings appear in every locale block, which suggests a missing or duplicate translation key introduced by this PR. That is deterministic and will repeat on re-run; fix the locale files.",
+  "evidence": [
+   {
+    "line": 512,
+    "quote": "Run yarn i18n-checker"
+   },
+   {
+    "line": 547,
+    "quote": "'Do you want to stop this atomic testing: {title}?',"
+   },
+   {
+    "line": 549,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 552,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 576,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3780,
+  "output_tokens": 882,
+  "ms": 5606,
+  "cost_usd": 0.000819,
+  "cached": false
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136344994629:b6929396066b095a",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Three architecture tests fail on deterministic baseline-file checks, not flakiness. The change moved or removed expiration-manager classes, so the guard baselines are now stale (remove entries) or missing classifications (ExpirationManagerIntegration and Factory flagged as handoff). Re-running will fail the same way. Fix the background-guard-baseline.txt and v1-tenant-construct-baseline.txt entries. The JSON parse error at line 1245 is a logged, handled error and is not the cause.",
+  "evidence": [
+   {
+    "line": 1795,
+    "quote": "[ERROR] Tests run: 6, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 1.504 s <<< FAILURE! -- in io.openaev.architecture.BackgroundEntrypointTenantScopeArchTest"
+   },
+   {
+    "line": 1798,
+    "quote": "2 background entry point(s) neither reference TenantScopedTransaction nor are listed in background-guard-baseline.txt with a reason."
+   },
+   {
+    "line": 1801,
+    "quote": "io.openaev.integration.impl.collectors.expiration_manager.ExpirationManagerIntegrationFactory  [handoff]"
+   },
+   {
+    "line": 1813,
+    "quote": "io.openaev.collectors.expectations_expiration_manager.ExpectationsExpirationManagerCollector is not a production class any more, remove it"
+   },
+   {
+    "line": 1999,
+    "quote": "V1TenantConstructArchTest.given_productionClasses_should_passEveryCheckOfTheGuard()[2] -- Time elapsed: 0.004 s <<< FAILURE!"
+   },
+   {
+    "line": 2001,
+    "quote": "These lines of v1-tenant-construct-baseline.txt describe a site that is gone: remove them and lower BASELINE_SIZE"
+   },
+   {
+    "line": 2002,
+    "quote": "Expecting empty but was: [\"line 25 'io.openaev.collectors.expectations_expiration_manager.ExpectationsExpirationManagerJob#run | TenantContext.clearCurrentTenant'\""
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 7608,
+  "output_tokens": 1194,
+  "ms": 5581,
+  "cost_usd": 0.001358,
+  "cached": false
+ }
+}

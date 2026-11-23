@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134852677568:f5bc40870b890f06",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "The API Types Check failed because the committed openaev-front/src/utils/api-types.d.ts is stale. The PR adds keep_findings to the Java inputs, but the regenerated types show it missing from the committed file, so the job fails deterministically on this commit. Fix: run yarn generate-types-from-api and commit the result. A retry will fail the same way.",
+  "evidence": [
+   {
+    "line": 1182,
+    "quote": "+  keep_findings?: boolean;"
+   },
+   {
+    "line": 1190,
+    "quote": "+  keep_findings?: boolean;"
+   },
+   {
+    "line": 1194,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3170,
+  "output_tokens": 619,
+  "ms": 3668,
+  "cost_usd": 0.000626,
+  "cached": false
+ }
+}

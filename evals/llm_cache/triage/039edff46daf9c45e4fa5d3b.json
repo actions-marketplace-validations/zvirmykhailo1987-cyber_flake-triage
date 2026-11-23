@@ -1,0 +1,53 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136189043398:bdecbc39cba7ff86",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "Five deterministic export tests fail with HTTP 400 where 200 is expected (InjectorContractApiCopyRankingTenantScopeTest and InjectorContractRightsPerCopyTest, both in the threat arsenal CSV export area). The 400s repeat across tests and the change touches the export code (ThreatArsenalApiExporter, import/export mappers), so a retry will likely fail the same way. Link to the change is inferred, not shown: the failing test files are not in the change, and the log has no 400 message body. The Detection AI JSON parse error in the log looks unrelated noise.",
+  "evidence": [
+   {
+    "line": 2583,
+    "quote": "Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 17.60 s <<< FAILURE! -- in Threat arsenal CSV export with no selector"
+   },
+   {
+    "line": 2587,
+    "quote": "expected: 200"
+   },
+   {
+    "line": 2588,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 2589,
+    "quote": "at io.openaev.rest.injector_contract.InjectorContractApiCopyRankingTenantScopeTest$ExportWithNoSelector.exportCsv(InjectorContractApiCopyRankingTenantScopeTest.java:390)"
+   },
+   {
+    "line": 3009,
+    "quote": "Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 2.486 s <<< FAILURE! -- in Threat arsenal CSV export on a scope of the default tenant and tenant A"
+   },
+   {
+    "line": 3268,
+    "quote": "expected: 200"
+   },
+   {
+    "line": 3269,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 3277,
+    "quote": "Tests run: 1426, Failures: 5, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6965,
+  "output_tokens": 1149,
+  "ms": 5584,
+  "cost_usd": 0.001271,
+  "cached": false
+ }
+}

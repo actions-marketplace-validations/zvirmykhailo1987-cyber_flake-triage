@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135740420019:5cc2da7e817d3452",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.75,
+  "summary": "One test failed deterministically: StreamVisibilityServiceTest expected [\"g\"] for a finding on a group with a hidden asset but got []. It has no flake history, and the change touches finding and asset-group membership code (FindingService, AssetGroupService, AssetGroupMembershipResolver, FindingHandler). The link to the change is inferred, not shown in the log, so a rerun is unlikely to pass.",
+  "evidence": [
+   {
+    "line": 2660,
+    "quote": "[ERROR] io.openaev.service.stream.StreamVisibilityServiceTest.given_findingOnAGroupWithAHiddenAsset_should_keepTheVisibleOnesInTheGroup -- Time elapsed: 0.008 s <<< FAILURE!"
+   },
+   {
+    "line": 2681,
+    "quote": "  []"
+   },
+   {
+    "line": 2682,
+    "quote": "to contain exactly (and in same order):"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2526,
+  "output_tokens": 843,
+  "ms": 4077,
+  "cost_usd": 0.000674,
+  "cached": false
+ }
+}

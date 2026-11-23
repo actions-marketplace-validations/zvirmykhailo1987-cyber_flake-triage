@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136466954823:da77b959069ff724",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The only failing test is PayloadAtomicTestingAuditLogLifecycleTest, which expected a 2xx response but got a 400 BadRequestException. The branch touches AtomicTestingService and atomic-testing DTOs, and the failure is a deterministic validation error on the same flow, so a rerun will likely fail again. The log does not show the specific validation message, so confirm the cause in the test request body. The other warnings (HTTP retry on Shibboleth repo, output post-processing error, tenant purge failure) are unrelated noise.",
+  "evidence": [
+   {
+    "line": 2029,
+    "quote": "Type = io.openaev.rest.exception.BadRequestException"
+   },
+   {
+    "line": 2048,
+    "quote": "[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.255 s <<< FAILURE! -- in Payload + Atomic testing lifecycle"
+   },
+   {
+    "line": 2050,
+    "quote": "java.lang.AssertionError: Range for response status value 400 expected:<SUCCESSFUL> but was:<CLIENT_ERROR>"
+   },
+   {
+    "line": 3588,
+    "quote": "PayloadAtomicTestingAuditLogLifecycleTest.given_payloadAndAtomicTestingLifecycle_should_logExpectedAuditEvents Range for response status value 400 expected:<SUCCESSFUL> but was:<CLIENT_ERROR>"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6134,
+  "output_tokens": 1103,
+  "ms": 5075,
+  "cost_usd": 0.001165,
+  "cached": false
+ }
+}

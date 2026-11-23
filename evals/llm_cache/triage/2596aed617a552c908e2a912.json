@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135491200966:4ee16d3dca86d392",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API types check failed because the committed TypeScript types are stale. Regenerating from the API produced new interfaces (LocalObjectOutput, XtmConnectionOutput) that are not in the branch, so the generated diff is deterministic and a re-run will fail the same way. Fix: run yarn generate-types-from-api, commit the result, and push.",
+  "evidence": [
+   {
+    "line": 1229,
+    "quote": "+export interface LocalObjectOutput {"
+   },
+   {
+    "line": 1245,
+    "quote": "+export interface XtmConnectionOutput {"
+   },
+   {
+    "line": 1254,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1255,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3569,
+  "output_tokens": 586,
+  "ms": 3269,
+  "cost_usd": 0.00065,
+  "cached": false
+ }
+}

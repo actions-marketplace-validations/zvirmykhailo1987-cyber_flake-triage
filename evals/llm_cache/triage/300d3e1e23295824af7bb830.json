@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133489105594:e4afebbfe36c04ee",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "API Types Check failed because the committed openaev-front/src/utils/api-types.d.ts is out of date. The generated diff moves ai_target_credential and adds ApiToken to SecretResolvedValue, and the check exits 1 with a 'Forgot to generate types' warning. This is deterministic and comes from this branch's backend changes, so re-running will not help. Run yarn generate-types-from-api and commit the result.",
+  "evidence": [
+   {
+    "line": 1315,
+    "quote": "-  ai_target_credential?: string;"
+   },
+   {
+    "line": 1323,
+    "quote": "+    | ApiToken"
+   },
+   {
+    "line": 1331,
+    "quote": "+  ai_target_credential?: string;"
+   },
+   {
+    "line": 1343,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1344,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2778,
+  "output_tokens": 616,
+  "ms": 3582,
+  "cost_usd": 0.000586,
+  "cached": false
+ }
+}

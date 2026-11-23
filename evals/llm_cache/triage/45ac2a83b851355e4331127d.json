@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135364864541:0ac578c1dedb222b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "The Docker build failed in the front-end stage: the Vite/rolldown production build ran `yarn build` and failed with 7 errors. The excerpt elides the individual error messages, so the exact cause is not visible. The failure is deterministic (a build error, not infrastructure or a flaky test), and the change touches many front-end graph and nav files, so it most likely broke the build. Check the 7 elided errors (lines 1395-1485) to confirm.",
+  "evidence": [
+   {
+    "line": 1392,
+    "quote": "#21 25.33 ✗ Build failed in 1.29s"
+   },
+   {
+    "line": 1394,
+    "quote": "#21 25.33 Build failed with 7 errors:"
+   },
+   {
+    "line": 1486,
+    "quote": "#21 ERROR: process \"/bin/sh -c set -eux                             ; npm install -g corepack                  ; yarn install                             ; yarn build                               ;\" did not complete successfully: exit code: 1"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3509,
+  "output_tokens": 628,
+  "ms": 3809,
+  "cost_usd": 0.000665,
+  "cached": false
+ }
+}

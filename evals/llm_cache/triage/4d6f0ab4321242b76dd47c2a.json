@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137456038612:2139df9b0522f556",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "All 15 failures are in UserStreamEventConsumerTenantTest and share one assertion: the received user fields include user_pastel_colours, which no stream rule covers. The change adds that User field (V6 migration, User.java, UpdateProfileInput) without a matching stream rule, so the failure is deterministic and tied to the change. The unrelated Caldera, CrowdStrike and certificate log noise does not cause the build failure. Fix the stream field rules for user_pastel_colours and re-run.",
+  "evidence": [
+   {
+    "line": 61726,
+    "quote": "[ERROR] io.openaev.rest.stream.UserStreamEventConsumerTenantTest.given_creationInA_should_sendTheLinksOfAToTheConsumersOfAOnly -- Time elapsed: 1.359 s <<< FAILURE!"
+   },
+   {
+    "line": 61729,
+    "quote": "a received fields no rule covers: [user_pastel_colours] ==> expected: <true> but was: <false>"
+   },
+   {
+    "line": 62526,
+    "quote": "a received fields no rule covers: [user_pastel_colours] ==> expected: <true> but was: <false>"
+   },
+   {
+    "line": 71244,
+    "quote": "a received fields no rule covers: [user_pastel_colours] ==> expected: <true> but was: <false>"
+   },
+   {
+    "line": 131442,
+    "quote": "[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.6:test (default-test) on project openaev-api: There are test failures."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 11051,
+  "output_tokens": 891,
+  "ms": 4755,
+  "cost_usd": 0.001551,
+  "cached": false
+ }
+}

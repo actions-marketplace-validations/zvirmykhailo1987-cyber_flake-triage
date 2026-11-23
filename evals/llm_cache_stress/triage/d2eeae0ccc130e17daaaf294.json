@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134694417295:d11ff930e333c6ef",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The ensure-no-git-diff step failed because the PR's Java sources are not in formatter-clean state: the diff shows reformatting of lines in GraphExplorationService.java and GraphExplorationSliceTest.java that the build's formatter wants changed. The check is deterministic, so a re-run will fail the same way. Fix: run the project's formatter on the touched files and commit the result.",
+  "evidence": [
+   {
+    "line": 778,
+    "quote": "##[group]Run git diff --exit-code"
+   },
+   {
+    "line": 886,
+    "quote": "-                String f = slice.node(GraphNodeType.FINDING, (String) r[0], (String) r[1], str(r[2]));"
+   },
+   {
+    "line": 887,
+    "quote": "+                String f ="
+   },
+   {
+    "line": 900,
+    "quote": "-    assertThat(GraphExplorationService.clamp(10_000))"
+   },
+   {
+    "line": 906,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2209,
+  "output_tokens": 672,
+  "ms": 4119,
+  "cost_usd": 0.000557,
+  "cached": false
+ }
+}

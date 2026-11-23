@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135758713224:e9984083dacabaef",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "7 InjectTargetSearchTest endpoint-search tests fail deterministically on JSON assertions. The response now includes an extra \"content[0].target_markings\" key that the expected JSON lacks, and some expected content entries are missing. The change touches AssetMarkingsOutput, AssetOutput, EndpointMapper and EndpointTargetSearchAdaptor, so the new markings field is the likely cause. Failures persisted on the prior run with no flake history, so a rerun will probably fail the same way. Other ERROR lines in the log (NoSuchElementException, ZipException) look like unrelated noise.",
+  "evidence": [
+   {
+    "line": 3483,
+    "quote": "Different keys found in node \"content[0]\", extra: \"content[0].target_markings\""
+   },
+   {
+    "line": 5522,
+    "quote": "Different keys found in node \"content[0]\", extra: \"content[0].target_markings\", expected: <{\"target_category\":\"HOST\""
+   },
+   {
+    "line": 5552,
+    "quote": "[ERROR] Tests run: 1682, Failures: 7, Errors: 0, Skipped: 0"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 10356,
+  "output_tokens": 843,
+  "ms": 5055,
+  "cost_usd": 0.001457,
+  "cached": false
+ }
+}

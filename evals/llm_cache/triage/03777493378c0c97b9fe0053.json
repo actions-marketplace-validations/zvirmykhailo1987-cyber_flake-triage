@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136338612662:07999b843c76a2c1",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "ArchRuleRegistrationTest fails deterministically: the rule TenantActiveTableAccessArchTest#scenario_revisions_repository_access_is_reviewed is not annotated @ArchTest and not listed in HELPERS, so the ArchUnit meta-test rejects it. This is a repeatable code/config problem, not flakiness, so a rerun will fail the same way. The touched-file list shows only front-end files and fds-migration, so the offending Java rule is probably in the branch but not listed; check the scenario-revisions architecture test and register or annotate it. The Shibboleth HEAD retry and the Jackson parse error logged earlier are noise and do not cause the failure.",
+  "evidence": [
+   {
+    "line": 1791,
+    "quote": "io.openaev.architecture.ArchRuleRegistrationTest.given_aRuleMember_should_beAnArchTestOrAListedHelper -- Time elapsed: 0.032 s <<< FAILURE!"
+   },
+   {
+    "line": 1793,
+    "quote": "[these rules are not annotated @ArchTest, so the ArchUnit engine never runs them: annotate them, or list them in HELPERS with the class that runs them]"
+   },
+   {
+    "line": 1794,
+    "quote": "Expecting empty but was: [\"io.openaev.architecture.TenantActiveTableAccessArchTest#scenario_revisions_repository_access_is_reviewed\"]"
+   },
+   {
+    "line": 3045,
+    "quote": "[ERROR] Tests run: 1427, Failures: 1, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4450,
+  "output_tokens": 1157,
+  "ms": 6154,
+  "cost_usd": 0.001024,
+  "cached": false
+ }
+}

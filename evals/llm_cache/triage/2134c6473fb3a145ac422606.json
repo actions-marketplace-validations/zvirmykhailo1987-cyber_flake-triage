@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135401944241:f3cf64e218935ad5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Seven InjectTargetSearchTest endpoint-search tests fail deterministically with zero flake history. The JSON diff shows the actual response has an extra target_markings key on each endpoint that the expected JSON lacks. The change adds marking fields to endpoint output (EndpointMapper, AssetOutput, AssetMarkingsOutput), so the test expectations are stale or the new field is leaking into the API. Re-running will not fix it. The ERROR/exception lines elsewhere in the log are from other passing tests and are not the cause.",
+  "evidence": [
+   {
+    "line": 3423,
+    "quote": "Different keys found in node \"content[0]\", extra: \"content[0].target_markings\""
+   },
+   {
+    "line": 5456,
+    "quote": "Different keys found in node \"content[0]\", extra: \"content[0].target_markings\""
+   },
+   {
+    "line": 3407,
+    "quote": "Tests run: 7, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 1.505 s <<< FAILURE! -- in With AND filter group operator"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 10767,
+  "output_tokens": 968,
+  "ms": 5015,
+  "cost_usd": 0.001561,
+  "cached": false
+ }
+}

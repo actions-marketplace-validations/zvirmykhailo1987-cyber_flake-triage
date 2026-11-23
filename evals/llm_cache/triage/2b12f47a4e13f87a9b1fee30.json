@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136984509470:e12501406b520d15",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Three deterministic architecture/schema tests fail because the branch adds a marking_definitions key (marking_definition_stix_id) and new MarkingDefinitionRepository access in MarkingDefinitionStixService. The shared-key list file and the arch rule are out of sync with the code, so a rerun will fail the same way. Caveat: the touched-files list shows only docs/rest-api.md, which does not match the classes named in the log, so the file list may be incomplete. The JSON parse error at line 1252 is logged noise and is not the cause.",
+  "evidence": [
+   {
+    "line": 1920,
+    "quote": "but was: <[marking_definitions marking_definition_stix_id, users_tenants user_id]>"
+   },
+   {
+    "line": 1929,
+    "quote": "shared-tenant-keys.txt and the schema disagree. The schema is the authority: write the derived lines into the file"
+   },
+   {
+    "line": 3070,
+    "quote": "[ERROR] io.openaev.architecture.TenantActiveTableAccessArchTest.marking_definitions_repository_access_is_reviewed -- Time elapsed: 0.176 s <<< FAILURE!"
+   },
+   {
+    "line": 3110,
+    "quote": "Method <io.openaev.service.marking_definition.MarkingDefinitionStixService.importOne(com.fasterxml.jackson.databind.JsonNode, java.lang.String, java.lang.String)> calls method"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5126,
+  "output_tokens": 1444,
+  "ms": 6431,
+  "cost_usd": 0.001235,
+  "cached": false
+ }
+}

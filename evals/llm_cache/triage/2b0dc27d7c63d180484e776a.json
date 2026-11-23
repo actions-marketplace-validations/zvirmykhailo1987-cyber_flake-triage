@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136876152215:837c26bcdea851fc",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API Types Check failed because the committed TypeScript types are out of date with the backend API. The generated output adds Scenario fields (scenario_safe_mode, scenario_asset_group_order, scenario_approval_status, etc.) that the PR did not commit. The step is deterministic, so a retry will fail the same way. Fix: run 'yarn generate-types-from-api' against the branch and commit the regenerated types.",
+  "evidence": [
+   {
+    "line": 1282,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1267,
+    "quote": "+  scenario_safe_mode?: boolean;"
+   },
+   {
+    "line": 1283,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1605,
+  "output_tokens": 606,
+  "ms": 3443,
+  "cost_usd": 0.000463,
+  "cached": false
+ }
+}

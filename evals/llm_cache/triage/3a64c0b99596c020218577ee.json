@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136165657403:3e3b1d495122d063",
+ "answer": {
+  "decision": "retry",
+  "category": "infrastructure",
+  "confidence": 0.6,
+  "summary": "BOM Override Guard failed at 'Resolve the runtime classpath' with Maven reporting it cannot find the 'dependency' plugin prefix in its local repo or plugin groups. The changed files are all frontend, so this looks like a Maven plugin resolution or repository environment problem rather than the change. The log does not show the root cause (offline mode, cache, or network), so confidence is moderate.",
+  "evidence": [
+   {
+    "line": 422,
+    "quote": "[ERROR] No plugin found for prefix 'dependency' in the current project and in the plugin groups"
+   },
+   {
+    "line": 428,
+    "quote": "[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/NoPluginFoundForPrefixException"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2771,
+  "output_tokens": 780,
+  "ms": 4392,
+  "cost_usd": 0.000667,
+  "cached": false
+ }
+}

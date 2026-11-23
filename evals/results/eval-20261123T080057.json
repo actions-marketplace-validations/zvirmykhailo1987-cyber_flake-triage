@@ -1,0 +1,277 @@
+{
+ "at": "2026-11-23T07:59:53+00:00",
+ "repo_data": "openaev",
+ "all_failures": 3017,
+ "labelled": 2029,
+ "labelled_with_log": 1386,
+ "labels": {
+  "flake": 394,
+  "persists": 1635,
+  "unlabelled": 988
+ },
+ "holdout_from": "2026-11-18T00:00:00+00:00",
+ "policies": {
+  "blind": {
+   "dev": {
+    "failures": 128,
+    "runs": 72,
+    "dependent_excluded": 133,
+    "flakes": 43,
+    "persists": 85,
+    "flakes_retried": 43,
+    "flake_recall": 1.0,
+    "flake_recall_ci95": [
+     0.918,
+     1.0
+    ],
+    "missed_flakes": 0,
+    "persist_skipped": 0,
+    "persist_skip_rate": 0.0,
+    "persist_skip_ci95": [
+     0.0,
+     0.043
+    ],
+    "retry_minutes_wasted": 1512,
+    "retry_minutes_saved": 0,
+    "missed_flake_minutes": 0,
+    "decisions": {
+     "retry": 128
+    },
+    "no_retry_precision": null
+   },
+   "holdout": {
+    "failures": 618,
+    "runs": 320,
+    "dependent_excluded": 507,
+    "flakes": 169,
+    "persists": 449,
+    "flakes_retried": 169,
+    "flake_recall": 1.0,
+    "flake_recall_ci95": [
+     0.978,
+     1.0
+    ],
+    "missed_flakes": 0,
+    "persist_skipped": 0,
+    "persist_skip_rate": 0.0,
+    "persist_skip_ci95": [
+     0.0,
+     0.008
+    ],
+    "retry_minutes_wasted": 7106,
+    "retry_minutes_saved": 0,
+    "missed_flake_minutes": 0,
+    "decisions": {
+     "retry": 618
+    },
+    "no_retry_precision": null
+   },
+   "all": {
+    "failures": 746,
+    "runs": 392,
+    "dependent_excluded": 640,
+    "flakes": 212,
+    "persists": 534,
+    "flakes_retried": 212,
+    "flake_recall": 1.0,
+    "flake_recall_ci95": [
+     0.982,
+     1.0
+    ],
+    "missed_flakes": 0,
+    "persist_skipped": 0,
+    "persist_skip_rate": 0.0,
+    "persist_skip_ci95": [
+     0.0,
+     0.007
+    ],
+    "retry_minutes_wasted": 8617,
+    "retry_minutes_saved": 0,
+    "missed_flake_minutes": 0,
+    "decisions": {
+     "retry": 746
+    },
+    "no_retry_precision": null
+   }
+  },
+  "rules": {
+   "dev": {
+    "failures": 128,
+    "runs": 72,
+    "dependent_excluded": 133,
+    "flakes": 43,
+    "persists": 85,
+    "flakes_retried": 41,
+    "flake_recall": 0.953,
+    "flake_recall_ci95": [
+     0.845,
+     0.987
+    ],
+    "missed_flakes": 2,
+    "persist_skipped": 45,
+    "persist_skip_rate": 0.529,
+    "persist_skip_ci95": [
+     0.424,
+     0.632
+    ],
+    "retry_minutes_wasted": 959,
+    "retry_minutes_saved": 553,
+    "missed_flake_minutes": 43,
+    "decisions": {
+     "unsure": 47,
+     "retry": 34,
+     "no_retry": 47
+    },
+    "no_retry_precision": 0.957
+   },
+   "holdout": {
+    "failures": 618,
+    "runs": 320,
+    "dependent_excluded": 507,
+    "flakes": 169,
+    "persists": 449,
+    "flakes_retried": 165,
+    "flake_recall": 0.976,
+    "flake_recall_ci95": [
+     0.941,
+     0.991
+    ],
+    "missed_flakes": 4,
+    "persist_skipped": 204,
+    "persist_skip_rate": 0.454,
+    "persist_skip_ci95": [
+     0.409,
+     0.501
+    ],
+    "retry_minutes_wasted": 4518,
+    "retry_minutes_saved": 2588,
+    "missed_flake_minutes": 39,
+    "decisions": {
+     "unsure": 208,
+     "retry": 202,
+     "no_retry": 208
+    },
+    "no_retry_precision": 0.981
+   },
+   "all": {
+    "failures": 746,
+    "runs": 392,
+    "dependent_excluded": 640,
+    "flakes": 212,
+    "persists": 534,
+    "flakes_retried": 206,
+    "flake_recall": 0.972,
+    "flake_recall_ci95": [
+     0.94,
+     0.987
+    ],
+    "missed_flakes": 6,
+    "persist_skipped": 249,
+    "persist_skip_rate": 0.466,
+    "persist_skip_ci95": [
+     0.424,
+     0.509
+    ],
+    "retry_minutes_wasted": 5477,
+    "retry_minutes_saved": 3140,
+    "missed_flake_minutes": 83,
+    "decisions": {
+     "unsure": 255,
+     "retry": 236,
+     "no_retry": 255
+    },
+    "no_retry_precision": 0.976
+   }
+  },
+  "rules+model": {
+   "dev": {
+    "failures": 128,
+    "runs": 72,
+    "dependent_excluded": 133,
+    "flakes": 43,
+    "persists": 85,
+    "flakes_retried": 35,
+    "flake_recall": 0.814,
+    "flake_recall_ci95": [
+     0.674,
+     0.903
+    ],
+    "missed_flakes": 8,
+    "persist_skipped": 75,
+    "persist_skip_rate": 0.882,
+    "persist_skip_ci95": [
+     0.797,
+     0.935
+    ],
+    "retry_minutes_wasted": 308,
+    "retry_minutes_saved": 1204,
+    "missed_flake_minutes": 93,
+    "decisions": {
+     "retry": 45,
+     "no_retry": 83
+    },
+    "no_retry_precision": 0.904
+   },
+   "holdout": {
+    "failures": 618,
+    "runs": 320,
+    "dependent_excluded": 507,
+    "flakes": 169,
+    "persists": 449,
+    "flakes_retried": 161,
+    "flake_recall": 0.953,
+    "flake_recall_ci95": [
+     0.909,
+     0.976
+    ],
+    "missed_flakes": 8,
+    "persist_skipped": 378,
+    "persist_skip_rate": 0.842,
+    "persist_skip_ci95": [
+     0.805,
+     0.873
+    ],
+    "retry_minutes_wasted": 1964,
+    "retry_minutes_saved": 5142,
+    "missed_flake_minutes": 88,
+    "decisions": {
+     "no_retry": 386,
+     "retry": 232
+    },
+    "no_retry_precision": 0.979
+   },
+   "all": {
+    "failures": 746,
+    "runs": 392,
+    "dependent_excluded": 640,
+    "flakes": 212,
+    "persists": 534,
+    "flakes_retried": 196,
+    "flake_recall": 0.925,
+    "flake_recall_ci95": [
+     0.881,
+     0.953
+    ],
+    "missed_flakes": 16,
+    "persist_skipped": 453,
+    "persist_skip_rate": 0.848,
+    "persist_skip_ci95": [
+     0.815,
+     0.876
+    ],
+    "retry_minutes_wasted": 2271,
+    "retry_minutes_saved": 6346,
+    "missed_flake_minutes": 181,
+    "decisions": {
+     "retry": 277,
+     "no_retry": 469
+    },
+    "no_retry_precision": 0.966
+   }
+  }
+ },
+ "model": {
+  "name": "claude-haiku-5-5",
+  "new_spend_usd": 0.0119
+ }
+}

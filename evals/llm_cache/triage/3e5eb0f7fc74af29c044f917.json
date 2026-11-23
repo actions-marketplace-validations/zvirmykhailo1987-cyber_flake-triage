@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135103477657:e6bae334914aa724",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "API types check failed because the generated TypeScript types differ from the committed ones. The PR adds inject_execution_threshold_minutes and SettingsInjectExecutionUpdateInput to the API but the generated types were not regenerated and committed. Re-running will fail the same way until the developer runs yarn generate-types-from-api and commits the result.",
+  "evidence": [
+   {
+    "line": 1196,
+    "quote": "+  inject_execution_threshold_minutes?: number;"
+   },
+   {
+    "line": 1222,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1223,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3547,
+  "output_tokens": 652,
+  "ms": 3526,
+  "cost_usd": 0.000681,
+  "cached": false
+ }
+}

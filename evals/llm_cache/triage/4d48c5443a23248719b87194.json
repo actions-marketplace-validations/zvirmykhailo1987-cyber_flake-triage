@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133617724684:7c4e01df7de4eacd",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The ensure-no-git-diff step failed because regenerating/formatting left a diff in MarkingCtx.java: the committed file still has an unused import java.util.Arrays that the tooling removes. This is deterministic and will repeat on re-run. Fix by removing the import (or regenerating) and committing.",
+  "evidence": [
+   {
+    "line": 785,
+    "quote": "diff --git a/openaev-model/src/main/java/io/openaev/context/MarkingCtx.java b/openaev-model/src/main/java/io/openaev/context/MarkingCtx.java"
+   },
+   {
+    "line": 789,
+    "quote": "@@ -1,6 +1,5 @@"
+   },
+   {
+    "line": 792,
+    "quote": "-import java.util.Arrays;"
+   },
+   {
+    "line": 796,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1639,
+  "output_tokens": 739,
+  "ms": 4034,
+  "cost_usd": 0.000533,
+  "cached": false
+ }
+}

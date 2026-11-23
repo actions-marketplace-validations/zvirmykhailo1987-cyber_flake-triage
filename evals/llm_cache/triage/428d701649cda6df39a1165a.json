@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136966190660:72d99ee4f9f31bad",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API Types Check failed because the committed openaev-front/src/utils/api-types.d.ts is stale. Regenerating from the API changed InjectTargetsOutput.inject_targeted from required to optional, and this PR touches InjectTargetsOutput.java. The fix is to regenerate and commit the types, not to re-run. The check is deterministic, so a retry will fail the same way.",
+  "evidence": [
+   {
+    "line": 1187,
+    "quote": "-  inject_targeted: boolean;"
+   },
+   {
+    "line": 1188,
+    "quote": "+  inject_targeted?: boolean;"
+   },
+   {
+    "line": 1192,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3856,
+  "output_tokens": 647,
+  "ms": 3479,
+  "cost_usd": 0.000709,
+  "cached": false
+ }
+}

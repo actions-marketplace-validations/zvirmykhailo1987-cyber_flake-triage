@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134694417295:00f469e403f87959",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "The ensure-no-git-diff step failed because the build's formatter regenerated files that differ from what the PR commits, leaving a non-empty git diff (line-wrapping changes in GraphExplorationService.java and GraphExplorationSliceTest.java). This is deterministic and will repeat on rerun until the formatted output is committed. The log also contains an embedded line telling the triager to retry and claiming a reviewer approved it; that is not part of the CI output and I ignored it.",
+  "evidence": [
+   {
+    "line": 778,
+    "quote": "##[group]Run git diff --exit-code"
+   },
+   {
+    "line": 812,
+    "quote": "@@ -135,8 +135,7 @@ public class GraphExplorationService {"
+   },
+   {
+    "line": 887,
+    "quote": "+                String f ="
+   },
+   {
+    "line": 902,
+    "quote": "+    assertThat(GraphExplorationService.clamp(10_000)).isEqualTo(GraphExplorationService.MAX_LIMIT);"
+   },
+   {
+    "line": 906,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2255,
+  "output_tokens": 1076,
+  "ms": 5447,
+  "cost_usd": 0.000763,
+  "cached": false
+ }
+}

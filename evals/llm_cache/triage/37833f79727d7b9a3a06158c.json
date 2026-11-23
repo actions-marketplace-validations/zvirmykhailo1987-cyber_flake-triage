@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133941787607:5c6c687bf4d7d14a",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "All 3 failures are XtmHubEmailRecipientsTest errors where inserting into roles is rejected by the DB trigger function require_tenant_write, which says platform-row writes need a platform-write transaction and writes to tenant rows need that tenant in scope. The change adds the V6 Guard_roles_and_role_links migration and touches tenant/access-control code, so the guard is most likely the cause. The failure is deterministic and will repeat on re-run. Unrelated noise in the log (engine down, smtp down, NPE in PreviewFeatureService) is not what failed the build.",
+  "evidence": [
+   {
+    "line": 3881,
+    "quote": "Where: PL/pgSQL function require_tenant_write(text,boolean) line 7 at RAISE"
+   },
+   {
+    "line": 3943,
+    "quote": "Caused by: org.postgresql.util.PSQLException: ERROR: write of a platform row refused: the transaction is not platform-write"
+   },
+   {
+    "line": 4117,
+    "quote": "Caused by: org.postgresql.util.PSQLException: ERROR: write of a row of tenant 855f5d87-0164-4252-917f-dd72080c181a refused: outside the scope of the transaction"
+   },
+   {
+    "line": 4189,
+    "quote": "Caused by: org.postgresql.util.PSQLException: ERROR: write of a row of tenant 47c8b817-bf97-445d-a732-1dfc207b7be2 refused: outside the scope of the transaction"
+   },
+   {
+    "line": 4449,
+    "quote": "[ERROR] Tests run: 1541, Failures: 0, Errors: 3, Skipped: 1"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 9582,
+  "output_tokens": 1246,
+  "ms": 6110,
+  "cost_usd": 0.001581,
+  "cached": false
+ }
+}

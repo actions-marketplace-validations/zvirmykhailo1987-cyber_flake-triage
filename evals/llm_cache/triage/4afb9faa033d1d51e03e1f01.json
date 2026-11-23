@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135828647074:35141fc58a89d9c5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The failing step is the i18n checker inside the frontend job, not a test. The new \"Attack path\" string has no translation in 8 locale files (de, es, fr, it, ja, ko, ru, zh), so the glossary check exits 1. This is deterministic and tied to the change's new strings, so a re-run will fail again. Add the translations, then re-run.",
+  "evidence": [
+   {
+    "line": 523,
+    "quote": "de.json — \"Attack path\" missing from the translation"
+   },
+   {
+    "line": 547,
+    "quote": "Total: 8 glossary violation(s)."
+   },
+   {
+    "line": 548,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2167,
+  "output_tokens": 778,
+  "ms": 4552,
+  "cost_usd": 0.000606,
+  "cached": false
+ }
+}

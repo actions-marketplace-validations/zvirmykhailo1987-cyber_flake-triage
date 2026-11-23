@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136338594664:3e0dbd6814ef82e7",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Frontend quality job failed at the i18n check: 3 translation values in de/es/fr are identical to English (Radial, Radial, Relations), and the checker exits 1. This is deterministic and tied to the lang file changes in this PR, so a rerun will fail the same way. Fix by translating the values or adding legitimate loanwords to scripts/i18n-loanwords.json.",
+  "evidence": [
+   {
+    "line": 519,
+    "quote": "de.json — identical to the English value"
+   },
+   {
+    "line": 520,
+    "quote": "  key   : Radial"
+   },
+   {
+    "line": 523,
+    "quote": "fr.json — identical to the English value"
+   },
+   {
+    "line": 524,
+    "quote": "  key   : Relations"
+   },
+   {
+    "line": 525,
+    "quote": "Total: 3 missing or untranslated value(s)."
+   },
+   {
+    "line": 528,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2909,
+  "output_tokens": 603,
+  "ms": 3990,
+  "cost_usd": 0.000592,
+  "cached": false
+ }
+}

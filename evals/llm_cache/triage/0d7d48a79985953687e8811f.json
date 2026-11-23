@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137313851010:0b5bfff893695946",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.6,
+  "summary": "The E2E job failed because the openaev-app container stopped during startup, and Spring Boot's LoggingFailureAnalysisReporter logged an ERROR. The excerpt is truncated before the actual failure cause, so the log does not say why. The PR is a renovate bump of spring-boot-starter-parent (pom.xml), so a deterministic startup failure from the framework upgrade is plausible, and a retry would likely repeat it. Check the full container log for the root cause, such as a bean or config error, before retrying.",
+  "evidence": [
+   {
+    "line": 1460,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   },
+   {
+    "line": 1471,
+    "quote": "{\"sequenceNumber\":0,\"timestamp\":1795373501094,\"nanoseconds\":94767791,\"level\":\"ERROR\",\"threadName\":\"main\",\"loggerName\":\"org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter\""
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1589,
+  "output_tokens": 915,
+  "ms": 4871,
+  "cost_usd": 0.000616,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136305439800:65fa79011036019f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "All listed tests fail because the Spring context never starts. Spring Data rejects the new query PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse as invalid SQL (JSqlParser error on \"ANDi\" at line 15, column 68). PayloadIdentityRepository is one of the files this change touched, so this is a deterministic break from the change, not a flake. Fix the query and re-run.",
+  "evidence": [
+   {
+    "line": 3417,
+    "quote": "Error creating bean with name 'payloadIdentityRepository' defined in io.openaev.database.repository.PayloadIdentityRepository defined in @EnableJpaRepositories declared on DataJpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3431,
+    "quote": "Caused by: org.springframework.data.repository.query.QueryCreationException: Cannot create query for method [PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse(java.lang.String,java.util.Collection)]; The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3460,
+    "quote": "Caused by: net.sf.jsqlparser.parser.ParseException: Encountered: <S_IDENTIFIER> / \"ANDi\", at line 15, column 68, in lexical state DEFAULT."
+   },
+   {
+    "line": 3500,
+    "quote": "java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@354412a1 testClass = io.openaev.aop.PlatformWriteMarkerScopeTest"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 14907,
+  "output_tokens": 1194,
+  "ms": 5681,
+  "cost_usd": 0.002088,
+  "cached": false
+ }
+}

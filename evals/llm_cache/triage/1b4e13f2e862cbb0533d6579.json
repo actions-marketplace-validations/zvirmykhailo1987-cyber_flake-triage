@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135752670118:29be2aa8f44fac8e",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.75,
+  "summary": "StreamVisibilityServiceTest.given_findingOnAGroupWithAHiddenAsset_should_keepTheVisibleOnesInTheGroup fails with a deterministic assertion: the finding's group resolves to an empty list where the test expects [\"g\"]. No flake history, and the PR touches AssetGroupService.java, which is plausibly on this path. Likely caused by the change; re-running probably fails again. Confidence is moderate because the log does not show the code path directly.",
+  "evidence": [
+   {
+    "line": 2658,
+    "quote": "[ERROR] Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.222 s <<< FAILURE! -- in The rows the payload lists or embeds"
+   },
+   {
+    "line": 2659,
+    "quote": "[ERROR] io.openaev.service.stream.StreamVisibilityServiceTest.given_findingOnAGroupWithAHiddenAsset_should_keepTheVisibleOnesInTheGroup -- Time elapsed: 0.008 s <<< FAILURE!"
+   },
+   {
+    "line": 2679,
+    "quote": "Expecting actual:"
+   },
+   {
+    "line": 2680,
+    "quote": "  []"
+   },
+   {
+    "line": 2681,
+    "quote": "to contain exactly (and in same order):"
+   },
+   {
+    "line": 2682,
+    "quote": "  [\"g\"]"
+   },
+   {
+    "line": 2683,
+    "quote": "but could not find the following elements:"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2227,
+  "output_tokens": 871,
+  "ms": 4243,
+  "cost_usd": 0.000658,
+  "cached": false
+ }
+}

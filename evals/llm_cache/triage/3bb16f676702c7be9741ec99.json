@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136278092555:00954db53ae3cc61",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The frontend quality job failed at the i18n check: 3 locale values (de/es 'Radial', fr 'Relations') are identical to English, so the checker exits 1. This is deterministic and tied to the lang file edits in this PR, so a re-run will fail the same way. Fix by translating the values or adding them to scripts/i18n-loanwords.json. The excerpt does not show the failing unit tests, so that part is unverified.",
+  "evidence": [
+   {
+    "line": 524,
+    "quote": "de.json — identical to the English value"
+   },
+   {
+    "line": 525,
+    "quote": "  key   : Radial"
+   },
+   {
+    "line": 530,
+    "quote": "Total: 3 missing or untranslated value(s)."
+   },
+   {
+    "line": 531,
+    "quote": "Run \"yarn auto-translation:all\" to translate them. If a value is legitimately identical"
+   },
+   {
+    "line": 533,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2909,
+  "output_tokens": 606,
+  "ms": 3400,
+  "cost_usd": 0.000594,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133560784655:3ba0b8dc363d6cda",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "Two deterministic ArchUnit rule failures, both in code this change touches. HandledErrorRollbackArchTest: MeApi#confirmEmailChange has two catch-RuntimeException sites that mark the shared transaction rollback-only, and they are not in REVIEWED_SITES. TenantActiveTableAccessArchTest: UserService.notifyPreviousAddressOfChange (UserService.java:662) calls MailingService.sendEmail, which is not a claimed caller. These are rule violations, not flakiness, so they will repeat on rerun. Fix the code or review and update the allowlists. The Jackson parse error at line 1247 is logged noise, and the other 1480 tests pass.",
+  "evidence": [
+   {
+    "line": 3038,
+    "quote": "[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 27.17 s <<< FAILURE! -- in io.openaev.architecture.HandledErrorRollbackArchTest"
+   },
+   {
+    "line": 3042,
+    "quote": "MeApi#confirmEmailChange -> ManagerCreator.createManager catches RuntimeException, which marks the shared transaction rollback-only"
+   },
+   {
+    "line": 3063,
+    "quote": "[ERROR] Tests run: 104, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 15.35 s <<< FAILURE! -- in io.openaev.architecture.TenantActiveTableAccessArchTest"
+   },
+   {
+    "line": 3100,
+    "quote": "Method <io.openaev.service.UserService.notifyPreviousAddressOfChange(java.lang.String, java.lang.String)> calls method <io.openaev.service.MailingService.sendEmail(java.lang.String, java.lang.String, java.util.List)> in (UserService.java:662) is not one of the callers claimed for MailingService#sendEmail"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4829,
+  "output_tokens": 1369,
+  "ms": 6146,
+  "cost_usd": 0.001167,
+  "cached": false
+ }
+}

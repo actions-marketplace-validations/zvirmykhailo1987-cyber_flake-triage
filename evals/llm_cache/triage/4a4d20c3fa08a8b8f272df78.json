@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136318958861:460814d189093849",
+ "answer": {
+  "decision": "retry",
+  "category": "infrastructure",
+  "confidence": 0.85,
+  "summary": "The job failed during yarn install (Install dependencies, not the e2e step named in the header) at the Resolution step with a network error, 'write ECANCELED Canceled because of SSL destruction'. The change does not touch dependencies or the lockfile, so this looks like a transient network or registry failure. Re-running should pass. The excerpt does not show any E2E test output, so the tests themselves were never reached.",
+  "evidence": [
+   {
+    "line": 553,
+    "quote": "➤ YN0001: │ Error: write ECANCELED Canceled because of SSL destruction"
+   },
+   {
+    "line": 557,
+    "quote": "➤ YN0001: Error: write ECANCELED Canceled because of SSL destruction"
+   },
+   {
+    "line": 561,
+    "quote": "➤ YN0000: · Failed with errors in 7s 581ms"
+   },
+   {
+    "line": 562,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3300,
+  "output_tokens": 590,
+  "ms": 4234,
+  "cost_usd": 0.000625,
+  "cached": false
+ }
+}

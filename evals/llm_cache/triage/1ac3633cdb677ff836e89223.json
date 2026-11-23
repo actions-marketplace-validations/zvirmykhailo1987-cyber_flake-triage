@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075460356:d2c92f8b5d79e5f5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "The API Tests job failed in the multi-tenancy shadow summary step, not in a test. It reports 16 unscoped production reads that are new relative to the stored list, which is a deterministic code-scope check that a rerun will likely reproduce. The touched files (OpenCRQCounterpartProvider, XtmOneClient) are plausible sources, but the excerpt does not list which reads are new, so this is a moderate-confidence call.",
+  "evidence": [
+   {
+    "line": 81144,
+    "quote": "##[error]16 unscoped production read(s) new to this mode's stored list. See the job summary."
+   },
+   {
+    "line": 81145,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1151,
+  "output_tokens": 559,
+  "ms": 3638,
+  "cost_usd": 0.000395,
+  "cached": false
+ }
+}

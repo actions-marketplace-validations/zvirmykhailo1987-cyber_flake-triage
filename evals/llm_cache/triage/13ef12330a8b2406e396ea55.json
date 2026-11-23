@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136166042017:e1c9dc7137fbc4ad",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API Types Check failed because the types generated from the running API differ from the committed openaev-front/src/utils/api-types.d.ts. The log shows new fields (has_more, consistency_mode, last_verified_at, and others) that the committed file lacks, which points to this PR changing API DTOs without regenerating the types. The mismatch is deterministic, so a rerun on the same commit will fail the same way. Fix: run yarn generate-types-from-api and commit the updated api-types.d.ts.",
+  "evidence": [
+   {
+    "line": 1305,
+    "quote": "+  consistency_mode?: string;"
+   },
+   {
+    "line": 1307,
+    "quote": "+  has_more?: boolean;"
+   },
+   {
+    "line": 1410,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1411,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3544,
+  "output_tokens": 706,
+  "ms": 3796,
+  "cost_usd": 0.000707,
+  "cached": false
+ }
+}

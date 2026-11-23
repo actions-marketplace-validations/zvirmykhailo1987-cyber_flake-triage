@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136338612020:bf9292381c69b43c",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The i18n checker step failed deterministically: it found 5 locale values identical to English (de Radial, de Version v{version}, es Radial, fr Relations, fr Version v{version}) and exited 1. The change adds or edits translation strings without translating them, so a rerun will fail the same way. Fix by translating the values or adding legitimate loanwords to scripts/i18n-loanwords.json.",
+  "evidence": [
+   {
+    "line": 520,
+    "quote": "de.json — identical to the English value"
+   },
+   {
+    "line": 521,
+    "quote": "  key   : Radial"
+   },
+   {
+    "line": 530,
+    "quote": "Total: 5 missing or untranslated value(s)."
+   },
+   {
+    "line": 531,
+    "quote": "Run \"yarn auto-translation:all\" to translate them. If a value is legitimately identical"
+   },
+   {
+    "line": 532,
+    "quote": "(loanword, language name), add it to scripts/i18n-loanwords.json under the locale, e.g. \"de\": [\"Dashboard\"]."
+   },
+   {
+    "line": 533,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2342,
+  "output_tokens": 617,
+  "ms": 3670,
+  "cost_usd": 0.000543,
+  "cached": false
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136168759703:a61c8dcfe5be8cae",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Five CSV export tests in InjectorContractApiCopyRankingTenantScopeTest and InjectorContractRightsPerCopyTest fail with HTTP 400 where they expect 200. All five fail the same way, with no flake history, and the change touches the export code (ThreatArsenalApiExporter, CsvInjectionUtils). This looks like a deterministic regression from the change, so a rerun will likely fail again. The log does not show the 400 response body, so the exact cause needs checking. The DetectionRemediation JSON parse error is unrelated log noise.",
+  "evidence": [
+   {
+    "line": 2584,
+    "quote": "io.openaev.rest.injector_contract.InjectorContractApiCopyRankingTenantScopeTest.given_copiesLabelledDifferently_should_exportTheDefaultTenantsCopy -- Time elapsed: 1.258 s <<< FAILURE!"
+   },
+   {
+    "line": 2587,
+    "quote": "expected: 200"
+   },
+   {
+    "line": 2588,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 3261,
+    "quote": "InjectorContractApiCopyRankingTenantScopeTest.given_builtinContractInTwoTenants_should_exportOneRowCountedLikeTheSearch"
+   },
+   {
+    "line": 3267,
+    "quote": "InjectorContractRightsPerCopyTest.given_grantOnlyInTenantAGroup_should_exportTenantACopyOnceAsTheSearchLists"
+   },
+   {
+    "line": 3277,
+    "quote": "[ERROR] Tests run: 1426, Failures: 5, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6990,
+  "output_tokens": 1174,
+  "ms": 5712,
+  "cost_usd": 0.001286,
+  "cached": false
+ }
+}

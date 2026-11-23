@@ -1,0 +1,98 @@
+{
+ "at": "2026-11-23T11:09:50+00:00",
+ "all_ok": true,
+ "checks": [
+  {
+   "check": "API summary = latest.json (holdout, rules+model)",
+   "ok": true,
+   "skipped": false,
+   "info": "378/449 skipped"
+  },
+  {
+   "check": "overview shows the evaluated numbers",
+   "ok": true,
+   "skipped": false,
+   "info": ""
+  },
+  {
+   "check": "flaky tests = issue drafts (min 3)",
+   "ok": true,
+   "skipped": false,
+   "info": "7 tests"
+  },
+  {
+   "check": "13 pages answer, with CSP, no script, no third-party URL",
+   "ok": true,
+   "skipped": false,
+   "info": ""
+  },
+  {
+   "check": "unknown page is a 404 page",
+   "ok": true,
+   "skipped": false,
+   "info": ""
+  },
+  {
+   "check": "load: 400 requests, 16 at a time, all 200",
+   "ok": true,
+   "skipped": false,
+   "info": "p50 49 ms, p95 141 ms, 269 req/s"
+  },
+  {
+   "check": "MCP lists its four read-only tools",
+   "ok": true,
+   "skipped": false,
+   "info": "failure, flaky_tests, summary, triage_job"
+  },
+  {
+   "check": "MCP summary = latest.json",
+   "ok": true,
+   "skipped": false,
+   "info": ""
+  },
+  {
+   "check": "MCP flaky_tests top test",
+   "ok": true,
+   "skipped": false,
+   "info": ""
+  },
+  {
+   "check": "MCP refuses a non-GitHub address",
+   "ok": true,
+   "skipped": false,
+   "info": ""
+  },
+  {
+   "check": "CLI issues = docs/issue-drafts.json",
+   "ok": true,
+   "skipped": false,
+   "info": "7 drafts"
+  },
+  {
+   "check": "live: a new OpenAEV job from GitHub",
+   "ok": true,
+   "skipped": false,
+   "info": "📖 Documentation gap check -> retry (rules, infra) in 9 s, 1 tried: https://github.com/OpenAEV-Platform/openaev/actions/runs/45161060088/job/137646335398",
+   "live": {
+    "url": "https://github.com/OpenAEV-Platform/openaev/actions/runs/45161060088/job/137646335398",
+    "decision": "retry",
+    "rule": "infra",
+    "reason": "Infrastructure (rate limit), not the code.",
+    "evidence": [
+     {
+      "kind": "infra",
+      "what": "rate limit",
+      "line": 308,
+      "text": "RequestError [HttpError]: API rate limit exceeded for installation. If you reach out to GitHub Support for help, please include the request ID E889:13763:527C5FF:1072E669:6B041CB2 and timestamp 2026-11-23 11:00:02 UTC. For more on scraping "
+     }
+    ]
+   }
+  },
+  {
+   "check": "action: a whole failed run, from a clean install",
+   "ok": true,
+   "skipped": false,
+   "info": "run 45161060088: 1 of 1 failed jobs decided in 11 s"
+  }
+ ]
+}

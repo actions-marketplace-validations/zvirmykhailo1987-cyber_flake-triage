@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135943981158:8aeb2f81ca6e4764",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API Types Check failed deterministically: the regenerated api-types.d.ts drops the Javadoc comment on PayloadUsageMoveOutput, so the committed file is stale. The PR changed that DTO and the generated types were not regenerated. Fix: run yarn generate-types-from-api and commit the result. Re-running will fail the same way.",
+  "evidence": [
+   {
+    "line": 1191,
+    "quote": "-/** The usages moved to the target version, and the others with why they stayed. */"
+   },
+   {
+    "line": 1195,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1196,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2203,
+  "output_tokens": 681,
+  "ms": 5344,
+  "cost_usd": 0.000561,
+  "cached": false
+ }
+}

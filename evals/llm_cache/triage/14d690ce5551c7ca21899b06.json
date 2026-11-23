@@ -1,0 +1,53 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137000580156:16f38b5e061cdf22",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API test shard fails at Spring context startup, not in test logic. Bean creation hits a circular dependency: workflowService to workflowEndService to notificationEventService to scenarioNotificationEventHandler to exerciseService back to workflowService. The change touches WorkflowEndService and NotificationEventService, so it likely introduced the cycle. This is deterministic and will repeat on re-run, so retrying won't help. The 419 errors are all context-load failures from this cause.",
+  "evidence": [
+   {
+    "line": 3271,
+    "quote": "APPLICATION FAILED TO START"
+   },
+   {
+    "line": 3296,
+    "quote": "Relying upon circular references is discouraged and they are prohibited by default."
+   },
+   {
+    "line": 3408,
+    "quote": "Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'workflowEndService' defined in file [/home/runner/work/openaev/openaev/openaev-api/target/classes/io/openaev/service/chaining/WorkflowEndService.class]"
+   },
+   {
+    "line": 3425,
+    "quote": "Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'notificationEventService' defined in file [/home/runner/work/openaev/openaev/openaev-api/target/classes/io/openaev/service/NotificationEventService.class]"
+   },
+   {
+    "line": 3459,
+    "quote": "Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'exerciseService' defined in file [/home/runner/work/openaev/openaev/openaev-api/target/classes/io/openaev/rest/exercise/service/ExerciseService.class]"
+   },
+   {
+    "line": 3476,
+    "quote": "Caused by: org.springframework.beans.factory.BeanCurrentlyInCreationException: Error creating bean with name 'workflowService': Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?"
+   },
+   {
+    "line": 3298,
+    "quote": "[ERROR] Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 44.02 s <<< FAILURE! -- in Inside a transaction whose v1 filter is already armed"
+   },
+   {
+    "line": 106626,
+    "quote": "[ERROR] Tests run: 685, Failures: 0, Errors: 419, Skipped: 0"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 14314,
+  "output_tokens": 1708,
+  "ms": 7279,
+  "cost_usd": 0.002285,
+  "cached": false
+ }
+}

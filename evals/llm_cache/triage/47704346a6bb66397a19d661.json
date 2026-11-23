@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136899401366:8bc5e9ce8d4fba29",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.3,
+  "summary": "The api-types-check step failed because the application never became ready on port 8080 within 180s (HTTP 000, no response), so no types were checked. The excerpt contains no application startup logs, so the cause is unknown. The change adds a Flyway migration and new Spring services, so a deterministic startup failure is possible. One retry is cheap; if it fails again, check the application's startup log for the first exception.",
+  "evidence": [
+   {
+    "line": 1159,
+    "quote": "❌ Application failed to become ready within 180s"
+   },
+   {
+    "line": 1161,
+    "quote": "HTTP 000"
+   },
+   {
+    "line": 1162,
+    "quote": "(no response)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2155,
+  "output_tokens": 900,
+  "ms": 5030,
+  "cost_usd": 0.000665,
+  "cached": false
+ }
+}

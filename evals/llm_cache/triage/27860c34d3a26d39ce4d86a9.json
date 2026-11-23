@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137313851434:c29feb521dd5561f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "E2E failed because the openaev-app container crashed on startup (line 1460), and Spring Boot logged a failure-analysis ERROR (line 1471). The excerpt cuts off before the actual cause. The PR is a Renovate bump of spring-boot-starter-parent to 4.x in pom.xml, so the upgrade most likely broke startup. A startup crash is deterministic, so a re-run should fail the same way. Check the full container log's failure analysis to confirm the cause.",
+  "evidence": [
+   {
+    "line": 1460,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   },
+   {
+    "line": 1471,
+    "quote": "{\"sequenceNumber\":0,\"timestamp\":1795373502865,\"nanoseconds\":865598724,\"level\":\"ERROR\",\"threadName\":\"main\",\"loggerName\":\"org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter\""
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1589,
+  "output_tokens": 944,
+  "ms": 6402,
+  "cost_usd": 0.000631,
+  "cached": false
+ }
+}

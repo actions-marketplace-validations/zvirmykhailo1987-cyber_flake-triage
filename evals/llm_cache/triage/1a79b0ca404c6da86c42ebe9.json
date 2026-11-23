@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135237722694:e2cea5c8fde06acf",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "The MUI regression gate failed deterministically: AssetLinks.tsx:23 added a new MUI Typography import where the design system's Typography should be used. The change introduced the import, so re-running will fail the same way. Fix by switching to the design-system import, or add a fds:keep-mui exception with a recorded reason.",
+  "evidence": [
+   {
+    "line": 815,
+    "quote": "MUI regression gate: FAIL — 1 new import(s) (4b6e2a111...HEAD)"
+   },
+   {
+    "line": 817,
+    "quote": "openaev-front/src/admin/components/assets/asset/AssetLinks.tsx:23"
+   },
+   {
+    "line": 818,
+    "quote": "imports MUI `Typography`; this product already renders the design system's `Typography`."
+   },
+   {
+    "line": 821,
+    "quote": "import Typography from '@filigran/design-system' instead (preferred);"
+   },
+   {
+    "line": 828,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1606,
+  "output_tokens": 335,
+  "ms": 2501,
+  "cost_usd": 0.000328,
+  "cached": false
+ }
+}

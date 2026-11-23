@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135767428634:ea129b98d810a9b5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "All 7 InjectTargetSearchTest JSON assertions fail. The actual response has an extra content[0].target_markings field that the expected JSON lacks, and the change touches the endpoint/asset mapping and output DTOs (EndpointMapper, AssetOutput, Marked). The failure is deterministic and tied to the change, so a re-run will likely fail again. The unrelated exception traces in the log come from tests that passed.",
+  "evidence": [
+   {
+    "line": 5521,
+    "quote": "Different keys found in node \"content[0]\", extra: \"content[0].target_markings\", expected:"
+   },
+   {
+    "line": 3482,
+    "quote": "Different keys found in node \"content[0]\", extra: \"content[0].target_markings\", expected: <{\"target_category\":\"HOST\""
+   },
+   {
+    "line": 5548,
+    "quote": "Array \"content\" has different content. Missing values: [{\"target_id\":\"cab801d1-4af9-4783-95b0-ab43b1aaf543\""
+   },
+   {
+    "line": 5551,
+    "quote": "[ERROR] Tests run: 1682, Failures: 7, Errors: 0, Skipped: 0"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 10417,
+  "output_tokens": 945,
+  "ms": 5202,
+  "cost_usd": 0.001514,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134703045482:6958d121aaec68b3",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.45,
+  "summary": "StepServiceGraphCopyIntegrationTest fails with ArithmeticException '/ by zero' in BatchQueueService.publish, called from QueueChainingService.readyStep. The error is deterministic for a given state, and the test has failed before (persisted 1x, not a flake). The log does not show why the divisor is zero. The change reshuffles API test shards (shards/*.txt, balance-api-shards.py), so this test may now run beside a test that leaves shared queue state behind. Re-running on the same shard layout will likely fail again. Check shard co-location and the zero batch-size or divisor source before retrying.",
+  "evidence": [
+   {
+    "line": 35561,
+    "quote": "StepServiceGraphCopyIntegrationTest.given_a_launched_scenario_should_keep_the_dependency_resolvable_in_the_run -- Time elapsed: 0.216 s <<< ERROR!"
+   },
+   {
+    "line": 35562,
+    "quote": "java.lang.ArithmeticException: / by zero"
+   },
+   {
+    "line": 35563,
+    "quote": "at io.openaev.service.queue.BatchQueueService.publish(BatchQueueService.java:486)"
+   },
+   {
+    "line": 36057,
+    "quote": "StepServiceGraphCopyIntegrationTest.given_a_launched_scenario_should_keep_the_dependency_resolvable_in_the_run » Arithmetic / by zero"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4654,
+  "output_tokens": 1422,
+  "ms": 7565,
+  "cost_usd": 0.001176,
+  "cached": false
+ }
+}

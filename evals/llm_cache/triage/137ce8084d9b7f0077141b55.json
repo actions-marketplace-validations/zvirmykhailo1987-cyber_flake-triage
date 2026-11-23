@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135993637037:41bc72ea1787c476",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Architecture test TenantActiveTableAccessArchTest.asset_agent_jobs_repository_access_is_reviewed failed because this change makes AtomicTestingService access AssetAgentJobRepository directly: a new field of that type, and stop() calls deleteAllByInjectIdsAndTenantId. The rule flags the class as not belonging to any reviewed access list. This is deterministic and will repeat on re-run, so fix the access or add a reviewed allowlist entry. Rest of the 1432 tests passed.",
+  "evidence": [
+   {
+    "line": 3017,
+    "quote": "io.openaev.architecture.TenantActiveTableAccessArchTest.asset_agent_jobs_repository_access_is_reviewed -- Time elapsed: 0.179 s <<< FAILURE!"
+   },
+   {
+    "line": 3053,
+    "quote": "Field <io.openaev.service.AtomicTestingService.assetAgentJobRepository> has type <io.openaev.database.repository.AssetAgentJobRepository> in (AtomicTestingService.java:0)"
+   },
+   {
+    "line": 3054,
+    "quote": "Method <io.openaev.service.AtomicTestingService.stop(io.openaev.context.TxCtx, java.lang.String)> calls method <io.openaev.database.repository.AssetAgentJobRepository.deleteAllByInjectIdsAndTenantId(java.util.List, java.lang.String)> in (AtomicTestingService.java:311)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3950,
+  "output_tokens": 915,
+  "ms": 4560,
+  "cost_usd": 0.000852,
+  "cached": false
+ }
+}

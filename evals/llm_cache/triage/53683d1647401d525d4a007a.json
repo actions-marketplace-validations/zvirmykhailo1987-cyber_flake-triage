@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137485572795:bed5d81e4aaa1f37",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The ensure-no-git-diff step failed because git diff is non-empty: the PR's Java test and source files have unformatted code (line wrapping and a long line) that the formatter rewrote. This is deterministic and will repeat on re-run. Fix: run the formatter locally and commit the result.",
+  "evidence": [
+   {
+    "line": 775,
+    "quote": "##[group]Run git diff --exit-code"
+   },
+   {
+    "line": 798,
+    "quote": "diff --git a/openaev-api/src/test/java/io/openaev/xtmone/XtmOneCounterpartProviderTest.java b/openaev-api/src/test/java/io/openaev/xtmone/XtmOneCounterpartProviderTest.java"
+   },
+   {
+    "line": 806,
+    "quote": "-    assertThat(EntityUtils.toString(sent.getEntity())).isEqualTo"
+   },
+   {
+    "line": 807,
+    "quote": "+    assertThat(EntityUtils.toString(sent.getEntity()))"
+   },
+   {
+    "line": 818,
+    "quote": "+            new Counterpart.Fact(\"category\", \"server\"));"
+   },
+   {
+    "line": 822,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2402,
+  "output_tokens": 1214,
+  "ms": 5587,
+  "cost_usd": 0.000847,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137321353074:44a22af2f98eb664",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "The API Types Check failed because the committed openaev-front/src/utils/api-types.d.ts is stale. The change added new enum values (SOURCE_CODE, CODE_REPOSITORY, CI_CD_PIPELINE, PACKAGE_REGISTRY, SOFTWARE_PACKAGE, CODE_OTHER) to the API, and regenerating the types produces a diff that was not committed. This is deterministic and will repeat on re-run. Fix: run yarn generate-types-from-api and commit the updated api-types.d.ts.",
+  "evidence": [
+   {
+    "line": 1164,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1173,
+    "quote": "+    | \"SOURCE_CODE\""
+   },
+   {
+    "line": 1191,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1192,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2161,
+  "output_tokens": 714,
+  "ms": 3434,
+  "cost_usd": 0.000573,
+  "cached": false
+ }
+}

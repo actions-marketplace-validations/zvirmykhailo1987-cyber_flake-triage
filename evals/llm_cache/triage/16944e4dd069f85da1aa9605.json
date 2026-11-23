@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133928892772:69797a0a53495d30",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Formatting check failed: the step runs git diff --exit-code and finds an uncommitted reformat of a line in ScopeSnapshotServiceTest.java, which this change touches. The committed code is not in the formatter's output, so the same commit fails again on rerun. Fix by applying the formatter and committing the result.",
+  "evidence": [
+   {
+    "line": 786,
+    "quote": "diff --git a/openaev-api/src/test/java/io/openaev/service/chaining/ScopeSnapshotServiceTest.java b/openaev-api/src/test/java/io/openaev/service/chaining/ScopeSnapshotServiceTest.java"
+   },
+   {
+    "line": 794,
+    "quote": "-      when(collectorRepository.findAllActiveByTenantIdAndSecurityPlatformIsNotNull(anyString(), anyString()))"
+   },
+   {
+    "line": 795,
+    "quote": "+      when(collectorRepository.findAllActiveByTenantIdAndSecurityPlatformIsNotNull("
+   },
+   {
+    "line": 796,
+    "quote": "+              anyString(), anyString()))"
+   },
+   {
+    "line": 800,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2511,
+  "output_tokens": 762,
+  "ms": 4243,
+  "cost_usd": 0.000632,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136031198338:9f870bcc8a279a05",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The i18n checker step failed deterministically (exit code 1) on the new atomic-testing stop strings. The log shows the same 'Stop execution' entry repeated within each language array (e.g. ja, ko, ru, zh), and the change adds these strings. Nothing points to infrastructure or flakiness, so a re-run will likely fail the same way until the translation files are fixed. The log excerpt does not show the checker's own diagnostic message, so the exact rule it enforces is inferred.",
+  "evidence": [
+   {
+    "line": 552,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 555,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 558,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 579,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3184,
+  "output_tokens": 575,
+  "ms": 3616,
+  "cost_usd": 0.000606,
+  "cached": false
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136905466819:6addf2d43f250391",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "API Types Check fails because the generated TypeScript types differ from the committed ones. The diff adds asset_stale, asset_stale_since, asset_last_seen and asset_last_seen_source, which come from this PR's asset freshness change, and the step reports that types were not regenerated before committing. A rerun on the same commit will fail the same way. Fix: run yarn generate-types-from-api and commit the result.",
+  "evidence": [
+   {
+    "line": 1233,
+    "quote": "+  asset_stale?: boolean;"
+   },
+   {
+    "line": 1259,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1260,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1900,
+  "output_tokens": 618,
+  "ms": 3597,
+  "cost_usd": 0.000499,
+  "cached": false
+ }
+}

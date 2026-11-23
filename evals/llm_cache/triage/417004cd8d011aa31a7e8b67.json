@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137261214725:ca3dae2e0a991b1f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API Types Check failed because the generated TypeScript types differ from the committed ones. The PR adds new bulk-update input fields (e.g. asset_tags_to_add, asset_url, search_pagination_input) to the API, but the generated types were not regenerated and committed. The failure is deterministic and will repeat on rerun until the developer runs yarn generate-types-from-api and commits the output.",
+  "evidence": [
+   {
+    "line": 1289,
+    "quote": "+  asset_tags_to_add?: string[];"
+   },
+   {
+    "line": 1297,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1298,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1750,
+  "output_tokens": 746,
+  "ms": 3984,
+  "cost_usd": 0.000548,
+  "cached": false
+ }
+}

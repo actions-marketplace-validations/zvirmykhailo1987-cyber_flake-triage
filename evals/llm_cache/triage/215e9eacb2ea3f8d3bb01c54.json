@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134082121041:ff286dc485624bde",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Two deterministic failures tied to this change. TenantBackgroundTransactionArchTest flags FindingService.generateFindings calling its own @Transactional recordFindingsByInject (intra-class call bypasses the Spring proxy), and FindingService/FindingRecordingService are in the touched files. PinnedActiveTablesArchTest fails on baseline line counts (94 vs 95, 95 vs 96) after classes were changed; it has persisted 3 times before. Re-running will likely fail the same way.",
+  "evidence": [
+   {
+    "line": 3083,
+    "quote": "Architecture Violation [Priority: MEDIUM] - Rule 'classes should not call a @Transactional method of the same class"
+   },
+   {
+    "line": 3084,
+    "quote": "Method <io.openaev.rest.finding.FindingService.generateFindings(io.openaev.rest.inject.service.ExecutionProcessingContext"
+   },
+   {
+    "line": 1883,
+    "quote": "The probe and control lines number 94, not DELIBERATE_SIZE 95. Removed one? Lower the constant."
+   },
+   {
+    "line": 3107,
+    "quote": "The drifts lines number 95, not DEBT_SIZE 96. Converted a class? Lower the constant. A new class follows the production list instead."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6367,
+  "output_tokens": 1138,
+  "ms": 5964,
+  "cost_usd": 0.001206,
+  "cached": false
+ }
+}

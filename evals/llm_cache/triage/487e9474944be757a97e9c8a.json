@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136568800152:3ca5bfa3695d5c28",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "E2E job failed because the OpenAEV API never started: Spring threw an UnsatisfiedDependency error during boot, so /api/me returned HTTP 000 for all 150 attempts. The PR is a Renovate bump of the eclipse-temurin base image in Dockerfile, so the change is a plausible cause, and a startup dependency error should repeat on rerun. The excerpt is truncated before the root-cause bean name, so this is not fully confirmed.",
+  "evidence": [
+   {
+    "line": 1507,
+    "quote": "\"cause\":{\"className\":\"org.springframework.beans.factory.UnsatisfiedDependency"
+   },
+   {
+    "line": 1512,
+    "quote": "❌ API /api/me not returning 200 after 300s (last HTTP 000)"
+   },
+   {
+    "line": 1535,
+    "quote": "\"level\":\"ERROR\",\"threadName\":\"main\",\"loggerName\":\"org.springframework.boot.SpringApplication\""
+   },
+   {
+    "line": 1536,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3752,
+  "output_tokens": 921,
+  "ms": 4906,
+  "cost_usd": 0.000836,
+  "cached": false
+ }
+}

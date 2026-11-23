@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135364886573:9150406164dec2e7",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Docker build fails in the front-end stage: 'yarn build' (Vite/rolldown) reports 'Build failed with 7 errors' and exits 1. The changed files include new graph front-end code and locale files, so a deterministic compile or bundling error from this change is the likely cause. The individual error messages are elided from the excerpt, so confirm them locally with yarn build.",
+  "evidence": [
+   {
+    "line": 1175,
+    "quote": "#34 2.753 ✗ Build failed in 1.94s"
+   },
+   {
+    "line": 1177,
+    "quote": "#34 2.754 Build failed with 7 errors:"
+   },
+   {
+    "line": 1269,
+    "quote": "#34 ERROR: process \"/bin/sh -c yarn build\" did not complete successfully: exit code: 1"
+   },
+   {
+    "line": 1298,
+    "quote": "##[error]buildx failed with: failed to build: failed to solve: process \"/bin/sh -c yarn build\" did not complete successfully: exit code: 1"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2735,
+  "output_tokens": 709,
+  "ms": 3866,
+  "cost_usd": 0.000628,
+  "cached": false
+ }
+}

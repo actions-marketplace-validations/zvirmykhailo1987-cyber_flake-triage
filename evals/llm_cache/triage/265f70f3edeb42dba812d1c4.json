@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136305439975:b40d7f87e87ebff2",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "Spring context fails to start because the new PayloadIdentityRepository query findAllActionIdsByTenantIdWithOlderVersionsInUse is invalid SQL (JSqlParser error near \"ANDi\"). Every API test that loads the app context then fails. This is deterministic and comes from a file the change touched, so a rerun will fail again. The flake history is not meaningful here because the context failure is cached.",
+  "evidence": [
+   {
+    "line": 3424,
+    "quote": "Caused by: org.springframework.data.repository.query.QueryCreationException: Cannot create query for method [PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse(java.lang.String,java.util.Collection)]; The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3453,
+    "quote": "Caused by: net.sf.jsqlparser.parser.ParseException: Encountered: <S_IDENTIFIER> / \"ANDi\", at line 15, column 68, in lexical state DEFAULT."
+   },
+   {
+    "line": 3491,
+    "quote": "[ERROR] Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 52.93 s <<< FAILURE! -- in attack path: read endpoints enforce SIMULATION READ (seed-tolerant)"
+   },
+   {
+    "line": 95388,
+    "quote": "[ERROR] Tests run: 627, Failures: 0, Errors: 254, Skipped: 1"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 14973,
+  "output_tokens": 1001,
+  "ms": 4823,
+  "cost_usd": 0.001998,
+  "cached": false
+ }
+}

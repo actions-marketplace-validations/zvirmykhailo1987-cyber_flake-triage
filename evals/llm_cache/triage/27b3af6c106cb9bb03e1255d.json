@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136277344606:05e24e958283071f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "GraphFeatureGateTest.given_flagOff_should_refuseXtmCounterparts fails deterministically: with the feature flag off it expects 404 but gets 400. The log shows a MethodArgumentNotValidException resolved in the same run, which suggests request validation now rejects the call before the flag gate runs. No flake history, and the failure repeats on retry. The log does not show the request body or the controller code, so the cause is inferred, and the touched file (LocalObjectServiceTest) is not the failing test.",
+  "evidence": [
+   {
+    "line": 1537,
+    "quote": "Type = org.springframework.web.bind.MethodArgumentNotValidException"
+   },
+   {
+    "line": 1558,
+    "quote": "java.lang.AssertionError: Status expected:<404> but was:<400>"
+   },
+   {
+    "line": 2867,
+    "quote": "GraphFeatureGateTest.given_flagOff_should_refuseXtmCounterparts:76 Status expected:<404> but was:<400>"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2719,
+  "output_tokens": 811,
+  "ms": 4994,
+  "cost_usd": 0.000677,
+  "cached": false
+ }
+}

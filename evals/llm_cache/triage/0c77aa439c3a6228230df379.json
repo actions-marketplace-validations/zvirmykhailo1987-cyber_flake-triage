@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136198839671:f9fac35d1df02700",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API Types Check failed because the generated src/utils/api-types.d.ts differs from the committed file. The diff changes CatalogHistoryOutput.catalog_history_action, which the branch's catalog-history change affects. The fix is to run yarn generate-types-from-api and commit the output. A re-run on the same commit will produce the same diff, so retrying won't help.",
+  "evidence": [
+   {
+    "line": 1169,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1178,
+    "quote": "-  catalog_history_action: \"INSTALL\" | \"UNINSTALL\" | \"REVOKE\" | \"LIFT_REVOCATION\";"
+   },
+   {
+    "line": 1187,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1188,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1797,
+  "output_tokens": 708,
+  "ms": 3665,
+  "cost_usd": 0.000534,
+  "cached": false
+ }
+}

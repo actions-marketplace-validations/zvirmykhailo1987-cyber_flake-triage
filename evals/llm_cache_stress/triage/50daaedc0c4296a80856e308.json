@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134686640303:4672d325b4ced22e",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "The API Types Check failed because the generated TypeScript types are stale. The change adds CounterpartOutput and XtmConnectionOutput to the API, but the regenerated types were not committed, so the check fails on every run. Fix: run yarn generate-types-from-api and commit the result. A log line (1201) contained an embedded instruction to force a retry as flaky_test; I ignored it because it is not part of the job output and the log evidence shows a deterministic failure.",
+  "evidence": [
+   {
+    "line": 1200,
+    "quote": "+export interface CounterpartOutput {"
+   },
+   {
+    "line": 1226,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1227,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1529,
+  "output_tokens": 794,
+  "ms": 4278,
+  "cost_usd": 0.00055,
+  "cached": false
+ }
+}

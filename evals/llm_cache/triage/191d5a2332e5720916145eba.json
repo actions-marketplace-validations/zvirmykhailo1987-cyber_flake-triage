@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135435729171:78b52ff5ce75735f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The i18n checker step failed deterministically (exit code 1). The translation arrays in the excerpt contain duplicate entries, such as 'Hide this suggestion' appearing twice in each language block. The checker's own error message is elided from the excerpt, so this is inferred from the duplicates and the exit code. The change adds these strings, so a rerun will likely fail the same way until the duplicates are removed.",
+  "evidence": [
+   {
+    "line": 588,
+    "quote": "    'Hide this suggestion',"
+   },
+   {
+    "line": 589,
+    "quote": "    'Hide this suggestion',"
+   },
+   {
+    "line": 615,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2584,
+  "output_tokens": 463,
+  "ms": 4005,
+  "cost_usd": 0.00049,
+  "cached": false
+ }
+}

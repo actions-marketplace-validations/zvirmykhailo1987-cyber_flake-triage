@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137000580038:36c58b19db006fc0",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.35,
+  "summary": "Failed step is named api-types-check, but the excerpt shows the 'Wait for application to be ready' step timing out after 180s on port 8080 with no HTTP response (HTTP 000). The log does not show why the app did not start: it could be a slow or stuck startup (infrastructure or timing) or a startup crash caused by this change. The excerpt has no stack trace or startup error, so a re-run is the cheap first check, but if it fails again, read the application's startup logs.",
+  "evidence": [
+   {
+    "line": 1142,
+    "quote": "❌ Application failed to become ready within 180s"
+   },
+   {
+    "line": 1144,
+    "quote": "HTTP 000"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1905,
+  "output_tokens": 674,
+  "ms": 3748,
+  "cost_usd": 0.000527,
+  "cached": false
+ }
+}

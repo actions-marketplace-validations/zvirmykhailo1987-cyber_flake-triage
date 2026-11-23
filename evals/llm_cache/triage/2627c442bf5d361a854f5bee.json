@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137000580133:373836cb4a6686fd",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.6,
+  "summary": "The E2E job never got the backend running: Spring Boot logged a startup failure (LoggingFailureAnalysisReporter, line 1591), and /api/me never returned 200 within 300s (last HTTP 000). The excerpt cuts off the actual exception, so the root cause isn't visible here. Startup failures usually repeat on the same commit, so a retry is unlikely to pass. Open the full log around line 1591 for the failure-analysis cause, which is likely in this PR's migrations or entity/wiring changes.",
+  "evidence": [
+   {
+    "line": 1591,
+    "quote": "\"loggerName\":\"org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter\""
+   },
+   {
+    "line": 1592,
+    "quote": "❌ API /api/me not returning 200 after 300s (last HTTP 000)"
+   },
+   {
+    "line": 1611,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5834,
+  "output_tokens": 1108,
+  "ms": 5645,
+  "cost_usd": 0.001137,
+  "cached": false
+ }
+}

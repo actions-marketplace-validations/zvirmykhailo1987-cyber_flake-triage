@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136305439922:ba2e047ce2de11f5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "Every failing test is a Spring ApplicationContext load failure, not a flake. The change's new query PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse is not valid SQL for JSqlParser (ParseException at line 15, column 68, near \"ANDi\"), so the bean fails and the context cannot start. The same error repeats on every retry, so re-running will fail again.",
+  "evidence": [
+   {
+    "line": 3406,
+    "quote": "Error creating bean with name 'payloadIdentityRepository' defined in io.openaev.database.repository.PayloadIdentityRepository"
+   },
+   {
+    "line": 3420,
+    "quote": "Cannot create query for method [PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse(java.lang.String,java.util.Collection)]; The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3449,
+    "quote": "net.sf.jsqlparser.parser.ParseException: Encountered: <S_IDENTIFIER> / \"ANDi\", at line 15, column 68, in lexical state DEFAULT."
+   },
+   {
+    "line": 3489,
+    "quote": "java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@186c39ed testClass = io.openaev.api.attack_pattern.AttackPatternCoverageApiTest"
+   },
+   {
+    "line": 125483,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 14238,
+  "output_tokens": 1203,
+  "ms": 5882,
+  "cost_usd": 0.002025,
+  "cached": false
+ }
+}

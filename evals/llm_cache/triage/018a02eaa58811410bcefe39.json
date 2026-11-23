@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137269830082:a0201b7cdca9c92c",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "LinkedIdResolutionArchTest[7] fails deterministically: its pinned baseline expects OTHER_SIZE 53, but the code now has 54 other lines. The PR touches linked-id-resolution-baseline.txt, so the count was likely changed without updating the pinned number. Re-running will fail the same way. The Jackson parse error and TenantScopedTransaction exception in the log are logged noise, not the failing assertion.",
+  "evidence": [
+   {
+    "line": 1858,
+    "quote": "[ERROR] Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 7.037 s <<< FAILURE! -- in Production code resolves ids on a tenant table with a tenant, or says why not"
+   },
+   {
+    "line": 1861,
+    "quote": "[should find exactly the pinned numbers of link and other lines. the two counts of linked-id-resolution-baseline.txt]"
+   },
+   {
+    "line": 1862,
+    "quote": "The other lines number 54, not OTHER_SIZE 53. Removed one? Lower the constant. Added one? That is the review call."
+   },
+   {
+    "line": 3201,
+    "quote": "Expecting empty but was: [\"The other lines number 54, not OTHER_SIZE 53. Removed one? Lower the constant. Added one? That is the review call.\"]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3621,
+  "output_tokens": 1110,
+  "ms": 5016,
+  "cost_usd": 0.000917,
+  "cached": false
+ }
+}

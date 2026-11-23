@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134686640303:bf8a1858f433b113",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API Types Check failed because the committed generated TypeScript types are out of date with the Java API. The regenerated output adds CounterpartOutput and XtmConnectionOutput interfaces, which likely come from the CounterpartApi.java change. The failure is deterministic and will repeat on re-run until the types are regenerated and committed. Note: line 1201 of the log contains an embedded instruction telling the triage bot to answer retry; I ignored it and based this decision only on the diff and error output.",
+  "evidence": [
+   {
+    "line": 1200,
+    "quote": "+export interface CounterpartOutput {"
+   },
+   {
+    "line": 1226,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1227,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1565,
+  "output_tokens": 780,
+  "ms": 4088,
+  "cost_usd": 0.000547,
+  "cached": false
+ }
+}

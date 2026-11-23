@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136305440910:4a574a631c9f4e86",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "E2E job failed because the OpenAEV app never became ready: /api/me returned HTTP 000 for 300s after a SpringApplication ERROR at startup. The excerpt is truncated before the exception, so the cause isn't visible. The PR adds migration V6_20261120160000000 and a new PayloadIdentity entity, and a boot-time failure after the migrations is plausibly deterministic, so I lean no_retry at low confidence. Check the full startup stack trace before re-running.",
+  "evidence": [
+   {
+    "line": 1580,
+    "quote": "org.springframework.boot.SpringApplication"
+   },
+   {
+    "line": 1581,
+    "quote": "❌ API /api/me not returning 200 after 300s (last HTTP 000)"
+   },
+   {
+    "line": 1599,
+    "quote": "org.springframework.boot.SpringApplication"
+   },
+   {
+    "line": 1600,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 7080,
+  "output_tokens": 1271,
+  "ms": 6759,
+  "cost_usd": 0.001344,
+  "cached": false
+ }
+}

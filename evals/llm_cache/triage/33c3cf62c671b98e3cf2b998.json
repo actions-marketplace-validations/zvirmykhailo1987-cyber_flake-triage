@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133177825506:42af479a8768f6a6",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.45,
+  "summary": "One test failed: ImportBundleAttributionTest expected a successful response to a bundle import but got HTTP 400 (CLIENT_ERROR). The 400 is deterministic, so a re-run will likely fail the same way. The log does not show the response body or the validation reason. The change touched marking validation (MarkingEscalationValidator), which could plausibly cause a 400, but no touched file is in the importer path, so the link is unconfirmed. The other stack traces in the log are expected noise from negative-path tests. Check the 400 response body for the rejection reason before retrying.",
+  "evidence": [
+   {
+    "line": 2356,
+    "quote": "[ERROR] Tests run: 5, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 6.882 s <<< FAILURE! -- in A bundle that declares its own tenant"
+   },
+   {
+    "line": 2358,
+    "quote": "java.lang.AssertionError: Range for response status value 400 expected:<SUCCESSFUL> but was:<CLIENT_ERROR>"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5543,
+  "output_tokens": 1006,
+  "ms": 6150,
+  "cost_usd": 0.001057,
+  "cached": false
+ }
+}

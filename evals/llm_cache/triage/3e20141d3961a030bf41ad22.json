@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135364864421:fe5a00a575d84133",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The Docker build failed at the front-end step `yarn build` (Vite/rolldown) with 7 compile errors. Dependency install succeeded, so this is a deterministic build failure, not infrastructure. The excerpt does not show the individual errors, but the change touches many front-end graph and nav files, so a broken import or type error from this change is the likely cause. Check the full log around lines 1394-1484 for the specific errors.",
+  "evidence": [
+   {
+    "line": 1391,
+    "quote": "#24 33.56 ✗ Build failed in 2.11s"
+   },
+   {
+    "line": 1393,
+    "quote": "#24 33.56 Build failed with 7 errors:"
+   },
+   {
+    "line": 1485,
+    "quote": "#24 ERROR: process \"/bin/sh -c set -eux                             ; npm install -g corepack                  ; yarn install                             ; yarn build                               ;\" did not complete successfully: exit code: 1"
+   },
+   {
+    "line": 1515,
+    "quote": "##[error]buildx failed with: failed to build: failed to solve: process \"/bin/sh -c set -eux                             ; npm install -g corepack                  ; yarn install                             ; yarn build                               ;\" did not complete successfully: exit code: 1"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3511,
+  "output_tokens": 745,
+  "ms": 3849,
+  "cost_usd": 0.000724,
+  "cached": false
+ }
+}

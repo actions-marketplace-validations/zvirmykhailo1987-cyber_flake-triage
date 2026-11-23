@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134778128479:df905518487fa081",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "The API types check failed because the generated front-end types file (api-types.d.ts) is out of date with the Java API changes in this PR. The diff moves the inject_execution_threshold_minutes fields, and the check exits with 'Forgot to generate types'. Re-running will fail the same way until the developer runs 'yarn run generate-types-from-api' and commits the result.",
+  "evidence": [
+   {
+    "line": 1196,
+    "quote": "+  inject_execution_threshold_minutes?: number;"
+   },
+   {
+    "line": 1222,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1223,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2326,
+  "output_tokens": 655,
+  "ms": 3690,
+  "cost_usd": 0.00056,
+  "cached": false
+ }
+}

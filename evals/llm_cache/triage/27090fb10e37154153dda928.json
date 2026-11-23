@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136204113577:a1299b272fc09b9a",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.75,
+  "summary": "Five tenant-scope CSV export tests in InjectorContractApiCopyRankingTenantScopeTest and InjectorContractRightsPerCopyTest fail with HTTP 400 where 200 is expected. The 400 is a deterministic BadRequestException from the app, not a timing or infra symptom, and the change touches the threat arsenal export code (ThreatArsenalApiExporter.java, CsvInjectionUtils.java). The log does not show the exception message, so the root cause is inferred and confidence is moderate. Rerunning is unlikely to help; check the 400 response body in the export path.",
+  "evidence": [
+   {
+    "line": 2529,
+    "quote": "Type = io.openaev.rest.exception.BadRequestException"
+   },
+   {
+    "line": 2586,
+    "quote": "io.openaev.rest.injector_contract.InjectorContractApiCopyRankingTenantScopeTest.given_copiesLabelledDifferently_should_exportTheDefaultTenantsCopy -- Time elapsed: 2.977 s <<< FAILURE!"
+   },
+   {
+    "line": 2589,
+    "quote": "expected: 200"
+   },
+   {
+    "line": 2590,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 3279,
+    "quote": "Tests run: 1426, Failures: 5, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6986,
+  "output_tokens": 1178,
+  "ms": 6212,
+  "cost_usd": 0.001288,
+  "cached": false
+ }
+}

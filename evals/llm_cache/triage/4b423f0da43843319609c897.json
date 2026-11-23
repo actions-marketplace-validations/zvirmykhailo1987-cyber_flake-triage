@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133288458820:c88e81882fe2f0f5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The only failing test is the ArchUnit rule HandledErrorRollbackArchTest, which flagged two new sites where PayloadRevocationService.refusal is caught in ExecutableInjectService and InjectExecutionStep#run. Those sites are not in the reviewed list, so the rule fails deterministically on every run. The change touches both PayloadRevocationService and ExecutableInjectService, so this is tied to the change and a retry will not pass. The Jackson '<' parse error at line 1248 is unrelated log noise.",
+  "evidence": [
+   {
+    "line": 3035,
+    "quote": "[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 29.80 s <<< FAILURE! -- in io.openaev.architecture.HandledErrorRollbackArchTest"
+   },
+   {
+    "line": 3039,
+    "quote": "ExecutableInjectService#getExecutablePayloadAndUpdateInjectStatus -> PayloadRevocationService.refusal catches UnexecutableInjectException/CommandBindingException, which marks the shared transaction rollback-only"
+   },
+   {
+    "line": 3040,
+    "quote": "InjectExecutionStep#run -> PayloadRevocationService.refusal catches UnexecutableInjectException/Exception, which marks the shared transaction rollback-only"
+   },
+   {
+    "line": 3085,
+    "quote": "[ERROR] Tests run: 1478, Failures: 1, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4576,
+  "output_tokens": 1111,
+  "ms": 4679,
+  "cost_usd": 0.001013,
+  "cached": false
+ }
+}

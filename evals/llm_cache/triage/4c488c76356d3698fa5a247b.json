@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136305439345:b2bbbf5a67d7ccd0",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "Every test in shard 4 fails because the Spring ApplicationContext never starts. PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse has a query that JSqlParser rejects at 'AND', and PayloadIdentityRepository.java is one of the files this change touched. The error is deterministic and tied to the change, so re-running will fail the same way. The 517 errors are cascade failures from the same context load.",
+  "evidence": [
+   {
+    "line": 3434,
+    "quote": "Error creating bean with name 'payloadIdentityRepository' defined in io.openaev.database.repository.PayloadIdentityRepository"
+   },
+   {
+    "line": 3448,
+    "quote": "Cannot create query for method [PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse(java.lang.String,java.util.Collection)]; The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3477,
+    "quote": "Caused by: net.sf.jsqlparser.parser.ParseException: Encountered: <S_IDENTIFIER> / \"ANDi\", at line 15, column 68, in lexical state DEFAULT."
+   },
+   {
+    "line": 3515,
+    "quote": "[ERROR] Tests run: 4, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 46.02 s <<< FAILURE! -- in clearance boundaries"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 15228,
+  "output_tokens": 1324,
+  "ms": 5903,
+  "cost_usd": 0.002185,
+  "cached": false
+ }
+}

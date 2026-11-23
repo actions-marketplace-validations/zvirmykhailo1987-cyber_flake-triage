@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135447107751:cbee781fb9c5284c",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "E2E job failed at startup, not in a test. The app container exited because Flyway found two migrations with the same version V6_20261118120000000. The change adds V6_20261118120000000__Catalog_connector_injector_contracts.java, which collides with an existing migration of the same version. This is deterministic and will repeat on every run until the version is renamed.",
+  "evidence": [
+   {
+    "line": 1477,
+    "quote": "Caused by: java.lang.IllegalStateException: Duplicate Flyway migration version found: V6_20261118120000000__Request_finding_refeed_for_asset_groups_side.class"
+   },
+   {
+    "line": 1469,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3660,
+  "output_tokens": 518,
+  "ms": 2951,
+  "cost_usd": 0.000625,
+  "cached": false
+ }
+}

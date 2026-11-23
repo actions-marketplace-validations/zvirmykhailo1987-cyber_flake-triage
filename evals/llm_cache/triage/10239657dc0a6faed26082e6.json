@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136704908213:7e93ee4dd441d9e4",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.72,
+  "summary": "The new estate-overview E2E test fails on an assertion that the packed bubbles span at least 90% of the canvas box (spanX or spanY). The change rewrote graph-pack.ts and the overview components, and this test exercises that layout, so the layout is the likely cause. Nothing in the log points to infrastructure or timing, and the test has no flake history, so a re-run will probably fail the same way. Confidence is moderate because the log shows only the assertion, not the computed geometry values.",
+  "evidence": [
+   {
+    "line": 1712,
+    "quote": "✘  25 [chromium] › tests_e2e/tests/graph/graph-interactions.spec.ts:284:3 › Exploration graph interactions › the estate overview fills the canvas: packed bubbles, no overlap, selection card, grey explained (1.8s)"
+   },
+   {
+    "line": 1741,
+    "quote": "Error: expect(received).toBe(expected) // Object.is equality"
+   },
+   {
+    "line": 1744,
+    "quote": "Received: false"
+   },
+   {
+    "line": 1748,
+    "quote": "> 329 |     expect(spanX >= geometry.box.width * 0.9 || spanY >= geometry.box.height * 0.9).toBe(true);"
+   },
+   {
+    "line": 1774,
+    "quote": "[chromium] › tests_e2e/tests/graph/graph-interactions.spec.ts:284:3 › Exploration graph interactions › the estate overview fills the canvas: packed bubbles, no overlap, selection card, grey explained"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3516,
+  "output_tokens": 881,
+  "ms": 4113,
+  "cost_usd": 0.000792,
+  "cached": false
+ }
+}

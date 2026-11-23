@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136166042135:f2f3f94b9ce134d9",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.75,
+  "summary": "All 5 failing tests are injector-contract CSV export tests that get HTTP 400 where 200 is expected. The 400 is a BadRequestException, which is deterministic, and these tests have no flake history. The change touches the threat arsenal exporter and import/export code, so it most likely caused this. The log does not show the validation message, so the exact cause is unconfirmed.",
+  "evidence": [
+   {
+    "line": 2528,
+    "quote": "Type = io.openaev.rest.exception.BadRequestException"
+   },
+   {
+    "line": 2589,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 2590,
+    "quote": "at io.openaev.rest.injector_contract.InjectorContractApiCopyRankingTenantScopeTest$ExportWithNoSelector.exportCsv(InjectorContractApiCopyRankingTenantScopeTest.java:390)"
+   },
+   {
+    "line": 3263,
+    "quote": "expected: 200"
+   },
+   {
+    "line": 3264,
+    "quote": "but was: 400"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 7065,
+  "output_tokens": 888,
+  "ms": 4515,
+  "cost_usd": 0.001151,
+  "cached": false
+ }
+}

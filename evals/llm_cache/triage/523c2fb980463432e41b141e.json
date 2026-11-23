@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137359246461:e2a80a32193d68d0",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "FDS conformity check fails deterministically: fds-migration/migration-state.json still lists CatalogScenarioInstallButton.tsx, which no longer exists in openaev-front. The change touches migration-state.json, so the mismatch is most likely from this PR and will repeat on re-run. Fix the migration-state entry or restore the file.",
+  "evidence": [
+   {
+    "line": 884,
+    "quote": "❌ [lib-component-usage] openaev-front/src/admin/components/scenarios/catalog/CatalogScenarioInstallButton.tsx: MISSING — file listed in migration-state.json no longer exists"
+   },
+   {
+    "line": 900,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4853,
+  "output_tokens": 703,
+  "ms": 3986,
+  "cost_usd": 0.000837,
+  "cached": false
+ }
+}

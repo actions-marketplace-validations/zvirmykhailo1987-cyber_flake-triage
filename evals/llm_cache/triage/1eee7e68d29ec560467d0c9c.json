@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136899411855:3f1545eb754ea00d",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The app container crashed on startup because of a duplicate Flyway migration version (V6_20261121140000000__Coverage_scenario_safe_mode_and_approval). The change added this migration, so the duplicate comes from the change and will repeat on every re-run.",
+  "evidence": [
+   {
+    "line": 1469,
+    "quote": "Caused by: java.lang.IllegalStateException: Duplicate Flyway migration version found: V6_20261121140000000__Coverage_scenario_safe_mode_and_approval.class"
+   },
+   {
+    "line": 1461,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   },
+   {
+    "line": 1488,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2227,
+  "output_tokens": 479,
+  "ms": 2785,
+  "cost_usd": 0.000462,
+  "cached": false
+ }
+}

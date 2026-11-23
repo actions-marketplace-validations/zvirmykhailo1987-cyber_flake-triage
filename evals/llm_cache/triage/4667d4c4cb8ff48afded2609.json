@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136188275951:a6bd219e01d75420",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "ThreatArsenalVersionApiTest.given_usagesOnV1_should_moveThemToV2 failed with 'Current user not found' inside UserService.currentUser, not in the changed PayloadUsageMoveService. The log doesn't show a link to the change. Earlier in the same run, other DataPack initializers failed (e.g. a DB error in the Service Account DataPack), so shared state or test ordering may be the cause. Retry is a low-confidence guess: the test has no flake history, so a rerun may not clear it if the cause is deterministic.",
+  "evidence": [
+   {
+    "line": 1551,
+    "quote": "io.openaev.rest.exception.ElementNotFoundException: Current user not found"
+   },
+   {
+    "line": 1552,
+    "quote": "\tat io.openaev.service.UserService.lambda$currentUser$13(UserService.java:939)"
+   },
+   {
+    "line": 2204,
+    "quote": "i.o.p.d.V20260518_Service_Account        : Unexpected error during DataPack 20260518 initialization."
+   },
+   {
+    "line": 2206,
+    "quote": "java.lang.RuntimeException: DB error"
+   },
+   {
+    "line": 2752,
+    "quote": "ThreatArsenalVersionApiTest.usageIds:210 » ElementNotFound Current user not found"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3637,
+  "output_tokens": 1245,
+  "ms": 6840,
+  "cost_usd": 0.000986,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136210341079:e88c94805ee975ea",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "All 6 AutonomousRunSimulationRequestScopeTest errors come from the DB guard require_tenant_write refusing a role INSERT for the member tenant as outside the transaction scope. This is deterministic and sits in the tenant-scope/write-guard area the change touches, so a rerun will likely fail the same way. Not a flake: no history, and the error is a consistent authorization refusal.",
+  "evidence": [
+   {
+    "line": 1363,
+    "quote": "[ERROR] Tests run: 6, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 10.63 s <<< FAILURE! -- in Non-prefixed route, X-Tenant-Ids naming the member tenant"
+   },
+   {
+    "line": 1365,
+    "quote": "org.hibernate.exception.AuthException:"
+   },
+   {
+    "line": 1416,
+    "quote": "Caused by: org.postgresql.util.PSQLException: ERROR: write of a row of tenant 2cffad3a-0001-4078-b0e2-ef74274022c3 refused: outside the scope of the transaction"
+   },
+   {
+    "line": 1417,
+    "quote": "  Where: PL/pgSQL function require_tenant_write(text,boolean) line 10 at RAISE"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 10999,
+  "output_tokens": 1144,
+  "ms": 5664,
+  "cost_usd": 0.001672,
+  "cached": false
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135435734629:4057b85dcbe6914e",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The Check i18n translations step (yarn i18n-checker) exited with code 1. The excerpt shows 'Stop execution' listed twice in each locale array (for example ja at lines 556 and 559), which looks like a duplicate-key or translation-list problem that the change introduced. The checker's own error message is outside the excerpt, so this is inferred, not confirmed. A rerun would likely fail the same way until the duplicates are fixed.",
+  "evidence": [
+   {
+    "line": 516,
+    "quote": "##[group]Run yarn i18n-checker"
+   },
+   {
+    "line": 553,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 556,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 559,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 580,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2636,
+  "output_tokens": 689,
+  "ms": 3854,
+  "cost_usd": 0.000608,
+  "cached": false
+ }
+}

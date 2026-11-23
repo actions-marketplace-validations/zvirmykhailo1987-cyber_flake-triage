@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137485572866:8a0b97a23bc0d264",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The i18n-checker step failed with exit code 1 after the PR's translation edits. The zh.json array in the log has duplicate strings ('Customize' twice, 'Not installed' twice), which is deterministic and will repeat on re-run. The excerpt does not show the checker's exact error message, so the cause is inferred from the duplicates.",
+  "evidence": [
+   {
+    "line": 511,
+    "quote": "##[start-action display=Check i18n translations;id=__self.__run_7]"
+   },
+   {
+    "line": 512,
+    "quote": "##[group]Run yarn i18n-checker"
+   },
+   {
+    "line": 730,
+    "quote": "    'Customize',"
+   },
+   {
+    "line": 732,
+    "quote": "    'Customize',"
+   },
+   {
+    "line": 748,
+    "quote": "    'Not installed',"
+   },
+   {
+    "line": 749,
+    "quote": "    'Not installed',"
+   },
+   {
+    "line": 756,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1954,
+  "output_tokens": 548,
+  "ms": 3756,
+  "cost_usd": 0.000469,
+  "cached": false
+ }
+}

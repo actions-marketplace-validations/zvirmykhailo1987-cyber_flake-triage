@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136899401109:7c5c35b8466756c2",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The app container failed at startup, not in a test. FlywayMigrationValidator threw 'Duplicate Flyway migration version found' for V6_20261121140000000, so the API never became ready. The change adds V6_20261121140000000__Add_finding_lifecycle.java, which appears to share that version number with another migration. This is deterministic and will repeat on re-run until the version clash is fixed.",
+  "evidence": [
+   {
+    "line": 1474,
+    "quote": "Caused by: java.lang.IllegalStateException: Duplicate Flyway migration version found: V6_20261121140000000__Coverage_scenario_safe_mode_and_approval.class"
+   },
+   {
+    "line": 1466,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3239,
+  "output_tokens": 643,
+  "ms": 3491,
+  "cost_usd": 0.000645,
+  "cached": false
+ }
+}

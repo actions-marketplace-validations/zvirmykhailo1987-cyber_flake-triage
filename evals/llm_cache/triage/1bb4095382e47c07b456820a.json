@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136193811040:574a4fc9fa283af2",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Five tenant-scope CSV export tests in InjectorContractApiCopyRankingTenantScopeTest and InjectorContractRightsPerCopyTest fail deterministically: each expects HTTP 200 but gets 400. The change touches ThreatArsenalApiExporter and the import/export code, and the failing tests exercise that export path, so a deterministic break from the change is likely. The 400 cause is not logged. The Jackson parse error at line 1248 is from DetectionRemediationAIService and is unrelated noise. Flake history is 0x, so this is not a known flake.",
+  "evidence": [
+   {
+    "line": 2586,
+    "quote": "Threat arsenal CSV export with no selector"
+   },
+   {
+    "line": 2587,
+    "quote": "InjectorContractApiCopyRankingTenantScopeTest.given_copiesLabelledDifferently_should_exportTheDefaultTenantsCopy -- Time elapsed: 6.940 s <<< FAILURE!"
+   },
+   {
+    "line": 2590,
+    "quote": "expected: 200"
+   },
+   {
+    "line": 2591,
+    "quote": "but was: 400"
+   },
+   {
+    "line": 3012,
+    "quote": "Threat arsenal CSV export on a scope of the default tenant and tenant A"
+   },
+   {
+    "line": 3267,
+    "quote": "InjectorContractApiCopyRankingTenantScopeTest.given_copiesLabelledDifferently_should_exportTheDefaultTenantsCopy"
+   },
+   {
+    "line": 3288,
+    "quote": "There are test failures."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6969,
+  "output_tokens": 987,
+  "ms": 4872,
+  "cost_usd": 0.00119,
+  "cached": false
+ }
+}

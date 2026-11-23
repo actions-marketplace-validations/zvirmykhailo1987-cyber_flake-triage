@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134082120944:b464336c508b28b3",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "The ensure-no-git-diff step failed because the build left an uncommitted change: git diff shows import-order churn in InjectServiceTest.java (PayloadRevocationService and FindingOccurrenceService imports swapped). This is a deterministic formatting or codegen diff that will repeat on rerun. Fix by running the formatter and committing the result. The log does not show why the diff appeared, and that file is not in the touched-files list, so the cause is not fully confirmed.",
+  "evidence": [
+   {
+    "line": 785,
+    "quote": "diff --git a/openaev-api/src/test/java/io/openaev/rest/inject/service/InjectServiceTest.java b/openaev-api/src/test/java/io/openaev/rest/inject/service/InjectServiceTest.java"
+   },
+   {
+    "line": 793,
+    "quote": "-import io.openaev.service.payload.PayloadRevocationService;"
+   },
+   {
+    "line": 795,
+    "quote": "+import io.openaev.service.payload.PayloadRevocationService;"
+   },
+   {
+    "line": 799,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3829,
+  "output_tokens": 882,
+  "ms": 4617,
+  "cost_usd": 0.000824,
+  "cached": false
+ }
+}

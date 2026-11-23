@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136984509335:26d335ac15b4c5d6",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "Deterministic assertion failure in AddMarkingDefinitionStixIdMigrationTest.given_idCarriedByAnotherDefinition_should_leaveItWithoutOne (expected 1, but was 0), in the new migration V6_20261121210000000 for this same feature. It has no flake history and the failure is an assertion about the migration's behaviour, so a rerun will likely repeat it. The provided file list shows only a docs change, which doesn't match a migration change, so verify the touched-file list is complete before relying on this.",
+  "evidence": [
+   {
+    "line": 2386,
+    "quote": "<<< FAILURE! -- in Migration V6_20261121210000000: add marking definition stix id"
+   },
+   {
+    "line": 2390,
+    "quote": "expected: 1"
+   },
+   {
+    "line": 2391,
+    "quote": "but was: 0"
+   },
+   {
+    "line": 4305,
+    "quote": "AddMarkingDefinitionStixIdMigrationTest.given_idCarriedByAnotherDefinition_should_leaveItWithoutOne:52"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3804,
+  "output_tokens": 1025,
+  "ms": 5272,
+  "cost_usd": 0.000893,
+  "cached": false
+ }
+}

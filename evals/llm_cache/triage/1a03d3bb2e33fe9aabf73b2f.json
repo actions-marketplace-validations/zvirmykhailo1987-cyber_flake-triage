@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136568800375:c7f1c236f89e8f9b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "E2E job failed because the OpenAEV API never started: it hit 150 health-check attempts (300s) with HTTP 000 and logged a Spring ERROR with an UnsatisfiedDependency cause. The PR bumps the eclipse-temurin base image in the Dockerfile, so this is most likely a deterministic startup break from that change, not flakiness. The log is truncated before the root-cause bean name, so this is inferred, not confirmed.",
+  "evidence": [
+   {
+    "line": 1510,
+    "quote": "\"cause\":{\"className\":\"org.springframework.beans.factory.UnsatisfiedDependency"
+   },
+   {
+    "line": 1511,
+    "quote": "Attempt 150/150 — HTTP 000 —"
+   },
+   {
+    "line": 1515,
+    "quote": "❌ API /api/me not returning 200 after 300s (last HTTP 000)"
+   },
+   {
+    "line": 1538,
+    "quote": "\"level\":\"ERROR\",\"threadName\":\"main\",\"loggerName\":\"org.springframework.boot.SpringApplication\""
+   },
+   {
+    "line": 1540,
+    "quote": "##[end-action id=__self.__run_6;outcome=failure;conclusion=failure;duration_ms=302736]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3745,
+  "output_tokens": 766,
+  "ms": 4225,
+  "cost_usd": 0.000758,
+  "cached": false
+ }
+}

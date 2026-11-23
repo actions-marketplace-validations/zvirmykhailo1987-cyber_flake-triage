@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136305439881:595be37827967e86",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "The Spring context fails to start because the new query PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse is invalid SQL: JSqlParser rejects a stray \"ANDi\" token at line 15, column 68. Every test that loads the context fails with this same error, which explains all 413 errors, including the AmbientTenantBridgeTest and CanAccessTenantFunctionTest entries. PayloadIdentityRepository.java is in the changed files, so this is deterministic and will repeat on retry. Fix the query text and re-run.",
+  "evidence": [
+   {
+    "line": 3447,
+    "quote": "Cannot create query for method [PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse(java.lang.String,java.util.Collection)]; The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3476,
+    "quote": "Caused by: net.sf.jsqlparser.parser.ParseException: Encountered: <S_IDENTIFIER> / \"ANDi\", at line 15, column 68, in lexical state DEFAULT."
+   },
+   {
+    "line": 3433,
+    "quote": "Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'payloadIdentityRepository' defined in io.openaev.database.repository.PayloadIdentityRepository"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 15393,
+  "output_tokens": 1149,
+  "ms": 5793,
+  "cost_usd": 0.002114,
+  "cached": false
+ }
+}

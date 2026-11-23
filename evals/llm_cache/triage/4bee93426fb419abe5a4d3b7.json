@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133691269225:f8c18efda2aa079c",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.6,
+  "summary": "Only one test failed (ImportBundleAttributionTest, 1 of 356). It asserted a successful response but got HTTP 400 CLIENT_ERROR. A 400 is deterministic, so a retry will likely repeat it. The log does not show why the import was rejected, and the test file is not in the change list, so the cause is unconfirmed. The certificate, Caldera, CrowdStrike and integration-throw errors elsewhere in the log are from tests that passed and are not this failure.",
+  "evidence": [
+   {
+    "line": 2421,
+    "quote": "[ERROR] Tests run: 5, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 6.412 s <<< FAILURE! -- in A bundle that declares its own tenant"
+   },
+   {
+    "line": 2423,
+    "quote": "java.lang.AssertionError: Range for response status value 400 expected:<SUCCESSFUL> but was:<CLIENT_ERROR>"
+   },
+   {
+    "line": 16158,
+    "quote": "[ERROR]   ImportBundleAttributionTest.given_contractBundleDeclaresAnotherTenantOnEveryResource_should_attributeAllToHeaderTenant Range for response status value 400 expected:<SUCCESSFUL> but was:<CLIENT_ERROR>"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 7025,
+  "output_tokens": 1133,
+  "ms": 5833,
+  "cost_usd": 0.001269,
+  "cached": false
+ }
+}

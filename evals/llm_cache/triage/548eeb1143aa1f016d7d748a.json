@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134868814312:f8d285bf02413f33",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "The one failing test, libUtilityClasses 'every class written in a className exists in that stylesheet', reports four classes used in the changed GraphExplorer.tsx (flex-grow, outline-2, left-3, top-3) that resolve to nothing at runtime. The change introduced them, so a rerun will fail the same way. The MissingTranslationError lines are log noise and do not fail the job.",
+  "evidence": [
+   {
+    "line": 6619,
+    "quote": "FAIL  src/__tests__/components/libUtilityClasses.test.ts > utility classes the library ships > every class written in a className exists in that stylesheet"
+   },
+   {
+    "line": 6620,
+    "quote": "AssertionError: these classes resolve to nothing at runtime: expected [ …(4) ] to deeply equal []"
+   },
+   {
+    "line": 6661,
+    "quote": "flex-grow (src/admin/components/graph/GraphExplorer.tsx)"
+   },
+   {
+    "line": 6662,
+    "quote": "outline-2 (src/admin/components/graph/GraphExplorer.tsx)"
+   },
+   {
+    "line": 6663,
+    "quote": "left-3 (src/admin/components/graph/GraphExplorer.tsx)"
+   },
+   {
+    "line": 6664,
+    "quote": "top-3 (src/admin/components/graph/GraphExplorer.tsx)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4060,
+  "output_tokens": 778,
+  "ms": 3895,
+  "cost_usd": 0.000795,
+  "cached": false
+ }
+}

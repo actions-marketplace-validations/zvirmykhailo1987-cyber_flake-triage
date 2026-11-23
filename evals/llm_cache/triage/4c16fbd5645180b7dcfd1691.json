@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135740419934:d31667ddb08a9c5b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "DashboardApiTest.given_findingHistogramByAssetGroup_should_countPerGroup failed with expected 2 but was 0. The test checks asset-group finding counts, which this change reworks (FindingService, AssetGroupService, RawFindingIndexing, and a refeed migration), and it has no flake history. Other errors in the log (audit transport, tenant purge, PreviewFeatureService NPE, division-by-zero) look like unrelated noise. Likely a real regression in the asset-group histogram path, but the log does not show the root cause.",
+  "evidence": [
+   {
+    "line": 2238,
+    "quote": "DashboardApiTest.given_findingHistogramByAssetGroup_should_countPerGroup -- Time elapsed: 2.536 s <<< FAILURE!"
+   },
+   {
+    "line": 2241,
+    "quote": "expected: 2"
+   },
+   {
+    "line": 2242,
+    "quote": "but was: 0"
+   },
+   {
+    "line": 1300,
+    "quote": "Output post-processing failed for inject 4128dbb8-e8df-40e3-ac6c-96bd9bddf8ab; recording execution status without derived findings"
+   },
+   {
+    "line": 3440,
+    "quote": "DashboardApiTest.given_findingHistogramByAssetGroup_should_countPerGroup"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5963,
+  "output_tokens": 1031,
+  "ms": 4783,
+  "cost_usd": 0.001112,
+  "cached": false
+ }
+}

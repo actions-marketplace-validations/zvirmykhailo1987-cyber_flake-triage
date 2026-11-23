@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136372077144:9c40c26085631477",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The i18n checker step fails deterministically, not from infrastructure. The key \"What's new in Filigran v{version}\" is missing in all nine locales, and \"Relations\" in fr.json is identical to English. Translate these values or add legitimate loanwords to scripts/i18n-loanwords.json, then push. A rerun will fail the same way.",
+  "evidence": [
+   {
+    "line": 519,
+    "quote": "Missing keys : {"
+   },
+   {
+    "line": 521,
+    "quote": "  en: [ \"What's new in Filigran v{version}\" ],"
+   },
+   {
+    "line": 530,
+    "quote": "fr.json — identical to the English value"
+   },
+   {
+    "line": 532,
+    "quote": "Total: 1 missing or untranslated value(s)."
+   },
+   {
+    "line": 535,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2478,
+  "output_tokens": 758,
+  "ms": 4216,
+  "cost_usd": 0.000627,
+  "cached": false
+ }
+}

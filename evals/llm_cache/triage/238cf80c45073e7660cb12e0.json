@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137305784729:feb0a122056e1cf4",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API types check failed because the committed openaev-front/src/utils/api-types.d.ts is stale. The change added new enum values (SOURCE_CODE, CODE_REPOSITORY, CI_CD_PIPELINE, PACKAGE_REGISTRY, SOFTWARE_PACKAGE, CODE_OTHER) to the AssetBulkUpdateInput API types, but the regenerated file was not committed. Regenerating types with 'yarn generate-types-from-api' and committing the result should fix it; a re-run will fail the same way.",
+  "evidence": [
+   {
+    "line": 1164,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1173,
+    "quote": "+    | \"SOURCE_CODE\""
+   },
+   {
+    "line": 1187,
+    "quote": "+    | \"CODE_OTHER\";"
+   },
+   {
+    "line": 1191,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1192,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2168,
+  "output_tokens": 712,
+  "ms": 5922,
+  "cost_usd": 0.000573,
+  "cached": false
+ }
+}

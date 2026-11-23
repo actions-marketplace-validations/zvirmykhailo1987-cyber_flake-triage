@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136311329010:023529dde884129f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Two ArchUnit rules in TenantActiveTableAccessArchTest fail deterministically on this branch. The new PayloadVersionService methods (keepOlderVersions, actionsWithOlderVersionsInUse, output) call PayloadIdentity and PayloadIdentityRepository methods that the architecture rule does not allow from that class. The change added these calls, so a rerun will fail the same way. The fix is to route access through an allowed class or update the rule with review. The 4x history on one test doesn't change this, since the log points at the new calls.",
+  "evidence": [
+   {
+    "line": 3015,
+    "quote": "[ERROR] Tests run: 107, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 15.76 s <<< FAILURE! -- in io.openaev.architecture.TenantActiveTableAccessArchTest"
+   },
+   {
+    "line": 3019,
+    "quote": "Method <io.openaev.service.payload.PayloadVersionService.keepOlderVersions(java.lang.String, java.lang.String, boolean)> calls method <io.openaev.database.model.payload.PayloadIdentity.setOlderVersionsKeptFor(java.lang.String)> in (PayloadVersionService.java:146)"
+   },
+   {
+    "line": 3032,
+    "quote": "Method <io.openaev.service.payload.PayloadVersionService.actionsWithOlderVersionsInUse(java.lang.String, java.util.List)> calls method <io.openaev.database.repository.PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse(java.lang.String, java.util.Collection)> in (PayloadVersionService.java:136)"
+   },
+   {
+    "line": 3065,
+    "quote": "Method <io.openaev.service.payload.PayloadVersionService.output(io.openaev.database.model.Payload, io.openaev.database.model.InjectorContract, io.openaev.database.model.payload.PayloadRevocation)> calls method <io.openaev.database.model.payload.PayloadIdentity.getOlderVersionsKeptFor()> in (PayloadVersionService.java:157)"
+   },
+   {
+    "line": 3067,
+    "quote": "[ERROR] Tests run: 1426, Failures: 2, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6421,
+  "output_tokens": 1409,
+  "ms": 5995,
+  "cost_usd": 0.001347,
+  "cached": false
+ }
+}

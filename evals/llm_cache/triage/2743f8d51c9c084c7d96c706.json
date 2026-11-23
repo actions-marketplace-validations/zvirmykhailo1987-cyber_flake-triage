@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136266229724:4e86b31ea8116fff",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "API types check failed because the committed openaev-front/src/utils/api-types.d.ts is out of sync with the types generated from the running API. The only diff is in ScenarioUpdateInput.scenario_update_choices, which the generator now wraps across lines. The failure is deterministic, so a re-run will fail again. Fix: run yarn generate-types-from-api locally against the change and commit the regenerated api-types.d.ts.",
+  "evidence": [
+   {
+    "line": 1170,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1180,
+    "quote": "+  scenario_update_choices?: Record<"
+   },
+   {
+    "line": 1187,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3839,
+  "output_tokens": 1048,
+  "ms": 5271,
+  "cost_usd": 0.000908,
+  "cached": false
+ }
+}

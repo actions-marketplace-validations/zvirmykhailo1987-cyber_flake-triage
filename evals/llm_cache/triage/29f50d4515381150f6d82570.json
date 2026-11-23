@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133968638004:23c0cc53a8f9085f",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.45,
+  "summary": "Failed: EngineServiceIntegrationTest.given_allTenantsScope_should_seeEveryTenantAsset, a tenant-scope read that returned 0 where 2 were expected. No flake history. The changed files are only the architecture test and its baseline, so nothing links the failure to this change. An Elasticsearch put_mapping error (finding_masking_version keyword to long) earlier in the shard suggests shared or stale index state, but the log does not tie it to this test. Retry, and if it fails again, check ES index state for shard 3.",
+  "evidence": [
+   {
+    "line": 2202,
+    "quote": "io.openaev.engine.EngineServiceIntegrationTest.given_allTenantsScope_should_seeEveryTenantAsset -- Time elapsed: 3.032 s <<< FAILURE!"
+   },
+   {
+    "line": 2205,
+    "quote": "expected: 2L"
+   },
+   {
+    "line": 2206,
+    "quote": "but was: 0L"
+   },
+   {
+    "line": 1888,
+    "quote": "mapper [finding_masking_version] cannot be changed from type [keyword] to [long]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3825,
+  "output_tokens": 1287,
+  "ms": 6540,
+  "cost_usd": 0.001026,
+  "cached": false
+ }
+}

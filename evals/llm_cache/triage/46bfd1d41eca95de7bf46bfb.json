@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135754264159:9cc8b060c8448326",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "7 InjectTargetSearchTest assertions fail because the JSON response now includes a new target_markings key that the expected payloads don't have. The change added marking fields (AssetMarkingsOutput, AssetOutput, EndpointMapper, Marked), so this is a deterministic contract change that will repeat on rerun. Other ERROR lines in the log come from tests that passed, so they don't explain these failures.",
+  "evidence": [
+   {
+    "line": 5521,
+    "quote": "Different keys found in node \"content[0]\", extra: \"content[0].target_markings\", expected:"
+   },
+   {
+    "line": 5548,
+    "quote": "Array \"content\" has different content. Missing values: [{\"target_id\":\"c1644b62-223d-4033-b690-4ad6e07364c7\""
+   },
+   {
+    "line": 5551,
+    "quote": "[ERROR] Tests run: 1682, Failures: 7, Errors: 0, Skipped: 0"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 10348,
+  "output_tokens": 929,
+  "ms": 5030,
+  "cost_usd": 0.001499,
+  "cached": false
+ }
+}

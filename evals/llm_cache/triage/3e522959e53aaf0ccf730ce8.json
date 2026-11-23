@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133921503573:4464eb5f8f1db583",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Migrations Guard failed deterministically: it reports that the block of previously released migrations was changed. The excerpt omits the diff it refers to, so the exact file is unconfirmed. The PR's new migration V6_20261103120000000 looks appended, so check the diff above line 1294 for an edited or renamed released V2_x/V1 migration. A rerun will not change this.",
+  "evidence": [
+   {
+    "line": 1322,
+    "quote": "ERROR: the block of previously released migrations was changed (check diff above). Exiting."
+   },
+   {
+    "line": 1323,
+    "quote": "##[error]Process completed with exit code 1."
+   },
+   {
+    "line": 787,
+    "quote": "##[start-action display=Check new migrations block is strictly appended to the end since the last release;id=__self.__run]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3834,
+  "output_tokens": 787,
+  "ms": 4616,
+  "cost_usd": 0.000777,
+  "cached": false
+ }
+}

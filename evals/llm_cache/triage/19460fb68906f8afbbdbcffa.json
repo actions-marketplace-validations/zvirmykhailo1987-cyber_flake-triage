@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "132684089313:987607df87a8d646",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.45,
+  "summary": "One test failed: BatchQueueServiceBatchProcessingTest.shouldReleaseWorkerWhenUnexpectedExceptionEscapes threw IllegalStateException 'Unexpected ack failure' (1 error, 788 run, 2 skipped). The PR only changes GitHub Actions composite YAML files, not Java code, and the test has no flake history. The log does not show a timing or infrastructure cause, so this is a low-confidence retry; if it fails again, check the batch queue ack/release path.",
+  "evidence": [
+   {
+    "line": 33780,
+    "quote": "[ERROR] io.openaev.rest.helper.queue.BatchQueueServiceBatchProcessingTest.shouldReleaseWorkerWhenUnexpectedExceptionEscapes -- Time elapsed: 0.108 s <<< ERROR!"
+   },
+   {
+    "line": 33781,
+    "quote": "java.lang.IllegalStateException: Unexpected ack failure"
+   },
+   {
+    "line": 41442,
+    "quote": "[ERROR]   BatchQueueServiceBatchProcessingTest.shouldReleaseWorkerWhenUnexpectedExceptionEscapes » IllegalState Unexpected ack failure"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5000,
+  "output_tokens": 1317,
+  "ms": 6256,
+  "cost_usd": 0.001159,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075460355:5ce436199b7314de",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "14 deterministic failures in 3 suites (PlayerLessonsAnonymousScopeTest, ScenarioLessonsApiTest, ScenarioObjectiveApiTest) return 404 where 200 is expected, and lesson counts come back 0 instead of 1. The change touches only OpenCRQ/XtmOne code, not these paths. A FAILCLOSED scope-gate line in ScenarioService.findInScope points to a tenant or table-gating problem, not a timing one. The 401 and NoHttpResponseException warnings are noise. No flake history, so this looks reproducible rather than flaky. The log does not show the cause, so confidence is low; check the scope gate config and tenant seeding before retrying.",
+  "evidence": [
+   {
+    "line": 9712,
+    "quote": "java.lang.AssertionError: Status expected:<200> but was:<404>"
+   },
+   {
+    "line": 10136,
+    "quote": "but was: \"lessons_category-965ccba9-b40b-48e8-a6c1-fbd8c06de7d1|0|1|lessons_question-86d09156-7b9d-4d2b-8ec0-43717b51c768\""
+   },
+   {
+    "line": 10381,
+    "quote": "[FAILCLOSED] tables=(gated) at=io.openaev.service.scenario.ScenarioService.findInScope:597"
+   },
+   {
+    "line": 10384,
+    "quote": "java.lang.AssertionError: Status expected:<200> but was:<404>"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 10684,
+  "output_tokens": 1464,
+  "ms": 7940,
+  "cost_usd": 0.0018,
+  "cached": false
+ }
+}

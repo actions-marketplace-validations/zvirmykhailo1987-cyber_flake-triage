@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136881428959:21729dfaa618f303",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "The job failed in the 'Wait for application to be ready' step: the app never answered on port 8080 within 180s (HTTP 000, no response). The log excerpt does not show why the app failed to start. The only changed file is a test class, which is unlikely to break startup, so a retry is reasonable, but the server's own startup logs are needed to rule out a real startup failure from this change.",
+  "evidence": [
+   {
+    "line": 1132,
+    "quote": "❌ Application failed to become ready within 180s"
+   },
+   {
+    "line": 1134,
+    "quote": "HTTP 000"
+   },
+   {
+    "line": 1135,
+    "quote": "(no response)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1088,
+  "output_tokens": 503,
+  "ms": 3548,
+  "cost_usd": 0.00036,
+  "cached": false
+ }
+}
