@@ -542,3 +542,16 @@ def test_log_and_model_text_cannot_plant_markdown() -> None:
 
     assert not re.search(r"(?<!\\)\]\(", md) and not re.search(r"(?<!\\)<img", md) and "![" not in md  # only escaped forms
     assert "`` A'B.c ``" in md
+
+
+def test_packed_excerpts_load_the_same_text(collected: Path) -> None:
+    first = dataset.load(collected)
+    path = dataset.pack_excerpts(collected)
+    assert path.read_bytes() == dataset.pack_excerpts(collected).read_bytes()  # deterministic
+    folder = collected / f"excerpts-{dataset.EXCERPT_VERSION}"
+    for p in folder.glob("*.txt"):
+        p.unlink()
+    folder.rmdir()
+    (collected / "raw").rename(collected / "raw-gone")  # nothing left to re-derive from
+    again = dataset.load(collected)
+    assert [f.log for f in again] == [f.log for f in first] and again[0].log

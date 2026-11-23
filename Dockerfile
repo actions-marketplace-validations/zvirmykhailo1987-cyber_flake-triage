@@ -7,7 +7,7 @@ COPY src ./src
 RUN pip install --no-cache-dir -c requirements.lock . && useradd -u 10001 -m triage
 # the committed data, the model's recorded answers and the built report: the console replays, never calls
 COPY data/openaev/runs.jsonl.gz data/openaev/meta.json ./data/openaev/
-COPY data/openaev/excerpts-e7 ./data/openaev/excerpts-e7
+COPY data/openaev/excerpts-e7.jsonl.gz ./data/openaev/
 COPY evals ./evals
 COPY docs/report.html docs/simulation.json ./docs/
 USER 10001

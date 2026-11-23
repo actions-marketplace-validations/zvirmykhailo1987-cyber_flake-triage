@@ -204,7 +204,7 @@ log (0.1-10 MB) ─► excerpt of the failed step ─► signals with line numbe
   and smuggled addresses, odd parameters, GitHub errors, rate limits.
 * **Three independent reviews** by separate agents that saw the code, not the author's conclusions;
   what they found and what was fixed is in [`docs/DESIGN.md`](docs/DESIGN.md).
-* 95 tests (coverage 97%), 65 injected bugs in [`scripts/mutation_check.py`](scripts/mutation_check.py) all caught (results in [`docs/mutation-results.json`](docs/mutation-results.json)), ruff, mypy (strict), bandit and pip-audit against the locked dependencies; CI runs all of it plus the evals, simulation, fresh and stress checks from the committed data, with no API key.
+* 96 tests (coverage 97%), 65 injected bugs in [`scripts/mutation_check.py`](scripts/mutation_check.py) all caught (results in [`docs/mutation-results.json`](docs/mutation-results.json)), ruff, mypy (strict), bandit and pip-audit against the locked dependencies; CI runs all of it plus the evals, simulation, fresh and stress checks from the committed data, with no API key.
 
 ## Limits
 
@@ -225,7 +225,9 @@ log (0.1-10 MB) ─► excerpt of the failed step ─► signals with line numbe
 ## Data
 
 Public CI metadata and log excerpts of OpenAEV-Platform/openaev, collected through the GitHub API.
-Full logs are not committed, only the excerpts the triage reads (`data/openaev/excerpts-e7/`) and
-the run list (`data/openaev/runs.jsonl.gz`).
+Full logs are not committed, only the excerpts the triage reads (`data/openaev/excerpts-e7.jsonl.gz`,
+one JSON line per job) and the run list (`data/openaev/runs.jsonl.gz`); the same for the fresh check
+in `data/openaev-fresh/`. A re-collection writes the excerpts as files; `python -c "from pathlib import
+Path; from flaketriage import dataset; dataset.pack_excerpts(Path('data/openaev'))"` packs them.
 
 MIT licence. Not affiliated with the OpenAEV project. Fonts: IBM Plex (OFL); icons: Lucide (ISC).

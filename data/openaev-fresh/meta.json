@@ -1,0 +1,13 @@
+{
+ "repo": "OpenAEV-Platform/openaev",
+ "workflows": [
+  245579469,
+  247641507
+ ],
+ "days": 1,
+ "collected_at": "2026-11-23T10:38:48.714958+00:00",
+ "runs_seen": 232,
+ "runs_with_failure": 77,
+ "runs_skipped": 2,
+ "api_calls": 1203
+}

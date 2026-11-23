@@ -123,15 +123,44 @@ def read_runs(root: Path) -> str:
     return (root / "runs.jsonl").read_text(encoding="utf-8")
 
 
+def packed_path(root: Path) -> Path:
+    return root / f"excerpts-{EXCERPT_VERSION}.jsonl.gz"
+
+
+def read_packed(root: Path) -> dict[int, str]:
+    """Excerpts as committed: one gzipped JSON line per job, instead of thousands of small files."""
+    path = packed_path(root)
+    if not path.exists():
+        return {}
+    rows = (json.loads(x) for x in gzip.decompress(path.read_bytes()).decode("utf-8").splitlines() if x.strip())
+    return {int(r["job_id"]): str(r["text"]) for r in rows}
+
+
+def pack_excerpts(root: Path) -> Path:
+    """Write the excerpt files of ``root`` into one deterministic gzip (same text the loader reads)."""
+    folder = root / f"excerpts-{EXCERPT_VERSION}"
+    rows = sorted((int(p.stem), p.read_text(encoding="utf-8")) for p in folder.glob("*.txt"))
+    body = "".join(json.dumps({"job_id": j, "text": t}, ensure_ascii=False) + "\n" for j, t in rows).encode("utf-8")
+    path = packed_path(root)
+    path.write_bytes(gzip.compress(body, mtime=0))
+    return path
+
+
 def load(root: Path, with_logs: bool = True) -> list[Failure]:
     rows = [json.loads(x) for x in read_runs(root).splitlines() if x.strip()]
     out = [f for r in rows for f in failures_of(r)]
     if with_logs:
+        packed: dict[int, str] | None = None
         for f in out:
             ex = root / f"excerpts-{EXCERPT_VERSION}" / f"{f.job_id}.txt"
             raw = root / "raw" / f"{f.job_id}.log.gz"
             if ex.exists():
                 f.log = ex.read_text(encoding="utf-8")
+                continue
+            if packed is None:
+                packed = read_packed(root)
+            if f.job_id in packed:
+                f.log = packed[f.job_id]
             elif raw.exists():
                 f.log = excerpt(gzip.decompress(raw.read_bytes()).decode("utf-8", errors="replace"))
                 ex.parent.mkdir(parents=True, exist_ok=True)

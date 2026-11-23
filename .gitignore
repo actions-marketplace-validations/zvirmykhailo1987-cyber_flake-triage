@@ -9,3 +9,4 @@ data/*/runs.jsonl
 data/*/excerpts-e6/
 .claude/
 build/
+data/*/excerpts-e7/
