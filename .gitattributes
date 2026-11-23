@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.gz binary
+*.png binary
+*.woff2 binary
+# excerpts and recorded model answers are kept byte for byte: the cassette keys hash the exact prompt
+data/** -text
+evals/llm_cache/** -text
+evals/llm_cache_stress/** -text
