@@ -4,10 +4,14 @@
 *retry*, *do not retry* or *unsure*, with the log lines it decided on. Rules decide first; a model is
 asked only where the rules are unsure and must quote the log. It never re-runs anything itself.
 
-It comes as a command line tool for a workflow step, a web console for the people who keep CI green,
-and an MCP server for other agents. Measured on 45 days of public GitHub Actions history of
-[OpenAEV-Platform/openaev](https://github.com/OpenAEV-Platform/openaev) (`[Core] CI` and Nightly),
-against what actually happened when people re-ran those jobs.
+It comes as a command line tool and a GitHub Action for a workflow step, a web console for the people
+who keep CI green, and an MCP server for other agents. Measured on 45 days of public GitHub Actions
+history of [OpenAEV-Platform/openaev](https://github.com/OpenAEV-Platform/openaev) (`[Core] CI` and
+Nightly), against what actually happened when people re-ran those jobs.
+
+**Live console:** https://ci-triage-demo.159.195.219.73.sslip.io (read-only, the committed data and
+model answers; live triage of new jobs is off there). The same end-to-end check that runs locally
+passed against it: [`evals/results/e2e-live.json`](evals/results/e2e-live.json).
 
 ![Overview of the console](docs/screenshot-home.png)
 
