@@ -10,3 +10,4 @@ data/*/excerpts-e6/
 .claude/
 build/
 data/*/excerpts-e7/
+data/*.log
