@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075459580:7a75762d83e53a69",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.6,
+  "summary": "All 8 graph-interactions Firefox tests fail the same page-error check (expect(problems).toEqual([])). The only recorded problem is a Report-Only CSP violation for a JavaScript eval in the schemas bundle. The change touched only Java backend files, not the front end or these specs, so the log does not show the change caused it. Still, the violation is deterministic and would likely repeat on rerun, so retry is unlikely to pass. Check whether the schemas bundle or its CSP/eval usage changed recently, and whether this is Firefox-only.",
+  "evidence": [
+   {
+    "line": 2014,
+    "quote": "Content-Security-Policy: (Report-Only policy) The page’s settings would block a JavaScript eval (script-src)"
+   },
+   {
+    "line": 2019,
+    "quote": "expect(problems).toEqual([]);"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6893,
+  "output_tokens": 1140,
+  "ms": 6454,
+  "cost_usd": 0.001259,
+  "cached": false
+ }
+}

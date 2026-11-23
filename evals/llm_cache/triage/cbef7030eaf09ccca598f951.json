@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "132684472622:0121594daf4107c5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "Backend compile fails in openaev-es8-client because Maven cannot resolve co.elastic.clients:elasticsearch-java:8.19.25, the version this renovate PR bumps in pom.xml. Central and jboss both report it missing, and a repository prefix filter also blocks it. The version is likely absent or unavailable, so a rerun will probably fail the same way. If Maven Central is only lagging a fresh release, a retry could pass, so verify the version exists in Central.",
+  "evidence": [
+   {
+    "line": 317,
+    "quote": "Failed to execute goal on project openaev-es8-client: Could not resolve dependencies for project io.openaev:openaev-es8-client:jar:3.261110.0"
+   },
+   {
+    "line": 318,
+    "quote": "dependency: co.elastic.clients:elasticsearch-java:jar:8.19.25 (runtime)"
+   },
+   {
+    "line": 319,
+    "quote": "Could not find artifact co.elastic.clients:elasticsearch-java:jar:8.19.25 in central (https://repo.maven.apache.org/maven2)"
+   },
+   {
+    "line": 321,
+    "quote": "prefixes: Path co/elastic/clients/elasticsearch-java/8.19.25/elasticsearch-java-8.19.25.jar NOT allowed from shibboleth-releases"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1944,
+  "output_tokens": 1190,
+  "ms": 5847,
+  "cost_usd": 0.000789,
+  "cached": false
+ }
+}

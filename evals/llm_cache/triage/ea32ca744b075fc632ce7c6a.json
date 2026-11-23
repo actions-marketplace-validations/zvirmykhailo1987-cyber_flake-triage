@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135945546409:9c4d232293b8e0e0",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The i18n checker step failed deterministically: it reports 38 plural placeholder mismatches across de, es, fr, it, ja, ru and zh translation files, and the change touched those lang files. Re-running on the same commit will fail the same way, so fix the translations (or add the loanword exceptions) before retrying.",
+  "evidence": [
+   {
+    "line": 543,
+    "quote": "de.json — placeholders differ, expected [{# atomic tests} {# atomic test}] got [{# atomare Tests} {# atomarer Test}]"
+   },
+   {
+    "line": 657,
+    "quote": "Total: 38 placeholder violation(s)."
+   },
+   {
+    "line": 658,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5056,
+  "output_tokens": 573,
+  "ms": 3161,
+  "cost_usd": 0.000792,
+  "cached": false
+ }
+}

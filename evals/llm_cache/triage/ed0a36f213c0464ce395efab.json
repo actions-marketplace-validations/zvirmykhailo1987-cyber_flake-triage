@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134702146602:3895d8029ede1b6d",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.7,
+  "summary": "Frontend Quality job failed at the 'Check i18n translations' step (yarn i18n-checker). It reports 3 locale values identical to English (de/es Radial, fr Relations), exit code 1. This check is deterministic and reads only locale files, so a re-run on the same commit will fail the same way. None of the touched files are locale files, and the log doesn't show which change added these keys. Fix by translating the values or adding them to scripts/i18n-loanwords.json.",
+  "evidence": [
+   {
+    "line": 523,
+    "quote": "de.json — identical to the English value"
+   },
+   {
+    "line": 524,
+    "quote": "  key   : Radial"
+   },
+   {
+    "line": 529,
+    "quote": "Total: 3 missing or untranslated value(s)."
+   },
+   {
+    "line": 530,
+    "quote": "Run \"yarn auto-translation:all\" to translate them. If a value is legitimately identical"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1319,
+  "output_tokens": 965,
+  "ms": 5255,
+  "cost_usd": 0.000614,
+  "cached": false
+ }
+}

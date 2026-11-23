@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134808425569:6fb12c5de93b4516",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "E2E test 'should have OpenAEV agent executor running new atomic test on new tenant' failed: it timed out after 60s waiting for an Install button that never appeared. The log shows no error about the change or the cause. Flake history is zero, but the change touches tenant groups and endpoint UI in the same area, so a rerun is not clearly safe. Check whether the Install button still renders for a new tenant.",
+  "evidence": [
+   {
+    "line": 1683,
+    "quote": "Error: expect(locator).toBeVisible() failed"
+   },
+   {
+    "line": 1685,
+    "quote": "Locator: getByRole('button', { name: /Install/i }).first()"
+   },
+   {
+    "line": 1688,
+    "quote": "Error: element(s) not found"
+   },
+   {
+    "line": 1696,
+    "quote": "Timeout 60000ms exceeded while waiting on the predicate"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3522,
+  "output_tokens": 1055,
+  "ms": 5911,
+  "cost_usd": 0.00088,
+  "cached": false
+ }
+}

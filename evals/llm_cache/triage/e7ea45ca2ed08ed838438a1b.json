@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135435714426:33b2b181c33d6a42",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The Frontend Quality job failed in the 'Run yarn i18n-checker' step, which exits with code 1. The log excerpt shows the same translation string listed twice in each locale block, which looks like a deterministic problem in the change's new i18n strings, not infrastructure or flakiness. The full checker output is not in the excerpt, so the exact rule it enforces is inferred, not confirmed.",
+  "evidence": [
+   {
+    "line": 514,
+    "quote": "##[start-action display=Check i18n translations;id=__self.__run_7]"
+   },
+   {
+    "line": 515,
+    "quote": "##[group]Run yarn i18n-checker"
+   },
+   {
+    "line": 573,
+    "quote": "'Set by the environment variable {name}, read-only',"
+   },
+   {
+    "line": 574,
+    "quote": "'Set by the environment variable {name}, read-only',"
+   },
+   {
+    "line": 597,
+    "quote": "##[error]Process completed with exit code 1."
+   },
+   {
+    "line": 598,
+    "quote": "##[end-action id=__self.__run_7;outcome=failure;conclusion=failure;duration_ms=1981]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2515,
+  "output_tokens": 610,
+  "ms": 3310,
+  "cost_usd": 0.000557,
+  "cached": false
+ }
+}

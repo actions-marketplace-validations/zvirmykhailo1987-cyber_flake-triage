@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136903861534:992b2ca8a996a65e",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API types check failed because the committed generated TypeScript types are stale. The regenerated output adds new asset software and SBOM interfaces (AssetSoftwareOutput, SbomImportOutput) that the PR did not commit. This is deterministic and will repeat on re-run. Fix: run 'yarn generate-types-from-api' against the local API and commit the result.",
+  "evidence": [
+   {
+    "line": 1232,
+    "quote": "+export interface SbomImportOutput {"
+   },
+   {
+    "line": 1245,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1246,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2001,
+  "output_tokens": 638,
+  "ms": 3587,
+  "cost_usd": 0.000519,
+  "cached": false
+ }
+}

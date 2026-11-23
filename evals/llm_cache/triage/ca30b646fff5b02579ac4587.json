@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075459658:28e588677d20e36c",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "All 8 failures are in tests_e2e/tests/graph/graph-interactions.spec.ts on webkit only. The first failure's assertion expects no console problems, and the received problem is a Content Security Policy console error, not a graph behaviour assertion. The change touches only Java backend files (OpenCRQ and XtmOne), not the graph UI or CSP config, so the log does not link it to the failure. The log does not show the root cause, so this is a low-confidence retry; a CSP or console-error issue in the graph page is the lead to check if it repeats.",
+  "evidence": [
+   {
+    "line": 2812,
+    "quote": "✘  19 [webkit] › tests_e2e/tests/graph/graph-interactions.spec.ts:112:3 › Exploration graph interactions › each layout button moves the nodes on the first click, and Re-run plays the layout again (10.1s)"
+   },
+   {
+    "line": 2878,
+    "quote": "+     \"error: The Content Security Policy 'default-src 'self'; script-src 'self' 'nonce-75840b31ebaca54656e3b14eb74ee705'; style-src 'self' 'unsafe-inline'"
+   },
+   {
+    "line": 2883,
+    "quote": "    > 127 |     expect(problems).toEqual([]);"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6947,
+  "output_tokens": 1331,
+  "ms": 7592,
+  "cost_usd": 0.00136,
+  "cached": false
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075459588:4c8e6a8780f5aa08",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.6,
+  "summary": "All 8 failures are in graph-interactions.spec.ts, which the change does not touch, and 6 of 8 have no flake history. The shared helper's assertion at line 127 fails because the browser logged a Content-Security-Policy Report-Only violation (missing 'unsafe-eval') from the frontend schemas bundle. That error is deterministic, so a re-run will likely fail the same way. The log is truncated for the other seven failures, so the root cause is not fully confirmed.",
+  "evidence": [
+   {
+    "line": 2004,
+    "quote": "error: [JavaScript Error: \"Content-Security-Policy: (Report-Only policy) The page’s settings would block a JavaScript eval (script-src)"
+   },
+   {
+    "line": 2009,
+    "quote": "expect(problems).toEqual([]);"
+   },
+   {
+    "line": 1938,
+    "quote": "✘  19 [firefox] › tests_e2e/tests/graph/graph-interactions.spec.ts:112:3 › Exploration graph interactions › each layout button moves the nodes on the first click"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6898,
+  "output_tokens": 1097,
+  "ms": 6661,
+  "cost_usd": 0.001238,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136052280761:028ad756b2246f07",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "API Types Check failed because the generated TypeScript types are stale. The PR adds ScenarioRevisionOutput and ScenarioUpdateInput to the API but the generated types were not regenerated and committed. The failure is deterministic and will repeat on re-run until the developer runs yarn generate-types-from-api and commits the result.",
+  "evidence": [
+   {
+    "line": 1226,
+    "quote": "+export interface ScenarioRevisionOutput {"
+   },
+   {
+    "line": 1244,
+    "quote": "+export interface ScenarioUpdateInput {"
+   },
+   {
+    "line": 1251,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1252,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3055,
+  "output_tokens": 569,
+  "ms": 3123,
+  "cost_usd": 0.00059,
+  "cached": false
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134751665559:d05a9a0f2e71e1cc",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "The MUI regression gate failed deterministically on a new import of MUI Typography in openaev-front/src/components/xtm/XtmPivot.tsx:3, which the PR introduced. The gate enforces the design system's Typography, so re-running on the same commit will fail the same way. Fix: import Typography from @filigran/design-system, or add the fds:keep-mui exemption with a recorded reason.",
+  "evidence": [
+   {
+    "line": 814,
+    "quote": "MUI regression gate: FAIL — 1 new import(s) (5dbc5449f...HEAD)"
+   },
+   {
+    "line": 816,
+    "quote": "openaev-front/src/components/xtm/XtmPivot.tsx:3"
+   },
+   {
+    "line": 817,
+    "quote": "imports MUI `Typography`; this product already renders the design system's `Typography`."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1350,
+  "output_tokens": 596,
+  "ms": 3474,
+  "cost_usd": 0.000433,
+  "cached": false
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133114369177:7a8177d298e94aab",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "All 26 AttackPathHttpIsolationTest tests error on setup: INSERT INTO roles is refused by the PL/pgSQL require_tenant_write guard with 'outside the scope of the transaction'. The error is deterministic and identical across tests, and the PR adds the V6 roles-guard migration plus TenantScopedTransaction and RoleRepository changes, so the change most likely caused it. Retry is unlikely to help. Log is from one shard only.",
+  "evidence": [
+   {
+    "line": 1316,
+    "quote": "[ERROR] Tests run: 26, Failures: 0, Errors: 26, Skipped: 0, Time elapsed: 11.90 s <<< FAILURE! -- in attack path POC read isolation through the real HTTP endpoints"
+   },
+   {
+    "line": 1319,
+    "quote": "was aborted: ERROR: write of a row of tenant 2cff"
+   },
+   {
+    "line": 1368,
+    "quote": "Caused by: org.postgresql.util.PSQLException: ERROR: write of a row of tenant 2cffad3a-0001-4078-b0e2-ef74274022c3 refused: outside the scope of the transaction"
+   },
+   {
+    "line": 1320,
+    "quote": "Where: PL/pgSQL function require_tenant_write(text,boolean) line 10 at RAISE"
+   },
+   {
+    "line": 43561,
+    "quote": "[ERROR] Tests run: 788, Failures: 0, Errors: 26, Skipped: 2"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 16050,
+  "output_tokens": 1206,
+  "ms": 6434,
+  "cost_usd": 0.002208,
+  "cached": false
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136873753001:68f6f52282ce1ad2",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Two FindingRecordingServiceTest lifecycle tests fail deterministically on an event-sequence assertion. Each publishes an extra DATA_UPDATE_SUCCESS event beyond the expected sequence. Both tests fail with no flake history, and FindingRecordingService.java is in the change, so the change likely altered when update events fire. The log does not show the cause directly, so a re-run is unlikely to pass.",
+  "evidence": [
+   {
+    "line": 2693,
+    "quote": "[ERROR] io.openaev.service.finding.FindingRecordingServiceTest.given_aNewOccurrenceLeavingTheSeenDatesAsTheyAre_should_publishAnUpdate -- Time elapsed: 0.784 s <<< FAILURE!"
+   },
+   {
+    "line": 2701,
+    "quote": "  [\"DATA_UPDATE_SUCCESS\"]"
+   },
+   {
+    "line": 2703,
+    "quote": "\tat io.openaev.service.finding.FindingRecordingServiceTest$LifecycleEvents.given_aNewOccurrenceLeavingTheSeenDatesAsTheyAre_should_publishAnUpdate(FindingRecordingServiceTest.java:521)"
+   },
+   {
+    "line": 2859,
+    "quote": "  [\"DATA_FETCH_SUCCESS\", \"DATA_UPDATE_SUCCESS\", \"DATA_UPDATE_SUCCESS\"]"
+   },
+   {
+    "line": 2869,
+    "quote": "    \"DATA_UPDATE_SUCCESS\","
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3387,
+  "output_tokens": 1230,
+  "ms": 5552,
+  "cost_usd": 0.000954,
+  "cached": false
+ }
+}

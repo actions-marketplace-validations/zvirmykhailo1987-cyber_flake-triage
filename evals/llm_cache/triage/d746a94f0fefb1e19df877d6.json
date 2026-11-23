@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137000580192:d2d0b5ba725df4ca",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Spring context fails to start in the API test shard because of a circular bean dependency: workflowService -> workflowEndService -> notificationEventService -> scenarioNotificationEventHandler -> exerciseService -> workflowService. The change touches WorkflowEndService and NotificationEventService, and the failure repeats across every test class that loads the app context (2 prior persists, 0 flakes). Re-running will fail the same way. Fix the cycle, for example by breaking the dependency or using a lazy or event-based hook.",
+  "evidence": [
+   {
+    "line": 3380,
+    "quote": "Error creating bean with name 'workflowEndService' defined in file [/home/runner/work/openaev/openaev/openaev-api/target/classes/io/openaev/service/chaining/WorkflowEndService.class]"
+   },
+   {
+    "line": 3397,
+    "quote": "Error creating bean with name 'notificationEventService' defined in file [/home/runner/work/openaev/openaev/openaev-api/target/classes/io/openaev/service/NotificationEventService.class]"
+   },
+   {
+    "line": 3414,
+    "quote": "Error creating bean with name 'scenarioNotificationEventHandler' defined in file [/home/runner/work/openaev/openaev/openaev-api/target/classes/io/openaev/notification/handler/ScenarioNotificationEventHandler.class]"
+   },
+   {
+    "line": 3431,
+    "quote": "Error creating bean with name 'workflowService': Requested bean is curren"
+   },
+   {
+    "line": 3448,
+    "quote": "Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?"
+   },
+   {
+    "line": 5564,
+    "quote": "Relying upon circular references is discouraged and they are prohibited by default."
+   },
+   {
+    "line": 3291,
+    "quote": "[ERROR] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 47.72 s <<< FAILURE! -- in Custom dashboard api exporter tests"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 13695,
+  "output_tokens": 1647,
+  "ms": 7635,
+  "cost_usd": 0.002193,
+  "cached": false
+ }
+}

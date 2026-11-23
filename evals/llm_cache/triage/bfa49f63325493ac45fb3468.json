@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135364886720:14cbb9b2c7727e8b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The Docker build fails in the front-end build stage: the Vite/rolldown production build reports 'Build failed with 7 errors', so the step exits 1. The log elides the individual errors, so the specific cause is unconfirmed. The build is deterministic and the changed files include many graph front-end files, so the change most likely broke it. Check the 7 errors locally with yarn build before re-running.",
+  "evidence": [
+   {
+    "line": 1387,
+    "quote": "#22 33.07 ✗ Build failed in 2.22s"
+   },
+   {
+    "line": 1389,
+    "quote": "#22 33.07 Build failed with 7 errors:"
+   },
+   {
+    "line": 1481,
+    "quote": "#22 ERROR: process \"/bin/sh -c set -eux                             ; npm install -g corepack                  ; yarn install                             ; yarn build                               ;\" did not complete successfully: exit code: 1"
+   },
+   {
+    "line": 1511,
+    "quote": "##[error]buildx failed with: failed to build: failed to solve: process \"/bin/sh -c set -eux                             ; npm install -g corepack                  ; yarn install                             ; yarn build                               ;\" did not complete successfully: exit code: 1"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3155,
+  "output_tokens": 612,
+  "ms": 3364,
+  "cost_usd": 0.000621,
+  "cached": false
+ }
+}

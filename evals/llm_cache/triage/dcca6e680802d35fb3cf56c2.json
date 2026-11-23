@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136050381131:ab0507b29e52d30c",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "API Types Check failed because the generated TypeScript types differ from the committed ones. The change adds new DTO fields (field_conflict, action_payload_customized, and others) without regenerating the types. The failure is deterministic and will repeat on re-run until the author runs yarn generate-types-from-api and commits the result.",
+  "evidence": [
+   {
+    "line": 1228,
+    "quote": "+  field_conflict: boolean;"
+   },
+   {
+    "line": 1248,
+    "quote": "+  /** The attached payload is a customized copy of a Filigran payload */"
+   },
+   {
+    "line": 1253,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1254,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3967,
+  "output_tokens": 578,
+  "ms": 3374,
+  "cost_usd": 0.000686,
+  "cached": false
+ }
+}

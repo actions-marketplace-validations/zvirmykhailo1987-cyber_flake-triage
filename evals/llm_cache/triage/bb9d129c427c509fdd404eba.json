@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135413378578:769840f2681c1d4b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API types check failed because the committed src/utils/api-types.d.ts is stale. Regenerating from the running API changes SettingsRuntimeUpdateInput.settings from Record<string, object> to Record<string, any>, which the PR's runtime-settings change caused. The failure is deterministic, so a rerun will fail again. Fix: run yarn generate-types-from-api and commit the updated file.",
+  "evidence": [
+   {
+    "line": 1183,
+    "quote": "-  settings: Record<string, object>;"
+   },
+   {
+    "line": 1184,
+    "quote": "+  settings: Record<string, any>;"
+   },
+   {
+    "line": 1188,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1612,
+  "output_tokens": 693,
+  "ms": 4504,
+  "cost_usd": 0.000508,
+  "cached": false
+ }
+}

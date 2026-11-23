@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135402995883:eb7cf2bc06b58830",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.6,
+  "summary": "ThreatArsenalApiTest.given_groupByPrimaryDomain_should_returnActionsInDomainOrder fails on an assertion that the grouped result contains one action ID, but the result has the same ID twice plus another. This is a deterministic duplicate in the grouped output, not a timing or infra error, and the test has no flake history. The change touches the catalog action and contract code that feeds this endpoint, so a regression is the likely cause. Leftover test data from another test in the shard is possible but not shown in the log, so confidence is moderate.",
+  "evidence": [
+   {
+    "line": 1493,
+    "quote": "[ERROR] io.openaev.api.threat_arsenal.ThreatArsenalApiTest.given_groupByPrimaryDomain_should_returnActionsInDomainOrder -- Time elapsed: 0.209 s <<< FAILURE!"
+   },
+   {
+    "line": 1494,
+    "quote": "java.lang.AssertionError:"
+   },
+   {
+    "line": 2737,
+    "quote": "\"17d063cd-6e5e-41f1-a80c-dd26ed153e97\","
+   },
+   {
+    "line": 2742,
+    "quote": "but the following element(s) were unexpected:"
+   },
+   {
+    "line": 2743,
+    "quote": "\"17d063cd-6e5e-41f1-a80c-dd26ed153e97\", \"17d063cd-6e5e-41f1-a80c-dd26ed153e97\"]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4962,
+  "output_tokens": 1351,
+  "ms": 6431,
+  "cost_usd": 0.001172,
+  "cached": false
+ }
+}

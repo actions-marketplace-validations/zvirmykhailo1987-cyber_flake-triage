@@ -1,0 +1,57 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137000580118:4527dc63cfbbb833",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "Spring ApplicationContext fails to start because of a circular bean dependency: workflowService -> workflowEndService -> notificationEventService -> scenarioNotificationEventHandler -> exerciseService -> workflowService. The change touches NotificationEventService and WorkflowEndService, so it likely introduced the cycle. This is deterministic, so a rerun will fail the same way. Around 540 of 1042 tests error from the cached context failure, and the AssetLink tests are among them. Fix the dependency cycle and re-run.",
+  "evidence": [
+   {
+    "line": 3290,
+    "quote": "Relying upon circular references is discouraged and they are prohibited by default."
+   },
+   {
+    "line": 3294,
+    "quote": "java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@1201b63d testClass = io.openaev.api.asset.AssetLinkApiTest"
+   },
+   {
+    "line": 3381,
+    "quote": "Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'workflowEndService' defined in file"
+   },
+   {
+    "line": 3398,
+    "quote": "Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'notificationEventService' defined in file"
+   },
+   {
+    "line": 3415,
+    "quote": "Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'scenarioNotificationEventHandler' defined in file"
+   },
+   {
+    "line": 3432,
+    "quote": "Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'exerciseService' defined in file"
+   },
+   {
+    "line": 3449,
+    "quote": "Caused by: org.springframework.beans.factory.BeanCurrentlyInCreationException: Error creating bean with name 'workflowService': Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?"
+   },
+   {
+    "line": 3462,
+    "quote": "java.lang.IllegalStateException: ApplicationContext failure threshold (1) exceeded: skipping repeated attempt to load context for [WebMergedContextConfiguration@1201b63d testClass = io.openaev.api.asset.AssetLinkApiTest"
+   },
+   {
+    "line": 99657,
+    "quote": "[ERROR] Tests run: 1042, Failures: 0, Errors: 540, Skipped: 0"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 14295,
+  "output_tokens": 1579,
+  "ms": 6709,
+  "cost_usd": 0.002219,
+  "cached": false
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075459624:61d66a768433d83d",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "All 8 failures are in graph-interactions.spec.ts (firefox, std-arm64), which the change does not touch; the change only edits OpenCRQ/XtmOne Java files. The only concrete cause in the excerpt is a deterministic CSP Report-Only violation (missing 'unsafe-eval') from a frontend asset, captured by a problems-array assertion. That is not obviously flaky, so a rerun will probably fail the same way. The other seven failure messages are elided, so the cause is not confirmed and confidence is low.",
+  "evidence": [
+   {
+    "line": 2034,
+    "quote": "✘  19 [firefox] › tests_e2e/tests/graph/graph-interactions.spec.ts:112:3 › Exploration graph interactions › each layout button moves the nodes on the first click"
+   },
+   {
+    "line": 2100,
+    "quote": "Content-Security-Policy: (Report-Only policy) The page’s settings would block a JavaScript eval (script-src)"
+   },
+   {
+    "line": 2105,
+    "quote": "expect(problems).toEqual([]);"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6885,
+  "output_tokens": 1510,
+  "ms": 8098,
+  "cost_usd": 0.001443,
+  "cached": false
+ }
+}

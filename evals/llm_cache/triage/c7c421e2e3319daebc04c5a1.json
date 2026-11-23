@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136253397925:48f2df1fb5439814",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API types check failed because the committed TypeScript types are out of date with the Java DTOs. Regenerating types from the API produces diffs that make scenario_revision_number and scenario_version_current/latest/scenario_simulations_count optional, and the script asks for a regeneration before committing. The PR changed these DTOs without regenerating types, so re-running will fail the same way until the types are regenerated and committed.",
+  "evidence": [
+   {
+    "line": 1192,
+    "quote": "-  scenario_revision_number: number;"
+   },
+   {
+    "line": 1193,
+    "quote": "+  scenario_revision_number?: number;"
+   },
+   {
+    "line": 1217,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3912,
+  "output_tokens": 640,
+  "ms": 3700,
+  "cost_usd": 0.000711,
+  "cached": false
+ }
+}

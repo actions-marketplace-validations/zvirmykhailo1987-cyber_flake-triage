@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135364864262:4bd9df32651fe605",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The Docker build failed at the front-end production build step (`yarn build`, vite/rolldown) with 7 compile errors. The specific error messages are cut from the excerpt, so the exact cause is unconfirmed. It is a deterministic build failure, not infrastructure or a flaky test, so a re-run will likely fail the same way. The change touches many front-end graph and nav files, which is the likely source.",
+  "evidence": [
+   {
+    "line": 1305,
+    "quote": "#39 2.168 ✗ Build failed in 1.38s"
+   },
+   {
+    "line": 1307,
+    "quote": "#39 2.168 Build failed with 7 errors:"
+   },
+   {
+    "line": 1421,
+    "quote": "ERROR: failed to build: failed to solve: process \"/bin/sh -c yarn build\" did not complete successfully: exit code: 1"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3190,
+  "output_tokens": 770,
+  "ms": 4189,
+  "cost_usd": 0.000704,
+  "cached": false
+ }
+}

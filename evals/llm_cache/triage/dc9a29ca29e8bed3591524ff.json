@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136881428932:24032547195fbb0e",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Every failing test fails at Spring ApplicationContext startup, not on an assertion. The root cause is a circular bean dependency: workflowService is requested while still in creation, via scenarioService, workflowEndService, notificationEventService, scenarioNotificationEventHandler and exerciseService. This is deterministic wiring that a re-run will reproduce. The change touches WorkflowServiceTest.java, and workflowService is in the same cycle, so the branch most likely introduced it. Caveat: the touched file is a test, so confirm the cycle is in the branch's main-code diff and not already on the base branch.",
+  "evidence": [
+   {
+    "line": 3261,
+    "quote": "APPLICATION FAILED TO START"
+   },
+   {
+    "line": 3286,
+    "quote": "Relying upon circular references is discouraged and they are prohibited by default."
+   },
+   {
+    "line": 3444,
+    "quote": "BeanCurrentlyInCreationException: Error creating bean with name 'workflowService': Requested bean is currently in creation"
+   },
+   {
+    "line": 3288,
+    "quote": "[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 38.97 s <<< FAILURE! -- in Global ATT&CK coverage API integration tests"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 12436,
+  "output_tokens": 1156,
+  "ms": 5973,
+  "cost_usd": 0.001822,
+  "cached": false
+ }
+}

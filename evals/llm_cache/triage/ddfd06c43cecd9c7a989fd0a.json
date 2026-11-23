@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136484386634:d70b209958daff0b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The ensure-no-git-diff check failed because the build regenerated formatting changes in the committed XtmUserJwtExtractorTest.java (javadoc rewrap and a re-wrapped isTrustedIssuer call). The committed code is not in the formatter's output, so the change itself must be reformatted. Re-running on the same commit will fail the same way.",
+  "evidence": [
+   {
+    "line": 774,
+    "quote": "##[group]Run git diff --exit-code"
+   },
+   {
+    "line": 790,
+    "quote": "- * The per-user token a connected OpenCTI forwards on the XTM reverse lookup: accepted only from"
+   },
+   {
+    "line": 792,
+    "quote": "+ * The per-user token a connected OpenCTI forwards on the XTM reverse lookup: accepted only from the"
+   },
+   {
+    "line": 801,
+    "quote": "-            XtmUserJwtExtractor.isTrustedIssuer("
+   },
+   {
+    "line": 803,
+    "quote": "+            XtmUserJwtExtractor.isTrustedIssuer(opencti, \"HTTPS://OpenCTI.test.filigran.io:443/\"))"
+   },
+   {
+    "line": 807,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2029,
+  "output_tokens": 894,
+  "ms": 4487,
+  "cost_usd": 0.00065,
+  "cached": false
+ }
+}

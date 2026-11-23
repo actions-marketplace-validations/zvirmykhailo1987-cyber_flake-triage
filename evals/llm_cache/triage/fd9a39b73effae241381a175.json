@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135364886475:b57b109dfdf2ca93",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The front-end build inside the Docker image failed during yarn build with 'Build failed with 7 errors' (rolldown/vite). The actual error messages are elided from the excerpt, so the specific cause is not shown. The change adds and edits many front-end graph files, which makes a deterministic compile or bundling error from this change the most likely cause. A re-run would probably fail the same way. Check the 7 errors in the full log (lines 1403-1493) to confirm.",
+  "evidence": [
+   {
+    "line": 1400,
+    "quote": "#24 26.21 ✗ Build failed in 1.42s"
+   },
+   {
+    "line": 1402,
+    "quote": "#24 26.22 Build failed with 7 errors:"
+   },
+   {
+    "line": 1494,
+    "quote": "#24 ERROR: process \"/bin/sh -c set -eux                             ; npm install -g corepack                  ; yarn install                             ; yarn build                               ;\" did not complete successfully: exit code: 1"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3213,
+  "output_tokens": 741,
+  "ms": 4331,
+  "cost_usd": 0.000692,
+  "cached": false
+ }
+}

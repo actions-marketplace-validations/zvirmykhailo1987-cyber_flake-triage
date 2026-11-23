@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133438952317:75c8a25dc3168d61",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "The ensure-no-git-diff step failed because the committed AddTenantIdToExecutionTracesMigrationTest.java is not formatted the way the build's formatter wants. The diff wraps two @DisplayName annotations onto multiple lines, so the working tree differs from the commit. This is deterministic and tied to this PR's test file, so a re-run will fail the same way. Fix: run the formatter on the file and commit the result.",
+  "evidence": [
+   {
+    "line": 777,
+    "quote": "##[group]Run git diff --exit-code"
+   },
+   {
+    "line": 788,
+    "quote": "+++ b/openaev-api/src/test/java/io/openaev/migration/AddTenantIdToExecutionTracesMigrationTest.java"
+   },
+   {
+    "line": 793,
+    "quote": "-    @DisplayName(\"A trace that already has a tenant holds the same tenant after the run, whatever its status's inject\")"
+   },
+   {
+    "line": 794,
+    "quote": "+    @DisplayName("
+   },
+   {
+    "line": 795,
+    "quote": "+        \"A trace that already has a tenant holds the same tenant after the run, whatever its status's inject\")"
+   },
+   {
+    "line": 809,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1757,
+  "output_tokens": 725,
+  "ms": 3840,
+  "cost_usd": 0.000538,
+  "cached": false
+ }
+}

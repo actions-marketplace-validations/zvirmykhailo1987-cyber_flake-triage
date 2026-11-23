@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137000580003:8523ff07c2eefb68",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "The API never came up: the health check on /api/me timed out after 300s (last HTTP 000) right after Spring Boot logged a startup failure. The migrations before it ran cleanly, but the actual failure reason is cut off in the excerpt, so this is not certain. Because it is a deterministic startup failure on a PR that changes Spring services, treat it as likely caused by the change until the root cause in the full log is confirmed.",
+  "evidence": [
+   {
+    "line": 1590,
+    "quote": "\"level\":\"ERROR\",\"threadName\":\"main\",\"loggerName\":\"org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter\""
+   },
+   {
+    "line": 1591,
+    "quote": "❌ API /api/me not returning 200 after 300s (last HTTP 000)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5832,
+  "output_tokens": 900,
+  "ms": 5516,
+  "cost_usd": 0.001033,
+  "cached": false
+ }
+}

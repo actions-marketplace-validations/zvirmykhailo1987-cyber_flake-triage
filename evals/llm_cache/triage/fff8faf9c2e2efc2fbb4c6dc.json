@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134778699496:883e259d98881ca7",
+ "answer": {
+  "decision": "retry",
+  "category": "infrastructure",
+  "confidence": 0.55,
+  "summary": "Two AtomicTestingApiTest delete tests fail because findings remain after their inject is deleted or launched. The log shows the engine delete flush failing with 'engine down' and an Elasticsearch mapping conflict, which points to the engine rather than this change. The changed files are front-end only, so a retry is reasonable, but the branch name 'keep-findings-of-deleted-injects' conflicts with what these tests assert, so check that before relying on a retry.",
+  "evidence": [
+   {
+    "line": 1993,
+    "quote": "Immediate engine delete flush failed for 1 id(s); journaled for replay: engine down"
+   },
+   {
+    "line": 1886,
+    "quote": "mapper [finding_masking_version] cannot be changed from type [keyword] to [long]"
+   },
+   {
+    "line": 2533,
+    "quote": "Expecting an empty Optional but was containing value"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5237,
+  "output_tokens": 1344,
+  "ms": 7119,
+  "cost_usd": 0.001196,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135740420008:13e3abc85f8d3f01",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "Two architecture tests fail deterministically on code this change added. AssetGroupService.assetGroupsOfAssets calls its own @Transactional method assetGroupIdsByAssetId (AssetGroupService.java:331), which bypasses the Spring proxy, and LinkedIdResolutionArchTest reports the new AssetGroupRepository lookup as an undeclared id-resolution site. The rest of the run passed, and the JSON parse error at line 1247 is logged noise, not the cause. Fix the self-invocation and the id-resolution pattern, or declare the site in the baseline, then re-run.",
+  "evidence": [
+   {
+    "line": 1862,
+    "quote": "io.openaev.architecture.LinkedIdResolutionArchTest.given_productionClasses_should_passEveryCheckOfTheGuard()[3] -- Time elapsed: 0.007 s <<< FAILURE!"
+   },
+   {
+    "line": 1865,
+    "quote": "Expecting empty but was: [\"io.openaev.service.AssetGroupService#assetGroupsOfAssets -> AssetGroupRepository | <link or other> | 1 | <why>\"]"
+   },
+   {
+    "line": 3028,
+    "quote": "io.openaev.architecture.TenantBackgroundTransactionArchTest.no_transactional_self_invocation -- Time elapsed: 0.125 s <<< FAILURE!"
+   },
+   {
+    "line": 3031,
+    "quote": "Method <io.openaev.service.AssetGroupService.assetGroupsOfAssets(java.util.Collection)> calls method <io.openaev.service.AssetGroupService.assetGroupIdsByAssetId(java.util.Collection)> in (AssetGroupService.java:331) self-invokes @Transactional io.openaev.service.AssetGroupService.assetGroupIdsByAssetId(java.util.Collection)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4598,
+  "output_tokens": 1371,
+  "ms": 5916,
+  "cost_usd": 0.001145,
+  "cached": false
+ }
+}

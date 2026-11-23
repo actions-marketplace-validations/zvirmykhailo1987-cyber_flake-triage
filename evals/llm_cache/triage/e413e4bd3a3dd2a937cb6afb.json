@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137000580195:bf4cd4a59a24fb33",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "The E2E job failed because the backend never became ready: /api/me did not return 200 after 300s (last HTTP 000). Spring's failure analysis reporter logged an ERROR at line 1592, but the excerpt cuts off before the actual cause, so the root cause is not visible. I lean no_retry because a Spring context startup failure is usually deterministic and the PR adds notification and exposure beans, but this is a guess from the log. Check the full startup error in the container log.",
+  "evidence": [
+   {
+    "line": 1592,
+    "quote": "\"loggerName\":\"org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter\""
+   },
+   {
+    "line": 1593,
+    "quote": "❌ API /api/me not returning 200 after 300s (last HTTP 000)"
+   },
+   {
+    "line": 1612,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5831,
+  "output_tokens": 959,
+  "ms": 5215,
+  "cost_usd": 0.001063,
+  "cached": false
+ }
+}

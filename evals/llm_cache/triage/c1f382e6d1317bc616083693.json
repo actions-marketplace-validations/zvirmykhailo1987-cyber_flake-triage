@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134860777588:c945bce282eb149c",
+ "answer": {
+  "decision": "retry",
+  "category": "infrastructure",
+  "confidence": 0.6,
+  "summary": "CredentialApiTest.given_azureInputWithScope_should_storeAndReturnScope fails with a missing JSON path (credential_azure_scope). Around it, Azure SDK calls to localhost:4577 are refused after retries are exhausted, and the Azure tenant lookup fails. That points to an unavailable local mock endpoint in the test environment, not the change. The log does not show the link between that refused connection and the missing field, and the touched files are GCP validators, so confidence is moderate.",
+  "evidence": [
+   {
+    "line": 1288,
+    "quote": "Connection refused: localhost/[0:0:0:0:0:0:0:1]:4577"
+   },
+   {
+    "line": 1292,
+    "quote": "Retry attempts have been exhausted."
+   },
+   {
+    "line": 1300,
+    "quote": "AADSTS90002: Tenant '33333333-3333-3333-3333-333333333333' not found."
+   },
+   {
+    "line": 1302,
+    "quote": "CredentialApiTest.given_azureInputWithScope_should_storeAndReturnScope -- Time elapsed: 0.621 s <<< ERROR!"
+   },
+   {
+    "line": 1303,
+    "quote": "com.jayway.jsonpath.PathNotFoundException: No results for path: $['credential_azure_scope']"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4405,
+  "output_tokens": 1176,
+  "ms": 5746,
+  "cost_usd": 0.001028,
+  "cached": false
+ }
+}

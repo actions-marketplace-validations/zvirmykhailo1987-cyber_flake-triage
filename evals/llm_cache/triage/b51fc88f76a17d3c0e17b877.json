@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134792622040:508cb7f2b3fb06ca",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "The frontend-quality job failed at the i18n checker, not at a test. fr.json has the key \"minutes\" with the same value as English, and the checker counts that as one untranslated value. This is deterministic and will repeat on re-run. The change likely added or touched that string in InjectExecutionForm.tsx. Fix by translating it via yarn auto-translation:all, or by adding a justified loanword entry to scripts/i18n-loanwords.json.",
+  "evidence": [
+   {
+    "line": 523,
+    "quote": "fr.json — identical to the English value"
+   },
+   {
+    "line": 524,
+    "quote": "  key   : minutes"
+   },
+   {
+    "line": 525,
+    "quote": "Total: 1 missing or untranslated value(s)."
+   },
+   {
+    "line": 528,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1255,
+  "output_tokens": 428,
+  "ms": 2926,
+  "cost_usd": 0.00034,
+  "cached": false
+ }
+}

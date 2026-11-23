@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135144590662:274f7d9160859a3a",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API Types Check failed because the committed api-types.d.ts is stale. The generated output adds new GraphEdgeOutput values (IDENTITY_OF, WORKS_FOR, IN_TEAM, TEAM_OF, LINKED_TO, ATTACK_STEP) and new GraphNodeOutput values (PERSON, ORGANIZATION, TEAM). The change to GraphExplorationService.java added these without regenerating types. This is deterministic, so a rerun will fail the same way. Fix: run yarn generate-types-from-api and commit the result.",
+  "evidence": [
+   {
+    "line": 1187,
+    "quote": "+++ b/openaev-front/src/utils/api-types.d.ts"
+   },
+   {
+    "line": 1193,
+    "quote": "+    | \"RUN_OF\"              "
+   },
+   {
+    "line": 1199,
+    "quote": "+    | \"ATTACK_STEP\";"
+   },
+   {
+    "line": 1215,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1216,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1538,
+  "output_tokens": 698,
+  "ms": 3671,
+  "cost_usd": 0.000503,
+  "cached": false
+ }
+}

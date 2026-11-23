@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136305439947:acba46ffba2bae63",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "Every failing test is a Spring ApplicationContext load failure caused by one deterministic error: the query on PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse is rejected by JSqlParser (ParseException near \"ANDi\", line 15, col 68). PayloadIdentityRepository.java is in this change, so the change broke startup. The 10 listed test failures are a cascade from that one context failure, so their flake history does not matter. Re-running will fail the same way. The HEAD timeout on line 1214 was recovered and is unrelated.",
+  "evidence": [
+   {
+    "line": 3413,
+    "quote": "Error creating bean with name 'payloadIdentityRepository' defined in io.openaev.database.repository.PayloadIdentityRepository"
+   },
+   {
+    "line": 3427,
+    "quote": "Cannot create query for method [PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse(java.lang.String,java.util.Collection)]"
+   },
+   {
+    "line": 3441,
+    "quote": "Caused by: java.lang.IllegalArgumentException: The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3456,
+    "quote": "Caused by: net.sf.jsqlparser.parser.ParseException: Encountered: <S_IDENTIFIER> / \"ANDi\", at line 15, column 68, in lexical state DEFAULT."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 14579,
+  "output_tokens": 1555,
+  "ms": 6988,
+  "cost_usd": 0.002235,
+  "cached": false
+ }
+}

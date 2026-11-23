@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134785743485:ff2fdd1a4145fa6a",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.88,
+  "summary": "The i18n checker failed deterministically: the key \"In OpenCTI\" has the same value as English in de.json and it.json, so 2 untranslated values remain. The change adds this string, so a rerun will fail the same way. Fix by translating the values (yarn auto-translation:all) or adding a justified loanword entry to scripts/i18n-loanwords.json.",
+  "evidence": [
+   {
+    "line": 523,
+    "quote": "de.json — identical to the English value"
+   },
+   {
+    "line": 524,
+    "quote": "  key   : In OpenCTI"
+   },
+   {
+    "line": 525,
+    "quote": "it.json — identical to the English value"
+   },
+   {
+    "line": 527,
+    "quote": "Total: 2 missing or untranslated value(s)."
+   },
+   {
+    "line": 528,
+    "quote": "Run \"yarn auto-translation:all\" to translate them. If a value is legitimately identical"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1261,
+  "output_tokens": 472,
+  "ms": 2942,
+  "cost_usd": 0.000362,
+  "cached": false
+ }
+}

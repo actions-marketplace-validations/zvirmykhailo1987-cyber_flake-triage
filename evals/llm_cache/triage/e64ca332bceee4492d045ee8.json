@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133167876980:4cfc5c95f876c522",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "All 26 AttackPathHttpIsolationTest errors fail on the same deterministic DB guard: the test's INSERT INTO roles is refused by the PL/pgSQL function require_tenant_write (tenant_write_value) with 'outside the scope of the transaction'. This is not a flake (0 prior flakes, failed before too), and the change touches the roles guard migration V6 and PlatformRoleService, so a rerun will likely fail the same way. Check the tenant-write guard and transaction scoping for role inserts in the test setup. Log does not show the migration body itself, so the link to the change is inferred.",
+  "evidence": [
+   {
+    "line": 1303,
+    "quote": "[ERROR] Tests run: 26, Failures: 0, Errors: 26, Skipped: 0, Time elapsed: 11.39 s <<< FAILURE! -- in attack path POC read isolation through the real HTTP endpoints"
+   },
+   {
+    "line": 1306,
+    "quote": "could not execute batch [Batch entry 0 INSERT INTO roles (role_created_at, role_description, role_name, tenant_id, role_updated_at, role_id) VALUES"
+   },
+   {
+    "line": 1307,
+    "quote": "Where: PL/pgSQL function require_tenant_write(text,boolean) line 10 at RAISE"
+   },
+   {
+    "line": 1308,
+    "quote": "PL/pgSQL function tenant_write_value(text,boolean) line 3 at IF  Call getNextException to see other errors in the batch.]"
+   },
+   {
+    "line": 1355,
+    "quote": "ERROR: write of a row of tenant 2cffad3a-0001-4078-b0e2-ef74274022c3 refused: outside the scope of the transaction"
+   },
+   {
+    "line": 43468,
+    "quote": "[ERROR] Errors:"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 16320,
+  "output_tokens": 1263,
+  "ms": 6035,
+  "cost_usd": 0.002263,
+  "cached": false
+ }
+}

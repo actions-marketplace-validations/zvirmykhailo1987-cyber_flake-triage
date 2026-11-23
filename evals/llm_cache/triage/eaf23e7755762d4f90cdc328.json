@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137082657602:38ac00ad42ad7237",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "10 deterministic failures in 3 test classes, none flaky. InjectRelationLinkTenantTest fails the write-attribution guard because tags and asset_groups are written under tenant OTHER (AssetGroupService.createAssetGroup, TagLinkJdbc.saveTag). ExerciseChildrenApiTest gets 404 where 200 is expected and a 'Log title|true|false' mismatch. The same tenant-scoping failure repeats in all runs, so a rerun will likely fail again. The log doesn't show which commit caused it, and the failing test files aren't in the change, so verify the tenant-scoping path before rerunning. The NoHttpResponseException retries are dependency-download noise and didn't cause these failures.",
+  "evidence": [
+   {
+    "line": 7377,
+    "quote": "java.lang.AssertionError: Status expected:<200> but was:<404>"
+   },
+   {
+    "line": 7557,
+    "quote": "but was: \"Log title|true|false\""
+   },
+   {
+    "line": 15153,
+    "quote": "Write-attribution: production code wrote a tenant_id outside the request or job scope (a wrong-tenant write, or a null tenant on a strict table):"
+   },
+   {
+    "line": 15154,
+    "quote": "tags OTHER io.openaev.utils.TagLinkJdbc.saveTag"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 10480,
+  "output_tokens": 1326,
+  "ms": 6691,
+  "cost_usd": 0.001711,
+  "cached": false
+ }
+}

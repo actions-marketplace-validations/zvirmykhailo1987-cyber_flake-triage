@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137534012692:03b55189b1ed8f07",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.3,
+  "summary": "Only the tenant-management test 'create new tenant A' failed, with a 20s predicate timeout (30s total). The excerpt elides the spec body and the wait's target, so the cause isn't visible. The test has no flake history, and the change touches tenant-isolation and catalog code, so a deterministic regression is possible. Retry is a cheap first check, but if it fails again treat it as a real regression.",
+  "evidence": [
+   {
+    "line": 1702,
+    "quote": "  ✘  32 [chrome] › tests_e2e/tests/multitenant/tenant-management.spec.ts:31:3 › Multi-tenancy — tenant management › create new tenant A (30.0s)"
+   },
+   {
+    "line": 1724,
+    "quote": "    Error: Timeout 20000ms exceeded while waiting on the predicate"
+   },
+   {
+    "line": 1732,
+    "quote": "      intervals: [200, 500, 1_000],"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5339,
+  "output_tokens": 1052,
+  "ms": 6192,
+  "cost_usd": 0.00106,
+  "cached": false
+ }
+}

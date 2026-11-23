@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133101715949:87709d1568cc71e0",
+ "answer": {
+  "decision": "retry",
+  "category": "flaky_test",
+  "confidence": 0.6,
+  "summary": "Single failure: ScenarioExecutionJobTest.given_chained_cron_in_one_minute_should_create_template_and_delay_run asserts expected 1 but got 0. The touched file (ExecutionTraceScopedPathsTest.java) is unrelated to this test, it has no flake history, and the test name suggests a timing-dependent cron run. The log does not show the root cause, so a rerun is reasonable, but confidence is moderate. The other ERROR lines are logged exceptions from other tests and do not cause the build failure.",
+  "evidence": [
+   {
+    "line": 2756,
+    "quote": "org.opentest4j.AssertionFailedError: expected: <1> but was: <0>"
+   },
+   {
+    "line": 2757,
+    "quote": "org.opentest4j.AssertionFailedError: expected: <1> but was: <0>"
+   },
+   {
+    "line": 7996,
+    "quote": "ScenarioExecutionJobTest.given_chained_cron_in_one_minute_should_create_template_and_delay_run expected: <1> but was: <0>"
+   },
+   {
+    "line": 7998,
+    "quote": "[ERROR] Tests run: 1967, Failures: 1, Errors: 0, Skipped: 0"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5111,
+  "output_tokens": 982,
+  "ms": 6266,
+  "cost_usd": 0.001002,
+  "cached": false
+ }
+}

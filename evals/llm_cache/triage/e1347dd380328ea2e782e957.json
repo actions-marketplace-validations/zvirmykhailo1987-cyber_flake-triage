@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136167590837:ef4e9eafa95ddfac",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API Types Check failed because the types regenerated from the running API differ from the committed api-types.d.ts (new fields such as has_more and last_verified_at appear as additions). The branch changed the API without regenerating and committing the types. This is deterministic, so a re-run on the same commit will fail the same way. Fix: run yarn generate-types-from-api and commit the result.",
+  "evidence": [
+   {
+    "line": 1402,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1403,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3544,
+  "output_tokens": 650,
+  "ms": 3866,
+  "cost_usd": 0.000679,
+  "cached": false
+ }
+}

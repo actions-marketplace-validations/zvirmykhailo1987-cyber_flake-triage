@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134794501491:7e79f22a13cc3e20",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Architecture test HandledErrorRollbackArchTest fails because the change makes CustomDashboardService#restoreStarterPackDashboards catch an IOException from TenantSettingsService.setSettingIfBlank, which marks the shared transaction rollback-only and causes UnexpectedRollbackException at commit. The two CustomDashboardApiTest failures (restored_dashboards 3 vs 6, defaults_set 1 vs 0) fit the same restore-path behaviour the change touches. This is deterministic, so a re-run will fail the same way. The Jackson parse error at line 1245 is logged but handled and is not the cause.",
+  "evidence": [
+   {
+    "line": 3098,
+    "quote": "Architecture Violation [Priority: MEDIUM] - Rule 'classes should not catch a rollback-marking call outside the reviewed list"
+   },
+   {
+    "line": 3099,
+    "quote": "CustomDashboardService#restoreStarterPackDashboards -> TenantSettingsService.setSettingIfBlank catches IOException, which marks the shared transaction rollback-only, so the commit then throws UnexpectedRollbackException."
+   },
+   {
+    "line": 2482,
+    "quote": "java.lang.AssertionError: JSON path \"$.restored_dashboards.length()\" expected:<6> but was:<3>"
+   },
+   {
+    "line": 2491,
+    "quote": "java.lang.AssertionError: JSON path \"$.defaults_set.length()\" expected:<0> but was:<1>"
+   },
+   {
+    "line": 3143,
+    "quote": "[ERROR]   CustomDashboardApiTest.given_starter_pack_dashboards_deleted_should_restore_them_once_with_their_names JSON path \"$.restored_dashboards.length()\" expected:<6> but was:<3>"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4606,
+  "output_tokens": 974,
+  "ms": 5201,
+  "cost_usd": 0.000948,
+  "cached": false
+ }
+}

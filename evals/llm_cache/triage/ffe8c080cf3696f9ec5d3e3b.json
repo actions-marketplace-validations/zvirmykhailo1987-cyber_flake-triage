@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135727250585:568134fe88d3c89a",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Failed at the 'Check git diff' step: the build regenerated sources and left uncommitted changes. The diff reformats GraphLandingService.java (line wrapping in a Javadoc and a createNativeQuery call), so the committed code isn't in the formatter's output. This comes from the change itself and will repeat on re-run.",
+  "evidence": [
+   {
+    "line": 785,
+    "quote": "diff --git a/openaev-api/src/main/java/io/openaev/api/graph/GraphLandingService.java b/openaev-api/src/main/java/io/openaev/api/graph/GraphLandingService.java"
+   },
+   {
+    "line": 805,
+    "quote": "+            .createNativeQuery(\"SELECT COALESCE(current_setting('app.current_markings', true), '')\")"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1684,
+  "output_tokens": 755,
+  "ms": 4161,
+  "cost_usd": 0.000546,
+  "cached": false
+ }
+}

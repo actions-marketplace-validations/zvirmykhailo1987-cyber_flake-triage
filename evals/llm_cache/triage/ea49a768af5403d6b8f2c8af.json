@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136911947904:89b8ce1e223a2de8",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "The API Types Check fails deterministically because the committed openaev-front/src/utils/api-types.d.ts is stale. The Javadoc on XtmPeerTokenInput (XtmPeerTokenInput.java, touched by this PR) changed, so the regenerated file differs from the committed one. Re-running will fail the same way. Fix: run yarn generate-types-from-api against a running API and commit the updated api-types.d.ts.",
+  "evidence": [
+   {
+    "line": 1179,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1188,
+    "quote": "-   * The consumer product (opencti, opencrq, xtm-one)"
+   },
+   {
+    "line": 1189,
+    "quote": "+   * The consumer product; only opencrq is accepted today, under the email opencrq@xtm.<product>.filigran.io"
+   },
+   {
+    "line": 1193,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1730,
+  "output_tokens": 683,
+  "ms": 4380,
+  "cost_usd": 0.000514,
+  "cached": false
+ }
+}

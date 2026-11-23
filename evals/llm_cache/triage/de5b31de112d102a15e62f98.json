@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136372192087:2c7e0e127a1e8686",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The i18n checker failed deterministically. Two new strings, \"What's new in Filigran v{version}\" and \"Revert to Filigran's\", are missing from every locale file, so re-running will fail again until the keys are added to the translation files.",
+  "evidence": [
+   {
+    "line": 520,
+    "quote": "Missing keys : {"
+   },
+   {
+    "line": 521,
+    "quote": "  de: [ \"What's new in Filigran v{version}\", \"Revert to Filigran's\" ],"
+   },
+   {
+    "line": 531,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3682,
+  "output_tokens": 505,
+  "ms": 3300,
+  "cost_usd": 0.000621,
+  "cached": false
+ }
+}

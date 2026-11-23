@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136210319304:99c1b93f9d30b73f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.72,
+  "summary": "All 6 AutonomousRunSimulationRequestScopeTest cases error in setup, before any assertion runs. Each one fails on an INSERT into roles for the member tenant, which the DB's require_tenant_write function refuses as outside the transaction's tenant scope. This is deterministic, not a flake, and it sits in the tenant write-scope and access-control code this change touches. Confidence is moderate because the failing test file itself is not in the changed list.",
+  "evidence": [
+   {
+    "line": 1363,
+    "quote": "[ERROR] Tests run: 6, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 10.10 s <<< FAILURE! -- in Non-prefixed route, X-Tenant-Ids naming the member tenant"
+   },
+   {
+    "line": 1367,
+    "quote": "  Where: PL/pgSQL function require_tenant_write(text,boolean) line 10 at RAISE"
+   },
+   {
+    "line": 1416,
+    "quote": "Caused by: org.postgresql.util.PSQLException: ERROR: write of a row of tenant 2cffad3a-0001-4078-b0e2-ef74274022c3 refused: outside the scope of the transaction"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 11451,
+  "output_tokens": 1059,
+  "ms": 5826,
+  "cost_usd": 0.001675,
+  "cached": false
+ }
+}

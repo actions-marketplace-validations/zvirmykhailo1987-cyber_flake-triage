@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136899401329:f1e853f25a764555",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "App fails at startup, not in a test: Flyway rejects two migrations with the same version V6_20261121140000000 (Coverage_scenario_safe_mode_and_approval and, per the touched files, Add_finding_lifecycle). The duplicate is in the change itself, so re-running on the same commit will fail the same way.",
+  "evidence": [
+   {
+    "line": 1471,
+    "quote": "Caused by: java.lang.IllegalStateException: Duplicate Flyway migration version found: V6_20261121140000000__Coverage_scenario_safe_mode_and_approval.class"
+   },
+   {
+    "line": 1463,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   },
+   {
+    "line": 1490,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3246,
+  "output_tokens": 752,
+  "ms": 4428,
+  "cost_usd": 0.000701,
+  "cached": false
+ }
+}

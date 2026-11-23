@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134810841519:f537e5d59d71fa71",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "Multi-tenancy agent spec failed: the Install button never appeared on the new tenant within the 60s toPass window, with no flake history. The change touches asset/endpoint UI (AssetsList, Endpoints, EndpointsPicker), which could plausibly hide or break that button, but the log does not confirm the cause. Treat as possibly change-related and inspect the screenshot before retrying.",
+  "evidence": [
+   {
+    "line": 1686,
+    "quote": "Locator: getByRole('button', { name: /Install/i }).first()"
+   },
+   {
+    "line": 1689,
+    "quote": "Error: element(s) not found"
+   },
+   {
+    "line": 1697,
+    "quote": "Timeout 60000ms exceeded while waiting on the predicate"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3519,
+  "output_tokens": 719,
+  "ms": 4470,
+  "cost_usd": 0.000711,
+  "cached": false
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137000580159:bc32a1a7641ca868",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "All 30 DetectionRemediationApiTest errors and 22 JsonTypeDirtyOnLoadProbeTest errors come from one Spring context startup failure: a circular bean dependency (workflowService -> ... -> notificationEventService -> scenarioNotificationEventHandler -> exerciseService -> workflowService). The PR touches NotificationEventService, WorkflowEndService and the notification handlers on that path, and the cycle is prohibited by default, so a rerun will fail the same way. Not a flake.",
+  "evidence": [
+   {
+    "line": 3285,
+    "quote": "Relying upon circular references is discouraged and they are prohibited by default."
+   },
+   {
+    "line": 3376,
+    "quote": "Error creating bean with name 'workflowEndService' defined in file"
+   },
+   {
+    "line": 3393,
+    "quote": "Error creating bean with name 'notificationEventService' defined in file"
+   },
+   {
+    "line": 3410,
+    "quote": "Error creating bean with name 'scenarioNotificationEventHandler' defin"
+   },
+   {
+    "line": 3427,
+    "quote": "Error creating bean with name 'exerciseService' defined in file"
+   },
+   {
+    "line": 3444,
+    "quote": "BeanCurrentlyInCreationException: Error creating bean with name 'workflowService': Requested bean is currently in creation"
+   },
+   {
+    "line": 3287,
+    "quote": "[ERROR] Tests run: 30, Failures: 0, Errors: 30, Skipped: 0, Time elapsed: 48.58 s <<< FAILURE!"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 13956,
+  "output_tokens": 1089,
+  "ms": 5005,
+  "cost_usd": 0.00194,
+  "cached": false
+ }
+}

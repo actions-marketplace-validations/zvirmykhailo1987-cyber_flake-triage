@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137313850946:0eef95788f7d0ba8",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "E2E job failed at 'Wait for application to be ready': the openaev-app container stopped on startup, and Spring Boot logged a failure analysis. The change is a Spring Boot parent bump to 4.x in pom.xml, so a deterministic startup failure from the upgrade is the likely cause. The excerpt cuts off before the actual failure reason, so this is inferred, not confirmed.",
+  "evidence": [
+   {
+    "line": 1460,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   },
+   {
+    "line": 1471,
+    "quote": "\"loggerName\":\"org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter\""
+   },
+   {
+    "line": 1472,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1584,
+  "output_tokens": 717,
+  "ms": 3672,
+  "cost_usd": 0.000517,
+  "cached": false
+ }
+}

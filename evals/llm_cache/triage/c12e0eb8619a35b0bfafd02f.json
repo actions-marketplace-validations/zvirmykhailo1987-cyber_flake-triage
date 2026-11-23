@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136881429044:621f158e344e06bc",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.6,
+  "summary": "E2E job failed because the API never came up: /api/me returned HTTP 000 for 300s. The app logged a Spring Boot failure analysis (line 1591) about 17s after the new migrations ran, so it appears to crash on startup. The excerpt cuts off before the actual failure reason, and the change touches only WorkflowServiceTest.java, so the cause is not clear from the log. A startup crash is likely deterministic, so a retry is unlikely to help until the failure analysis is checked.",
+  "evidence": [
+   {
+    "line": 1591,
+    "quote": "{\"sequenceNumber\":0,\"timestamp\":1795272946676,\"nanoseconds\":676384433,\"level\":\"ERROR\",\"threadName\":\"main\",\"loggerName\":\"org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter\""
+   },
+   {
+    "line": 1592,
+    "quote": "❌ API /api/me not returning 200 after 300s (last HTTP 000)"
+   },
+   {
+    "line": 1611,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5013,
+  "output_tokens": 1101,
+  "ms": 6070,
+  "cost_usd": 0.001052,
+  "cached": false
+ }
+}

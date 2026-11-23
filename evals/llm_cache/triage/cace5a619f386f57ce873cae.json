@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136168759458:809751355f38ca0a",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API Types Check failed because the generated TypeScript API types differ from the committed api-types.d.ts (the log shows added fields such as last_verified_at and has_more). The PR changed the backend API without regenerating types. This is deterministic, so a re-run will fail again. Fix: run yarn generate-types-from-api and commit the updated api-types.d.ts.",
+  "evidence": [
+   {
+    "line": 1398,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1399,
+    "quote": "##[error]Process completed with exit code 1."
+   },
+   {
+    "line": 1293,
+    "quote": "+  consistency_mode?: string;"
+   },
+   {
+    "line": 1383,
+    "quote": "+  last_verified_at?: string;"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3544,
+  "output_tokens": 584,
+  "ms": 3463,
+  "cost_usd": 0.000646,
+  "cached": false
+ }
+}

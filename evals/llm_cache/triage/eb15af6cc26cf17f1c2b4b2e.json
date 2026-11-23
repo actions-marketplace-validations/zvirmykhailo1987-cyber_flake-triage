@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135490965556:3b90ac42c6c800f1",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The i18n checker step (yarn i18n-checker) exited with code 1. The excerpt shows per-locale string lists for zh with repeated entries such as 'Select neighbours', 'Remove from view', 'Re-run the layout' and 'Keyboard shortcuts', which points to duplicate or invalid translation keys added by this change in the graph UI strings. The log excerpt omits the checker's own error message, so the exact rule is unconfirmed, but the failure is deterministic and should repeat on retry.",
+  "evidence": [
+   {
+    "line": 516,
+    "quote": "##[group]Run yarn i18n-checker"
+   },
+   {
+    "line": 726,
+    "quote": "'Select neighbours',"
+   },
+   {
+    "line": 729,
+    "quote": "'Select neighbours',"
+   },
+   {
+    "line": 735,
+    "quote": "'Keyboard shortcuts'"
+   },
+   {
+    "line": 739,
+    "quote": "'Keyboard shortcuts'"
+   },
+   {
+    "line": 742,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1533,
+  "output_tokens": 711,
+  "ms": 3786,
+  "cost_usd": 0.000509,
+  "cached": false
+ }
+}

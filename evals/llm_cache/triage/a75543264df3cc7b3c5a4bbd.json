@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136154573709:58f3db42b7ba98ce",
+ "answer": {
+  "decision": "retry",
+  "category": "infrastructure",
+  "confidence": 0.8,
+  "summary": "API test job failed before any test ran: Maven could not resolve httpcore5/httpcore5-h2 5.5 from central, JBoss, or the shibboleth repo (prefix filter rejected it), and the GitHub and Azure feeds returned 401. The change touches no pom or dependency files, so this looks like a repository or registry access problem, not the change. Retry is likely to pass.",
+  "evidence": [
+   {
+    "line": 1191,
+    "quote": "Could not transfer metadata /.meta/prefixes.txt from/to flyway-community-db-support (https://maven.pkg.github.com/flyway/flyway-community-db-support): HTTP Status: 401"
+   },
+   {
+    "line": 1203,
+    "quote": "Failed to execute goal on project openaev-api: Could not resolve dependencies for project io.openaev:openaev-api:jar:3.261118.0"
+   },
+   {
+    "line": 1205,
+    "quote": "Could not find artifact org.apache.httpcomponents.core5:httpcore5:jar:5.5 in central (https://repo.maven.apache.org/maven2)"
+   },
+   {
+    "line": 1206,
+    "quote": "prefixes: Path org/apache/httpcomponents/core5/httpcore5/5.5/httpcore5-5.5.jar NOT allowed from shibboleth-releases"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2543,
+  "output_tokens": 1147,
+  "ms": 6520,
+  "cost_usd": 0.000828,
+  "cached": false
+ }
+}

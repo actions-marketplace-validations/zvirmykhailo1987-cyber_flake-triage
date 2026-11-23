@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075459572:3eb61698fa2a1e4b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.4,
+  "summary": "All 8 failures are in graph-interactions.spec.ts on webkit only, and each one fails on an expect for a deep-equality check. The only visible cause is a Content Security Policy console error captured in the first failure (line 2807), which is deterministic rather than timing-related, so a rerun will likely repeat it. The change touches only OpenCRQ and XtmOne Java files, with no visible link to the graph UI or CSP. The log is truncated before the other seven errors, so the root cause is not confirmed; low confidence.",
+  "evidence": [
+   {
+    "line": 2800,
+    "quote": "Error: expect(received).toEqual(expected) // deep equality"
+   },
+   {
+    "line": 2807,
+    "quote": "error: The Content Security Policy 'default-src 'self'; script-src 'self' 'nonce-427b1daa8d8010d0f5c3dacc96c67c6c'; style-src 'self' 'unsafe-inline'"
+   },
+   {
+    "line": 2812,
+    "quote": "expect(problems).toEqual([]);"
+   },
+   {
+    "line": 3111,
+    "quote": "8 failed"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6915,
+  "output_tokens": 1364,
+  "ms": 7347,
+  "cost_usd": 0.001373,
+  "cached": false
+ }
+}

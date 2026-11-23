@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137313850971:4dbd9d8136d2178f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "The openaev-app container crashed on startup, and Spring Boot's failure analysis reporter logged the error, so the app never became ready for the E2E tests. The change is a Renovate bump of spring-boot-starter-parent to 4.x in pom.xml, which is the likeliest cause of a deterministic startup failure. The excerpt is truncated before the actual failure analysis text, so the specific cause is not visible and confidence is moderate.",
+  "evidence": [
+   {
+    "line": 1460,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   },
+   {
+    "line": 1471,
+    "quote": "org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter"
+   },
+   {
+    "line": 1472,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1591,
+  "output_tokens": 1015,
+  "ms": 5117,
+  "cost_usd": 0.000667,
+  "cached": false
+ }
+}

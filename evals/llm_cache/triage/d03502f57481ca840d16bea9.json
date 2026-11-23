@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135142759697:700b2c551daa41e9",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The ensure-no-git-diff step failed because the build's formatter would change the committed code. The diff rewraps the edges.putIfAbsent(...) call (line 805) and the steps(...) call (line 820) in GraphExplorationService.java. This is deterministic and tied to this change, so a rerun will fail the same way. Run the formatter locally and commit the result.",
+  "evidence": [
+   {
+    "line": 805,
+    "quote": "-      edges.putIfAbsent(id, new GraphEdgeOutput(id, GraphEdgeType.ATTACK_STEP, source, target, null));"
+   },
+   {
+    "line": 821,
+    "quote": "+          steps(slice, tenantIds, \"(x.sourceAssetId = :id OR x.targetAssetId = :id)\", id, cap);"
+   },
+   {
+    "line": 825,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1849,
+  "output_tokens": 689,
+  "ms": 3817,
+  "cost_usd": 0.000529,
+  "cached": false
+ }
+}

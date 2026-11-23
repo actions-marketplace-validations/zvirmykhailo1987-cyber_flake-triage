@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135677533307:d7e50aa54fe895b7",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "API Types Check failed because the committed generated TypeScript types are out of date with the API. The diff adds StarterPackDashboardsRestoreOutput and simulations_count, which this PR's Java API changes produce, but the types were not regenerated. Re-running will fail the same way; fix by running yarn generate-types-from-api and committing the result.",
+  "evidence": [
+   {
+    "line": 1232,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1233,
+    "quote": "##[error]Process completed with exit code 1."
+   },
+   {
+    "line": 1220,
+    "quote": "export interface StarterPackDashboardsRestoreOutput {"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3557,
+  "output_tokens": 540,
+  "ms": 3490,
+  "cost_usd": 0.000626,
+  "cached": false
+ }
+}

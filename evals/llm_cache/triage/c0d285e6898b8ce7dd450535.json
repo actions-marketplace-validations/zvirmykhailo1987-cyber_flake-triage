@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135653555576:38cc18c34cd8cce7",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "The ensure-no-git-diff step failed because a generated or formatted-file check found uncommitted changes. The diff reorders imports in SimulationInjectApi.java: ArraySchema and Parameter are swapped. The committed file doesn't match what the tooling produces, so a re-run on the same commit will fail the same way. Fix by committing the regenerated or reformatted file.",
+  "evidence": [
+   {
+    "line": 786,
+    "quote": "diff --git a/openaev-api/src/main/java/io/openaev/rest/inject/SimulationInjectApi.java b/openaev-api/src/main/java/io/openaev/rest/inject/SimulationInjectApi.java"
+   },
+   {
+    "line": 794,
+    "quote": "-import io.swagger.v3.oas.annotations.media.ArraySchema;"
+   },
+   {
+    "line": 796,
+    "quote": "+import io.swagger.v3.oas.annotations.media.ArraySchema;"
+   },
+   {
+    "line": 800,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2542,
+  "output_tokens": 686,
+  "ms": 5396,
+  "cost_usd": 0.000597,
+  "cached": false
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133134353693:be8e13f75adabae9",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.6,
+  "summary": "PinnedActiveTablesArchTest fails deterministically: a line in pinned-active-tables-baseline.txt no longer describes CrossTenantJobSweepTest (its recorded and runs-with lists differ). The change touched only ExecutionTraceScopedPathsTest.java, so the log doesn't show whether this change caused it or the baseline was already stale. The same assertion would repeat on a rerun. The Jackson parse error at line 1247 is logged noise from a passing path, not the failure.",
+  "evidence": [
+   {
+    "line": 1880,
+    "quote": "io.openaev.architecture.PinnedActiveTablesArchTest.given_testTree_should_passEveryCheckOfTheGuard()[6] -- Time elapsed: 0.009 s <<< FAILURE!"
+   },
+   {
+    "line": 1883,
+    "quote": "Expecting empty but was: [\"io.openaev.scheduler.jobs.CrossTenantJobSweepTest: recorded import_mappers, runs with import_mappers,scenarios\"]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3312,
+  "output_tokens": 1104,
+  "ms": 5806,
+  "cost_usd": 0.000883,
+  "cached": false
+ }
+}

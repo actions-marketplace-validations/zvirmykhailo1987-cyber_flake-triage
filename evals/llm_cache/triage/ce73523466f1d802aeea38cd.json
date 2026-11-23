@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136568800296:39c24d5d53081be6",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.65,
+  "summary": "E2E job failed because the API container never became ready: /api/me stayed at HTTP 000 for 300s and Spring logged a fatal startup error on an UnsatisfiedDependency (bean wiring). The PR only bumps the Dockerfile base image (eclipse-temurin 25), so the cause is plausibly the change and a retry will likely repeat it. The excerpt is truncated and does not name the missing bean, so this is not fully confirmed.",
+  "evidence": [
+   {
+    "line": 1495,
+    "quote": "\"cause\":{\"className\":\"org.springframework.beans.factory.UnsatisfiedDependency"
+   },
+   {
+    "line": 1500,
+    "quote": "❌ API /api/me not returning 200 after 300s (last HTTP 000)"
+   },
+   {
+    "line": 1523,
+    "quote": "\"level\":\"ERROR\",\"threadName\":\"main\",\"loggerName\":\"org.springframework.boot.SpringApplication\""
+   },
+   {
+    "line": 1524,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3751,
+  "output_tokens": 989,
+  "ms": 5186,
+  "cost_usd": 0.00087,
+  "cached": false
+ }
+}

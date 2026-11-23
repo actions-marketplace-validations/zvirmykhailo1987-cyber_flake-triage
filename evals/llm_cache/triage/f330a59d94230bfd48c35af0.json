@@ -1,0 +1,49 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134861807126:60518cd7044ca260",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "Two ArchUnit architecture tests fail deterministically in openaev-api: findings_repository_access_is_reviewed (FindingRepository.detachFromInjects/detachFromScenarios called from InjectService and ScenarioService outside the allowed Finding classes) and no_transactional_self_invocation (self-invoked @Transactional methods in ExerciseService, InjectService, ScenarioService). The change touches the inject delete and bulk delete paths, so it most likely introduced these violations. Rerunning will fail the same way. The Jackson parse error and the exception-dump lines are logged noise and do not cause the failure.",
+  "evidence": [
+   {
+    "line": 3011,
+    "quote": "[ERROR] Tests run: 104, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 20.38 s <<< FAILURE! -- in io.openaev.architecture.TenantActiveTableAccessArchTest"
+   },
+   {
+    "line": 3014,
+    "quote": "Architecture Violation [Priority: MEDIUM] - Rule 'no classes that do not belong to any of [io.openaev.rest.finding.FindingSearchApi, io.openaev.rest.finding.FindingService"
+   },
+   {
+    "line": 3041,
+    "quote": "[ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.231 s <<< FAILURE! -- in io.openaev.architecture.TenantBackgroundTransactionArchTest"
+   },
+   {
+    "line": 3044,
+    "quote": "Architecture Violation [Priority: MEDIUM] - Rule 'classes should not call a @Transactional method of the same class, because an intra-class call to a @Transactional method bypasses the Spring proxy"
+   },
+   {
+    "line": 3077,
+    "quote": "Method <io.openaev.rest.inject.service.InjectService.delete(java.lang.String, boolean)> calls method <io.openaev.database.repository.FindingRepository.detachFromInjects(java.util.List)> in (InjectService.java:887)"
+   },
+   {
+    "line": 3083,
+    "quote": "Method <io.openaev.rest.inject.service.InjectService.delete(java.lang.String)> calls method <io.openaev.rest.inject.service.InjectService.delete(java.lang.String, boolean)> in (InjectService.java:873) self-invokes @Transactional"
+   },
+   {
+    "line": 3087,
+    "quote": "[ERROR] Tests run: 1419, Failures: 2, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5941,
+  "output_tokens": 1416,
+  "ms": 6411,
+  "cost_usd": 0.001302,
+  "cached": false
+ }
+}

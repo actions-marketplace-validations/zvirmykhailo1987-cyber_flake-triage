@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135435769792:465f10c31a6645f6",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The Check i18n translations step failed deterministically. The fr.json value for key 'minutes' is identical to the English text, and the checker counts it as 1 missing or untranslated value. This change touches the lang files, so re-running will fail the same way. Fix by translating 'minutes' in fr.json or adding it to scripts/i18n-loanwords.json if it is a legitimate loanword.",
+  "evidence": [
+   {
+    "line": 523,
+    "quote": "fr.json — identical to the English value"
+   },
+   {
+    "line": 524,
+    "quote": "  key   : minutes"
+   },
+   {
+    "line": 525,
+    "quote": "Total: 1 missing or untranslated value(s)."
+   },
+   {
+    "line": 527,
+    "quote": "add it to scripts/i18n-loanwords.json under the locale, e.g. \"de\": [\"Dashboard\"]."
+   },
+   {
+    "line": 528,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1379,
+  "output_tokens": 540,
+  "ms": 3198,
+  "cost_usd": 0.000408,
+  "cached": false
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135794207288:114d1a7c9dfc455c",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API Types Check failed because the committed generated TypeScript types are stale. The diff shows new API output types (LocalObjectOutput, XtmConnectionOutput, and new edge/node/link fields) that the PR's Java DTO changes produce but the front-end types don't include. The log itself says to regenerate types before committing. Re-running will fail the same way; regenerate with yarn generate-types-from-api and commit the result.",
+  "evidence": [
+   {
+    "line": 1382,
+    "quote": "+export interface LocalObjectOutput {"
+   },
+   {
+    "line": 1407,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1408,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2912,
+  "output_tokens": 700,
+  "ms": 3845,
+  "cost_usd": 0.000641,
+  "cached": false
+ }
+}

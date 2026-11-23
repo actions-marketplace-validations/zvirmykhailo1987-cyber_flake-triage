@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136899411861:7f094ad59a1fa8d8",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "E2E job failed because the app container stopped on startup: Flyway found a duplicate migration version (V6_20261121140000000__Coverage_scenario_safe_mode_and_approval). This is a deterministic startup error that will repeat on re-run. The migration name matches this branch's coverage safe-mode work, so the change likely added or renumbered a migration. The touched-file list does not show the migration file itself, so that link is inferred.",
+  "evidence": [
+   {
+    "line": 1464,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   },
+   {
+    "line": 1472,
+    "quote": "Duplicate Flyway migration version found: V6_20261121140000000__Coverage_scenario_safe_mode_and_approval.class"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2220,
+  "output_tokens": 615,
+  "ms": 3615,
+  "cost_usd": 0.00053,
+  "cached": false
+ }
+}

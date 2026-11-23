@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136899411827:91a3823d1e1cf493",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "E2E job failed because the openaev-app container crashed at startup with a deterministic 'Duplicate Flyway migration version' error for V6_20261121140000000__Coverage_scenario_safe_mode_and_approval, which matches this branch's feature. The app never became ready, so the failure will repeat on re-run. Fix the duplicate migration version or name before retrying.",
+  "evidence": [
+   {
+    "line": 1461,
+    "quote": "❌ Container openaev-app stopped unexpectedly"
+   },
+   {
+    "line": 1469,
+    "quote": "Caused by: java.lang.IllegalStateException: Duplicate Flyway migration version found: V6_20261121140000000__Coverage_scenario_safe_mode_and_approval.class"
+   },
+   {
+    "line": 1488,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2225,
+  "output_tokens": 633,
+  "ms": 3656,
+  "cost_usd": 0.000539,
+  "cached": false
+ }
+}

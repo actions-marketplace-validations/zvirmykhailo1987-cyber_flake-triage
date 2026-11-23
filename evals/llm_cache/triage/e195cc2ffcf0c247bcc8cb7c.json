@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137082657761:b06e86757290c84c",
+ "answer": {
+  "decision": "retry",
+  "category": "flaky_test",
+  "confidence": 0.6,
+  "summary": "Three API tests failed: two AssetLinkApiTest cases got 404 instead of 200, and ThreatArsenalVersionApiTest errored with an unattributed tenant write on Inject. The log shows tenant-isolation test helper and write-attribution warnings (TenantIsolationTestHelper, FAILCLOSED, WRITEATTR) and several unrelated DataPack and NPE errors, which points to shared tenant or test-data state rather than the change. None of the three failing tests or the touched files (OpenCRQCounterpartProvider, XtmOneClient) is in the failure path. The log does not prove a race, so confidence is moderate.",
+  "evidence": [
+   {
+    "line": 1398,
+    "quote": "java.lang.AssertionError: Status expected:<200> but was:<404>"
+   },
+   {
+    "line": 4009,
+    "quote": "org.springframework.dao.InvalidDataAccessApiUsageException: unattributed tenant write: Inject"
+   },
+   {
+    "line": 4035,
+    "quote": "Caused by: java.lang.IllegalStateException: unattributed tenant write: Inject"
+   },
+   {
+    "line": 1595,
+    "quote": "[FAILCLOSED] tables=agents,asset_groups,assets,injects at=io.openaev.service.InjectExpectationService.findAllByInjectId:256"
+   },
+   {
+    "line": 9527,
+    "quote": "[WRITEATTR-STALE] reporting_schedules DEFAULT unattributed(io.openaev.config.WriteAttrDirtyUpdateReportingTest$DirtyUpdate.given_entityLoadedBeforeRecording_should_beReportedUnattributed)"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5077,
+  "output_tokens": 1369,
+  "ms": 6404,
+  "cost_usd": 0.001192,
+  "cached": false
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135435728107:23fb1f5fe27bbba3",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.72,
+  "summary": "The i18n checker step exits with code 1 after dumping a long list of new UI strings from this PR's graph and marketplace components. The excerpt never states the checker's exact complaint, but the failure is deterministic and tied to the change (likely missing or duplicated translation keys, e.g. 'Keyboard shortcuts' and 'Explore in graph' each appear twice). Re-running will not fix it; the i18n keys need fixing.",
+  "evidence": [
+   {
+    "line": 510,
+    "quote": "##[start-action display=Check i18n translations;id=__self.__run_7]"
+   },
+   {
+    "line": 511,
+    "quote": "##[group]Run yarn i18n-checker"
+   },
+   {
+    "line": 1202,
+    "quote": "'Keyboard shortcuts'"
+   },
+   {
+    "line": 1207,
+    "quote": "'Keyboard shortcuts'"
+   },
+   {
+    "line": 1223,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2804,
+  "output_tokens": 753,
+  "ms": 4092,
+  "cost_usd": 0.000657,
+  "cached": false
+ }
+}

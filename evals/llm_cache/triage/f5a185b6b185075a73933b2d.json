@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136199777199:dbf1a8ff4e1b019f",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "The ensure-no-git-diff step failed because generation or formatting rewrote SimulationInjectApi.java: the import of io.swagger.v3.oas.annotations.media.ArraySchema is out of order relative to the committed file. The diff is deterministic, so a rerun on this commit will fail the same way. Fix by committing the import order the generator/formatter produces.",
+  "evidence": [
+   {
+    "line": 783,
+    "quote": "diff --git a/openaev-api/src/main/java/io/openaev/rest/inject/SimulationInjectApi.java b/openaev-api/src/main/java/io/openaev/rest/inject/SimulationInjectApi.java"
+   },
+   {
+    "line": 791,
+    "quote": "-import io.swagger.v3.oas.annotations.media.ArraySchema;"
+   },
+   {
+    "line": 793,
+    "quote": "+import io.swagger.v3.oas.annotations.media.ArraySchema;"
+   },
+   {
+    "line": 797,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2888,
+  "output_tokens": 625,
+  "ms": 3395,
+  "cost_usd": 0.000601,
+  "cached": false
+ }
+}

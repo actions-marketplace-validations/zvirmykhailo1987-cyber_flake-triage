@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134698865236:0e8384e9c32fcd4b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The coverage gate failed deterministically: the new file CoverageWaiverProbe.java has 0.00% coverage of its 5 changed lines, below the 80% threshold. The change adds untested code, so a re-run on the same commit will fail the same way until tests are added.",
+  "evidence": [
+   {
+    "line": 458,
+    "quote": "openaev-api/src/main/java/io/openaev/utils/CoverageWaiverProbe.java (0.00%): Missing lines 9-10,12-13,15"
+   },
+   {
+    "line": 461,
+    "quote": "Missing: 5 lines (0 partial)"
+   },
+   {
+    "line": 462,
+    "quote": "Coverage: 0.00%"
+   },
+   {
+    "line": 463,
+    "quote": "Less than 80% of the changed lines are covered."
+   },
+   {
+    "line": 464,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1201,
+  "output_tokens": 567,
+  "ms": 3346,
+  "cost_usd": 0.000404,
+  "cached": false
+ }
+}

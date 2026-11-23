@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136213806341:855b087ac806fcb6",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.7,
+  "summary": "The frontend-quality step failed in the 'Run yarn i18n-checker' action, which exits 1 deterministically. The visible log shows duplicate 'Stop execution' entries in the ja, ko, ru and zh translation arrays, which the checker likely rejects. The change does not touch any frontend locale files, and the checker's own error message (lines 512-545) is not in the excerpt, so the cause is not confirmed. A rerun will likely fail the same way until the duplicate keys are fixed.",
+  "evidence": [
+   {
+    "line": 551,
+    "quote": "    'Stop execution',"
+   },
+   {
+    "line": 554,
+    "quote": "    'Stop execution'"
+   },
+   {
+    "line": 575,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2971,
+  "output_tokens": 743,
+  "ms": 4316,
+  "cost_usd": 0.000669,
+  "cached": false
+ }
+}

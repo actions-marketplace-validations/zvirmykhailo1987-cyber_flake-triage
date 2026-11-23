@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136673156465:e34981f3efce51ac",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "The Docker build fails in the front-end stage because yarn build (Vite/rolldown) hits a JSX syntax error in openaev-front/src/admin/components/graph/Graph.tsx, a file this PR changes: an unclosed 'Box' tag at line 290 plus an unexpected token at line 292. This is a deterministic compile error from the change, so a rerun on the same commit will fail the same way.",
+  "evidence": [
+   {
+    "line": 1258,
+    "quote": "#39 2.040 ✗ Build failed in 1.28s"
+   },
+   {
+    "line": 1262,
+    "quote": "#39 2.043 [builtin:vite-transform] Expected corresponding JSX closing tag for 'Box'."
+   },
+   {
+    "line": 1271,
+    "quote": "Expected `</Box>`"
+   },
+   {
+    "line": 1274,
+    "quote": "#39 2.043 [builtin:vite-transform] Unexpected token. Did you mean `{'}'}` or `&rbrace;`?"
+   },
+   {
+    "line": 1291,
+    "quote": "#39 ERROR: process \"/bin/sh -c yarn build\" did not complete successfully: exit code: 1"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2736,
+  "output_tokens": 823,
+  "ms": 4141,
+  "cost_usd": 0.000685,
+  "cached": false
+ }
+}

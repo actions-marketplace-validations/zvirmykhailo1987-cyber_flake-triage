@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137185407420:bd9a2ba4bf93aa28",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "The API types check failed because the PR changed the backend EndpointOverviewOutput DTO (adding asset_external_reference and asset_last_seen_source) but did not regenerate openaev-front/src/utils/api-types.d.ts. The generator output differs from the committed file, so the job fails deterministically on every run. Fix: run yarn generate-types-from-api and commit the result. A re-run will not help.",
+  "evidence": [
+   {
+    "line": 1179,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1188,
+    "quote": "+  /** Reference of the asset in the system it was imported from (a link or an id), read by the cross-product pivots to mark that product as holding the asset */"
+   },
+   {
+    "line": 1189,
+    "quote": "+  asset_external_reference?: string;"
+   },
+   {
+    "line": 1198,
+    "quote": "+  asset_last_seen_source?: string;"
+   },
+   {
+    "line": 1202,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1203,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2377,
+  "output_tokens": 713,
+  "ms": 3639,
+  "cost_usd": 0.000594,
+  "cached": false
+ }
+}

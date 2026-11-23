@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "132684472596:f053b767cac34382",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "Docker build fails in the openaev-es8-client module during mvn install: Maven cannot resolve co.elastic.clients:elasticsearch-java:8.19.25, which the Renovate bump introduced. It is not found in jboss-public or central, and the shibboleth-releases repository prefix rule blocks it. The same pom will fail the same way on retry, so the fix is to correct the version or repository config. The log does not show whether the artifact is absent upstream or only from this mirror.",
+  "evidence": [
+   {
+    "line": 7253,
+    "quote": "Could not resolve dependencies for project io.openaev:openaev-es8-client:jar:3.261110.0"
+   },
+   {
+    "line": 7254,
+    "quote": "dependency: co.elastic.clients:elasticsearch-java:jar:8.19.25 (runtime)"
+   },
+   {
+    "line": 7255,
+    "quote": "prefixes: Path co/elastic/clients/elasticsearch-java/8.19.25/elasticsearch-java-8.19.25.jar NOT allowed from shibboleth-releases"
+   },
+   {
+    "line": 7256,
+    "quote": "Could not find artifact co.elastic.clients:elasticsearch-java:jar:8.19.25 in jboss-public"
+   },
+   {
+    "line": 7257,
+    "quote": "Could not find artifact co.elastic.clients:elasticsearch-java:jar:8.19.25 in central"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2586,
+  "output_tokens": 1138,
+  "ms": 5964,
+  "cost_usd": 0.000828,
+  "cached": false
+ }
+}

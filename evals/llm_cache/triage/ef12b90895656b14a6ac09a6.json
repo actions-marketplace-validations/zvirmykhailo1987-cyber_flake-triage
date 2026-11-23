@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136983973814:25a2cbe2e2195557",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "API Types Check failed because the committed openaev-front/src/utils/api-types.d.ts is stale. Regenerating from the API adds marking_definition_stix_id and an ImportLine type that the PR did not commit. The failure is deterministic and will repeat on re-run until types are regenerated and committed.",
+  "evidence": [
+   {
+    "line": 1178,
+    "quote": "[success] api file \"api-types.d.ts\" created in /home/runner/work/openaev/openaev/openaev-front/src/utils"
+   },
+   {
+    "line": 1179,
+    "quote": "Detected changes in src/utils/api-types.d.ts:"
+   },
+   {
+    "line": 1202,
+    "quote": "+  marking_definition_stix_id?: string;"
+   },
+   {
+    "line": 1206,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1207,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1841,
+  "output_tokens": 564,
+  "ms": 3487,
+  "cost_usd": 0.000466,
+  "cached": false
+ }
+}

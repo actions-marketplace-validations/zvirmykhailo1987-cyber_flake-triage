@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075459628:c62afc8c86034a65",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.6,
+  "summary": "8 graph-interactions Firefox e2e tests failed on a scheduled run of main. The first failure is a deterministic console error: a CSP report-only violation from schemas-BmYp45oA.js (eval blocked, 'unsafe-eval' missing) that the spec's problems assertion treats as a failure. The change touches only Java OpenCRQ/XtmOne files, so it doesn't explain the graph UI failures directly. The log doesn't show the other 7 failure details, so the shared cause is inferred. A rerun would likely repeat the same console error, so retry is unlikely to help.",
+  "evidence": [
+   {
+    "line": 1942,
+    "quote": "✘  19 [firefox] › tests_e2e/tests/graph/graph-interactions.spec.ts:112:3 › Exploration graph interactions › each layout button moves the nodes on the first click, and Re-run plays the layout again (7.8s)"
+   },
+   {
+    "line": 2011,
+    "quote": "+     \"error: [JavaScript Error: \\\"Content-Security-Policy: (Report-Only policy) The page’s settings would block a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'self' 'nonce-f0968a302099a994197b320c434f5986'” (Missing 'unsafe-eval')\\\" {file: \\\"http://localhost:8080/assets/schemas-BmYp45oA.js\\\" line: 1}]\","
+   },
+   {
+    "line": 2016,
+    "quote": "expect(problems).toEqual([]);"
+   },
+   {
+    "line": 2315,
+    "quote": "8 failed"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 6888,
+  "output_tokens": 1485,
+  "ms": 7649,
+  "cost_usd": 0.001431,
+  "cached": false
+ }
+}

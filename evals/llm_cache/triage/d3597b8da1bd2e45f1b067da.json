@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134704323856:71bdac5997f1531d",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "The MUI regression gate fails deterministically: it found 5 new MUI imports (Button, Typography, Badge, Tooltip) in openaev-front graph components, and re-running the same commit will fail the same way. Caveat: the changed-files list shows only docs/docs/reference/apis/rest-api.md, which doesn't match the flagged Graph.tsx files, so check the branch diff for those imports.",
+  "evidence": [
+   {
+    "line": 815,
+    "quote": "MUI regression gate: FAIL — 5 new import(s) (01d6f1f89...HEAD)"
+   },
+   {
+    "line": 817,
+    "quote": "openaev-front/src/admin/components/graph/Graph.tsx:1"
+   },
+   {
+    "line": 818,
+    "quote": "imports MUI `Button`; this product already renders the design system's `Button`."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1547,
+  "output_tokens": 677,
+  "ms": 4011,
+  "cost_usd": 0.000493,
+  "cached": false
+ }
+}

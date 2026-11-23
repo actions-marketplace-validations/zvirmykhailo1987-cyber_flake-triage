@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075460214:b90435a736b92548",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.75,
+  "summary": "The multi-tenancy shadow check failed with 13 unscoped production reads that are not in the stored allowed list. This is a deterministic static check rather than a flaky test, so a rerun on the same commit should fail again. The touched files (OpenCRQCounterpartProvider, XtmOneClient) are the likely source of the new unscoped reads. The excerpt does not show which reads they are, so confirm in the job summary.",
+  "evidence": [
+   {
+    "line": 7211,
+    "quote": "##[error]13 unscoped production read(s) new to this mode's stored list. See the job summary."
+   },
+   {
+    "line": 7212,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1156,
+  "output_tokens": 494,
+  "ms": 3394,
+  "cost_usd": 0.000363,
+  "cached": false
+ }
+}

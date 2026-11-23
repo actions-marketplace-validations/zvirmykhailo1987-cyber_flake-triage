@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "131982156103:63e674c242bb3529",
+ "answer": {
+  "decision": "retry",
+  "category": "unclear",
+  "confidence": 0.35,
+  "summary": "The only failing test is BatchQueueServiceBatchProcessingTest.shouldReleaseWorkerWhenUnexpectedExceptionEscapes, which throws IllegalStateException 'Unexpected ack failure'. It is in batch queue code the change does not touch, has no flake history, and the log gives no root cause, so a retry is a low-confidence call.",
+  "evidence": [
+   {
+    "line": 33780,
+    "quote": "BatchQueueServiceBatchProcessingTest.shouldReleaseWorkerWhenUnexpectedExceptionEscapes -- Time elapsed: 0.112 s <<< ERROR!"
+   },
+   {
+    "line": 33781,
+    "quote": "java.lang.IllegalStateException: Unexpected ack failure"
+   },
+   {
+    "line": 41446,
+    "quote": "BatchQueueServiceBatchProcessingTest.shouldReleaseWorkerWhenUnexpectedExceptionEscapes » IllegalState Unexpected ack failure"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5061,
+  "output_tokens": 1335,
+  "ms": 8274,
+  "cost_usd": 0.001174,
+  "cached": false
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "133435017814:8916701b28bb54e8",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "API types check failed because the committed front-end types in openaev-front/src/utils/api-types.d.ts do not match what the backend generates. The diff adds InjectAuthorisationInput and aiTargetToken, and changes ai_target_token_set from readonly to writable. The change must regenerate and commit the types. This is deterministic, so a retry will fail the same way.",
+  "evidence": [
+   {
+    "line": 1240,
+    "quote": "+export interface InjectAuthorisationInput {"
+   },
+   {
+    "line": 1252,
+    "quote": "+  aiTargetToken?: string;"
+   },
+   {
+    "line": 1261,
+    "quote": "+  ai_target_token_set?: boolean;"
+   },
+   {
+    "line": 1265,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1266,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2162,
+  "output_tokens": 558,
+  "ms": 3762,
+  "cost_usd": 0.000495,
+  "cached": false
+ }
+}

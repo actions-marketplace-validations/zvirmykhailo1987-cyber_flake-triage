@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136407699159:771a457a63ae6191",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.75,
+  "summary": "ScenarioUpdateApiTest.given_updatedTwice_should_rollBackToTheInstalledContent fails an assertion on rollback behaviour the change touches: after rollback, a revision reports catalog version 1.1.0 where 1.0.0 is expected. It has failed 4 times before, so this looks deterministic. The second failure, given_foreignRevision_should_refuseTheRollback, is a secondary error: a foreign key violation on the 'anonymous' user poisons the transaction. That may be test setup or order-dependent, so it is not proof of a regression on its own.",
+  "evidence": [
+   {
+    "line": 1941,
+    "quote": "Expected: every item is is \"1.0.0\""
+   },
+   {
+    "line": 1942,
+    "quote": "but: an item was \"1.1.0\""
+   },
+   {
+    "line": 1938,
+    "quote": "io.openaev.api.scenario.ScenarioUpdateApiTest.given_updatedTwice_should_rollBackToTheInstalledContent -- Time elapsed: 0.465 s <<< FAILURE!"
+   },
+   {
+    "line": 1682,
+    "quote": "Detail: Key (user_id)=(anonymous) is not present in table \"users\"."
+   },
+   {
+    "line": 1669,
+    "quote": "Caused by: org.postgresql.util.PSQLException: ERROR: current transaction is aborted, commands ignored until end of transaction block"
+   },
+   {
+    "line": 3210,
+    "quote": "ScenarioUpdateApiTest.revisionId:378 JSON path \"$[*].scenario_revision_catalog_version\""
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4386,
+  "output_tokens": 1094,
+  "ms": 5938,
+  "cost_usd": 0.000986,
+  "cached": false
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136250600427:78f5a1c2359a76f1",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "API types check failed because the types generated from the API no longer match the committed openaev-front/src/utils/api-types.d.ts. This PR's DTO changes made several fields optional (scenario_revision_number, scenario_version_current, scenario_version_latest, scenario_simulations_count), and the committed file was not regenerated. This is deterministic, so a rerun will fail again. Fix: run yarn generate-types-from-api and commit the result.",
+  "evidence": [
+   {
+    "line": 1192,
+    "quote": "-  scenario_revision_number: number;"
+   },
+   {
+    "line": 1193,
+    "quote": "+  scenario_revision_number?: number;"
+   },
+   {
+    "line": 1201,
+    "quote": "-  scenario_version_current: boolean;"
+   },
+   {
+    "line": 1203,
+    "quote": "+  scenario_version_current?: boolean;"
+   },
+   {
+    "line": 1212,
+    "quote": "-  scenario_simulations_count: number;"
+   },
+   {
+    "line": 1217,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3507,
+  "output_tokens": 781,
+  "ms": 4129,
+  "cost_usd": 0.000741,
+  "cached": false
+ }
+}

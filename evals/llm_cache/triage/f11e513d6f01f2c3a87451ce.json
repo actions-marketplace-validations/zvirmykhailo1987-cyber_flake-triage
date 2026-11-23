@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135364864273:71d8012c9434c42d",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "Frontend build fails deterministically with 7 Rolldown/Vite errors. The visible one is an unresolved import of '../../graph/EntityGraph' from TeamDetail.tsx, in a PR that touches the graph components, so the change most likely broke the import path or module. A rerun will hit the same error.",
+  "evidence": [
+   {
+    "line": 270,
+    "quote": "✗ Build failed in 2.00s"
+   },
+   {
+    "line": 272,
+    "quote": "Build failed with 7 errors:"
+   },
+   {
+    "line": 338,
+    "quote": "[UNRESOLVED_IMPORT] Could not resolve '../../graph/EntityGraph' in src/admin/components/teams/teams/TeamDetail.tsx"
+   },
+   {
+    "line": 364,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2894,
+  "output_tokens": 785,
+  "ms": 4558,
+  "cost_usd": 0.000682,
+  "cached": false
+ }
+}

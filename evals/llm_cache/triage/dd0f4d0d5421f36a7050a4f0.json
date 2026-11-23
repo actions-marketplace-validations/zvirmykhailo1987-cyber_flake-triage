@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135437361896:7da717ef936e356a",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Likely regression, not flake: InjectsExecutionJobExternalPhaseSplitTest.given_recordOutcomeFailure_should_notAbortTheRestOfTheBatch failed on a path the change touches (InjectsExecutionJob.java), with no flake history. It expects the rest of the batch to run after one inject's recording failure, but the only ExecutionTrace produced is the failing one ('Failed to publish to RabbitMQ'), so the batch appears to have aborted. Other ERROR lines in the log (JFR, chaining, integrations) are unrelated noise.",
+  "evidence": [
+   {
+    "line": 2083,
+    "quote": "given_recordOutcomeFailure_should_notAbortTheRestOfTheBatch -- Time elapsed: 0.365 s <<< FAILURE!"
+   },
+   {
+    "line": 2085,
+    "quote": "[the rest of the batch still runs despite the other inject's recording failure]"
+   },
+   {
+    "line": 2087,
+    "quote": "message=Failed to publish to RabbitMQ, structuredOutput=null, action=COMPLETE, status=ERROR"
+   },
+   {
+    "line": 2088,
+    "quote": "to match given predicate but none did."
+   },
+   {
+    "line": 8403,
+    "quote": "InjectsExecutionJobExternalPhaseSplitTest.given_recordOutcomeFailure_should_notAbortTheRestOfTheBatch:264 [the rest of the batch still runs despite the other inject's recording failure]"
+   },
+   {
+    "line": 8408,
+    "quote": "[ERROR] Tests run: 2050, Failures: 1, Errors: 0, Skipped: 0"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5546,
+  "output_tokens": 1183,
+  "ms": 5377,
+  "cost_usd": 0.001146,
+  "cached": false
+ }
+}

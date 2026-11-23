@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134884379868:9a19ce643d85cfee",
+ "answer": {
+  "decision": "retry",
+  "category": "infrastructure",
+  "confidence": 0.9,
+  "summary": "Docker build failed while copying a base image layer from the quay.io CDN (httpReadSeeker: failed open / failed to do request). This is a registry/network fetch error during cache key computation, before any project code was compiled or tested, so it is unrelated to the frontend expectation changes. Re-running the job should likely pass.",
+  "evidence": [
+   {
+    "line": 938,
+    "quote": "#8 ERROR: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://cdn01.quay.io/quayio-production-s3/sha256/28/287d0ba27ab0eadffff8706274db457b3b43f6f0733beafec3592f47906ee75f?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATAAF2YHTGR23ZTE6%2F20261118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261118T144708Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&X-Amz-Signature"
+   },
+   {
+    "line": 970,
+    "quote": "ERROR: failed to build: failed to solve: failed to compute cache key: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://cdn01.quay.io/quayio-production-s3/sha256/28/287d0ba27ab0eadffff8706274db457b3b43f6f0733beafec3592f47906ee75f"
+   },
+   {
+    "line": 958,
+    "quote": "#12 CANCELED"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2857,
+  "output_tokens": 556,
+  "ms": 3115,
+  "cost_usd": 0.000564,
+  "cached": false
+ }
+}

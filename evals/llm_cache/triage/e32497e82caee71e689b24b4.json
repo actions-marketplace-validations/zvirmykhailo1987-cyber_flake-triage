@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135104212211:0d34c04397cf1ed0",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "API Types Check failed because the committed generated TypeScript types are stale. The PR adds API output fields and a new StarterPackDashboardsRestoreOutput type, but the generator was not re-run and committed. The job prints an explicit 'Forgot to generate types' message. Re-running will fail the same way until the developer runs yarn generate-types-from-api and commits the result.",
+  "evidence": [
+   {
+    "line": 1200,
+    "quote": "+  simulations_count: number;"
+   },
+   {
+    "line": 1210,
+    "quote": "/** Starter-pack dashboards restored and tenant defaults set back */"
+   },
+   {
+    "line": 1223,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1224,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3473,
+  "output_tokens": 664,
+  "ms": 3754,
+  "cost_usd": 0.000679,
+  "cached": false
+ }
+}

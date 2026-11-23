@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134702146708:df63c1884da749b5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.92,
+  "summary": "API Types Check failed because the generated TypeScript types don't match the committed ones. The diff adds new Graph types (GraphOutput, GraphNodeOutput, GraphEdgeOutput) from the Java API change in this PR, but the generated types file was not regenerated and committed. The check is deterministic, so a rerun will fail the same way until the types are regenerated and committed.",
+  "evidence": [
+   {
+    "line": 1224,
+    "quote": "+export interface GraphOutput {"
+   },
+   {
+    "line": 1235,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1236,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1581,
+  "output_tokens": 488,
+  "ms": 2999,
+  "cost_usd": 0.000402,
+  "cached": false
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135945546352:f9b675079bc74d82",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API Types Check failed because the committed openaev-front/src/utils/api-types.d.ts is out of date. Regenerating from the API removed the doc comment above PayloadUsageMoveOutput, so the generated file no longer matches the committed one. This is deterministic and tied to the PR's Java DTO changes, so a re-run will fail the same way. Fix: run yarn generate-types-from-api and commit the updated api-types.d.ts.",
+  "evidence": [
+   {
+    "line": 1191,
+    "quote": "-/** The usages moved to the target version, and the others with why they stayed. */"
+   },
+   {
+    "line": 1195,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1196,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2201,
+  "output_tokens": 542,
+  "ms": 3113,
+  "cost_usd": 0.000491,
+  "cached": false
+ }
+}

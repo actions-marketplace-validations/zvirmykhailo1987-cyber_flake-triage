@@ -1,0 +1,45 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134392801186:d991e4a47fbfedad",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "Three deterministic ArchUnit architecture tests failed (3 failures, build exit 1), and the violations come from code this branch adds. ThreatArsenalService.isNameAvailable calls PayloadIdentity.getId() and injectorContract(String) without a tenant argument, and PayloadService.assertNameAvailable self-invokes the @Transactional isNameAvailable. These are not infrastructure or flake signals (0 flakes on the first two tests, and the history shows no prior persistence for this change), so a re-run will fail the same way. Fix the layering and transaction violations, or add a reviewed allowlist entry.",
+  "evidence": [
+   {
+    "line": 3065,
+    "quote": "[ERROR] Tests run: 104, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 97.15 s <<< FAILURE! -- in io.openaev.architecture.TenantActiveTableAccessArchTest"
+   },
+   {
+    "line": 3069,
+    "quote": "Method <io.openaev.service.threat_arsenal.ThreatArsenalService.isNameAvailable(io.openaev.context.TxCtx, java.lang.String, java.lang.String)> calls method <io.openaev.database.model.payload.PayloadIdentity.getId()> in (ThreatArsenalService.java:288)"
+   },
+   {
+    "line": 3082,
+    "quote": "Method <io.openaev.service.threat_arsenal.ThreatArsenalService.isNameAvailable(io.openaev.context.TxCtx, java.lang.String, java.lang.String)> calls method <io.openaev.rest.injector_contract.InjectorContractService.injectorContract(java.lang.String)> in (ThreatArsenalService.java:284)"
+   },
+   {
+    "line": 3101,
+    "quote": "Architecture Violation [Priority: MEDIUM] - Rule 'classes should not call a @Transactional method of the same class, because an intra-class call to a @Transactional method bypasses the Spring proxy: no transaction, no tenant scope, silently' was violated (1 times):"
+   },
+   {
+    "line": 3129,
+    "quote": "Method <io.openaev.rest.payload.service.PayloadService.assertNameAvailable(java.lang.String, java.lang.String, java.lang.String)> calls method <io.openaev.rest.payload.service.PayloadService.isNameAvailable(java.lang.String, java.lang.String, java.lang.String)> in (PayloadService.java:429) self-invokes @Transactional io.openaev.rest.payload.service.PayloadService.isNameAvailable(java.lang.String, "
+   },
+   {
+    "line": 3131,
+    "quote": "[ERROR] Tests run: 1487, Failures: 3, Errors: 0, Skipped: 3"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5578,
+  "output_tokens": 1514,
+  "ms": 6552,
+  "cost_usd": 0.001315,
+  "cached": false
+ }
+}

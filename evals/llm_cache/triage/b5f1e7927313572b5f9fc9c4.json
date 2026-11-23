@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136305439793:b6b9a7a069603d6d",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "Deterministic Spring context startup failure, not a flake. The change adds a JPQL query in PayloadIdentityRepository (findAllActionIdsByTenantIdWithOlderVersionsInUse) that JSqlParser rejects at line 15, column 68 on the token \"ANDi\", likely a typo. The application context fails to load, so every AppTest test fails with the same cause, and later context-based tests fail on the cached failure. Re-running will fail the same way. Fix the query in PayloadIdentityRepository.java.",
+  "evidence": [
+   {
+    "line": 3528,
+    "quote": "Cannot create query for method [PayloadIdentityRepository.findAllActionIdsByTenantIdWithOlderVersionsInUse(java.lang.String,java.util.Collection)]; The query you provided is not a valid SQL Query"
+   },
+   {
+    "line": 3557,
+    "quote": "Encountered: <S_IDENTIFIER> / \"ANDi\", at line 15, column 68, in lexical state DEFAULT."
+   },
+   {
+    "line": 5860,
+    "quote": "java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@35fd8e88 testClass = io.openaev.AppTest"
+   },
+   {
+    "line": 6029,
+    "quote": "java.lang.IllegalStateException: ApplicationContext failure threshold (1) exceeded: skipping repeated attempt to load context"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 14251,
+  "output_tokens": 1143,
+  "ms": 5049,
+  "cost_usd": 0.001997,
+  "cached": false
+ }
+}

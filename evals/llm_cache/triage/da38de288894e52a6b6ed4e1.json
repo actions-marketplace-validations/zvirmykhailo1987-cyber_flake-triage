@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134038236469:383f6c39b8171ef8",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "The API Types Check failed because the committed generated TypeScript types are stale. The PR adds new API fields (payload_revoked, action_payload_managed, action_payload_revoked, action_payload_version) that the generator produced but the commit does not include. The log itself says to run yarn generate-types-from-api and commit the result. The same diff will appear on every re-run, so retrying will not help. Fix: regenerate the types, commit them, and push.",
+  "evidence": [
+   {
+    "line": 1221,
+    "quote": "+  action_payload_managed?: boolean;"
+   },
+   {
+    "line": 1229,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1230,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2149,
+  "output_tokens": 678,
+  "ms": 3717,
+  "cost_usd": 0.000554,
+  "cached": false
+ }
+}

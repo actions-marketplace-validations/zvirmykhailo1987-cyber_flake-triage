@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135740420130:dbdc4c2cf0c82c79",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "TenantStatementInspectorTest.assetGroupOptionQueriesAcceptFindingsActive fails on a deterministic SQL assertion: the asset-group option query joins findings in a subquery without the tenant filter. The PR touches AssetGroupRepository, FindingRepository and the asset-group code, so the change likely caused it. The Azure identity errors and the catalog startup warning are unrelated noise.",
+  "evidence": [
+   {
+    "line": 1741,
+    "quote": "io.openaev.config.TenantStatementInspectorTest.assetGroupOptionQueriesAcceptFindingsActive(String)[1] -- Time elapsed: 0.006 s <<< FAILURE!"
+   },
+   {
+    "line": 1742,
+    "quote": "org.opentest4j.AssertionFailedError: findAllByNameLinkedToFindings joins findings inside a subquery; once findings is active that join must be filtered too"
+   },
+   {
+    "line": 2209,
+    "quote": "TenantStatementInspectorTest.assetGroupOptionQueriesAcceptFindingsActive:1342 findAllByNameLinkedToFindings joins findings inside a subquery"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3706,
+  "output_tokens": 961,
+  "ms": 4115,
+  "cost_usd": 0.000851,
+  "cached": false
+ }
+}

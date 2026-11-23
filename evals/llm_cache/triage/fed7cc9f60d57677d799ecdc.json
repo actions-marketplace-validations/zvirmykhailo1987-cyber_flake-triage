@@ -1,0 +1,29 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "137075460430:0d1288dbd314de24",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.7,
+  "summary": "The API Tests step failed in the multi-tenancy shadow check, not in a test assertion: it found 12 unscoped production reads that are new relative to the stored list, and exited 1. This check is deterministic, so a rerun on the same commit should fail the same way. The log does not list the reads, so the cause is unconfirmed. The touched files (OpenCRQCounterpartProvider, XtmOneClient) are the likely source and should be checked for reads missing tenant scoping.",
+  "evidence": [
+   {
+    "line": 6908,
+    "quote": "##[error]12 unscoped production read(s) new to this mode's stored list. See the job summary."
+   },
+   {
+    "line": 6909,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1151,
+  "output_tokens": 606,
+  "ms": 3681,
+  "cost_usd": 0.000418,
+  "cached": false
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136051523877:24fb8759da8bcfa1",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.9,
+  "summary": "Two deterministic architecture-rule failures, not flakes, and both point at files this change touched. TenantBackgroundTransactionArchTest flags CatalogListService.offered self-invoking the @Transactional released() method (CatalogListService.java:41), a bypassed-proxy bug that will repeat on every run. JsonTypeDirtyOnLoadCoverageTest fails because the JSON-mapped fields in tenant-active tables no longer match the probe list, likely from the changed Inject/ScenarioRevision model. Infra noise at the Jackson '<' parse error is unrelated. Fix the self-invocation and the probe list, then re-run.",
+  "evidence": [
+   {
+    "line": 1830,
+    "quote": "[ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.582 s <<< FAILURE! -- in what the two lists promise"
+   },
+   {
+    "line": 1832,
+    "quote": "every JSON-mapped field stored in a tenant-active table needs a case in JsonTypeDirtyOnLoadProbeTest, and nothing else belongs in PROBED_FIELDS. With tables: [AiAttack.multiTurn @ payloads, AiAttack.successDetector @ payloads, Asset.aiTargetConfiguration @ assets, Asset.metadata @ assets, AssetGroup.dynamicFilter @ asset_groups"
+   },
+   {
+    "line": 3034,
+    "quote": "[ERROR] io.openaev.architecture.TenantBackgroundTransactionArchTest.no_transactional_self_invocation -- Time elapsed: 0.132 s <<< FAILURE!"
+   },
+   {
+    "line": 3036,
+    "quote": "Architecture Violation [Priority: MEDIUM] - Rule 'classes should not call a @Transactional method of the same class, because an intra-class call to a @Transactional method bypasses the Spring proxy: no transaction, no tenant scope, silently' was violated (1 times):"
+   },
+   {
+    "line": 3037,
+    "quote": "Method <io.openaev.service.catalog.CatalogListService.offered(java.lang.Class, java.lang.String, java.lang.String)> calls method <io.openaev.service.catalog.CatalogListService.released(java.lang.Class, java.lang.String, java.lang.String)> in (CatalogListService.java:41) self-invokes @Transactional"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 5729,
+  "output_tokens": 1565,
+  "ms": 6897,
+  "cost_usd": 0.001355,
+  "cached": false
+ }
+}

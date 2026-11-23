@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135494589630:a54bd3e91f52f1f9",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.95,
+  "summary": "The API types check failed because the generated TypeScript types are stale. The PR adds backend settings (SettingsRuntimeUpdateInput and a runtime setting type) but the committed generated types were not regenerated. The failure is deterministic and will repeat on re-run until the engineer runs yarn generate-types-from-api and commits the output.",
+  "evidence": [
+   {
+    "line": 1246,
+    "quote": "+export interface SettingsRuntimeUpdateInput {"
+   },
+   {
+    "line": 1254,
+    "quote": "⚠️ Forgot to generate types! Please run 'yarn run generate-types-from-api' before committing."
+   },
+   {
+    "line": 1255,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3658,
+  "output_tokens": 579,
+  "ms": 3108,
+  "cost_usd": 0.000655,
+  "cached": false
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "136874699681:2b62cb5d978afcd5",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "Two FindingRecordingServiceTest lifecycle tests fail deterministically on the feature branch: each expects one DATA_UPDATE_SUCCESS event but gets an extra one. The assertion concerns the finding-lifecycle event sequence this branch changes, and the failure repeats across the run. The changed files shown are only docs and front-end types, so the service-side link is inferred from the test area, not confirmed in the diff.",
+  "evidence": [
+   {
+    "line": 2692,
+    "quote": "[ERROR] io.openaev.service.finding.FindingRecordingServiceTest.given_aNewOccurrenceLeavingTheSeenDatesAsTheyAre_should_publishAnUpdate -- Time elapsed: 0.666 s <<< FAILURE!"
+   },
+   {
+    "line": 2698,
+    "quote": "  [\"DATA_FETCH_SUCCESS\", \"DATA_UPDATE_SUCCESS\"]"
+   },
+   {
+    "line": 2700,
+    "quote": "  [\"DATA_UPDATE_SUCCESS\"]"
+   },
+   {
+    "line": 2858,
+    "quote": "  [\"DATA_FETCH_SUCCESS\", \"DATA_UPDATE_SUCCESS\", \"DATA_UPDATE_SUCCESS\"]"
+   },
+   {
+    "line": 2862,
+    "quote": "  [\"DATA_UPDATE_SUCCESS\"]"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2812,
+  "output_tokens": 1107,
+  "ms": 6137,
+  "cost_usd": 0.000835,
+  "cached": false
+ }
+}

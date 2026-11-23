@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134701082771:11b8fb8ee402bff2",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.93,
+  "summary": "The MUI regression gate failed deterministically: the PR adds 5 direct MUI imports (Button, Typography, Badge, Tooltip) in the new graph components, which the design-system policy forbids. Re-running will fail the same way; fix by importing from @filigran/design-system or adding a documented fds:keep-mui exemption.",
+  "evidence": [
+   {
+    "line": 811,
+    "quote": "MUI regression gate: FAIL — 5 new import(s) (01d6f1f89...HEAD)"
+   },
+   {
+    "line": 814,
+    "quote": "imports MUI `Button`; this product already renders the design system's `Button`."
+   },
+   {
+    "line": 820,
+    "quote": "imports MUI `Tooltip`; this product already renders the design system's `Tooltip`."
+   },
+   {
+    "line": 825,
+    "quote": "import Button from '@filigran/design-system' instead (preferred);"
+   },
+   {
+    "line": 832,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1995,
+  "output_tokens": 336,
+  "ms": 2000,
+  "cost_usd": 0.000367,
+  "cached": false
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134704242599:c7f19af4c6870cdb",
+ "answer": {
+  "decision": "no_retry",
+  "category": "unclear",
+  "confidence": 0.7,
+  "summary": "The frontend job failed in the i18n checker, not in tests: three locale values are identical to English (de Radial, es Radial, fr Relations). The checker is deterministic and will fail again on rerun. The PR only touches docs/docs/reference/apis/rest-api.md, so it is unclear why the locale check started failing here. Fix the translations or add the loanwords to scripts/i18n-loanwords.json.",
+  "evidence": [
+   {
+    "line": 523,
+    "quote": "de.json — identical to the English value"
+   },
+   {
+    "line": 529,
+    "quote": "Total: 3 missing or untranslated value(s)."
+   },
+   {
+    "line": 531,
+    "quote": "If a value is legitimately identical"
+   },
+   {
+    "line": 532,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 1265,
+  "output_tokens": 592,
+  "ms": 4923,
+  "cost_usd": 0.000423,
+  "cached": false
+ }
+}

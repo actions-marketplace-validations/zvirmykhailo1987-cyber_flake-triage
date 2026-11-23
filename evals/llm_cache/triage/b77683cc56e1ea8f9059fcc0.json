@@ -1,0 +1,37 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135103458103:9dd5c4411484d54b",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "The 'Check i18n translations' step (yarn i18n-checker) exits with code 1. The log excerpt shows the same English strings repeated in the ja, ko, ru and zh arrays, including 'Stop execution' appearing twice in one array. This looks like a deterministic translation-file problem from this change, not flakiness, so a re-run should fail again. The excerpt is truncated and never prints the checker's own error message, so the exact rule that fired is inferred.",
+  "evidence": [
+   {
+    "line": 559,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 556,
+    "quote": "'Stop execution'"
+   },
+   {
+    "line": 555,
+    "quote": "ja: ["
+   },
+   {
+    "line": 580,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 3520,
+  "output_tokens": 713,
+  "ms": 4796,
+  "cost_usd": 0.000709,
+  "cached": false
+ }
+}

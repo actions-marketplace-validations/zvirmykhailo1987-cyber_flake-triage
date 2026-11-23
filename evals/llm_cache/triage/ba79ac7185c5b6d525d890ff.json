@@ -1,0 +1,33 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "135364886435:fc77666c469fca9d",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.85,
+  "summary": "Frontend build fails at the Vite/rolldown bundling step with 7 UNRESOLVED_IMPORT errors, e.g. OrganizationDetail.tsx imports ../../graph/EntityGraph, which does not resolve. This is a deterministic module-resolution error, most likely caused by this PR's graph-component changes (a renamed or removed file), so a rerun will fail the same way. Only the first error is visible in the excerpt, so the other six are unconfirmed.",
+  "evidence": [
+   {
+    "line": 272,
+    "quote": "Build failed with 7 errors:"
+   },
+   {
+    "line": 338,
+    "quote": "[UNRESOLVED_IMPORT] Could not resolve '../../graph/EntityGraph' in src/admin/components/teams/organizations/OrganizationDetail.tsx"
+   },
+   {
+    "line": 364,
+    "quote": "##[error]Process completed with exit code 1."
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 2561,
+  "output_tokens": 821,
+  "ms": 4303,
+  "cost_usd": 0.000667,
+  "cached": false
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "purpose": "triage",
+ "prompt_version": "v2",
+ "cache_id": "134894328534:f2b5a85255311561",
+ "answer": {
+  "decision": "no_retry",
+  "category": "regression",
+  "confidence": 0.8,
+  "summary": "ThreatArsenalApiTest.given_groupByPrimaryDomain_should_returnActionsInDomainOrder fails with an assertion that a single action ID appears twice in the result, which looks like duplicated rows from a join and would repeat on rerun. The change touches threat arsenal, domain grouping, and AuthorJoins.java, so it plausibly caused this. The other errors in the log (DataPack init NPE, 'boom', DB error) are logged during setup and do not cause the build failure. Confidence is not higher because the log does not show the query or the join directly.",
+  "evidence": [
+   {
+    "line": 1493,
+    "quote": "io.openaev.api.threat_arsenal.ThreatArsenalApiTest.given_groupByPrimaryDomain_should_returnActionsInDomainOrder -- Time elapsed: 0.285 s <<< FAILURE!"
+   },
+   {
+    "line": 1503,
+    "quote": "\"8bc1aea0-6bfe-404e-8b41-da00e4d7d374\", \"8bc1aea0-6bfe-404e-8b41-da00e4d7d374\""
+   },
+   {
+    "line": 2737,
+    "quote": "\"8bc1aea0-6bfe-404e-8b41-da00e4d7d374\","
+   },
+   {
+    "line": 2738,
+    "quote": "\"8bc1aea0-6bfe-404e-8b41-da00e4d7d374\","
+   },
+   {
+    "line": 2746,
+    "quote": "Tests run: 1155, Failures: 1, Errors: 0, Skipped: 0"
+   }
+  ]
+ },
+ "meta": {
+  "model": "claude-haiku-5-5",
+  "input_tokens": 4428,
+  "output_tokens": 1002,
+  "ms": 5165,
+  "cost_usd": 0.000944,
+  "cached": false
+ }
+}
