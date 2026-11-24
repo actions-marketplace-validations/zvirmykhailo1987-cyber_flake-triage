@@ -15,6 +15,30 @@ passed against it: [`evals/results/e2e-live.json`](evals/results/e2e-live.json).
 
 ![Overview of the console](docs/screenshot-home.png)
 
+**As a GitHub Action**, after your CI workflow fails (full example:
+[`docs/example-workflow.yml`](docs/example-workflow.yml)):
+
+```yaml
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+permissions:
+  actions: read
+jobs:
+  triage:
+    if: github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: zvirmykhailo1987-cyber/flake-triage@v0   # or pin the commit SHA you reviewed
+        with:
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}   # optional: without it, rules only
+          history: path/to/collected-history                     # optional, see flake-collect
+```
+
+Every failed job gets *retry*, *do not retry* or *unsure* in the run's summary, with the log lines
+behind it. It needs only `actions: read` and never re-runs, comments or opens issues.
+
 ## Results
 
 Same failures for every policy. Holdout: failures from 2026-11-18 on; the rules and the model prompt

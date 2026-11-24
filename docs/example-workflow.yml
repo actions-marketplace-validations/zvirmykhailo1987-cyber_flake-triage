@@ -17,7 +17,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - id: triage
-        uses: OWNER/flake-triage@v0          # pin a tag or a commit SHA you have reviewed
+        uses: zvirmykhailo1987-cyber/flake-triage@v0         # pin a tag or a commit SHA you have reviewed
         with:
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}   # optional: without it, rules only
           history: bundled                                       # OpenAEV: the history shipped with the action

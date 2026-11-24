@@ -1,0 +1,38 @@
+# Runs this repository's action on a real GitHub runner against a failed public OpenAEV run.
+# Rules only (no model key), history bundled. Manual, so a release is checked before it is tagged.
+name: Action smoke test
+on:
+  workflow_dispatch:
+    inputs:
+      run-id:
+        description: A failed OpenAEV-Platform/openaev workflow run
+        required: true
+        default: "45139591143"
+permissions:
+  actions: read
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+      - id: triage
+        uses: ./
+        with:
+          repository: OpenAEV-Platform/openaev
+          run-id: ${{ inputs.run-id }}
+          history: bundled
+      - name: Check the decisions
+        shell: bash
+        env:
+          DECISIONS: ${{ steps.triage.outputs.decisions }}
+        run: |
+          python - "$DECISIONS" <<'EOF'
+          import json, sys
+          rows = json.load(open(sys.argv[1], encoding="utf-8"))
+          rows = rows if isinstance(rows, list) else rows.get("decisions", rows)
+          assert rows, "no decisions"
+          for r in rows:
+              print(r.get("decision"), "|", r.get("job") or r.get("name"))
+          EOF
