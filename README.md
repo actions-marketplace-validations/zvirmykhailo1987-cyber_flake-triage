@@ -250,6 +250,25 @@ log (0.1-10 MB) ─► excerpt of the failed step ─► signals with line numbe
 * **The injection filter is narrow** and easy to word around; what bounds a hostile log is that the
   model must quote a real line, never overrides a rule, and the tool only suggests.
 
+## AI, privacy and support
+
+* **AI-written verdicts are marked.** "decided by model:…" in the summary (`source` in the JSON) means
+  Claude, a generative model by Anthropic, wrote the decision and its explanation. It can be wrong: read
+  the quoted lines. "decided by rules" involves no model. Good for: deciding whether a failed job is
+  worth another run. Not for: gating a merge or release, or closing a bug, without a person.
+* **What leaves the runner.** Run, job, change and log data are read from the GitHub API with the token
+  you give. Only if you set `anthropic-api-key`, and only for failures the rules leave unsure, this goes
+  to the Anthropic API under your key: job and step names, event, branch, the rules' reason, failing
+  test names and their history, up to 60 changed file paths and up to about 220 log lines. GitHub masks
+  registered secrets in logs; anything else your CI prints (names, e-mails, tokens it does not know) is
+  not filtered here. Leave the key out to keep logs away from the model.
+* **What the author receives.** Nothing: the Action has no server or telemetry of the author's. Decisions
+  stay in your run's summary and on your runner.
+* **Support and wrong verdicts.** Open an
+  [issue](https://github.com/zvirmykhailo1987-cyber/flake-triage/issues) (leave private log lines out).
+  Problems with GitHub itself: [GitHub Support](https://support.github.com).
+* **Licence for users:** [MIT](LICENSE), no warranty.
+
 ## Data
 
 Public CI metadata and log excerpts of OpenAEV-Platform/openaev, collected through the GitHub API.
