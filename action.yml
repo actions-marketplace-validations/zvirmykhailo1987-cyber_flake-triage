@@ -1,7 +1,5 @@
 name: Flake triage
-description: >-
-  For every failed job of a workflow run: retry, do not retry, or unsure, with the log lines behind
-  the decision, written to the run's summary. Read-only: it never re-runs, comments or opens issues.
+description: Should a failed CI job be retried? A verdict with the log lines behind it, in the run summary. Read-only.
 branding:
   icon: repeat
   color: purple
